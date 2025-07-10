@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashar Rai Mujeeb - Product Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <script>
+        // Only initialize PostHog on HTTP/HTTPS (not file://)
+        if (window.location.protocol !== 'file:') {
+            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+            posthog.init('phc_HLkBqAzWm6tU5qx5mLXF0ypPuD2NEJk51XjnHPQF6Ii',{api_host:'https://us.posthog.com'});
+        } else {
+            // Create dummy PostHog object for local development
+            window.posthog = {
+                capture: function() { /* no-op */ },
+                identify: function() { /* no-op */ }
+            };
+            console.log('📊 PostHog disabled for local development (file:// protocol)');
+        }
+    </script>
+</head>
+<body>
+    <!-- Skip Links for Screen Readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#navbar" class="skip-link">Skip to navigation</a>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-name">ASHAR</span>
+                <span class="brand-title">PM</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#about" class="nav-link" tabindex="0">ABOUT</a>
+                <a href="#work" class="nav-link" tabindex="0">WORK</a>
+                <a href="#projects" class="nav-link" tabindex="0">PROJECTS</a>
+                <a href="#skills" class="nav-link" tabindex="0">SKILLS</a>
+                <a href="#contact" class="nav-link" tabindex="0">CONTACT</a>
+                <div class="settings-dropdown">
+                    <button class="settings-btn" id="settings-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Settings menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
+                        </svg>
+                    </button>
+                    <div class="settings-menu" id="settings-menu">
+                        <div class="settings-section">
+                            <h4>THEME</h4>
+                            <button id="theme-toggle" class="settings-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="settings-section">
+                            <h4>ACCENT COLOR</h4>
+                            <div class="accent-picker">
+                                <div class="accent-color" data-color="#0066FF" style="background: #0066FF;"></div>
+                                <div class="accent-color" data-color="#FF1493" style="background: #FF1493;"></div>
+                                <div class="accent-color" data-color="#32CD32" style="background: #32CD32;"></div>
+                                <div class="accent-color" data-color="#FF6600" style="background: #FF6600;"></div>
+                                <div class="accent-color" data-color="#8A2BE2" style="background: #8A2BE2;"></div>
+                                <div class="accent-color" data-color="#20B2AA" style="background: #20B2AA;"></div>
+                                <div class="accent-color" data-color="#FFD700" style="background: #FFD700;"></div>
+                                <div class="accent-color" data-color="#FF69B4" style="background: #FF69B4;"></div>
+                            </div>
+                            <button id="randomizer" class="settings-item randomizer-btn">
+                                <span>Random Color</span>
+                            </button>
+                        </div>
+                        <div class="settings-section">
+                            <h4>ACCESSIBILITY</h4>
+                            <button id="colorblind-toggle" class="settings-item">
+                                <span>Colorblind Mode</span>
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-toggle" role="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner" aria-labelledby="hero-title">
+        <div class="video-container">
+            <video id="hero-video" autoplay muted loop>
+                <source src="hero-video.mp4" type="video/mp4">
+                <track kind="captions" src="captions.vtt" srclang="en" label="English" id="captions-track">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title" id="hero-title">ASHAR RAI MUJEEB</h1>
+            <p class="hero-subtitle">PRODUCT MANAGER</p>
+        </div>
+        <!-- Video controls moved outside video container -->
+        <div class="video-controls">
+            <button id="play-pause" tabindex="0" aria-label="Pause video">PAUSE</button>
+            <button id="volume-toggle" tabindex="0" aria-label="Mute video">MUTE</button>
+            <button id="speed-control" data-speed="1" tabindex="0" aria-label="Change video speed">1x</button>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="bento-grid" id="main-content" role="main" aria-label="Portfolio content">
+        <!-- About Section -->
+        <section class="bento-box large about" id="about" role="region" aria-labelledby="about-heading">
+            <h2 id="about-heading">ABOUT</h2>
+            <p>Successfully transitioned from a legal background, now thriving as an Associate Product Manager. Proven ability to launch new features, drive user growth, and enhance user experience through data-driven decision-making and cross-functional collaboration.</p>
+            <div class="cta-buttons">
+                <a href="#" class="resume-btn animate-btn" id="resume-download-btn">VIEW RESUME</a>
+                <a href="https://www.linkedin.com/in/0xtr0jan/" class="linkedin-btn animate-btn" target="_blank" onclick="if(typeof posthog !== 'undefined') { posthog.capture('linkedin_clicked', { location: 'about_section', theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">LINKEDIN</a>
+            </div>
+        </section>
+        <!-- Fabits Work Section -->
+        <section class="bento-box large work animate-box" id="work" role="region" aria-labelledby="work-heading">
+            <h2 id="work-heading">FABITS - PRODUCT MANAGER</h2>
+            <p class="work-period">Nov 2023 – Present | Bengaluru</p>
+            <div class="work-grid">
+                <div class="work-item animate-item">
+                    <h3>PRODUCT LAUNCHES</h3>
+                    <p>Launched key investment instruments including Mutual Funds, Mutual Fund Baskets, IPO, SGB which improved Assets Under Management by 2x.</p>
+                </div>
+                <div class="work-item animate-item">
+                    <h3>USER GROWTH</h3>
+                    <p>Increased Monthly Active Users by 60% through the implementation of biometric authentication, significantly reducing drop-off rates.</p>
+                </div>
+                <div class="work-item animate-item">
+                    <h3>UX ENHANCEMENT</h3>
+                    <p>Enhanced user experience and drove NPS from 4 to 7 by upgrading to a modern design language and optimizing in-app navigation.</p>
+                </div>
+                <div class="work-item animate-item">
+                    <h3>UPI AUTOPAY</h3>
+                    <p>Integrated UPI Autopay for collection of subscription charges, improving collection success rate and streamlining administrative workload.</p>
+                </div>
+                <div class="work-item animate-item">
+                    <h3>ANALYTICS</h3>
+                    <p>Integrated Mixpanel and Clevertap on the platform, improving ability to make data-driven decisions.</p>
+                </div>
+                <div class="work-item animate-item">
+                    <h3>COMPLIANCE</h3>
+                    <p>Launched user complaint ticketing system and voluntary freezing system to ensure proper compliance with SEBI and NSE guidelines.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section -->
+        <section class="bento-box extra-large projects" id="projects" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">PROJECTS & CASE STUDIES</h2>
+            <div class="projects-grid" id="projects-grid">
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project1.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project1-thumb.jpg" alt="UPI Autopay Implementation">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>UPI AUTOPAY IMPLEMENTATION</h3>
+                            <p>Complete case study on implementing UPI Autopay for subscription collection</p>
+                            <div class="project-tags">
+                                <span class="tag">Product Strategy</span>
+                                <span class="tag">UX Design</span>
+                                <span class="tag">Implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project2.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project2-thumb.jpg" alt="Analytics Integration">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>ANALYTICS INTEGRATION</h3>
+                            <p>Mixpanel & Clevertap integration for data-driven decision making</p>
+                            <div class="project-tags">
+                                <span class="tag">Analytics</span>
+                                <span class="tag">Data Strategy</span>
+                                <span class="tag">Implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project3.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project3-thumb.jpg" alt="Biometric Authentication">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>BIOMETRIC AUTHENTICATION</h3>
+                            <p>60% MAU increase through biometric authentication implementation</p>
+                            <div class="project-tags">
+                                <span class="tag">User Experience</span>
+                                <span class="tag">Authentication</span>
+                                <span class="tag">Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project4.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project4-thumb.jpg" alt="Product Launch Strategy">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>PRODUCT LAUNCH STRATEGY</h3>
+                            <p>Comprehensive strategy for launching investment instruments</p>
+                            <div class="project-tags">
+                                <span class="tag">Product Launch</span>
+                                <span class="tag">Strategy</span>
+                                <span class="tag">Go-to-Market</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project5.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project5-thumb.jpg" alt="User Experience Redesign">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>USER EXPERIENCE REDESIGN</h3>
+                            <p>Modern design language implementation driving NPS from 4 to 7</p>
+                            <div class="project-tags">
+                                <span class="tag">UX Design</span>
+                                <span class="tag">Product Strategy</span>
+                                <span class="tag">User Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="visible">
+                    <div class="project-card animate-card" data-pdf="project6.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project6-thumb.jpg" alt="Compliance Framework">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>COMPLIANCE FRAMEWORK</h3>
+                            <p>User complaint ticketing system for SEBI and NSE compliance</p>
+                            <div class="project-tags">
+                                <span class="tag">Compliance</span>
+                                <span class="tag">Process Design</span>
+                                <span class="tag">Regulation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional projects (initially hidden) -->
+                <div class="project-item" data-category="hidden">
+                    <div class="project-card animate-card" data-pdf="project7.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project7-thumb.jpg" alt="KYC Integration">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>KYC INTEGRATION</h3>
+                            <p>HyperVerge integration improving KYC onboarding metrics</p>
+                            <div class="project-tags">
+                                <span class="tag">Integration</span>
+                                <span class="tag">Onboarding</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="hidden">
+                    <div class="project-card animate-card" data-pdf="project8.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project8-thumb.jpg" alt="Investment Instruments">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>INVESTMENT INSTRUMENTS</h3>
+                            <p>Mutual Funds, IPO, and SGB implementation strategy</p>
+                            <div class="project-tags">
+                                <span class="tag">Product Development</span>
+                                <span class="tag">Financial Services</span>
+                                <span class="tag">Launch Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-category="hidden">
+                    <div class="project-card animate-card" data-pdf="project9.pdf">
+                        <div class="project-thumbnail">
+                            <img src="assets/pdfs/thumbnails/project9-thumb.jpg" alt="Mobile App Optimization">
+                            <div class="project-overlay">
+                                <span class="view-pdf">VIEW PDF</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>MOBILE APP OPTIMIZATION</h3>
+                            <p>Cross-functional collaboration for enhanced user experience</p>
+                            <div class="project-tags">
+                                <span class="tag">Mobile</span>
+                                <span class="tag">Optimization</span>
+                                <span class="tag">User Journey</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="projects-expand-btn" id="projects-expand-btn" aria-expanded="false" aria-controls="projects-grid" aria-label="Show more projects">
+                <span>VIEW MORE</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+            </button>
+        </section>
+        <!-- Skills Section -->
+        <section class="bento-box medium skills animate-box" id="skills" role="region" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-item">
+                    <h3>TECHNOLOGY</h3>
+                    <ul>
+                        <li>Python & JavaScript</li>
+                        <li>Code reading & prototyping</li>
+                        <li>Learning custom classes</li>
+                    </ul>
+                </div>
+                <div class="skill-category animate-item">
+                    <h3>DESIGN</h3>
+                    <ul>
+                        <li>Figma wireframes</li>
+                        <li>Prototyping</li>
+                        <li>Learning auto-layout</li>
+                    </ul>
+                </div>
+                <div class="skill-category animate-item">
+                    <h3>DATA</h3>
+                    <ul>
+                        <li>MySQL queries</li>
+                        <li>Sub-queries & joins</li>
+                        <li>Data extraction</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Certifications Section -->
+        <section class="bento-box large certifications" id="certifications" role="region" aria-labelledby="certifications-heading">
+            <h2 id="certifications-heading">CERTIFICATIONS</h2>
+            <div class="certifications-grid">
+                <div class="cert-card animate-card" data-cert="cert1.jpg">
+                    <div class="cert-thumbnail">
+                        <img src="assets/certificates/cert1-thumb.jpg" alt="NextLeap Fellowship">
+                        <div class="cert-overlay">
+                            <span class="view-cert">VIEW CERTIFICATE</span>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <h3>NEXTLEAP FELLOWSHIP</h3>
+                        <p>Top Fellow • Product Management</p>
+                        <span class="cert-year">2023</span>
+                    </div>
+                </div>
+                
+                <div class="cert-card animate-card" data-cert="cert2.jpg">
+                    <div class="cert-thumbnail">
+                        <img src="assets/certificates/cert2-thumb.jpg" alt="IBM Generative AI">
+                        <div class="cert-overlay">
+                            <span class="view-cert">VIEW CERTIFICATE</span>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <h3>GENERATIVE AI SPECIALIZATION</h3>
+                        <p>IBM • Product Managers</p>
+                        <span class="cert-year">2025</span>
+                    </div>
+                </div>
+                
+                <div class="cert-card animate-card" data-cert="cert3.jpg">
+                    <div class="cert-thumbnail">
+                        <img src="assets/certificates/cert3-thumb.jpg" alt="Mixpanel Certification">
+                        <div class="cert-overlay">
+                            <span class="view-cert">VIEW CERTIFICATE</span>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <h3>MIXPANEL CERTIFICATION</h3>
+                        <p>Product School • Analytics</p>
+                        <span class="cert-year">2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Get in Touch Section -->
+        <section class="bento-box small get-in-touch animate-box" id="get-in-touch" role="region" aria-labelledby="get-in-touch-heading">
+            <h2 id="get-in-touch-heading">GET IN TOUCH</h2>
+            <div class="touch-form" role="form" aria-describedby="contact-description">
+                <label for="contact-input" class="sr-only">Contact information (email or phone number)</label>
+                <input 
+                    type="text" 
+                    id="contact-input" 
+                    placeholder="Your email or phone number..." 
+                    class="touch-input"
+                    aria-describedby="contact-description contact-validation"
+                    aria-required="true"
+                    aria-invalid="false"
+                >
+                <div id="contact-validation" class="validation-message" aria-live="polite" aria-atomic="true"></div>
+                <button id="submit-contact" class="touch-submit animate-btn" aria-describedby="contact-description">CONNECT</button>
+            </div>
+            <p id="contact-description" class="touch-description">Let's discuss opportunities!</p>
+        </section>
+        <!-- Contact Section -->
+        <section class="bento-box small contact animate-box" id="contact" role="region" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">CONTACT</h2>
+            <div class="contact-info">
+                <a href="mailto:asharrm18@gmail.com" class="contact-link animate-btn" onclick="if(typeof posthog !== 'undefined') { posthog.capture('email_clicked', { theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">asharrm18@gmail.com</a>
+                <a href="tel:+917378666101" class="contact-link animate-btn" onclick="if(typeof posthog !== 'undefined') { posthog.capture('phone_clicked', { theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">+91-7378666101</a>
+                <a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank" class="contact-link animate-btn" onclick="if(typeof posthog !== 'undefined') { posthog.capture('linkedin_clicked', { location: 'contact_section', theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">LinkedIn Profile</a>
+            </div>
+        </section>
+        <!-- Personal Section (commented out) -->
+        <!--
+        <section class="bento-box small personal" id="personal">
+            <h2>PERSONAL</h2>
+            <div class="personal-gallery">
+                <div class="personal-item">
+                    <img src="fitness-placeholder.jpg" alt="Fitness journey">
+                    <p>FITNESS JOURNEY</p>
+                    <span>50kg → 80kg, 2x bodyweight deadlift</span>
+                </div>
+                <div class="personal-item">
+                    <img src="tech-placeholder.jpg" alt="Technology passion">
+                    <p>TECH ENTHUSIAST</p>
+                    <span>Can talk about technology all day long</span>
+                </div>
+                <div class="personal-item">
+                    <img src="legal-placeholder.jpg" alt="Legal background">
+                    <p>LEGAL BACKGROUND</p>
+                    <span>Practicing advocate in criminal law</span>
+                </div>
+            </div>
+        </section>
+        -->
+    </main>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdf-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="pdf-title">Project Document</h3>
+                <button class="close-btn" id="close-pdf">&times;</button>
+            </div>
+            <div class="modal-body">
+                <canvas id="pdf-canvas"></canvas>
+                <div class="pdf-controls">
+                    <button id="prev-page">← Previous</button>
+                    <span id="page-info">Page 1 of 1</span>
+                    <button id="next-page">Next →</button>
+                    <button id="zoom-in">ZOOM IN</button>
+                    <button id="zoom-out">ZOOM OUT</button>
+                    <button id="download-pdf">DOWNLOAD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Gallery Modal -->
+    <div id="cert-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="cert-title">Certificate</h3>
+                <button class="close-btn" id="close-cert">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="cert-image" src="" alt="Certificate">
+                <div class="cert-controls">
+                    <button id="cert-prev">← Previous</button>
+                    <button id="cert-next">Next →</button>
+                    <button id="cert-zoom">ZOOM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ASHAR RAI MUJEEB</h4>
+                <p>Product Manager passionate about launching innovative products and driving user growth.</p>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONNECT</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank" onclick="if(typeof posthog !== 'undefined') { posthog.capture('linkedin_clicked', { location: 'footer', theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">LinkedIn</a>
+                    <a href="mailto:asharrm18@gmail.com" onclick="if(typeof posthog !== 'undefined') { posthog.capture('email_clicked', { theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">Email</a>
+                    <a href="tel:+917378666101" onclick="if(typeof posthog !== 'undefined') { posthog.capture('phone_clicked', { theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">Phone</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ashar Rai Mujeeb. Built with <span class="accent-text">Claude Code</span>.</p>
+        </div>
+    </footer>
+
+    <!-- Keyboard Shortcuts Panel -->
+    <div class="keyboard-shortcuts" id="keyboard-shortcuts">
+        <div class="keyboard-shortcuts-header">
+            <span class="keyboard-shortcuts-title">Shortcuts</span>
+            <button class="shortcuts-toggle" id="shortcuts-close">×</button>
+        </div>
+        <!-- Desktop shortcuts list (keyboard combinations) -->
+        <ul class="shortcuts-list desktop-shortcuts">
+            <li>
+                <span class="shortcut-keys">Z + C</span>
+                <span class="shortcut-description">Get in Touch</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">Z + X</span>
+                <span class="shortcut-description">Random Color</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">Z + N</span>
+                <span class="shortcut-description">Toggle Theme</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">Z + C + V</span>
+                <span class="shortcut-description">Download CV</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">Z + R</span>
+                <span class="shortcut-description">Report Problem</span>
+            </li>
+            <li id="video-shortcut-desktop">
+                <span class="shortcut-keys">SPACE</span>
+                <span class="shortcut-description">Play/Pause Video</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">/</span>
+                <span class="shortcut-description">Show Shortcuts</span>
+            </li>
+        </ul>
+        
+        <!-- Mobile shortcuts list (clickable buttons) -->
+        <div class="shortcuts-buttons mobile-shortcuts">
+            <button class="shortcut-btn" data-action="get-in-touch">Get in Touch</button>
+            <button class="shortcut-btn" data-action="random-color">Random Color</button>
+            <button class="shortcut-btn" data-action="toggle-theme">Toggle Theme</button>
+            <button class="shortcut-btn" data-action="download-cv">Download CV</button>
+            <button class="shortcut-btn" data-action="report-problem">Report Problem</button>
+            <button class="shortcut-btn" data-action="video-play-pause" id="video-shortcut-mobile">Play/Pause Video</button>
+        </div>
+    </div>
+
+    <!-- Shortcuts Trigger Button -->
+    <button class="shortcuts-trigger" id="shortcuts-trigger" title="Keyboard Shortcuts (/)" aria-label="Show keyboard shortcuts" tabindex="-1">
+        /shortcuts
+    </button>
+
+    <!-- Shortcut Notification -->
+    <div class="shortcut-notification" id="shortcut-notification"></div>
+
+    <script src="muuri.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
