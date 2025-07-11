@@ -5,6 +5,7 @@ const settingsToggle = document.getElementById('settings-toggle');
 const settingsMenu = document.getElementById('settings-menu');
 const themeToggle = document.getElementById('theme-toggle');
 const colorblindToggle = document.getElementById('colorblind-toggle');
+const analyticsToggle = document.getElementById('analytics-toggle');
 const randomizer = document.getElementById('randomizer');
 const accentColors = document.querySelectorAll('.accent-color');
 const navToggle = document.querySelector('.nav-toggle');
@@ -38,6 +39,7 @@ const certCards = document.querySelectorAll('.cert-card');
 let currentTheme = localStorage.getItem('theme') || 'dark';
 let currentAccent = localStorage.getItem('accent') || '#0066FF';
 let colorblindMode = localStorage.getItem('colorblindMode') === 'true' || false;
+let trackingEnabled = localStorage.getItem('trackingEnabled') !== 'false';
 
 // Resume Download State
 let hasViewedResume = localStorage.getItem('hasViewedResume') === 'true' || false;
@@ -76,16 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // PostHog Analytics Functions
+function captureAnalytics(eventName, properties = {}) {
+    if (typeof posthog !== 'undefined' && trackingEnabled) {
+        posthog.capture(eventName, properties);
+    }
+}
+
 function initializePostHog() {
     if (typeof posthog !== 'undefined') {
-        posthog.capture('portfolio_loaded', {
-            theme: currentTheme,
-            accent_color: currentAccent,
-            colorblind_mode: colorblindMode,
-            user_agent: navigator.userAgent,
-            screen_resolution: `${window.screen.width}x${window.screen.height}`,
-            viewport_size: `${window.innerWidth}x${window.innerHeight}`
-        });
+        // Set initial opt-out state based on user preference
+        if (trackingEnabled) {
+            posthog.opt_in_capturing();
+            // Only capture if tracking is enabled
+            captureAnalytics('portfolio_loaded', {
+                theme: currentTheme,
+                accent_color: currentAccent,
+                colorblind_mode: colorblindMode,
+                user_agent: navigator.userAgent,
+                screen_resolution: `${window.screen.width}x${window.screen.height}`,
+                viewport_size: `${window.innerWidth}x${window.innerHeight}`
+            });
+        } else {
+            posthog.opt_out_capturing();
+        }
     }
 }
 
@@ -122,13 +137,11 @@ function initializeSettings() {
         settingsToggle.setAttribute('aria-expanded', isOpening.toString());
         
         // PostHog Analytics
-        if (typeof posthog !== 'undefined') {
-            posthog.capture('settings_dropdown_toggled', {
-                action: isOpening ? 'opened' : 'closed',
-                theme: currentTheme,
-                colorblind_mode: colorblindMode
-            });
-        }
+        captureAnalytics('settings_dropdown_toggled', {
+            action: isOpening ? 'opened' : 'closed',
+            theme: currentTheme,
+            colorblind_mode: colorblindMode
+        });
         
         // Add click animation
         settingsToggle.style.transform = 'scale(0.95)';
@@ -148,9 +161,13 @@ function initializeSettings() {
     // Initialize toggle states
     updateToggleState(themeToggle, currentTheme === 'dark');
     updateToggleState(colorblindToggle, colorblindMode);
+    updateToggleState(analyticsToggle, trackingEnabled);
     
     // Update theme toggle text
     updateThemeToggleText();
+    
+    // Initialize analytics toggle
+    initializeAnalyticsToggle();
 }
 
 function updateToggleState(toggleButton, isActive) {
@@ -178,13 +195,11 @@ themeToggle.addEventListener('click', () => {
     updateThemeToggleText();
     
     // PostHog Analytics
-    if (typeof posthog !== 'undefined') {
-        posthog.capture('theme_changed', {
-            from_theme: previousTheme,
-            to_theme: currentTheme,
-            colorblind_mode: colorblindMode
-        });
-    }
+    captureAnalytics('theme_changed', {
+        from_theme: previousTheme,
+        to_theme: currentTheme,
+        colorblind_mode: colorblindMode
+    });
     
     // Add click animation
     themeToggle.style.transform = 'scale(0.98)';
@@ -222,13 +237,11 @@ colorblindToggle.addEventListener('click', () => {
     }
     
     // PostHog Analytics
-    if (typeof posthog !== 'undefined') {
-        posthog.capture('colorblind_mode_toggled', {
-            colorblind_mode: colorblindMode,
-            theme: currentTheme,
-            previous_mode: previousMode
-        });
-    }
+    captureAnalytics('colorblind_mode_toggled', {
+        colorblind_mode: colorblindMode,
+        theme: currentTheme,
+        previous_mode: previousMode
+    });
     
     // Add click animation
     colorblindToggle.style.transform = 'scale(0.98)';
@@ -237,6 +250,46 @@ colorblindToggle.addEventListener('click', () => {
     }, 150);
 });
 
+// Analytics Toggle Functionality
+function initializeAnalyticsToggle() {
+    // Analytics toggle click handler
+    analyticsToggle.addEventListener('click', () => {
+        const previousState = trackingEnabled;
+        trackingEnabled = !trackingEnabled;
+        localStorage.setItem('trackingEnabled', trackingEnabled);
+        
+        updateToggleState(analyticsToggle, trackingEnabled);
+        
+        // Update PostHog state
+        if (typeof posthog !== 'undefined') {
+            if (trackingEnabled) {
+                posthog.opt_in_capturing();
+                // Capture the opt-in event after enabling
+                posthog.capture('analytics_opt_in', {
+                    previous_state: previousState ? 'enabled' : 'disabled',
+                    new_state: 'enabled',
+                    theme: currentTheme,
+                    colorblind_mode: colorblindMode
+                });
+            } else {
+                // Capture the opt-out event before disabling
+                posthog.capture('analytics_opt_out', {
+                    previous_state: previousState ? 'enabled' : 'disabled',
+                    new_state: 'disabled',
+                    theme: currentTheme,
+                    colorblind_mode: colorblindMode
+                });
+                posthog.opt_out_capturing();
+            }
+        }
+        
+        // Add click animation
+        analyticsToggle.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            analyticsToggle.style.transform = '';
+        }, 150);
+    });
+}
 
 // Accent Color Picker Functionality
 accentColors.forEach(color => {
