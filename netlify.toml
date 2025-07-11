@@ -1,0 +1,76 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Environment variables for production
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Headers for static assets (cache optimization)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers for HTML files
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Headers for API calls (CORS)
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Authorization, Content-Type"
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-backend.run.app/api/:splat"
+  status = 200
+  force = true
+
+# Redirect old paths to new structure
+[[redirects]]
+  from = "/assets/*"
+  to = "/src/assets/:splat"
+  status = 301
+
+# Handle 404s for missing pages
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+# Plugin configuration
+[[plugins]]
+  package = "netlify-plugin-minify-html"
+  
+  [plugins.inputs]
+    contexts = ["production"]
+
+# Function configuration (for future serverless functions)
+[functions]
+  directory = "netlify/functions"
+  
+# Form handling configuration
+[forms]
+  external_domains = ["your-backend.run.app"]
+
+# Split testing configuration (for future A/B tests)
+[split_test]
+  enabled = false

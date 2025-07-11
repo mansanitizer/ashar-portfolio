@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot the Fake CV - Ashar Rai Mujeeb</title>
+    <!-- Vite will inject CSS here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PostHog will be initialized in game.js with environment variables -->
+</head>
+<body data-theme="dark" style="background: #FFFFFF;">
+    <!-- Skip Links for Accessibility -->
+    <a href="#game-content" class="skip-link">Skip to game</a>
+    
+    <!-- Game Header -->
+    <header class="game-header">
+        <div class="game-nav">
+            <div class="game-brand">
+                <span class="brand-name">SPOT THE</span>
+                <span class="brand-title">FAKE CV</span>
+            </div>
+            <div class="game-actions">
+                <a href="index.html" class="return-btn animate-btn" id="return-btn">
+                    <span class="btn-icon">←</span>
+                    <span class="btn-text">BACK TO PORTFOLIO</span>
+                </a>
+                <a href="resume.pdf" class="cv-btn animate-btn" id="cv-download-btn" download="Ashar_Rai_Mujeeb_Resume.pdf">
+                    <span class="btn-icon">⬇</span>
+                    <span class="btn-text">DOWNLOAD CV</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Content -->
+    <main class="game-container" id="game-content" role="main" aria-label="Resume Roulette Game">
+        <!-- Game Stats Bar -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">TIME</span>
+                <span class="stat-value" id="timer">00:00</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">STREAK</span>
+                <span class="stat-value" id="streak">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">LEVEL</span>
+                <span class="stat-value" id="level">1</span>
+            </div>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="game-instructions" id="game-instructions">
+            <h1 class="game-title">SPOT THE FAKE CV</h1>
+            <button class="start-game-btn animate-btn" id="start-game-btn">START GAME</button>
+        </div>
+
+        <!-- Game Interface -->
+        <div class="game-interface hidden" id="game-interface">
+            <!-- Game Instruction Header -->
+            <div class="game-instruction-header">
+                <h2 class="instruction-text">ONE OF THESE CV BULLETS IS FAKE</h2>
+                <p class="instruction-subtext">Talk is cheap, people fake their CVs, proof of work speaks for itself. Hire me instead.</p>
+            </div>
+
+            <!-- CV Options Grid -->
+            <div class="cv-options-grid" id="cv-options-grid">
+                <button class="cv-option" id="cv-option-1" data-option="1">
+                    <div class="option-number">1</div>
+                    <div class="cv-bullet" id="cv-bullet-1">
+                        Loading CV bullet...
+                    </div>
+                </button>
+                <button class="cv-option" id="cv-option-2" data-option="2">
+                    <div class="option-number">2</div>
+                    <div class="cv-bullet" id="cv-bullet-2">
+                        Loading CV bullet...
+                    </div>
+                </button>
+                <button class="cv-option" id="cv-option-3" data-option="3">
+                    <div class="option-number">3</div>
+                    <div class="cv-bullet" id="cv-bullet-3">
+                        Loading CV bullet...
+                    </div>
+                </button>
+                <button class="cv-option" id="cv-option-4" data-option="4">
+                    <div class="option-number">4</div>
+                    <div class="cv-bullet" id="cv-bullet-4">
+                        Loading CV bullet...
+                    </div>
+                </button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="current-question">1</span> / <span id="total-questions">20</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Results -->
+        <div class="game-results hidden" id="game-results">
+            <div class="results-container">
+                <h2 class="results-title">GAME COMPLETE!</h2>
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <div class="result-number" id="final-score">0</div>
+                        <div class="result-label">FINAL SCORE</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-number" id="final-time">00:00</div>
+                        <div class="result-label">TIME PLAYED</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-number" id="final-accuracy">0%</div>
+                        <div class="result-label">ACCURACY</div>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button class="action-btn play-again-btn" id="play-again-btn">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">PLAY AGAIN</span>
+                    </button>
+                    <button class="action-btn share-btn" id="share-btn">
+                        <span class="btn-icon">📱</span>
+                        <span class="btn-text">SHARE SCORE</span>
+                    </button>
+                    <a href="index.html" class="action-btn portfolio-btn">
+                        <span class="btn-icon">👤</span>
+                        <span class="btn-text">VIEW PORTFOLIO</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Keyboard Shortcuts Panel (inherited from main portfolio) -->
+    <div class="keyboard-shortcuts" id="keyboard-shortcuts">
+        <div class="keyboard-shortcuts-header">
+            <span class="keyboard-shortcuts-title">Shortcuts</span>
+            <button class="shortcuts-toggle" id="shortcuts-close">×</button>
+        </div>
+        <ul class="shortcuts-list desktop-shortcuts">
+            <li>
+                <span class="shortcut-keys">1</span>
+                <span class="shortcut-description">Select Option 1</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">2</span>
+                <span class="shortcut-description">Select Option 2</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">3</span>
+                <span class="shortcut-description">Select Option 3</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">4</span>
+                <span class="shortcut-description">Select Option 4</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">R</span>
+                <span class="shortcut-description">Restart Game</span>
+            </li>
+            <li>
+                <span class="shortcut-keys">/</span>
+                <span class="shortcut-description">Show Shortcuts</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Shortcuts Trigger Button -->
+    <button class="shortcuts-trigger" id="shortcuts-trigger" title="Keyboard Shortcuts (/)" aria-label="Show keyboard shortcuts" tabindex="-1">
+        /shortcuts
+    </button>
+
+    <!-- Shortcut Notification -->
+    <div class="shortcut-notification" id="shortcut-notification"></div>
+
+    <!-- Feedback Overlay -->
+    <div class="feedback-overlay" id="feedback-overlay">
+        <div class="feedback-icon" id="feedback-icon"></div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">thinking...</div>
+    </div>
+
+    <script type="module" src="/src/game.js"></script>
+</body>
+</html>

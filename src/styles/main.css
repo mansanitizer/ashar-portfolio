@@ -574,6 +574,82 @@ h1, h2, h3, h4 {
     to { width: 100%; }
 }
 
+/* Hero Game Section */
+.hero-game-section {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero-hiring-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0px var(--shadow-color);
+    letter-spacing: 0.1em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.play-game-btn {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border: 3px solid var(--border-color);
+    padding: 16px 32px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 4px 0px var(--shadow-color);
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+}
+
+.play-game-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--shadow-color);
+    background: var(--gradient-start);
+}
+
+.play-game-btn:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.play-game-btn::before {
+    content: '🎮';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.play-game-btn:hover::before {
+    left: 8px;
+}
+
+/* Mobile adjustments for hero game section */
+@media (max-width: 768px) {
+    .hero-game-section {
+        margin-top: 30px;
+        gap: 15px;
+    }
+    
+    .play-game-btn {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+}
+
 /* Bento Grid Layout */
 .bento-grid {
     display: grid;

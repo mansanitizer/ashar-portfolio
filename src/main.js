@@ -1,4 +1,9 @@
 // Enhanced Portfolio JavaScript with Modern Features
+// Import CSS styles
+import './styles/main.css';
+
+// Import API client for future backend integration
+import { api, apiUtils } from './utils/api.js';
 
 // DOM Elements
 const settingsToggle = document.getElementById('settings-toggle');
@@ -85,7 +90,15 @@ function captureAnalytics(eventName, properties = {}) {
 }
 
 function initializePostHog() {
-    if (typeof posthog !== 'undefined') {
+    // Get PostHog configuration from environment variables
+    const posthogKey = import.meta.env.VITE_POSTHOG_KEY;
+    const posthogHost = import.meta.env.VITE_POSTHOG_HOST || 'https://us.posthog.com';
+    
+    if (posthogKey && window.location.protocol !== 'file:') {
+        // Initialize PostHog with environment variables
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)";},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init(posthogKey, {api_host: posthogHost});
+        
         // Set initial opt-out state based on user preference
         if (trackingEnabled) {
             posthog.opt_in_capturing();
@@ -101,6 +114,15 @@ function initializePostHog() {
         } else {
             posthog.opt_out_capturing();
         }
+    } else {
+        // Create dummy PostHog object for local development
+        window.posthog = {
+            capture: function() { /* no-op */ },
+            identify: function() { /* no-op */ },
+            opt_in_capturing: function() { /* no-op */ },
+            opt_out_capturing: function() { /* no-op */ }
+        };
+        console.log('📊 PostHog disabled - no API key or running on file:// protocol');
     }
 }
 
