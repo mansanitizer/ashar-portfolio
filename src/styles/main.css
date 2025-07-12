@@ -1830,6 +1830,88 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
+/* Health Status Indicator */
+.health-status {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.heart-icon {
+    font-size: 1.2rem;
+    animation: heartbeat 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.3));
+}
+
+.heart-icon.healthy {
+    color: #ff0000;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.heart-icon.unhealthy {
+    color: #ffaa00;
+    animation: none;
+    opacity: 0.7;
+}
+
+.health-tooltip {
+    position: absolute;
+    left: 0;
+    top: -40px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 0 var(--shadow-color);
+    z-index: 1000;
+}
+
+.health-status:hover .health-tooltip,
+.health-status:focus .health-tooltip,
+.health-status.show-tooltip .health-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.health-status:hover .heart-icon {
+    transform: scale(1.1);
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.15);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.15);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .bento-item {
@@ -2353,6 +2435,30 @@ h1, h2, h3, h4 {
     }
 }
 /* --- END 2-1-2-2 GRID LAYOUT --- */
+
+/* Mobile Health Status */
+@media (max-width: 768px) {
+    .health-status {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .health-tooltip {
+        top: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+    }
+    
+    .health-status:hover .health-tooltip,
+    .health-status.show-tooltip .health-tooltip {
+        transform: translateX(-50%) translateY(0);
+    }
+}
 
 /* Ensure proper z-index hierarchy */
 .keyboard-shortcuts {

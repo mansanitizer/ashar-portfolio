@@ -1014,6 +1014,9 @@ function initializeGame() {
     // Initialize keyboard shortcuts
     initializeGameShortcuts();
     
+    // Initialize health status monitor
+    initializeHealthStatusForGame();
+    
     // Track page load
     trackEvent('game_page_loaded', {
         timestamp: new Date().toISOString(),
@@ -1767,6 +1770,86 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePostHogForGame();
     initializeGame();
 });
+
+// Health Status Monitor for Game Page
+function initializeHealthStatusForGame() {
+    const healthStatus = document.getElementById('health-status');
+    const heartIcon = document.getElementById('heart-icon');
+    const healthTooltip = document.getElementById('health-tooltip');
+    
+    if (!healthStatus || !heartIcon || !healthTooltip) {
+        console.log('ℹ️ Health status elements not found');
+        return;
+    }
+    
+    let healthCheckInterval;
+    let isHealthy = null;
+    
+    // Check health status
+    async function checkHealth() {
+        try {
+            const startTime = Date.now();
+            const result = await api.healthCheck();
+            const responseTime = Date.now() - startTime;
+            
+            if (result && result.status === 'ok') {
+                isHealthy = true;
+                heartIcon.className = 'heart-icon healthy';
+                healthTooltip.textContent = `backend is healthy @ 2bpm (${responseTime}ms)`;
+                
+                // Game-specific health tracking
+                trackEvent('health_check_success', {
+                    response_time: responseTime,
+                    game_state: gameState.isPlaying ? 'playing' : 'idle'
+                });
+                
+            } else {
+                throw new Error('Invalid response');
+            }
+        } catch (error) {
+            isHealthy = false;
+            heartIcon.className = 'heart-icon unhealthy';
+            healthTooltip.textContent = 'is backend ok?';
+            
+            console.warn('❤️ Backend health check failed:', error.message);
+            
+            // Game-specific health failure tracking
+            trackEvent('health_check_failure', {
+                error_message: error.message,
+                game_state: gameState.isPlaying ? 'playing' : 'idle'
+            });
+        }
+    }
+    
+    // Show tooltip on click/tap (for mobile)
+    healthStatus.addEventListener('click', () => {
+        healthStatus.classList.toggle('show-tooltip');
+        
+        // Hide tooltip after 3 seconds on mobile
+        setTimeout(() => {
+            healthStatus.classList.remove('show-tooltip');
+        }, 3000);
+        
+        // Track health status interaction
+        trackEvent('health_status_clicked', {
+            is_healthy: isHealthy,
+            game_state: gameState.isPlaying ? 'playing' : 'idle'
+        });
+    });
+    
+    // Prevent tooltip from closing when clicking on it
+    healthTooltip.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    // Initial health check
+    checkHealth();
+    
+    // Set up 30-second interval (2 beats per minute)
+    healthCheckInterval = setInterval(checkHealth, 30000);
+    
+    console.log('❤️ Game health status monitor initialized - checking every 30 seconds');
+}
 
 // Export for debugging
 window.gameState = gameState;

@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeBentoGrid();
     initializeProjectsExpand();
     initializeAIQuery();
+    initializeHealthStatus();
     
     // Add initial loading state
     document.body.style.opacity = '0';
@@ -2207,5 +2208,87 @@ async function handleAIQuery() {
     }
 }
 
+// Health Status Monitor
+function initializeHealthStatus() {
+    const healthStatus = document.getElementById('health-status');
+    const heartIcon = document.getElementById('heart-icon');
+    const healthTooltip = document.getElementById('health-tooltip');
+    
+    if (!healthStatus || !heartIcon || !healthTooltip) {
+        console.log('ℹ️ Health status elements not found (expected on game page)');
+        return;
+    }
+    
+    let healthCheckInterval;
+    let lastCheckTime = null;
+    let isHealthy = null;
+    
+    // Check health status
+    async function checkHealth() {
+        try {
+            const startTime = Date.now();
+            const result = await api.healthCheck();
+            const responseTime = Date.now() - startTime;
+            lastCheckTime = new Date();
+            
+            if (result && result.status === 'ok') {
+                isHealthy = true;
+                heartIcon.className = 'heart-icon healthy';
+                healthTooltip.textContent = `backend is healthy @ 2bpm (${responseTime}ms)`;
+                
+                // PostHog tracking for health checks
+                captureAnalytics('health_check_success', {
+                    response_time: responseTime,
+                    theme: currentTheme
+                });
+                
+            } else {
+                throw new Error('Invalid response');
+            }
+        } catch (error) {
+            isHealthy = false;
+            heartIcon.className = 'heart-icon unhealthy';
+            healthTooltip.textContent = 'is backend ok?';
+            
+            console.warn('❤️ Backend health check failed:', error.message);
+            
+            // PostHog tracking for health failures
+            captureAnalytics('health_check_failure', {
+                error_message: error.message,
+                theme: currentTheme
+            });
+        }
+    }
+    
+    // Show tooltip on click/tap (for mobile)
+    healthStatus.addEventListener('click', () => {
+        healthStatus.classList.toggle('show-tooltip');
+        
+        // Hide tooltip after 3 seconds on mobile
+        setTimeout(() => {
+            healthStatus.classList.remove('show-tooltip');
+        }, 3000);
+        
+        // PostHog tracking
+        captureAnalytics('health_status_clicked', {
+            is_healthy: isHealthy,
+            theme: currentTheme
+        });
+    });
+    
+    // Prevent tooltip from closing when clicking on it
+    healthTooltip.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    // Initial health check
+    checkHealth();
+    
+    // Set up 30-second interval (2 beats per minute)
+    healthCheckInterval = setInterval(checkHealth, 30000);
+    
+    console.log('❤️ Health status monitor initialized - checking every 30 seconds');
+}
+
 console.log('Modern Neobrutal Portfolio Ready!');
-console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Accessibility Enhanced');
+console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Health Monitor | Accessibility Enhanced');

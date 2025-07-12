@@ -1024,3 +1024,69 @@
             8px 8px 0 var(--superhot-black);
     }
 }
+
+/* Game Footer */
+.game-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.game-footer .health-status {
+    position: static;
+    transform: none;
+    background: var(--superhot-white);
+    border: 3px solid var(--superhot-black);
+    padding: 8px 12px;
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--superhot-black);
+    transition: all 0.3s ease;
+}
+
+.game-footer .health-status:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--superhot-black);
+}
+
+.game-footer .health-tooltip {
+    background: var(--superhot-white);
+    color: var(--superhot-black);
+    border: 3px solid var(--superhot-black);
+    box-shadow: 4px 4px 0 var(--superhot-black);
+    border-radius: 0;
+    top: -50px;
+    left: 0;
+    transform: translateY(10px);
+}
+
+.game-footer .health-status:hover .health-tooltip,
+.game-footer .health-status.show-tooltip .health-tooltip {
+    transform: translateY(0);
+}
+
+/* Mobile styles for game footer */
+@media (max-width: 768px) {
+    .game-footer {
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .game-footer .health-status {
+        padding: 6px 8px;
+        border: 2px solid var(--superhot-black);
+        box-shadow: 2px 2px 0 var(--superhot-black);
+    }
+    
+    .game-footer .health-status:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 var(--superhot-black);
+    }
+    
+    .game-footer .health-tooltip {
+        border: 2px solid var(--superhot-black);
+        box-shadow: 2px 2px 0 var(--superhot-black);
+        font-size: 0.7rem;
+        top: -40px;
+    }
+}
