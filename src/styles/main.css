@@ -389,23 +389,19 @@ h1, h2, h3, h4 {
     color: var(--bg-color);
 }
 
-.nav-menu {
+/* Desktop Navigation Menu */
+.nav-menu-desktop {
     display: flex;
     gap: 40px;
     align-items: center;
     overflow: visible; /* Ensure dropdowns aren't clipped */
 }
 
-/* Desktop Navigation Layout (default) */
-.nav-actions-row,
-.nav-links-section {
-    display: none; /* Hide mobile containers on desktop */
-}
-
-.nav-link-desktop,
-.share-dropdown-desktop,
-.settings-dropdown-desktop {
-    display: block; /* Show desktop elements */
+/* Mobile Header Actions - always visible on mobile */
+.mobile-header-actions {
+    display: none; /* Hidden on desktop */
+    gap: 15px;
+    align-items: center;
 }
 
 .nav-link {
@@ -442,19 +438,7 @@ h1, h2, h3, h4 {
     transform: translateY(-2px);
 }
 
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.nav-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--accent-color);
-    transition: all 0.3s ease;
-}
+/* Removed hamburger menu styles - no longer needed */
 
 /* Settings Dropdown */
 .settings-dropdown {
@@ -1602,16 +1586,29 @@ h1, h2, h3, h4 {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 20px;
 }
 
 .skill-category {
     background: var(--bg-color);
     border: 3px solid var(--accent-color);
-    padding: 25px;
+    padding: 20px;
     text-align: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+}
+
+.skill-category .skill-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto 12px;
+    fill: var(--accent-color);
+    transition: fill 0.3s ease;
+}
+
+.skill-category h3 {
+    margin-bottom: 15px;
+    font-size: 1rem;
 }
 
 .skill-category::before {
@@ -2190,7 +2187,7 @@ h1, h2, h3, h4 {
     
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
+        gap: 18px;
     }
     
     .personal-gallery {
@@ -2205,87 +2202,28 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: var(--nav-bg);
-        flex-direction: column;
-        justify-content: center;
-        transition: left 0.3s ease;
-        backdrop-filter: blur(20px);
-        gap: 40px;
-        padding: 40px 20px;
-    }
-    
-    /* Show mobile containers, hide desktop elements */
-    .nav-actions-row,
-    .nav-links-section {
-        display: flex;
-    }
-    
-    .nav-link-desktop,
-    .share-dropdown-desktop,
-    .settings-dropdown-desktop {
+    /* Hide desktop navigation */
+    .nav-menu-desktop {
         display: none;
     }
     
-    .nav-actions-row {
-        justify-content: center;
-        gap: 30px;
-        align-items: center;
-    }
-    
-    .nav-links-section {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .nav-links-section .nav-link {
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-align: center;
-        width: 100%;
-        padding: 15px 0;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-links-section .nav-link:hover {
-        color: var(--accent-color);
-        transform: translateX(10px);
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-toggle {
+    /* Show mobile header actions */
+    .mobile-header-actions {
         display: flex;
     }
     
-    .nav-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+    /* Mobile dropdown positioning */
+    .mobile-header-actions .settings-menu,
+    .mobile-header-actions .share-menu {
+        right: -30px;
+        min-width: 220px;
     }
     
-    .nav-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .nav-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
-    
-    .settings-menu {
-        right: -50px;
-        min-width: 200px;
-    }
-    
-    .share-menu {
-        right: -50px;
-        min-width: 200px;
+    /* Ensure proper touch targets for mobile */
+    .mobile-header-actions .settings-btn {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 10px;
     }
     
     .accent-picker {
@@ -2358,6 +2296,66 @@ h1, h2, h3, h4 {
     
     .skills-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Mobile collapsible skills */
+    .skill-category.mobile-collapsible {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .skill-category.mobile-collapsible:hover {
+        background: var(--hover-bg);
+    }
+    
+    .skill-category.mobile-collapsible h3 {
+        padding-right: 30px; /* Space for expand icon */
+    }
+    
+    .skill-category.mobile-collapsible ul {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease,
+                    padding 0.3s ease;
+        opacity: 0;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    .skill-category.mobile-collapsible.expanded ul {
+        max-height: 150px;
+        opacity: 1;
+        padding-top: 8px;
+    }
+    
+    .skill-category.mobile-collapsible ul li {
+        padding: 2px 0;
+        font-size: 0.85rem;
+        transform: translateY(-10px);
+        transition: transform 0.3s ease 0.1s;
+    }
+    
+    .skill-category.mobile-collapsible.expanded ul li {
+        transform: translateY(0);
+    }
+    
+    .skill-category.mobile-collapsible::after {
+        content: '+';
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.1rem;
+        color: var(--accent-color);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: bold;
+        line-height: 1;
+    }
+    
+    .skill-category.mobile-collapsible.expanded::after {
+        content: '−';
+        transform: rotate(90deg);
     }
     
     .personal-gallery {

@@ -29,8 +29,6 @@ const colorblindToggleMobile = document.getElementById('colorblind-toggle-mobile
 const analyticsToggleMobile = document.getElementById('analytics-toggle-mobile');
 const randomizerMobile = document.getElementById('randomizer-mobile');
 const accentColors = document.querySelectorAll('.accent-color');
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
 // Get in Touch Elements
@@ -90,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeAIQuery();
     initializeHealthStatus();
     initializePortfolioSharing();
+    initializeSkillsCollapse();
     
     // Add initial loading state
     document.body.style.opacity = '0';
@@ -594,32 +593,6 @@ function createConfettiEffect() {
 
 // Navigation Functions
 function initializeNavigation() {
-    // Mobile menu toggle
-    const toggleNavMenu = () => {
-        const isOpening = !navMenu.classList.contains('active');
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-        
-        // Update ARIA state
-        navToggle.setAttribute('aria-expanded', isOpening.toString());
-        
-        // Animate hamburger
-        navToggle.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-            navToggle.style.transform = '';
-        }, 150);
-    };
-    
-    navToggle.addEventListener('click', toggleNavMenu);
-    
-    // Keyboard support for nav toggle
-    navToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleNavMenu();
-        }
-    });
-    
     // Smooth scroll for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -633,10 +606,6 @@ function initializeNavigation() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                
-                // Close mobile menu
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
             }
         });
     });
@@ -1318,6 +1287,86 @@ function handleVideoError() {
     }
     
     console.log('✅ Video fallback implemented successfully');
+}
+
+// Skills Collapse Functionality (Mobile Only)
+function initializeSkillsCollapse() {
+    const skillCategories = document.querySelectorAll('.skill-category');
+    let eventListenersAdded = false;
+    
+    function handleSkillClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const category = e.currentTarget;
+        
+        // Only work if mobile-collapsible class is present
+        if (!category.classList.contains('mobile-collapsible')) return;
+        
+        // Toggle expanded state
+        category.classList.toggle('expanded');
+        const isExpanded = category.classList.contains('expanded');
+        category.setAttribute('aria-expanded', isExpanded);
+        
+        console.log('📱 Skill toggled:', category.querySelector('h3')?.textContent, 'Expanded:', isExpanded);
+        
+        // Analytics tracking
+        if (typeof posthog !== 'undefined') {
+            posthog.capture('mobile_skill_toggle', {
+                skill_name: category.querySelector('h3')?.textContent,
+                expanded: isExpanded,
+                theme: currentTheme,
+                colorblind_mode: colorblindMode
+            });
+        }
+    }
+    
+    function handleSkillKeydown(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleSkillClick(e);
+        }
+    }
+    
+    function updateMobileState() {
+        const isMobile = window.innerWidth <= 768;
+        
+        skillCategories.forEach(category => {
+            if (isMobile) {
+                // Add mobile collapsible class and functionality
+                category.classList.add('mobile-collapsible');
+                category.setAttribute('tabindex', '0');
+                category.setAttribute('role', 'button');
+                category.setAttribute('aria-expanded', 'false');
+                
+                // Add event listeners if not already added
+                if (!eventListenersAdded) {
+                    category.addEventListener('click', handleSkillClick);
+                    category.addEventListener('keydown', handleSkillKeydown);
+                }
+                
+            } else {
+                // Remove mobile functionality on desktop
+                category.classList.remove('mobile-collapsible', 'expanded');
+                category.removeAttribute('tabindex');
+                category.removeAttribute('role');
+                category.removeAttribute('aria-expanded');
+            }
+        });
+        
+        eventListenersAdded = isMobile;
+        console.log('📱 Mobile skills collapse', isMobile ? 'enabled' : 'disabled');
+    }
+    
+    // Initialize on load
+    updateMobileState();
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateMobileState, 100);
+    });
 }
 
 // Legacy Keyboard Shortcuts (kept for T, M, C, X keys)
