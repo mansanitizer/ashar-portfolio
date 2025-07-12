@@ -181,6 +181,25 @@ export const api = {
       console.error('🤖 AI query failed:', error);
       throw error;
     }
+  },
+
+  // Game CV bullet generation
+  async generateCVBullets(options = {}) {
+    try {
+      const requestData = {
+        count: options.count || 5,
+        bullet_type: options.bulletType || 'fake_subtle',
+        difficulty_level: options.difficultyLevel || 0.6,
+        role: options.role || 'product_manager',
+        ...options
+      };
+      
+      const response = await apiClient.post('/api/v1/game/generate-cv-bullets', requestData);
+      return response.data;
+    } catch (error) {
+      console.error('🎮 Game CV bullet generation failed:', error);
+      throw error;
+    }
   }
 };
 

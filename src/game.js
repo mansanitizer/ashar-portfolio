@@ -443,8 +443,10 @@ const cvBullets = {
 class CVGenerator {
     constructor() {
         this.apiKey = null; // Will be set when implementing real AI
-        this.isEnabled = false; // Toggle for AI vs static bullets
+        this.isEnabled = true; // Enable API integration
         this.usedBullets = new Set(); // Track used bullets in current game
+        this.bulletCache = new Map(); // Simple in-memory cache
+        this.cacheExpiry = 5 * 60 * 1000; // 5 minutes
     }
     
     // Reset used bullets for new game
@@ -453,7 +455,100 @@ class CVGenerator {
     }
     
     async generateCVOptions(temperature = 1.0) {
-        // Generate 3 professional bullets and 1 fake bullet based on temperature
+        // Try to generate with API first, fallback to static bullets
+        try {
+            return await this.generateWithAPI(temperature);
+        } catch (error) {
+            console.warn('🎮 API generation failed, falling back to static bullets:', error);
+            return this.generateWithStaticBullets(temperature);
+        }
+    }
+    
+    async generateWithAPI(temperature = 1.0) {
+        const options = [];
+        
+        // Add 3 professional bullets (from static database for now)
+        for (let i = 0; i < 3; i++) {
+            const bullet = this.getUniqueRandomBullet('professional');
+            options.push({
+                text: bullet,
+                isFake: false,
+                temperature: 0.0,
+                source: 'static'
+            });
+        }
+        
+        // Generate 1 fake bullet using API (with caching)
+        const bulletType = this.getAPIBulletTypeByTemperature(temperature);
+        const cacheKey = `${bulletType}_${Math.round(temperature * 10)}`;
+        
+        let apiResponse;
+        
+        // Check cache first
+        const cached = this.bulletCache.get(cacheKey);
+        if (cached && (Date.now() - cached.timestamp) < this.cacheExpiry && cached.bullets.length > 0) {
+            // Use cached bullet and remove it from cache to avoid repetition
+            const bullet = cached.bullets.pop();
+            apiResponse = { bullets: [bullet] };
+            console.log('🎮 Using cached bullet');
+        } else {
+            // Generate new bullets and cache them
+            console.log('🎮 Generating new bullets via API');
+            apiResponse = await api.generateCVBullets({
+                count: 3, // Generate extra for caching
+                bulletType: bulletType,
+                difficultyLevel: temperature,
+                role: 'product_manager'
+            });
+            
+            // Cache the extra bullets
+            if (apiResponse.bullets && apiResponse.bullets.length > 1) {
+                const validBullets = apiResponse.bullets.filter(bullet => 
+                    !bullet.text.toLowerCase().includes('here are') &&
+                    !bullet.text.toLowerCase().includes('cv bullet') &&
+                    bullet.text.length > 30
+                );
+                
+                if (validBullets.length > 1) {
+                    this.bulletCache.set(cacheKey, {
+                        bullets: validBullets.slice(1), // Cache all but the first
+                        timestamp: Date.now()
+                    });
+                }
+            }
+        }
+        
+        if (apiResponse.bullets && apiResponse.bullets.length > 0) {
+            // Skip the first bullet if it's just an introduction/explanation
+            const validBullets = apiResponse.bullets.filter(bullet => 
+                !bullet.text.toLowerCase().includes('here are') &&
+                !bullet.text.toLowerCase().includes('cv bullet') &&
+                bullet.text.length > 30
+            );
+            
+            if (validBullets.length > 0) {
+                const selectedBullet = validBullets[0];
+                options.push({
+                    text: selectedBullet.text,
+                    isFake: true,
+                    temperature: temperature,
+                    source: 'api',
+                    bulletId: selectedBullet.id
+                });
+            } else {
+                // Fallback to static if no valid bullets
+                throw new Error('No valid bullets from API');
+            }
+        } else {
+            throw new Error('No bullets returned from API');
+        }
+        
+        // Shuffle the options so fake isn't always in same position
+        return this.shuffleArray(options);
+    }
+    
+    generateWithStaticBullets(temperature = 1.0) {
+        // Original static implementation as fallback
         const options = [];
         
         // Add 3 professional bullets (ensuring no duplicates)
@@ -462,7 +557,8 @@ class CVGenerator {
             options.push({
                 text: bullet,
                 isFake: false,
-                temperature: 0.0
+                temperature: 0.0,
+                source: 'static'
             });
         }
         
@@ -472,7 +568,8 @@ class CVGenerator {
         options.push({
             text: fakeBullet,
             isFake: true,
-            temperature: temperature
+            temperature: temperature,
+            source: 'static'
         });
         
         // Shuffle the options so fake isn't always in same position
@@ -480,9 +577,17 @@ class CVGenerator {
     }
     
     getBulletTypeByTemperature(temperature) {
+        // For static bullets
         if (temperature >= 0.8) return 'absurd';
         if (temperature >= 0.4) return 'inflated';
         return 'professional'; // This shouldn't happen for fake bullets
+    }
+    
+    getAPIBulletTypeByTemperature(temperature) {
+        // For API bullets - map to API bullet types
+        if (temperature >= 0.8) return 'fake_obvious';
+        if (temperature >= 0.4) return 'fake_subtle';
+        return 'fake_subtle'; // Default for API
     }
     
     getRandomBullet(type) {
