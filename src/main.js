@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeKeyboardShortcuts();
     initializeBentoGrid();
     initializeProjectsExpand();
+    initializeAIQuery();
     
     // Add initial loading state
     document.body.style.opacity = '0';
@@ -1718,18 +1719,19 @@ const keyboardShortcuts = {
             return;
         }
         
+        // C + V: Download CV (standalone combination)
+        if (this.activeKeys.has('c') && this.activeKeys.has('v') && keys.length === 2) {
+            e.preventDefault();
+            this.executeShortcut('download-cv', 'Download CV');
+            return;
+        }
+        
         // Z-based combinations
         if (this.activeKeys.has('z')) {
             // Z + C: Get in Touch
-            if (this.activeKeys.has('c') && !this.activeKeys.has('v') && keys.length === 2) {
+            if (this.activeKeys.has('c') && keys.length === 2) {
                 e.preventDefault();
                 this.executeShortcut('get-in-touch', 'Get in Touch');
-            }
-            
-            // Z + C + V: Download CV
-            else if (this.activeKeys.has('c') && this.activeKeys.has('v') && keys.length === 3) {
-                e.preventDefault();
-                this.executeShortcut('download-cv', 'Download CV');
             }
             
             // Z + X: Random Color
@@ -2113,5 +2115,97 @@ function removeFocusTrap(modal) {
     }
 }
 
+// AI Query Functions
+function initializeAIQuery() {
+    const aiQueryInput = document.getElementById('ai-query-input');
+    const aiQuerySubmit = document.getElementById('ai-query-submit');
+    const aiQueryClear = document.getElementById('ai-query-clear');
+    const aiQueryResponse = document.getElementById('ai-query-response');
+    const aiResponseContent = document.getElementById('ai-response-content');
+    
+    if (!aiQueryInput || !aiQuerySubmit) return;
+    
+    // Enable/disable submit button based on input
+    aiQueryInput.addEventListener('input', () => {
+        const hasText = aiQueryInput.value.trim().length > 0;
+        aiQuerySubmit.disabled = !hasText;
+    });
+    
+    // Clear button functionality
+    if (aiQueryClear) {
+        aiQueryClear.addEventListener('click', () => {
+            aiQueryInput.value = '';
+            aiQuerySubmit.disabled = true;
+            aiQueryResponse.classList.add('hidden');
+            aiQueryInput.focus();
+        });
+    }
+    
+    // Submit query
+    aiQuerySubmit.addEventListener('click', handleAIQuery);
+    
+    // Enter key submission
+    aiQueryInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !aiQuerySubmit.disabled) {
+            handleAIQuery();
+        }
+    });
+}
+
+async function handleAIQuery() {
+    const aiQueryInput = document.getElementById('ai-query-input');
+    const aiQuerySubmit = document.getElementById('ai-query-submit');
+    const aiQueryResponse = document.getElementById('ai-query-response');
+    const aiResponseContent = document.getElementById('ai-response-content');
+    const btnText = aiQuerySubmit.querySelector('.btn-text');
+    const btnLoading = aiQuerySubmit.querySelector('.btn-loading');
+    
+    const query = aiQueryInput.value.trim();
+    if (!query) return;
+    
+    // Show loading state
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    aiQuerySubmit.disabled = true;
+    
+    try {
+        // Make API call to backend
+        const response = await api.query(query);
+        
+        // Show response
+        aiResponseContent.textContent = response.response;
+        aiQueryResponse.classList.remove('hidden');
+        
+        // PostHog analytics
+        captureAnalytics('ai_query_submitted', {
+            query_length: query.length,
+            theme: currentTheme,
+            colorblind_mode: colorblindMode
+        });
+        
+        // Clear input
+        aiQueryInput.value = '';
+        
+    } catch (error) {
+        console.error('AI Query Error:', error);
+        
+        // Show error message
+        aiResponseContent.textContent = 'Sorry, I encountered an error processing your request. Please try again.';
+        aiQueryResponse.classList.remove('hidden');
+        
+        // PostHog error tracking
+        captureAnalytics('ai_query_error', {
+            error_message: error.message,
+            theme: currentTheme,
+            colorblind_mode: colorblindMode
+        });
+    } finally {
+        // Reset button state
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+        aiQuerySubmit.disabled = query.length === 0;
+    }
+}
+
 console.log('Modern Neobrutal Portfolio Ready!');
-console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | Accessibility Enhanced');
+console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Accessibility Enhanced');

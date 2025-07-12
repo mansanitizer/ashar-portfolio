@@ -188,6 +188,15 @@
     text-shadow: 6px 6px 0px var(--superhot-red);
 }
 
+.shortcut-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--superhot-grey);
+    margin-top: 12px;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
 .start-game-btn {
     background: var(--superhot-black);
     color: var(--superhot-white);

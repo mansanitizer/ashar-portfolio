@@ -858,16 +858,51 @@ function endGame() {
 }
 
 function restartGame() {
+    console.log('🔄 Restarting game...');
+    
     // Reset display
     elements.gameResults.classList.add('hidden');
+    elements.gameInterface.classList.add('hidden');
     elements.gameInstructions.classList.remove('hidden');
     
-    // Reset state
+    // Reset all game state
     gameState.isPlaying = false;
+    gameState.isPaused = false;
     gameState.currentQuestion = 0;
+    gameState.score = 0;
+    gameState.streak = 0;
+    gameState.temperature = 1.0;
+    gameState.startTime = null;
+    gameState.questionStartTime = null;
+    gameState.correctAnswers = 0;
+    gameState.wrongAnswers = 0;
+    gameState.currentOptions = [];
+    gameState.correctOption = null;
+    gameState.timeElapsed = 0;
+    
+    // Reset UI elements
+    elements.scoreDisplay.textContent = '0';
+    elements.timerDisplay.textContent = '00:00';
+    elements.streakDisplay.textContent = '0';
+    elements.levelDisplay.textContent = '1';
+    elements.progressFill.style.width = '0%';
+    elements.currentQuestionSpan.textContent = '1';
+    
+    // Clear CV options
+    elements.cvBullet1.textContent = 'Loading CV bullet...';
+    elements.cvBullet2.textContent = 'Loading CV bullet...';
+    elements.cvBullet3.textContent = 'Loading CV bullet...';
+    elements.cvBullet4.textContent = 'Loading CV bullet...';
+    
+    // Remove any selected states
+    document.querySelectorAll('.cv-option').forEach(option => {
+        option.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+    });
     
     // Track restart
     trackEvent('game_restarted');
+    
+    console.log('✅ Game reset complete');
 }
 
 // Utility Functions - keeping for compatibility
@@ -931,6 +966,18 @@ function handleGameKeyPress(e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
     switch (e.key) {
+        case ' ':
+            // Space key to start game
+            if (!gameState.isPlaying) {
+                e.preventDefault();
+                startGame();
+            }
+            break;
+        case 'Escape':
+            // ESC key to exit game and return to main portfolio
+            e.preventDefault();
+            window.location.href = '/';
+            break;
         case '/':
             // Don't show shortcuts panel on mobile
             if (window.innerWidth <= 768) return;

@@ -21,7 +21,7 @@ apiClient.interceptors.request.use(
   (config) => {
     // Add API key to headers if available
     if (API_KEY) {
-      config.headers.Authorization = `Bearer ${API_KEY}`;
+      config.headers['x-api-key'] = API_KEY;
     }
     
     // Add request timestamp
@@ -168,6 +168,17 @@ export const api = {
       return response.data;
     } catch (error) {
       console.log('🎮 Game score submission failed (expected in development)');
+      throw error;
+    }
+  },
+
+  // Query AI endpoint
+  async query(message) {
+    try {
+      const response = await apiClient.post('/api/v1/query', { message });
+      return response.data;
+    } catch (error) {
+      console.error('🤖 AI query failed:', error);
       throw error;
     }
   }
