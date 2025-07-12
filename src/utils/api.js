@@ -6,6 +6,14 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://cloudrun-7426
 const API_KEY = import.meta.env.VITE_API_KEY;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
+// Temporary debug logging to check what URL is being used
+console.log('🔧 API Debug Info:', {
+  'import.meta.env.VITE_API_BASE_URL': import.meta.env.VITE_API_BASE_URL,
+  'Final API_BASE_URL': API_BASE_URL,
+  'Environment Mode': import.meta.env.MODE,
+  'All VITE env vars': Object.keys(import.meta.env).filter(key => key.startsWith('VITE_'))
+});
+
 
 // Create axios instance with default configuration
 const apiClient = axios.create({
@@ -27,6 +35,16 @@ apiClient.interceptors.request.use(
     
     // Add request timestamp
     config.metadata = { startTime: new Date() };
+    
+    // Temporary debug logging for all requests
+    console.log('🚀 API Request:', {
+      method: config.method?.toUpperCase(),
+      baseURL: config.baseURL,
+      url: config.url,
+      fullURL: config.baseURL + config.url,
+      headers: config.headers,
+      data: config.data
+    });
     
     // Debug logging
     if (DEBUG) {
