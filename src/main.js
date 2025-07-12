@@ -2412,7 +2412,7 @@ function initializeHealthStatus() {
         } catch (error) {
             isHealthy = false;
             heartIcon.className = 'heart-icon unhealthy';
-            healthTooltip.textContent = 'is backend ok?';
+            healthTooltip.textContent = 'backend unavailable';
             
             console.warn('❤️ Backend health check failed:', error.message);
             
