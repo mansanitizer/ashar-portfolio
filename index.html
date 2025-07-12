@@ -28,10 +28,141 @@
                 <span class="brand-title">PM</span>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <!-- Action Buttons Row -->
+                <!-- Mobile Action Buttons Row (hidden on desktop) -->
                 <div class="nav-actions-row">
                     <!-- Settings Button -->
                     <div class="settings-dropdown">
+                        <button class="settings-btn" id="settings-toggle-mobile" aria-expanded="false" aria-haspopup="true" aria-label="Settings menu">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
+                            </svg>
+                        </button>
+                        <div class="settings-menu" id="settings-menu-mobile">
+                            <div class="settings-section">
+                                <h4>THEME</h4>
+                                <button id="theme-toggle-mobile" class="settings-item">
+                                    <span>Dark Mode</span>
+                                    <div class="toggle-switch">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="settings-section">
+                                <h4>ACCENT COLOR</h4>
+                                <div class="accent-picker">
+                                    <div class="accent-color" data-color="#0066FF" style="background: #0066FF;"></div>
+                                    <div class="accent-color" data-color="#FF1493" style="background: #FF1493;"></div>
+                                    <div class="accent-color" data-color="#32CD32" style="background: #32CD32;"></div>
+                                    <div class="accent-color" data-color="#FF6600" style="background: #FF6600;"></div>
+                                    <div class="accent-color" data-color="#8A2BE2" style="background: #8A2BE2;"></div>
+                                    <div class="accent-color" data-color="#20B2AA" style="background: #20B2AA;"></div>
+                                    <div class="accent-color" data-color="#FFD700" style="background: #FFD700;"></div>
+                                    <div class="accent-color" data-color="#FF69B4" style="background: #FF69B4;"></div>
+                                </div>
+                                <button id="randomizer-mobile" class="settings-item randomizer-btn">
+                                    <span>Random Color</span>
+                                </button>
+                            </div>
+                            <div class="settings-section">
+                                <h4>ACCESSIBILITY</h4>
+                                <button id="colorblind-toggle-mobile" class="settings-item">
+                                    <span>Colorblind Mode</span>
+                                    <div class="toggle-switch">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="settings-section">
+                                <h4>PRIVACY</h4>
+                                <button id="analytics-toggle-mobile" class="settings-item">
+                                    <span>Track Me</span>
+                                    <div class="toggle-switch">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Share Button -->
+                    <div class="share-dropdown">
+                        <button class="settings-btn" id="share-toggle-mobile" aria-expanded="false" aria-haspopup="true" aria-label="Share menu">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+                            </svg>
+                        </button>
+                        <div class="share-menu" id="share-menu-mobile">
+                            <div class="share-section">
+                                <h4>SHARE PORTFOLIO</h4>
+                                <button class="share-item share-btn-linkedin" id="share-portfolio-linkedin-mobile">
+                                    <span class="share-icon">in</span>
+                                    <span>LinkedIn</span>
+                                </button>
+                                <button class="share-item share-btn-twitter" id="share-portfolio-twitter-mobile">
+                                    <span class="share-icon">🐦</span>
+                                    <span>Twitter</span>
+                                </button>
+                                <button class="share-item share-btn-whatsapp" id="share-portfolio-whatsapp-mobile">
+                                    <span class="share-icon">💬</span>
+                                    <span>WhatsApp</span>
+                                </button>
+                                <button class="share-item share-btn-copy" id="share-portfolio-copy-mobile">
+                                    <span class="share-icon">📋</span>
+                                    <span>Copy Link</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Navigation Links (hidden on desktop) -->
+                <div class="nav-links-section">
+                    <a href="#about" class="nav-link" tabindex="0">ABOUT</a>
+                    <a href="#work" class="nav-link" tabindex="0">WORK</a>
+                    <a href="#projects" class="nav-link" tabindex="0">PROJECTS</a>
+                    <a href="#skills" class="nav-link" tabindex="0">SKILLS</a>
+                    <a href="#contact" class="nav-link" tabindex="0">CONTACT</a>
+                </div>
+                
+                <!-- Desktop Navigation (hidden on mobile) -->
+                <a href="#about" class="nav-link nav-link-desktop" tabindex="0">ABOUT</a>
+                <a href="#work" class="nav-link nav-link-desktop" tabindex="0">WORK</a>
+                <a href="#projects" class="nav-link nav-link-desktop" tabindex="0">PROJECTS</a>
+                <a href="#skills" class="nav-link nav-link-desktop" tabindex="0">SKILLS</a>
+                <a href="#contact" class="nav-link nav-link-desktop" tabindex="0">CONTACT</a>
+                
+                <!-- Desktop Share Button -->
+                <div class="share-dropdown share-dropdown-desktop">
+                    <button class="settings-btn" id="share-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Share menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+                        </svg>
+                    </button>
+                    <div class="share-menu" id="share-menu">
+                        <div class="share-section">
+                            <h4>SHARE PORTFOLIO</h4>
+                            <button class="share-item share-btn-linkedin" id="share-portfolio-linkedin">
+                                <span class="share-icon">in</span>
+                                <span>LinkedIn</span>
+                            </button>
+                            <button class="share-item share-btn-twitter" id="share-portfolio-twitter">
+                                <span class="share-icon">🐦</span>
+                                <span>Twitter</span>
+                            </button>
+                            <button class="share-item share-btn-whatsapp" id="share-portfolio-whatsapp">
+                                <span class="share-icon">💬</span>
+                                <span>WhatsApp</span>
+                            </button>
+                            <button class="share-item share-btn-copy" id="share-portfolio-copy">
+                                <span class="share-icon">📋</span>
+                                <span>Copy Link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Settings Button -->
+                <div class="settings-dropdown settings-dropdown-desktop">
                     <button class="settings-btn" id="settings-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Settings menu">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
@@ -82,46 +213,6 @@
                             </button>
                         </div>
                     </div>
-                    </div>
-                    
-                    <!-- Share Button -->
-                    <div class="share-dropdown">
-                        <button class="settings-btn" id="share-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Share menu">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
-                            </svg>
-                        </button>
-                        <div class="share-menu" id="share-menu">
-                            <div class="share-section">
-                                <h4>SHARE PORTFOLIO</h4>
-                                <button class="share-item share-btn-linkedin" id="share-portfolio-linkedin">
-                                    <span class="share-icon">in</span>
-                                    <span>LinkedIn</span>
-                                </button>
-                                <button class="share-item share-btn-twitter" id="share-portfolio-twitter">
-                                    <span class="share-icon">🐦</span>
-                                    <span>Twitter</span>
-                                </button>
-                                <button class="share-item share-btn-whatsapp" id="share-portfolio-whatsapp">
-                                    <span class="share-icon">💬</span>
-                                    <span>WhatsApp</span>
-                                </button>
-                                <button class="share-item share-btn-copy" id="share-portfolio-copy">
-                                    <span class="share-icon">📋</span>
-                                    <span>Copy Link</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Navigation Links -->
-                <div class="nav-links-section">
-                    <a href="#about" class="nav-link" tabindex="0">ABOUT</a>
-                    <a href="#work" class="nav-link" tabindex="0">WORK</a>
-                    <a href="#projects" class="nav-link" tabindex="0">PROJECTS</a>
-                    <a href="#skills" class="nav-link" tabindex="0">SKILLS</a>
-                    <a href="#contact" class="nav-link" tabindex="0">CONTACT</a>
                 </div>
             </div>
             <div class="nav-toggle" role="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu" tabindex="0">

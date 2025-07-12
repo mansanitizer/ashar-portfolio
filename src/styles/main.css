@@ -359,6 +359,7 @@ h1, h2, h3, h4 {
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    overflow: visible; /* Ensure dropdowns aren't clipped */
 }
 
 .nav-brand {
@@ -392,6 +393,19 @@ h1, h2, h3, h4 {
     display: flex;
     gap: 40px;
     align-items: center;
+    overflow: visible; /* Ensure dropdowns aren't clipped */
+}
+
+/* Desktop Navigation Layout (default) */
+.nav-actions-row,
+.nav-links-section {
+    display: none; /* Hide mobile containers on desktop */
+}
+
+.nav-link-desktop,
+.share-dropdown-desktop,
+.settings-dropdown-desktop {
+    display: block; /* Show desktop elements */
 }
 
 .nav-link {
@@ -809,6 +823,13 @@ h1, h2, h3, h4 {
     position: relative;
     display: inline-block;
     margin-right: 15px;
+    z-index: 100; /* Ensure dropdown container has proper stacking context */
+}
+
+/* Ensure both desktop and mobile share dropdowns have proper positioning */
+.share-dropdown-desktop {
+    position: relative;
+    z-index: 100;
 }
 
 /* Share button uses same styling as settings button */
@@ -854,7 +875,7 @@ h1, h2, h3, h4 {
     box-shadow: 0 10px 40px var(--shadow-color);
     padding: 20px;
     min-width: 200px;
-    z-index: 1000;
+    z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -866,6 +887,7 @@ h1, h2, h3, h4 {
     visibility: visible;
     transform: translateY(0);
 }
+
 
 .share-section h4 {
     font-family: 'Space Grotesk', sans-serif;
@@ -2121,15 +2143,25 @@ h1, h2, h3, h4 {
         padding: 40px 20px;
     }
     
-    .nav-actions-row {
+    /* Show mobile containers, hide desktop elements */
+    .nav-actions-row,
+    .nav-links-section {
         display: flex;
+    }
+    
+    .nav-link-desktop,
+    .share-dropdown-desktop,
+    .settings-dropdown-desktop {
+        display: none;
+    }
+    
+    .nav-actions-row {
         justify-content: center;
         gap: 30px;
         align-items: center;
     }
     
     .nav-links-section {
-        display: flex;
         flex-direction: column;
         gap: 20px;
         align-items: center;

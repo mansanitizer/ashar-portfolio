@@ -1538,8 +1538,16 @@ function initializeGameSharing() {
     };
     
     // Initialize header share dropdown if elements exist
+    console.log('Game header share elements check:', {
+        shareToggle: !!shareToggle,
+        shareMenu: !!shareMenu
+    });
+    
     if (shareToggle && shareMenu) {
+        console.log('✅ Initializing game header share functionality');
         initializeHeaderShareDropdown(shareToggle, shareMenu);
+    } else {
+        console.warn('🔗 Missing game header share elements');
     }
     
     // Check if results share elements exist

@@ -20,6 +20,14 @@ const themeToggle = document.getElementById('theme-toggle');
 const colorblindToggle = document.getElementById('colorblind-toggle');
 const analyticsToggle = document.getElementById('analytics-toggle');
 const randomizer = document.getElementById('randomizer');
+
+// Mobile settings elements
+const settingsToggleMobile = document.getElementById('settings-toggle-mobile');
+const settingsMenuMobile = document.getElementById('settings-menu-mobile');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+const colorblindToggleMobile = document.getElementById('colorblind-toggle-mobile');
+const analyticsToggleMobile = document.getElementById('analytics-toggle-mobile');
+const randomizerMobile = document.getElementById('randomizer-mobile');
 const accentColors = document.querySelectorAll('.accent-color');
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
@@ -161,6 +169,31 @@ function updateActiveAccentColor() {
 
 // Settings Management Functions
 function initializeSettings() {
+    // Initialize desktop settings if elements exist
+    if (settingsToggle && settingsMenu) {
+        initializeSettingsDropdown(settingsToggle, settingsMenu, {
+            themeToggle: themeToggle,
+            colorblindToggle: colorblindToggle,
+            analyticsToggle: analyticsToggle,
+            randomizer: randomizer
+        }, 'desktop');
+    }
+    
+    // Initialize mobile settings if elements exist
+    if (settingsToggleMobile && settingsMenuMobile) {
+        initializeSettingsDropdown(settingsToggleMobile, settingsMenuMobile, {
+            themeToggle: themeToggleMobile,
+            colorblindToggle: colorblindToggleMobile,
+            analyticsToggle: analyticsToggleMobile,
+            randomizer: randomizerMobile
+        }, 'mobile');
+    }
+    
+    console.log('⚙️ Settings initialized for both desktop and mobile');
+}
+
+// Reusable settings dropdown initialization function
+function initializeSettingsDropdown(settingsToggle, settingsMenu, settingsElements, context) {
     // Settings dropdown toggle
     settingsToggle.addEventListener('click', () => {
         const isOpening = !settingsMenu.classList.contains('show');
@@ -172,6 +205,7 @@ function initializeSettings() {
         // PostHog Analytics
         captureAnalytics('settings_dropdown_toggled', {
             action: isOpening ? 'opened' : 'closed',
+            context: context,
             theme: currentTheme,
             colorblind_mode: colorblindMode
         });
@@ -192,15 +226,32 @@ function initializeSettings() {
     });
     
     // Initialize toggle states
-    updateToggleState(themeToggle, currentTheme === 'dark');
-    updateToggleState(colorblindToggle, colorblindMode);
-    updateToggleState(analyticsToggle, trackingEnabled);
+    if (settingsElements.themeToggle) {
+        updateToggleState(settingsElements.themeToggle, currentTheme === 'dark');
+        updateThemeToggleText(settingsElements.themeToggle);
+        initializeThemeToggle(settingsElements.themeToggle, context);
+    }
     
-    // Update theme toggle text
-    updateThemeToggleText();
+    if (settingsElements.colorblindToggle) {
+        updateToggleState(settingsElements.colorblindToggle, colorblindMode);
+        initializeColorblindToggle(settingsElements.colorblindToggle, context);
+    }
     
-    // Initialize analytics toggle
-    initializeAnalyticsToggle();
+    if (settingsElements.analyticsToggle) {
+        updateToggleState(settingsElements.analyticsToggle, trackingEnabled);
+        initializeAnalyticsToggle(settingsElements.analyticsToggle, context);
+    }
+    
+    if (settingsElements.randomizer) {
+        initializeRandomizer(settingsElements.randomizer, context);
+    }
+    
+    // Initialize accent colors (shared between desktop and mobile)
+    if (context === 'desktop') {
+        initializeAccentColors();
+    }
+    
+    console.log(`⚙️ ${context} settings dropdown initialized`);
 }
 
 function updateToggleState(toggleButton, isActive) {
@@ -212,86 +263,117 @@ function updateToggleState(toggleButton, isActive) {
     }
 }
 
-function updateThemeToggleText() {
-    const themeText = themeToggle.querySelector('span');
+function updateThemeToggleText(themeToggleElement) {
+    const themeText = themeToggleElement.querySelector('span');
     themeText.textContent = currentTheme === 'dark' ? 'Dark Mode' : 'Light Mode';
 }
 
 // Theme Toggle Functionality
-themeToggle.addEventListener('click', () => {
-    const previousTheme = currentTheme;
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('theme', currentTheme);
-    
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateToggleState(themeToggle, currentTheme === 'dark');
-    updateThemeToggleText();
-    
-    // PostHog Analytics
-    captureAnalytics('theme_changed', {
-        from_theme: previousTheme,
-        to_theme: currentTheme,
-        colorblind_mode: colorblindMode
+function initializeThemeToggle(themeToggleElement, context) {
+    themeToggleElement.addEventListener('click', () => {
+        const previousTheme = currentTheme;
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', currentTheme);
+        
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        // Update both desktop and mobile toggles
+        if (themeToggle) {
+            updateToggleState(themeToggle, currentTheme === 'dark');
+            updateThemeToggleText(themeToggle);
+        }
+        if (themeToggleMobile) {
+            updateToggleState(themeToggleMobile, currentTheme === 'dark');
+            updateThemeToggleText(themeToggleMobile);
+        }
+        
+        // PostHog Analytics
+        captureAnalytics('theme_changed', {
+            from_theme: previousTheme,
+            to_theme: currentTheme,
+            context: context,
+            colorblind_mode: colorblindMode
+        });
+        
+        // Add click animation
+        themeToggleElement.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            themeToggleElement.style.transform = '';
+        }, 150);
     });
-    
-    // Add click animation
-    themeToggle.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-        themeToggle.style.transform = '';
-    }, 150);
-});
+}
 
 // Colorblind Toggle Functionality
-colorblindToggle.addEventListener('click', () => {
-    const previousMode = colorblindMode;
-    colorblindMode = !colorblindMode;
-    localStorage.setItem('colorblindMode', colorblindMode);
-    
-    updateToggleState(colorblindToggle, colorblindMode);
-    document.documentElement.setAttribute('data-colorblind', colorblindMode);
-    
-    if (colorblindMode) {
-        // Disable accent color picker
-        accentColors.forEach(color => {
-            color.style.pointerEvents = 'none';
-            color.style.opacity = '0.5';
+function initializeColorblindToggle(colorblindToggleElement, context) {
+    colorblindToggleElement.addEventListener('click', () => {
+        const previousMode = colorblindMode;
+        colorblindMode = !colorblindMode;
+        localStorage.setItem('colorblindMode', colorblindMode);
+        
+        // Update both desktop and mobile toggles
+        if (colorblindToggle) updateToggleState(colorblindToggle, colorblindMode);
+        if (colorblindToggleMobile) updateToggleState(colorblindToggleMobile, colorblindMode);
+        
+        document.documentElement.setAttribute('data-colorblind', colorblindMode);
+        
+        if (colorblindMode) {
+            // Disable accent color picker
+            accentColors.forEach(color => {
+                color.style.pointerEvents = 'none';
+                color.style.opacity = '0.5';
+            });
+            if (randomizer) {
+                randomizer.style.pointerEvents = 'none';
+                randomizer.style.opacity = '0.5';
+            }
+            if (randomizerMobile) {
+                randomizerMobile.style.pointerEvents = 'none';
+                randomizerMobile.style.opacity = '0.5';
+            }
+        } else {
+            // Re-enable accent colors
+            document.documentElement.style.setProperty('--accent-color', currentAccent);
+            accentColors.forEach(color => {
+                color.style.pointerEvents = 'all';
+                color.style.opacity = '1';
+            });
+            if (randomizer) {
+                randomizer.style.pointerEvents = 'all';
+                randomizer.style.opacity = '1';
+            }
+            if (randomizerMobile) {
+                randomizerMobile.style.pointerEvents = 'all';
+                randomizerMobile.style.opacity = '1';
+            }
+        }
+        
+        // PostHog Analytics
+        captureAnalytics('colorblind_mode_toggled', {
+            colorblind_mode: colorblindMode,
+            theme: currentTheme,
+            context: context,
+            previous_mode: previousMode
         });
-        randomizer.style.pointerEvents = 'none';
-        randomizer.style.opacity = '0.5';
-    } else {
-        // Re-enable accent colors
-        document.documentElement.style.setProperty('--accent-color', currentAccent);
-        accentColors.forEach(color => {
-            color.style.pointerEvents = 'all';
-            color.style.opacity = '1';
-        });
-        randomizer.style.pointerEvents = 'all';
-        randomizer.style.opacity = '1';
-    }
-    
-    // PostHog Analytics
-    captureAnalytics('colorblind_mode_toggled', {
-        colorblind_mode: colorblindMode,
-        theme: currentTheme,
-        previous_mode: previousMode
+        
+        // Add click animation
+        colorblindToggleElement.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            colorblindToggleElement.style.transform = '';
+        }, 150);
     });
-    
-    // Add click animation
-    colorblindToggle.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-        colorblindToggle.style.transform = '';
-    }, 150);
-});
+}
 
 // Analytics Toggle Functionality
-function initializeAnalyticsToggle() {
+function initializeAnalyticsToggle(analyticsToggleElement, context) {
     // Analytics toggle click handler
-    analyticsToggle.addEventListener('click', () => {
+    analyticsToggleElement.addEventListener('click', () => {
         const previousState = trackingEnabled;
         trackingEnabled = !trackingEnabled;
         localStorage.setItem('trackingEnabled', trackingEnabled);
         
-        updateToggleState(analyticsToggle, trackingEnabled);
+        // Update both desktop and mobile toggles
+        if (analyticsToggle) updateToggleState(analyticsToggle, trackingEnabled);
+        if (analyticsToggleMobile) updateToggleState(analyticsToggleMobile, trackingEnabled);
         
         // Update PostHog state
         if (typeof posthog !== 'undefined') {
@@ -301,6 +383,7 @@ function initializeAnalyticsToggle() {
                 posthog.capture('analytics_opt_in', {
                     previous_state: previousState ? 'enabled' : 'disabled',
                     new_state: 'enabled',
+                    context: context,
                     theme: currentTheme,
                     colorblind_mode: colorblindMode
                 });
@@ -309,6 +392,7 @@ function initializeAnalyticsToggle() {
                 posthog.capture('analytics_opt_out', {
                     previous_state: previousState ? 'enabled' : 'disabled',
                     new_state: 'disabled',
+                    context: context,
                     theme: currentTheme,
                     colorblind_mode: colorblindMode
                 });
@@ -317,10 +401,81 @@ function initializeAnalyticsToggle() {
         }
         
         // Add click animation
-        analyticsToggle.style.transform = 'scale(0.98)';
+        analyticsToggleElement.style.transform = 'scale(0.98)';
         setTimeout(() => {
-            analyticsToggle.style.transform = '';
+            analyticsToggleElement.style.transform = '';
         }, 150);
+    });
+}
+
+// Randomizer Functionality
+function initializeRandomizer(randomizerElement, context) {
+    randomizerElement.addEventListener('click', () => {
+        if (colorblindMode) return; // Don't randomize in colorblind mode
+        
+        const randomAccent = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+        currentAccent = randomAccent;
+        localStorage.setItem('accent', currentAccent);
+        document.documentElement.style.setProperty('--accent-color', currentAccent);
+        
+        // Update accent color display
+        accentColors.forEach(color => {
+            color.classList.remove('active');
+            if (color.dataset.color === currentAccent) {
+                color.classList.add('active');
+            }
+        });
+        
+        // PostHog Analytics
+        captureAnalytics('accent_randomized', {
+            new_color: currentAccent,
+            context: context,
+            theme: currentTheme,
+            colorblind_mode: colorblindMode
+        });
+        
+        // Add click animation
+        randomizerElement.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            randomizerElement.style.transform = '';
+        }, 150);
+    });
+}
+
+// Accent Colors Initialization (shared function)
+function initializeAccentColors() {
+    accentColors.forEach(color => {
+        color.addEventListener('click', () => {
+            if (colorblindMode) return; // Don't allow color change in colorblind mode
+            
+            const previousAccent = currentAccent;
+            currentAccent = color.dataset.color;
+            localStorage.setItem('accent', currentAccent);
+            document.documentElement.style.setProperty('--accent-color', currentAccent);
+            
+            // Update active state
+            accentColors.forEach(c => c.classList.remove('active'));
+            color.classList.add('active');
+            
+            // PostHog Analytics
+            captureAnalytics('accent_color_changed', {
+                from_color: previousAccent,
+                to_color: currentAccent,
+                theme: currentTheme,
+                colorblind_mode: colorblindMode
+            });
+            
+            // Add click animation
+            color.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                color.style.transform = '';
+            }, 150);
+        });
+        
+        // Set initial active state
+        if (color.dataset.color === currentAccent) {
+            color.classList.add('active');
+        }
     });
 }
 
@@ -2301,6 +2456,7 @@ function initializeHealthStatus() {
 
 // Portfolio Sharing Functions
 function initializePortfolioSharing() {
+    // Desktop elements
     const shareToggle = document.getElementById('share-toggle');
     const shareMenu = document.getElementById('share-menu');
     const shareButtons = {
@@ -2310,39 +2466,68 @@ function initializePortfolioSharing() {
         copy: document.getElementById('share-portfolio-copy')
     };
     
-    // Check if elements exist
-    const missingElements = Object.entries(shareButtons)
-        .filter(([key, element]) => !element)
-        .map(([key]) => key);
+    // Mobile elements
+    const shareToggleMobile = document.getElementById('share-toggle-mobile');
+    const shareMenuMobile = document.getElementById('share-menu-mobile');
+    const shareButtonsMobile = {
+        linkedin: document.getElementById('share-portfolio-linkedin-mobile'),
+        twitter: document.getElementById('share-portfolio-twitter-mobile'),
+        whatsapp: document.getElementById('share-portfolio-whatsapp-mobile'),
+        copy: document.getElementById('share-portfolio-copy-mobile')
+    };
     
-    if (missingElements.length > 0 || !shareToggle || !shareMenu) {
-        console.warn('🔗 Missing share elements:', missingElements, { shareToggle: !!shareToggle, shareMenu: !!shareMenu });
-        return;
+    // Debug: Check what elements we found
+    console.log('🔍 Share elements found:', {
+        desktop: {
+            shareToggle: !!shareToggle,
+            shareMenu: !!shareMenu,
+            shareButtons: Object.fromEntries(Object.entries(shareButtons).map(([k, v]) => [k, !!v]))
+        },
+        mobile: {
+            shareToggleMobile: !!shareToggleMobile,
+            shareMenuMobile: !!shareMenuMobile,
+            shareButtonsMobile: Object.fromEntries(Object.entries(shareButtonsMobile).map(([k, v]) => [k, !!v]))
+        }
+    });
+
+    // Initialize desktop sharing if elements exist
+    if (shareToggle && shareMenu && Object.values(shareButtons).every(btn => btn)) {
+        console.log('✅ Initializing desktop share');
+        initializeShareDropdown(shareToggle, shareMenu, shareButtons, 'desktop');
+    } else {
+        console.log('❌ Desktop share not initialized - missing elements');
     }
     
-    // Share dropdown toggle functionality
-    shareToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = shareMenu.classList.contains('show');
-        
-        // Close settings menu if open
-        const settingsMenu = document.getElementById('settings-menu');
-        if (settingsMenu && settingsMenu.classList.contains('show')) {
-            settingsMenu.classList.remove('show');
-            document.getElementById('settings-toggle').setAttribute('aria-expanded', 'false');
-        }
-        
-        // Toggle share menu
+    // Initialize mobile sharing if elements exist
+    if (shareToggleMobile && shareMenuMobile && Object.values(shareButtonsMobile).every(btn => btn)) {
+        console.log('✅ Initializing mobile share');
+        initializeShareDropdown(shareToggleMobile, shareMenuMobile, shareButtonsMobile, 'mobile');
+    } else {
+        console.log('❌ Mobile share not initialized - missing elements');
+    }
+    
+    console.log('🔗 Portfolio sharing initialized');
+}
+
+// Reusable share dropdown initialization function
+function initializeShareDropdown(shareToggle, shareMenu, shareButtons, context) {
+    // Share dropdown toggle (copying settings pattern exactly)
+    shareToggle.addEventListener('click', () => {
+        const isOpening = !shareMenu.classList.contains('show');
         shareMenu.classList.toggle('show');
-        shareToggle.setAttribute('aria-expanded', !isOpen);
         
-        captureAnalytics('share_dropdown_toggled', {
-            action: isOpen ? 'closed' : 'opened',
-            theme: currentTheme
+        // Update ARIA state
+        shareToggle.setAttribute('aria-expanded', isOpening.toString());
+        
+        console.log('🔗 Share menu toggled', { 
+            context: context,
+            isOpening: isOpening,
+            menuHasShow: shareMenu.classList.contains('show'),
+            menuId: shareMenu.id
         });
     });
     
-    // Close share menu when clicking outside
+    // Close share menu when clicking outside (copying settings pattern)
     document.addEventListener('click', (e) => {
         if (!shareToggle.contains(e.target) && !shareMenu.contains(e.target)) {
             shareMenu.classList.remove('show');
@@ -2350,7 +2535,7 @@ function initializePortfolioSharing() {
         }
     });
     
-    // Close on escape key
+    // Close on escape key (copying settings pattern)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && shareMenu.classList.contains('show')) {
             shareMenu.classList.remove('show');
@@ -2360,43 +2545,52 @@ function initializePortfolioSharing() {
     });
     
     // LinkedIn sharing
-    shareButtons.linkedin.addEventListener('click', () => {
+    shareButtons.linkedin.addEventListener('click', (e) => {
+        console.log('🔗 LinkedIn share clicked!');
+        e.preventDefault();
+        e.stopPropagation();
         openPlatformShare(SHARE_PLATFORMS.LINKEDIN, SHARE_CONTEXTS.PORTFOLIO);
         shareMenu.classList.remove('show');
         shareToggle.setAttribute('aria-expanded', 'false');
         captureAnalytics('portfolio_shared', {
             platform: 'linkedin',
             method: 'platform_specific',
+            context: context,
             theme: currentTheme
         });
     });
     
     // Twitter sharing
     shareButtons.twitter.addEventListener('click', () => {
+        console.log('Twitter share clicked', { platform: SHARE_PLATFORMS.TWITTER, context: SHARE_CONTEXTS.PORTFOLIO });
         openPlatformShare(SHARE_PLATFORMS.TWITTER, SHARE_CONTEXTS.PORTFOLIO);
         shareMenu.classList.remove('show');
         shareToggle.setAttribute('aria-expanded', 'false');
         captureAnalytics('portfolio_shared', {
             platform: 'twitter',
             method: 'platform_specific',
+            context: context,
             theme: currentTheme
         });
     });
     
     // WhatsApp sharing
     shareButtons.whatsapp.addEventListener('click', () => {
+        console.log('WhatsApp share clicked', { platform: SHARE_PLATFORMS.WHATSAPP, context: SHARE_CONTEXTS.PORTFOLIO });
         openPlatformShare(SHARE_PLATFORMS.WHATSAPP, SHARE_CONTEXTS.PORTFOLIO);
         shareMenu.classList.remove('show');
         shareToggle.setAttribute('aria-expanded', 'false');
         captureAnalytics('portfolio_shared', {
             platform: 'whatsapp',
             method: 'platform_specific',
+            context: context,
             theme: currentTheme
         });
     });
     
     // Copy to clipboard
     shareButtons.copy.addEventListener('click', async () => {
+        console.log('Copy share clicked', { context: SHARE_CONTEXTS.PORTFOLIO });
         try {
             const result = await copyToClipboard(SHARE_CONTEXTS.PORTFOLIO, SHARE_PLATFORMS.LINKEDIN);
             
@@ -2407,6 +2601,7 @@ function initializePortfolioSharing() {
                 captureAnalytics('portfolio_shared', {
                     platform: 'clipboard',
                     method: 'copy',
+                    context: context,
                     theme: currentTheme
                 });
             } else {
@@ -2418,7 +2613,7 @@ function initializePortfolioSharing() {
         }
     });
     
-    console.log('🔗 Portfolio sharing initialized');
+    console.log(`🔗 ${context} share dropdown initialized`);
 }
 
 // Share notification function

@@ -128,11 +128,14 @@ export async function nativeShare(context, data = {}) {
  * @param {Object} data - Additional data for message generation
  */
 export function openPlatformShare(platform, context, data = {}) {
+    console.log('🔗 openPlatformShare called', { platform, context, data });
     const shareUrl = generateShareUrl(platform, context, data);
+    console.log('🔗 Generated share URL:', shareUrl);
     
     // Open in new window/tab
     const windowFeatures = 'width=600,height=400,resizable=yes,scrollbars=yes';
-    window.open(shareUrl, '_blank', windowFeatures);
+    const newWindow = window.open(shareUrl, '_blank', windowFeatures);
+    console.log('🔗 Window opened:', !!newWindow);
     
     // Analytics tracking
     if (typeof posthog !== 'undefined') {
