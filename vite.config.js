@@ -19,24 +19,7 @@ export default defineConfig({
   // Development server configuration
   server: {
     port: 3000,
-    open: true,
-    // Proxy configuration for future API calls
-    proxy: {
-      '/api': {
-        target: 'https://cloudrun-742666648332.europe-west1.run.app',
-        changeOrigin: true,
-        secure: true,
-        configure: (proxy, options) => {
-          // Add custom headers for API requests
-          proxy.on('proxyReq', (proxyReq, req, res) => {
-            // Add API key header when available
-            if (process.env.VITE_API_KEY) {
-              proxyReq.setHeader('Authorization', `Bearer ${process.env.VITE_API_KEY}`);
-            }
-          });
-        }
-      }
-    }
+    open: true
   },
   
   // Asset handling
