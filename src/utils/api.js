@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://your-backend.run.app';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://cloudrun-742666648332.europe-west1.run.app';
 const API_KEY = import.meta.env.VITE_API_KEY;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 

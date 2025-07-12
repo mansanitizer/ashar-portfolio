@@ -23,7 +23,7 @@ export default defineConfig({
     // Proxy configuration for future API calls
     proxy: {
       '/api': {
-        target: 'https://your-backend.run.app',
+        target: 'https://cloudrun-742666648332.europe-west1.run.app',
         changeOrigin: true,
         secure: true,
         configure: (proxy, options) => {
