@@ -119,7 +119,7 @@ export const api = {
   // Health check
   async healthCheck() {
     try {
-      const response = await apiClient.get('/api/health');
+      const response = await apiClient.get('/health');
       return response.data;
     } catch (error) {
       console.log('🏥 Health check failed (expected in development)');
