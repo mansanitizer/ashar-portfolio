@@ -1209,19 +1209,29 @@ function initializeVideoControls() {
             }
         });
         
-        // Enhanced error handling
+        // Enhanced error handling with fallback support
         heroVideo.addEventListener('error', (e) => {
             console.log('Video loading error:', e);
-            if (videoControls) {
-                videoControls.style.display = 'none';
-            }
-            if (videoShortcutDesktop) {
-                videoShortcutDesktop.style.display = 'none';
-            }
-            if (videoShortcutMobile) {
-                videoShortcutMobile.style.display = 'none';
-            }
+            handleVideoError();
         });
+        
+        // Handle various video failure scenarios
+        heroVideo.addEventListener('stalled', () => {
+            console.log('Video stalled - network issues detected');
+            setTimeout(() => {
+                if (heroVideo.readyState < 3) { // Not enough data loaded
+                    handleVideoError();
+                }
+            }, 5000); // Wait 5 seconds before falling back
+        });
+        
+        // Fallback for extremely slow connections
+        setTimeout(() => {
+            if (heroVideo.readyState === 0) { // Nothing loaded
+                console.log('Video failed to load within timeout - showing fallback');
+                handleVideoError();
+            }
+        }, 10000); // 10 second timeout
         
         // Handle case where video fails to load initially
         heroVideo.addEventListener('loadstart', () => {
@@ -1255,6 +1265,59 @@ function initializeVideoControls() {
             }
         }, 3000);
     }
+}
+
+// Video Error Handling Function
+function handleVideoError() {
+    console.log('🚨 Video loading failed - implementing fallback strategy');
+    
+    const videoControls = document.querySelector('.video-controls');
+    const videoShortcutDesktop = document.getElementById('video-shortcut-desktop');
+    const videoShortcutMobile = document.getElementById('video-shortcut-mobile');
+    const videoContainer = document.querySelector('.video-container');
+    const heroVideo = document.getElementById('hero-video');
+    
+    // Hide video controls and shortcuts
+    if (videoControls) {
+        videoControls.style.display = 'none';
+    }
+    if (videoShortcutDesktop) {
+        videoShortcutDesktop.style.display = 'none';
+    }
+    if (videoShortcutMobile) {
+        videoShortcutMobile.style.display = 'none';
+    }
+    
+    // Check if GIF fallback exists and show it
+    const gifFallback = videoContainer?.querySelector('img[src*="hero-video.gif"]');
+    if (gifFallback) {
+        console.log('🎬 Showing GIF fallback');
+        gifFallback.style.display = 'block';
+        gifFallback.style.zIndex = '2'; // Show above video
+        
+        // Hide the video element
+        if (heroVideo) {
+            heroVideo.style.display = 'none';
+        }
+    } else {
+        // No GIF fallback, show poster image
+        console.log('🖼️ Showing poster image fallback');
+        if (heroVideo) {
+            heroVideo.poster = 'hero-poster.jpg';
+            heroVideo.style.display = 'block';
+        }
+    }
+    
+    // Analytics tracking
+    if (typeof posthog !== 'undefined') {
+        posthog.capture('video_fallback_activated', {
+            fallback_type: gifFallback ? 'gif' : 'poster',
+            theme: currentTheme,
+            colorblind_mode: colorblindMode
+        });
+    }
+    
+    console.log('✅ Video fallback implemented successfully');
 }
 
 // Legacy Keyboard Shortcuts (kept for T, M, C, X keys)
