@@ -58,7 +58,7 @@ const certCards = document.querySelectorAll('.cert-card');
 
 // Theme Management
 let currentTheme = localStorage.getItem('theme') || 'dark';
-let currentAccent = localStorage.getItem('accent') || '#0066FF';
+let currentAccent = localStorage.getItem('accent') || '#FF6600';
 let colorblindMode = localStorage.getItem('colorblindMode') === 'true' || false;
 let trackingEnabled = localStorage.getItem('trackingEnabled') !== 'false';
 

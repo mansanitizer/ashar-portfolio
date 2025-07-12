@@ -2,27 +2,27 @@
 :root {
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
-    --accent-color: #0066FF;
+    --accent-color: #FF6600;
     --border-color: #000000;
     --shadow-color: rgba(0, 0, 0, 0.9);
     --card-bg: #1a1a1a;
     --nav-bg: rgba(26, 26, 26, 0.95);
     --hover-bg: #2a2a2a;
-    --gradient-start: #0066FF;
-    --gradient-end: #00CCFF;
+    --gradient-start: #FF6600;
+    --gradient-end: #FF8C00;
 }
 
 [data-theme="light"] {
     --bg-color: #f8f9fa;
     --text-color: #1a1a1a;
-    --accent-color: #0066FF;
+    --accent-color: #FF6600;
     --border-color: #e0e0e0;
     --shadow-color: rgba(0, 0, 0, 0.15);
     --card-bg: #ffffff;
     --nav-bg: rgba(255, 255, 255, 0.95);
     --hover-bg: #f0f0f0;
-    --gradient-start: #0066FF;
-    --gradient-end: #00CCFF;
+    --gradient-start: #FF6600;
+    --gradient-end: #FF8C00;
 }
 
 [data-theme="dark"][data-colorblind="true"] {
@@ -747,7 +747,6 @@ h1, h2, h3, h4 {
     color: var(--accent-color);
     text-shadow: 2px 2px 0px var(--shadow-color);
     letter-spacing: 0.1em;
-    animation: typewriter 2s steps(40) 1s both;
 }
 
 @keyframes typewriter {
