@@ -89,6 +89,8 @@ const elements = {
     
     // Loading
     loadingOverlay: document.getElementById('loading-overlay'),
+    loadingModal: document.getElementById('loading-modal'),
+    loadingVerb: document.getElementById('loading-verb'),
     
     // Shortcuts
     keyboardShortcuts: document.getElementById('keyboard-shortcuts'),
@@ -447,11 +449,116 @@ class CVGenerator {
         this.usedBullets = new Set(); // Track used bullets in current game
         this.bulletCache = new Map(); // Simple in-memory cache
         this.cacheExpiry = 5 * 60 * 1000; // 5 minutes
+        this.sessionId = `game_${Date.now()}`; // Unique session ID
+        this.prefetchBuffer = []; // Buffer for prefetched bullets
+        this.isPrefetching = false; // Prevent concurrent prefetch calls
+        this.usedBufferIds = new Set(); // Track used buffer bullet IDs to prevent immediate repetition
+        this.bufferRotationCount = 0; // Track buffer rotations for variety
+        this.questionsAnswered = 0; // Track session progress for adaptive prefetching
     }
     
     // Reset used bullets for new game
     resetUsedBullets() {
         this.usedBullets.clear();
+        this.sessionId = `game_${Date.now()}`;
+        this.prefetchBuffer = [];
+        this.usedBufferIds.clear();
+        this.bufferRotationCount = 0;
+        this.questionsAnswered = 0;
+    }
+    
+    // Initialize prefetch buffer with randomization
+    async initializePrefetch() {
+        if (this.isPrefetching) return;
+        
+        try {
+            this.isPrefetching = true;
+            console.log('🎮 Initializing randomized bullet prefetch...');
+            
+            // Increment rotation count for backend tracking
+            this.bufferRotationCount++;
+            
+            // Adaptive buffer size based on session progress
+            const bufferSize = this.getAdaptiveBufferSize();
+            
+            const prefetchResponse = await api.prefetchBullets({
+                sessionId: this.sessionId,
+                totalQuestions: gameState.totalQuestions,
+                bufferSize: bufferSize,
+                role: 'product_manager',
+                difficultyProgression: 'linear',
+                rotationCount: this.bufferRotationCount,
+                excludeIds: Array.from(this.usedBufferIds), // Exclude recently used bullets
+                requestRandomization: true, // Signal backend to randomize generation
+                sessionProgress: this.questionsAnswered / gameState.totalQuestions // Progress indicator
+            });
+            
+            if (prefetchResponse.success) {
+                console.log(`🎮 Prefetch successful, randomized buffer ready (rotation ${this.bufferRotationCount})`);
+                
+                // Clear old used IDs if we've rotated enough times
+                if (this.bufferRotationCount % 3 === 0) {
+                    this.usedBufferIds.clear();
+                    console.log('🎮 Cleared used bullet IDs for maximum variety');
+                }
+            }
+        } catch (error) {
+            console.warn('🎮 Prefetch failed, will generate on-demand:', error);
+        } finally {
+            this.isPrefetching = false;
+        }
+    }
+    
+    // Get adaptive buffer size based on session progress
+    getAdaptiveBufferSize() {
+        const progress = this.questionsAnswered / gameState.totalQuestions;
+        
+        // Aggressive prefetching early, conservative later
+        if (progress < 0.2) {
+            return 25; // First 20% - maximum variety needed
+        } else if (progress < 0.5) {
+            return 20; // 20-50% - high variety
+        } else if (progress < 0.8) {
+            return 15; // 50-80% - moderate variety
+        } else {
+            return 10; // Final 20% - minimal prefetching
+        }
+    }
+    
+    // Get adaptive refill threshold based on session progress
+    getAdaptiveRefillThreshold() {
+        const progress = this.questionsAnswered / gameState.totalQuestions;
+        
+        // Aggressive refilling early, relaxed later
+        if (progress < 0.3) {
+            return { bufferMin: 8, varietyMin: 4 }; // Keep buffer very full early
+        } else if (progress < 0.6) {
+            return { bufferMin: 6, varietyMin: 3 }; // Moderate refilling
+        } else if (progress < 0.9) {
+            return { bufferMin: 4, varietyMin: 2 }; // Conservative refilling
+        } else {
+            return { bufferMin: 2, varietyMin: 1 }; // Minimal refilling near end
+        }
+    }
+    
+    // Trigger background prefetch during gameplay with adaptive thresholds
+    async backgroundPrefetch() {
+        if (this.isPrefetching) return;
+        
+        const thresholds = this.getAdaptiveRefillThreshold();
+        const availableVariety = this.prefetchBuffer.filter(set => !this.isRecentlyUsed(set)).length;
+        
+        // Adaptive prefetch triggering based on session progress
+        if (this.prefetchBuffer.length < thresholds.bufferMin || availableVariety < thresholds.varietyMin) {
+            const progress = this.questionsAnswered / gameState.totalQuestions;
+            const delay = progress < 0.3 ? 50 : progress < 0.7 ? 100 : 200; // Faster early, slower later
+            
+            setTimeout(() => {
+                this.initializePrefetch();
+            }, delay);
+            
+            console.log(`🎮 Adaptive prefetch triggered (progress: ${Math.round(progress * 100)}%, buffer: ${this.prefetchBuffer.length}, variety: ${availableVariety})`);
+        }
     }
     
     async generateCVOptions(temperature = 1.0) {
@@ -465,86 +572,187 @@ class CVGenerator {
     }
     
     async generateWithAPI(temperature = 1.0) {
-        const options = [];
-        
-        // Add 3 professional bullets (from static database for now)
-        for (let i = 0; i < 3; i++) {
-            const bullet = this.getUniqueRandomBullet('professional');
-            options.push({
-                text: bullet,
-                isFake: false,
-                temperature: 0.0,
-                source: 'static'
-            });
+        // First check if we can get from prefetch buffer (instant retrieval with randomization)
+        if (this.prefetchBuffer.length > 0) {
+            // Find suitable temperature matches and randomize selection
+            const suitableSets = this.prefetchBuffer.filter(set => 
+                Math.abs(set.temperature - temperature) < 0.1 &&
+                !this.isRecentlyUsed(set)
+            );
+            
+            if (suitableSets.length > 0) {
+                // Randomly select from suitable sets instead of using first match
+                const randomIndex = Math.floor(Math.random() * suitableSets.length);
+                const selectedSet = suitableSets[randomIndex];
+                
+                // Remove from buffer and track usage
+                this.prefetchBuffer = this.prefetchBuffer.filter(set => set !== selectedSet);
+                this.trackBulletUsage(selectedSet);
+                this.questionsAnswered++; // Track session progress
+                
+                console.log(`🎮 Using randomized prefetched set (${randomIndex + 1}/${suitableSets.length} options, progress: ${Math.round((this.questionsAnswered / gameState.totalQuestions) * 100)}%)`);
+                
+                // Trigger adaptive background prefetch to refill buffer
+                this.backgroundPrefetch();
+                
+                return this.formatBulletSet(selectedSet.bullets, temperature);
+            }
         }
         
-        // Generate 1 fake bullet using API (with caching)
-        const bulletType = this.getAPIBulletTypeByTemperature(temperature);
-        const cacheKey = `${bulletType}_${Math.round(temperature * 10)}`;
+        // Generate all 4 bullets via single API call (3 real + 1 fake)
+        const cacheKey = `all_bullets_${Math.round(temperature * 10)}`;
         
         let apiResponse;
         
         // Check cache first
         const cached = this.bulletCache.get(cacheKey);
-        if (cached && (Date.now() - cached.timestamp) < this.cacheExpiry && cached.bullets.length > 0) {
-            // Use cached bullet and remove it from cache to avoid repetition
-            const bullet = cached.bullets.pop();
-            apiResponse = { bullets: [bullet] };
-            console.log('🎮 Using cached bullet');
+        if (cached && (Date.now() - cached.timestamp) < this.cacheExpiry && cached.bulletSets.length > 0) {
+            // Use cached bullet set and remove it from cache to avoid repetition
+            apiResponse = cached.bulletSets.pop();
+            console.log('🎮 Using cached bullet set');
         } else {
-            // Generate new bullets and cache them
-            console.log('🎮 Generating new bullets via API');
+            // Generate new bullet sets and cache them
+            console.log('🎮 Generating new bullet set via API');
+            
+            const fakeTemperature = Math.max(0.5, temperature); // Ensure fake bullets have temp >= 0.5
+            
             apiResponse = await api.generateCVBullets({
-                count: 3, // Generate extra for caching
-                bulletType: bulletType,
-                difficultyLevel: temperature,
+                realCount: 3,
+                fakeCount: 1,
+                realTemperature: 0.0,
+                fakeTemperature: fakeTemperature,
                 role: 'product_manager'
             });
             
-            // Cache the extra bullets
-            if (apiResponse.bullets && apiResponse.bullets.length > 1) {
-                const validBullets = apiResponse.bullets.filter(bullet => 
-                    !bullet.text.toLowerCase().includes('here are') &&
-                    !bullet.text.toLowerCase().includes('cv bullet') &&
-                    bullet.text.length > 30
-                );
+            // Cache multiple sets for future use
+            if (apiResponse.real_bullets && apiResponse.fake_bullets) {
+                // Create 2 additional sets from the same response for caching
+                const cachedSets = [];
+                for (let i = 0; i < 2; i++) {
+                    if (apiResponse.real_bullets.length >= 3 && apiResponse.fake_bullets.length >= 1) {
+                        cachedSets.push({
+                            real_bullets: apiResponse.real_bullets.slice(i * 3, (i + 1) * 3),
+                            fake_bullets: apiResponse.fake_bullets.slice(i, i + 1)
+                        });
+                    }
+                }
                 
-                if (validBullets.length > 1) {
+                if (cachedSets.length > 0) {
                     this.bulletCache.set(cacheKey, {
-                        bullets: validBullets.slice(1), // Cache all but the first
+                        bulletSets: cachedSets,
                         timestamp: Date.now()
                     });
                 }
             }
         }
         
-        if (apiResponse.bullets && apiResponse.bullets.length > 0) {
-            // Skip the first bullet if it's just an introduction/explanation
-            const validBullets = apiResponse.bullets.filter(bullet => 
-                !bullet.text.toLowerCase().includes('here are') &&
-                !bullet.text.toLowerCase().includes('cv bullet') &&
-                bullet.text.length > 30
-            );
-            
-            if (validBullets.length > 0) {
-                const selectedBullet = validBullets[0];
-                options.push({
-                    text: selectedBullet.text,
-                    isFake: true,
-                    temperature: temperature,
-                    source: 'api',
-                    bulletId: selectedBullet.id
-                });
-            } else {
-                // Fallback to static if no valid bullets
-                throw new Error('No valid bullets from API');
-            }
-        } else {
-            throw new Error('No bullets returned from API');
+        if (!apiResponse.real_bullets || !apiResponse.fake_bullets || 
+            apiResponse.real_bullets.length < 3 || apiResponse.fake_bullets.length < 1) {
+            throw new Error('Invalid API response format');
         }
+        
+        const options = [];
+        
+        // Add 3 real bullets
+        for (let i = 0; i < 3; i++) {
+            const bullet = apiResponse.real_bullets[i];
+            options.push({
+                text: bullet.text || bullet,
+                isFake: false,
+                temperature: 0.0,
+                source: 'api',
+                bulletId: bullet.id
+            });
+        }
+        
+        // Add 1 fake bullet
+        const fakeBullet = apiResponse.fake_bullets[0];
+        options.push({
+            text: fakeBullet.text || fakeBullet,
+            isFake: true,
+            temperature: temperature,
+            source: 'api',
+            bulletId: fakeBullet.id
+        });
         
         // Shuffle the options so fake isn't always in same position
         return this.shuffleArray(options);
+    }
+    
+    // Helper method to format bullet sets consistently
+    formatBulletSet(bullets, temperature) {
+        const options = [];
+        
+        // Add real bullets
+        if (bullets.real_bullets) {
+            bullets.real_bullets.forEach(bullet => {
+                options.push({
+                    text: bullet.text || bullet,
+                    isFake: false,
+                    temperature: 0.0,
+                    source: 'api',
+                    bulletId: bullet.id
+                });
+            });
+        }
+        
+        // Add fake bullets
+        if (bullets.fake_bullets) {
+            bullets.fake_bullets.forEach(bullet => {
+                options.push({
+                    text: bullet.text || bullet,
+                    isFake: true,
+                    temperature: temperature,
+                    source: 'api',
+                    bulletId: bullet.id
+                });
+            });
+        }
+        
+        return this.shuffleArray(options);
+    }
+    
+    // Check if a bullet set was recently used
+    isRecentlyUsed(bulletSet) {
+        if (!bulletSet.bullets || (!bulletSet.bullets.real_bullets && !bulletSet.bullets.fake_bullets)) {
+            return false;
+        }
+        
+        // Check if any bullet in the set was recently used
+        const allBullets = [
+            ...(bulletSet.bullets.real_bullets || []),
+            ...(bulletSet.bullets.fake_bullets || [])
+        ];
+        
+        return allBullets.some(bullet => {
+            const bulletId = bullet.id || bullet.bulletId || bullet.text;
+            return this.usedBufferIds.has(bulletId);
+        });
+    }
+    
+    // Track bullet usage to prevent immediate repetition
+    trackBulletUsage(bulletSet) {
+        if (!bulletSet.bullets) return;
+        
+        const allBullets = [
+            ...(bulletSet.bullets.real_bullets || []),
+            ...(bulletSet.bullets.fake_bullets || [])
+        ];
+        
+        allBullets.forEach(bullet => {
+            const bulletId = bullet.id || bullet.bulletId || bullet.text;
+            if (bulletId) {
+                this.usedBufferIds.add(bulletId);
+            }
+        });
+        
+        // Limit the size of used IDs to prevent memory bloat
+        if (this.usedBufferIds.size > 100) {
+            const idsArray = Array.from(this.usedBufferIds);
+            this.usedBufferIds.clear();
+            // Keep only the most recent 50 IDs
+            idsArray.slice(-50).forEach(id => this.usedBufferIds.add(id));
+        }
     }
     
     generateWithStaticBullets(temperature = 1.0) {
@@ -583,12 +791,7 @@ class CVGenerator {
         return 'professional'; // This shouldn't happen for fake bullets
     }
     
-    getAPIBulletTypeByTemperature(temperature) {
-        // For API bullets - map to API bullet types
-        if (temperature >= 0.8) return 'fake_obvious';
-        if (temperature >= 0.4) return 'fake_subtle';
-        return 'fake_subtle'; // Default for API
-    }
+    // Removed getAPIBulletTypeByTemperature - no longer using bullet types
     
     getRandomBullet(type) {
         const bullets = cvBullets[type] || cvBullets.professional;
@@ -677,6 +880,124 @@ class CVGenerator {
 // Initialize CV Generator
 const cvGenerator = new CVGenerator();
 
+// Loading Modal Functions
+let verbRotationInterval = null;
+
+function showLoadingModal() {
+    if (!elements.loadingModal) return;
+    
+    elements.loadingModal.classList.remove('hidden');
+    startVerbRotation();
+    console.log('🎮 Loading modal shown');
+}
+
+function hideLoadingModal() {
+    if (!elements.loadingModal) return;
+    
+    elements.loadingModal.classList.add('hidden');
+    stopVerbRotation();
+    console.log('🎮 Loading modal hidden');
+}
+
+function startVerbRotation() {
+    if (verbRotationInterval) return;
+    
+    let currentTypeInterval;
+    
+    // Use the existing randomization logic for verb selection
+    function getRandomVerb() {
+        return loadingVerbs[Math.floor(Math.random() * loadingVerbs.length)];
+    }
+    
+    function typeWriter(text, element) {
+        if (currentTypeInterval) {
+            clearInterval(currentTypeInterval);
+        }
+        
+        let i = 0;
+        element.textContent = '';
+        
+        currentTypeInterval = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(currentTypeInterval);
+                currentTypeInterval = null;
+            }
+        }, 80); // 80ms per character
+    }
+    
+    // Start with first random verb
+    if (elements.loadingVerb) {
+        const firstVerb = getRandomVerb().toUpperCase();
+        typeWriter(firstVerb, elements.loadingVerb);
+    }
+    
+    // Change to new random verb every 3 seconds
+    verbRotationInterval = setInterval(() => {
+        if (elements.loadingVerb) {
+            // Get a new random verb (ensuring it's different from current)
+            let newVerb;
+            let attempts = 0;
+            const currentText = elements.loadingVerb.textContent;
+            
+            do {
+                newVerb = getRandomVerb().toUpperCase();
+                attempts++;
+            } while (newVerb === currentText && attempts < 5);
+            
+            // Type the new verb
+            typeWriter(newVerb, elements.loadingVerb);
+        }
+    }, 3000);
+}
+
+function stopVerbRotation() {
+    if (verbRotationInterval) {
+        clearInterval(verbRotationInterval);
+        verbRotationInterval = null;
+    }
+}
+
+// Enhanced bullet generation with loading modal
+async function generateCVOptionsWithLoading(temperature = 1.0) {
+    try {
+        // Show loading modal for API calls that might take time
+        const shouldShowLoading = cvGenerator.prefetchBuffer.length === 0 || 
+                                Math.random() < 0.3; // 30% chance to show loading for variety
+        
+        if (shouldShowLoading) {
+            showLoadingModal();
+            
+            // Minimum loading time for good UX (even if API is fast)
+            const minimumLoadingTime = 800;
+            const startTime = Date.now();
+            
+            const options = await cvGenerator.generateCVOptions(temperature);
+            
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = Math.max(0, minimumLoadingTime - elapsedTime);
+            
+            // Ensure minimum loading time for smooth UX
+            if (remainingTime > 0) {
+                await new Promise(resolve => setTimeout(resolve, remainingTime));
+            }
+            
+            hideLoadingModal();
+            return options;
+        } else {
+            // Fast path for instant buffer hits
+            return await cvGenerator.generateCVOptions(temperature);
+        }
+    } catch (error) {
+        hideLoadingModal();
+        console.error('🎮 Error generating CV options:', error);
+        // Fallback to static generation
+        return cvGenerator.generateWithStaticBullets(temperature);
+    }
+}
+
 // Game Logic Functions
 function initializeGame() {
     console.log('🎯 Game initialization started');
@@ -721,6 +1042,13 @@ function startGame() {
     // Reset used bullets for new game
     cvGenerator.resetUsedBullets();
     
+    // Initialize prefetch buffer for optimal performance
+    if (cvGenerator.isEnabled) {
+        cvGenerator.initializePrefetch().catch(error => {
+            console.warn('🎮 Prefetch initialization failed:', error);
+        });
+    }
+    
     // Hide instructions, show game interface
     elements.gameInstructions.classList.add('hidden');
     elements.gameInterface.classList.remove('hidden');
@@ -754,13 +1082,9 @@ async function nextQuestion() {
     // Calculate temperature for this question (decreases by 0.05 each question)
     gameState.temperature = Math.max(0.05, 1.0 - ((gameState.currentQuestion - 1) * 0.05));
     
-    // Show loading with random verb
-    showLoading();
-    
     try {
-        // Get CV options (with slight delay for effect)
-        await new Promise(resolve => setTimeout(resolve, 600));
-        const options = await cvGenerator.generateCVOptions(gameState.temperature);
+        // Get CV options with neobrutal loading modal
+        const options = await generateCVOptionsWithLoading(gameState.temperature);
         gameState.currentOptions = options;
         
         // Find which option is the fake one
@@ -775,15 +1099,12 @@ async function nextQuestion() {
         
         // Reset option states
         [elements.cvOption1, elements.cvOption2, elements.cvOption3, elements.cvOption4].forEach(option => {
-            option.classList.remove('correct', 'incorrect', 'disabled');
+            option.classList.remove('correct', 'incorrect', 'disabled', 'wrong-choice', 'correct-highlight');
         });
         
         // Update progress bar
         const progress = (gameState.currentQuestion / gameState.totalQuestions) * 100;
         elements.progressFill.style.width = `${progress}%`;
-        
-        // Hide loading
-        hideLoading();
         
         // Enable options
         enableCVOptions();
@@ -795,7 +1116,7 @@ async function nextQuestion() {
         
     } catch (error) {
         console.error('Error generating question:', error);
-        hideLoading();
+        // Error handling is now done in generateCVOptionsWithLoading
     }
 }
 
@@ -845,10 +1166,18 @@ function handleCVSelection(selectedOption) {
         temperature: gameState.temperature
     });
     
-    // Auto-advance after brief feedback
-    setTimeout(() => {
-        nextQuestion();
-    }, 1500);
+    // Auto-advance with different timing based on correctness
+    if (isCorrect) {
+        // Correct answer: advance after celebration
+        setTimeout(() => {
+            nextQuestion();
+        }, 2500);
+    } else {
+        // Wrong answer: stay for 5 seconds to show correct answer
+        setTimeout(() => {
+            nextQuestion();
+        }, 5000);
+    }
 }
 
 function showMicroFeedback(isCorrect, selectedOption) {
@@ -857,10 +1186,22 @@ function showMicroFeedback(isCorrect, selectedOption) {
     const correctElement = document.getElementById(`cv-option-${gameState.correctOption}`);
     
     if (isCorrect) {
+        // Exciting correct answer celebration
         selectedElement.classList.add('correct');
+        
+        // Add device vibration if available
+        if (navigator.vibrate) {
+            navigator.vibrate([100, 50, 100, 50, 200]); // Success pattern
+        }
     } else {
-        selectedElement.classList.add('incorrect');
-        correctElement.classList.add('correct');
+        // Wrong answer: shake selected option and highlight correct answer
+        selectedElement.classList.add('wrong-choice');
+        correctElement.classList.add('correct-highlight');
+        
+        // Add device vibration if available
+        if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]); // Error pattern
+        }
     }
     
     // Show full-screen feedback overlay
@@ -1001,7 +1342,7 @@ function restartGame() {
     
     // Remove any selected states
     document.querySelectorAll('.cv-option').forEach(option => {
-        option.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+        option.classList.remove('selected', 'correct', 'incorrect', 'disabled', 'wrong-choice', 'correct-highlight');
     });
     
     // Track restart
