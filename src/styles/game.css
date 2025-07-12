@@ -72,6 +72,89 @@
     align-items: center;
 }
 
+/* Share Dropdown in Game Header */
+.game-actions .share-dropdown {
+    position: relative;
+}
+
+.game-actions .settings-btn {
+    background: var(--superhot-white);
+    border: 4px solid var(--superhot-black);
+    padding: 15px;
+    cursor: pointer;
+    transition: none;
+    box-shadow: 4px 4px 0px var(--superhot-black);
+    color: var(--superhot-black);
+}
+
+.game-actions .settings-btn:hover {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--superhot-grey);
+}
+
+.game-actions .share-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--superhot-white);
+    border: 4px solid var(--superhot-black);
+    box-shadow: 8px 8px 0px var(--superhot-black);
+    padding: 20px;
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.game-actions .share-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.game-actions .share-section h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--superhot-black);
+    margin-bottom: 15px;
+    letter-spacing: 0.1em;
+}
+
+.game-actions .share-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--superhot-white);
+    border: 3px solid var(--superhot-black);
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--superhot-black);
+    transition: none;
+}
+
+.game-actions .share-item:hover {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px var(--superhot-grey);
+}
+
+.game-actions .share-item .share-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
 .return-btn, .cv-btn {
     background: var(--superhot-white);
     color: var(--superhot-black);
@@ -574,10 +657,88 @@
     border-color: var(--superhot-red);
 }
 
+/* Enhanced Share Section Styles */
+.share-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.share-section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--superhot-black);
+    margin: 0 0 15px 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.game-share-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
 .share-btn {
     background: var(--superhot-black);
     color: var(--superhot-white);
     border-color: var(--superhot-black);
+    position: relative;
+    overflow: hidden;
+}
+
+.share-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--superhot-grey);
+}
+
+.share-btn-linkedin {
+    background: #0066cc;
+    border-color: #004499;
+    box-shadow: 6px 6px 0px var(--superhot-black);
+}
+
+.share-btn-linkedin:hover {
+    background: #0052a3;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #004499;
+}
+
+.share-btn-twitter {
+    background: #1da1f2;
+    border-color: #0d8bd9;
+    box-shadow: 6px 6px 0px var(--superhot-black);
+}
+
+.share-btn-twitter:hover {
+    background: #0d8bd9;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #0d8bd9;
+}
+
+.share-btn-whatsapp {
+    background: #25d366;
+    border-color: #1aaa4b;
+    box-shadow: 6px 6px 0px var(--superhot-black);
+}
+
+.share-btn-whatsapp:hover {
+    background: #1aaa4b;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #1aaa4b;
+}
+
+.share-btn-copy {
+    background: var(--superhot-red);
+    border-color: var(--superhot-red);
+    box-shadow: 6px 6px 0px var(--superhot-black);
+}
+
+.share-btn-copy:hover {
+    background: #cc0000;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--superhot-red);
 }
 
 .portfolio-btn {
@@ -779,6 +940,15 @@
     .results-actions {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+    
+    .game-share-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .share-section-title {
+        font-size: 14px;
     }
 }
 

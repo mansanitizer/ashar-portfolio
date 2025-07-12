@@ -11,7 +11,7 @@ const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 // Create axios instance with default configuration
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000, // 10 second timeout
+  timeout: 45000, // 45 second timeout for CV generation (needs more time)
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -200,6 +200,13 @@ export const api = {
       return response.data;
     } catch (error) {
       console.error('🎮 Game CV bullet generation failed:', error);
+      console.error('🎮 Error details:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        requestData
+      });
       throw error;
     }
   },

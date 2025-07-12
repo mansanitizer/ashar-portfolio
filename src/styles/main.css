@@ -804,6 +804,140 @@ h1, h2, h3, h4 {
     left: 8px;
 }
 
+/* Header Share Dropdown Styles */
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Share button uses same styling as settings button */
+.share-btn-header {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.share-btn-header:hover {
+    background: var(--hover-bg);
+    transform: scale(1.05);
+}
+
+.share-btn-header:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.share-btn-header svg {
+    transition: transform 0.3s ease;
+}
+
+.share-btn-header[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.share-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px var(--shadow-color);
+    padding: 20px;
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.share-section h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+
+.share-item {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.share-item:last-child {
+    margin-bottom: 0;
+}
+
+.share-item:hover {
+    background: var(--hover-bg);
+    transform: translateX(4px);
+}
+
+.share-item:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.share-item .share-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.share-btn-linkedin:hover {
+    background: rgba(0, 102, 204, 0.1);
+    color: #0066cc;
+}
+
+.share-btn-twitter:hover {
+    background: rgba(29, 161, 242, 0.1);
+    color: #1da1f2;
+}
+
+.share-btn-whatsapp:hover {
+    background: rgba(37, 211, 102, 0.1);
+    color: #25d366;
+}
+
+.share-btn-copy:hover {
+    background: rgba(var(--accent-color), 0.1);
+    color: var(--accent-color);
+}
+
 /* Mobile adjustments for hero game section */
 @media (max-width: 768px) {
     .hero-game-section {
@@ -814,6 +948,21 @@ h1, h2, h3, h4 {
     .play-game-btn {
         padding: 14px 28px;
         font-size: 16px;
+    }
+    
+    .share-dropdown {
+        margin-right: 10px;
+    }
+    
+    .share-menu {
+        right: -10px;
+        min-width: 180px;
+        padding: 15px;
+    }
+    
+    .share-item {
+        padding: 10px 12px;
+        font-size: 13px;
     }
 }
 
@@ -1968,6 +2117,36 @@ h1, h2, h3, h4 {
         justify-content: center;
         transition: left 0.3s ease;
         backdrop-filter: blur(20px);
+        gap: 40px;
+        padding: 40px 20px;
+    }
+    
+    .nav-actions-row {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+    }
+    
+    .nav-links-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .nav-links-section .nav-link {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        padding: 15px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-links-section .nav-link:hover {
+        color: var(--accent-color);
+        transform: translateX(10px);
     }
     
     .nav-menu.active {
@@ -1991,6 +2170,11 @@ h1, h2, h3, h4 {
     }
     
     .settings-menu {
+        right: -50px;
+        min-width: 200px;
+    }
+    
+    .share-menu {
         right: -50px;
         min-width: 200px;
     }

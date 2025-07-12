@@ -6,6 +6,15 @@ import './styles/game.css';
 // Import API client for future backend integration
 import { api, apiUtils } from './utils/api.js';
 
+// Import sharing utilities
+import { 
+    openPlatformShare, 
+    copyToClipboard, 
+    captureScreenshot,
+    SHARE_PLATFORMS, 
+    SHARE_CONTEXTS 
+} from './utils/sharing.js';
+
 console.log('🎮 Spot the Fake CV Game Initializing...');
 
 // Game State Management
@@ -566,12 +575,19 @@ class CVGenerator {
         try {
             return await this.generateWithAPI(temperature);
         } catch (error) {
-            console.warn('🎮 API generation failed, falling back to static bullets:', error);
+            console.warn('🎮 API generation failed, falling back to static bullets:', error.message);
             return this.generateWithStaticBullets(temperature);
         }
     }
     
     async generateWithAPI(temperature = 1.0) {
+        // Add small delay to prevent API spam (rate limiting protection)
+        const timeSinceLastCall = Date.now() - (this.lastApiCall || 0);
+        if (timeSinceLastCall < 500) { // Minimum 500ms between API calls
+            await new Promise(resolve => setTimeout(resolve, 500 - timeSinceLastCall));
+        }
+        this.lastApiCall = Date.now();
+        
         // First check if we can get from prefetch buffer (instant retrieval with randomization)
         if (this.prefetchBuffer.length > 0) {
             // Find suitable temperature matches and randomize selection
@@ -590,7 +606,10 @@ class CVGenerator {
                 this.trackBulletUsage(selectedSet);
                 this.questionsAnswered++; // Track session progress
                 
-                console.log(`🎮 Using randomized prefetched set (${randomIndex + 1}/${suitableSets.length} options, progress: ${Math.round((this.questionsAnswered / gameState.totalQuestions) * 100)}%)`);
+                // Only log occasionally to reduce spam
+                if (this.questionsAnswered % 5 === 0) {
+                    console.log(`🎮 Using prefetch buffer (progress: ${Math.round((this.questionsAnswered / gameState.totalQuestions) * 100)}%)`);
+                }
                 
                 // Trigger adaptive background prefetch to refill buffer
                 this.backgroundPrefetch();
@@ -609,20 +628,25 @@ class CVGenerator {
         if (cached && (Date.now() - cached.timestamp) < this.cacheExpiry && cached.bulletSets.length > 0) {
             // Use cached bullet set and remove it from cache to avoid repetition
             apiResponse = cached.bulletSets.pop();
-            console.log('🎮 Using cached bullet set');
+            // Reduced logging
         } else {
             // Generate new bullet sets and cache them
             console.log('🎮 Generating new bullet set via API');
             
             const fakeTemperature = Math.max(0.5, temperature); // Ensure fake bullets have temp >= 0.5
             
-            apiResponse = await api.generateCVBullets({
-                realCount: 3,
-                fakeCount: 1,
-                realTemperature: 0.0,
-                fakeTemperature: fakeTemperature,
-                role: 'product_manager'
-            });
+            try {
+                apiResponse = await api.generateCVBullets({
+                    realCount: 3,
+                    fakeCount: 1,
+                    realTemperature: 0.0,
+                    fakeTemperature: fakeTemperature,
+                    role: 'product_manager'
+                });
+            } catch (apiError) {
+                console.warn('🎮 API call failed, will use static bullets:', apiError.message);
+                throw apiError; // Re-throw to trigger static bullet fallback
+            }
             
             // Cache multiple sets for future use
             if (apiResponse.real_bullets && apiResponse.fake_bullets) {
@@ -648,6 +672,13 @@ class CVGenerator {
         
         if (!apiResponse.real_bullets || !apiResponse.fake_bullets || 
             apiResponse.real_bullets.length < 3 || apiResponse.fake_bullets.length < 1) {
+            console.error('🎮 API Response Debug:', {
+                hasRealBullets: !!apiResponse.real_bullets,
+                hasFakeBullets: !!apiResponse.fake_bullets,
+                realCount: apiResponse.real_bullets?.length || 0,
+                fakeCount: apiResponse.fake_bullets?.length || 0,
+                actualResponse: apiResponse
+            });
             throw new Error('Invalid API response format');
         }
         
@@ -1009,7 +1040,9 @@ function initializeGame() {
     elements.cvOption3.addEventListener('click', () => handleCVSelection(3));
     elements.cvOption4.addEventListener('click', () => handleCVSelection(4));
     elements.playAgainBtn.addEventListener('click', restartGame);
-    elements.shareBtn.addEventListener('click', shareScore);
+    
+    // Initialize enhanced sharing
+    initializeGameSharing();
     
     // Initialize keyboard shortcuts
     initializeGameShortcuts();
@@ -1082,8 +1115,8 @@ async function nextQuestion() {
     gameState.currentQuestion++;
     gameState.questionStartTime = Date.now();
     
-    // Calculate temperature for this question (decreases by 0.05 each question)
-    gameState.temperature = Math.max(0.05, 1.0 - ((gameState.currentQuestion - 1) * 0.05));
+    // Calculate temperature for this question (decreases by 0.02 each question for smoother progression)
+    gameState.temperature = Math.max(0.1, 1.0 - ((gameState.currentQuestion - 1) * 0.02));
     
     try {
         // Get CV options with neobrutal loading modal
@@ -1112,10 +1145,12 @@ async function nextQuestion() {
         // Enable options
         enableCVOptions();
         
-        // Log usage stats for debugging
-        const stats = cvGenerator.getUsageStats();
-        console.log(`Question ${gameState.currentQuestion}: Temperature ${gameState.temperature.toFixed(2)}, Fake option: ${gameState.correctOption}`);
-        console.log(`Bullets used: ${stats.totalUsed} total (${stats.professionalUsed} professional, ${stats.inflatedUsed} inflated, ${stats.absurdUsed} absurd)`);
+        // Log usage stats for debugging (reduced frequency)
+        if (gameState.currentQuestion <= 3 || gameState.currentQuestion % 5 === 0) {
+            const stats = cvGenerator.getUsageStats();
+            console.log(`Question ${gameState.currentQuestion}: Temperature ${gameState.temperature.toFixed(2)}, Fake option: ${gameState.correctOption}`);
+            console.log(`Bullets used: ${stats.totalUsed} total (${stats.professionalUsed} professional, ${stats.inflatedUsed} inflated, ${stats.absurdUsed} absurd)`);
+        }
         
     } catch (error) {
         console.error('Error generating question:', error);
@@ -1488,58 +1523,214 @@ function hideShortcutsPanel() {
     elements.keyboardShortcuts.classList.remove('show');
 }
 
-// Screenshot and Sharing Functionality
-function shareScore() {
-    // Capture screenshot of the results screen
-    captureGameScreenshot('results').then(screenshotBlob => {
+// Enhanced Game Sharing Functionality
+function initializeGameSharing() {
+    // Header share dropdown elements
+    const shareToggle = document.getElementById('share-toggle');
+    const shareMenu = document.getElementById('share-menu');
+    
+    // Results section share buttons
+    const shareButtons = {
+        linkedin: document.getElementById('share-game-linkedin'),
+        twitter: document.getElementById('share-game-twitter'),
+        whatsapp: document.getElementById('share-game-whatsapp'),
+        copy: document.getElementById('share-game-copy')
+    };
+    
+    // Initialize header share dropdown if elements exist
+    if (shareToggle && shareMenu) {
+        initializeHeaderShareDropdown(shareToggle, shareMenu);
+    }
+    
+    // Check if results share elements exist
+    const missingElements = Object.entries(shareButtons)
+        .filter(([key, element]) => !element)
+        .map(([key]) => key);
+    
+    if (missingElements.length > 0) {
+        console.warn('🔗 Missing game share button elements:', missingElements);
+        return;
+    }
+    
+    // LinkedIn sharing
+    shareButtons.linkedin.addEventListener('click', () => {
         const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
-        const shareText = `🎯 I just scored ${gameState.score} points with ${accuracy}% accuracy in Spot the Fake CV! Can you identify AI-generated resume bullets? Try it yourself!`;
-        
-        if (navigator.share && screenshotBlob) {
-            const file = new File([screenshotBlob], 'spot-the-fake-cv-score.png', { type: 'image/png' });
-            navigator.share({
-                title: 'Spot the Fake CV - My Score',
-                text: shareText,
-                files: [file],
-                url: window.location.origin + '/game.html'
-            }).catch(err => {
-                console.log('Error sharing with image:', err);
-                // Fallback to text-only sharing
-                shareTextOnly(shareText);
-            });
-        } else {
-            shareTextOnly(shareText);
-        }
-        
-        trackEvent('score_shared', {
-            final_score: gameState.score,
-            accuracy: accuracy,
-            share_method: navigator.share ? 'native' : 'clipboard',
-            includes_screenshot: !!screenshotBlob
+        openPlatformShare(SHARE_PLATFORMS.LINKEDIN, SHARE_CONTEXTS.GAME, {
+            score: gameState.score,
+            accuracy: accuracy
         });
-    }).catch(err => {
-        console.log('Screenshot capture failed:', err);
-        const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
-        const shareText = `🎯 I just scored ${gameState.score} points with ${accuracy}% accuracy in Spot the Fake CV!`;
-        shareTextOnly(shareText);
+        trackEvent('game_shared', {
+            platform: 'linkedin',
+            method: 'platform_specific',
+            final_score: gameState.score,
+            accuracy: accuracy
+        });
     });
+    
+    // Twitter sharing
+    shareButtons.twitter.addEventListener('click', () => {
+        const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
+        openPlatformShare(SHARE_PLATFORMS.TWITTER, SHARE_CONTEXTS.GAME, {
+            score: gameState.score,
+            accuracy: accuracy
+        });
+        trackEvent('game_shared', {
+            platform: 'twitter',
+            method: 'platform_specific',
+            final_score: gameState.score,
+            accuracy: accuracy
+        });
+    });
+    
+    // WhatsApp sharing
+    shareButtons.whatsapp.addEventListener('click', () => {
+        const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
+        openPlatformShare(SHARE_PLATFORMS.WHATSAPP, SHARE_CONTEXTS.GAME, {
+            score: gameState.score,
+            accuracy: accuracy
+        });
+        trackEvent('game_shared', {
+            platform: 'whatsapp',
+            method: 'platform_specific',
+            final_score: gameState.score,
+            accuracy: accuracy
+        });
+    });
+    
+    // Copy to clipboard
+    shareButtons.copy.addEventListener('click', async () => {
+        try {
+            const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
+            const result = await copyToClipboard(SHARE_CONTEXTS.GAME, SHARE_PLATFORMS.LINKEDIN, {
+                score: gameState.score,
+                accuracy: accuracy
+            });
+            
+            if (result.success) {
+                showNotification('Game score copied to clipboard!');
+                trackEvent('game_shared', {
+                    platform: 'clipboard',
+                    method: 'copy',
+                    final_score: gameState.score,
+                    accuracy: accuracy
+                });
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            console.error('Copy to clipboard failed:', error);
+            showNotification('Failed to copy score');
+        }
+    });
+    
+    console.log('🔗 Enhanced game sharing initialized');
 }
 
-function shareTextOnly(shareText) {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Spot the Fake CV - My Score',
-            text: shareText,
-            url: window.location.origin + '/game.html'
-        }).catch(err => console.log('Error sharing:', err));
-    } else {
-        // Fallback: copy to clipboard
-        navigator.clipboard.writeText(shareText + ' ' + window.location.href).then(() => {
-            showNotification('Score copied to clipboard!');
-        }).catch(() => {
-            showNotification('Share: ' + shareText);
+// Header Share Dropdown Functionality
+function initializeHeaderShareDropdown(shareToggle, shareMenu) {
+    // Toggle dropdown
+    shareToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shareMenu.classList.toggle('active');
+        shareToggle.setAttribute('aria-expanded', shareMenu.classList.contains('active'));
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!shareToggle.contains(e.target) && !shareMenu.contains(e.target)) {
+            shareMenu.classList.remove('active');
+            shareToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Handle escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && shareMenu.classList.contains('active')) {
+            shareMenu.classList.remove('active');
+            shareToggle.setAttribute('aria-expanded', 'false');
+            shareToggle.focus();
+        }
+    });
+    
+    // Platform sharing from header
+    const headerShareButtons = {
+        linkedin: shareMenu.querySelector('#share-game-linkedin'),
+        twitter: shareMenu.querySelector('#share-game-twitter'),
+        whatsapp: shareMenu.querySelector('#share-game-whatsapp'),
+        copy: shareMenu.querySelector('#share-game-copy')
+    };
+    
+    // Add event listeners for header share buttons
+    if (headerShareButtons.linkedin) {
+        headerShareButtons.linkedin.addEventListener('click', () => {
+            openPlatformShare(SHARE_PLATFORMS.LINKEDIN, SHARE_CONTEXTS.GAME, {});
+            trackEvent('game_shared', {
+                platform: 'linkedin',
+                method: 'header_dropdown',
+                source: 'header'
+            });
+            shareMenu.classList.remove('active');
         });
     }
+    
+    if (headerShareButtons.twitter) {
+        headerShareButtons.twitter.addEventListener('click', () => {
+            openPlatformShare(SHARE_PLATFORMS.TWITTER, SHARE_CONTEXTS.GAME, {});
+            trackEvent('game_shared', {
+                platform: 'twitter',
+                method: 'header_dropdown',
+                source: 'header'
+            });
+            shareMenu.classList.remove('active');
+        });
+    }
+    
+    if (headerShareButtons.whatsapp) {
+        headerShareButtons.whatsapp.addEventListener('click', () => {
+            openPlatformShare(SHARE_PLATFORMS.WHATSAPP, SHARE_CONTEXTS.GAME, {});
+            trackEvent('game_shared', {
+                platform: 'whatsapp',
+                method: 'header_dropdown',
+                source: 'header'
+            });
+            shareMenu.classList.remove('active');
+        });
+    }
+    
+    if (headerShareButtons.copy) {
+        headerShareButtons.copy.addEventListener('click', async () => {
+            try {
+                const result = await copyToClipboard(SHARE_CONTEXTS.GAME, SHARE_PLATFORMS.LINKEDIN, {});
+                
+                if (result.success) {
+                    showNotification('Game link copied to clipboard!');
+                    trackEvent('game_shared', {
+                        platform: 'clipboard',
+                        method: 'header_dropdown',
+                        source: 'header'
+                    });
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('Copy to clipboard failed:', error);
+                showNotification('Failed to copy link');
+            }
+            shareMenu.classList.remove('active');
+        });
+    }
+    
+    console.log('🔗 Header share dropdown initialized');
+}
+
+// Legacy function kept for compatibility
+function shareScore() {
+    // Trigger the LinkedIn share as default fallback
+    const accuracy = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
+    openPlatformShare(SHARE_PLATFORMS.LINKEDIN, SHARE_CONTEXTS.GAME, {
+        score: gameState.score,
+        accuracy: accuracy
+    });
 }
 
 // Screenshot capture functionality

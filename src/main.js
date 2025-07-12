@@ -5,6 +5,14 @@ import './styles/main.css';
 // Import API client for future backend integration
 import { api, apiUtils } from './utils/api.js';
 
+// Import sharing utilities
+import { 
+    openPlatformShare, 
+    copyToClipboard, 
+    SHARE_PLATFORMS, 
+    SHARE_CONTEXTS 
+} from './utils/sharing.js';
+
 // DOM Elements
 const settingsToggle = document.getElementById('settings-toggle');
 const settingsMenu = document.getElementById('settings-menu');
@@ -73,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeProjectsExpand();
     initializeAIQuery();
     initializeHealthStatus();
+    initializePortfolioSharing();
     
     // Add initial loading state
     document.body.style.opacity = '0';
@@ -2290,5 +2299,169 @@ function initializeHealthStatus() {
     console.log('❤️ Health status monitor initialized - checking every 30 seconds');
 }
 
+// Portfolio Sharing Functions
+function initializePortfolioSharing() {
+    const shareToggle = document.getElementById('share-toggle');
+    const shareMenu = document.getElementById('share-menu');
+    const shareButtons = {
+        linkedin: document.getElementById('share-portfolio-linkedin'),
+        twitter: document.getElementById('share-portfolio-twitter'),
+        whatsapp: document.getElementById('share-portfolio-whatsapp'),
+        copy: document.getElementById('share-portfolio-copy')
+    };
+    
+    // Check if elements exist
+    const missingElements = Object.entries(shareButtons)
+        .filter(([key, element]) => !element)
+        .map(([key]) => key);
+    
+    if (missingElements.length > 0 || !shareToggle || !shareMenu) {
+        console.warn('🔗 Missing share elements:', missingElements, { shareToggle: !!shareToggle, shareMenu: !!shareMenu });
+        return;
+    }
+    
+    // Share dropdown toggle functionality
+    shareToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = shareMenu.classList.contains('show');
+        
+        // Close settings menu if open
+        const settingsMenu = document.getElementById('settings-menu');
+        if (settingsMenu && settingsMenu.classList.contains('show')) {
+            settingsMenu.classList.remove('show');
+            document.getElementById('settings-toggle').setAttribute('aria-expanded', 'false');
+        }
+        
+        // Toggle share menu
+        shareMenu.classList.toggle('show');
+        shareToggle.setAttribute('aria-expanded', !isOpen);
+        
+        captureAnalytics('share_dropdown_toggled', {
+            action: isOpen ? 'closed' : 'opened',
+            theme: currentTheme
+        });
+    });
+    
+    // Close share menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!shareToggle.contains(e.target) && !shareMenu.contains(e.target)) {
+            shareMenu.classList.remove('show');
+            shareToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && shareMenu.classList.contains('show')) {
+            shareMenu.classList.remove('show');
+            shareToggle.setAttribute('aria-expanded', 'false');
+            shareToggle.focus();
+        }
+    });
+    
+    // LinkedIn sharing
+    shareButtons.linkedin.addEventListener('click', () => {
+        openPlatformShare(SHARE_PLATFORMS.LINKEDIN, SHARE_CONTEXTS.PORTFOLIO);
+        shareMenu.classList.remove('show');
+        shareToggle.setAttribute('aria-expanded', 'false');
+        captureAnalytics('portfolio_shared', {
+            platform: 'linkedin',
+            method: 'platform_specific',
+            theme: currentTheme
+        });
+    });
+    
+    // Twitter sharing
+    shareButtons.twitter.addEventListener('click', () => {
+        openPlatformShare(SHARE_PLATFORMS.TWITTER, SHARE_CONTEXTS.PORTFOLIO);
+        shareMenu.classList.remove('show');
+        shareToggle.setAttribute('aria-expanded', 'false');
+        captureAnalytics('portfolio_shared', {
+            platform: 'twitter',
+            method: 'platform_specific',
+            theme: currentTheme
+        });
+    });
+    
+    // WhatsApp sharing
+    shareButtons.whatsapp.addEventListener('click', () => {
+        openPlatformShare(SHARE_PLATFORMS.WHATSAPP, SHARE_CONTEXTS.PORTFOLIO);
+        shareMenu.classList.remove('show');
+        shareToggle.setAttribute('aria-expanded', 'false');
+        captureAnalytics('portfolio_shared', {
+            platform: 'whatsapp',
+            method: 'platform_specific',
+            theme: currentTheme
+        });
+    });
+    
+    // Copy to clipboard
+    shareButtons.copy.addEventListener('click', async () => {
+        try {
+            const result = await copyToClipboard(SHARE_CONTEXTS.PORTFOLIO, SHARE_PLATFORMS.LINKEDIN);
+            
+            if (result.success) {
+                showShareNotification('Portfolio link copied to clipboard!');
+                shareMenu.classList.remove('show');
+                shareToggle.setAttribute('aria-expanded', 'false');
+                captureAnalytics('portfolio_shared', {
+                    platform: 'clipboard',
+                    method: 'copy',
+                    theme: currentTheme
+                });
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            console.error('Copy to clipboard failed:', error);
+            showShareNotification('Failed to copy link');
+        }
+    });
+    
+    console.log('🔗 Portfolio sharing initialized');
+}
+
+// Share notification function
+function showShareNotification(message) {
+    // Create notification element if it doesn't exist
+    let notification = document.getElementById('share-notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'share-notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    notification.textContent = message;
+    
+    // Show notification
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+    }, 3000);
+}
+
 console.log('Modern Neobrutal Portfolio Ready!');
-console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Health Monitor | Accessibility Enhanced');
+console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Health Monitor | Portfolio Sharing | Accessibility Enhanced');
