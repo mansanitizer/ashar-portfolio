@@ -46,7 +46,7 @@
 .game-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 3px; /* Reduced gap for tighter spacing */
 }
 
 .game-brand .brand-name {
@@ -80,11 +80,15 @@
 .game-actions .settings-btn {
     background: var(--superhot-white);
     border: 4px solid var(--superhot-black);
-    padding: 15px;
+    padding: 15px 25px; /* Match other buttons' padding */
     cursor: pointer;
     transition: none;
     box-shadow: 4px 4px 0px var(--superhot-black);
     color: var(--superhot-black);
+    min-height: 54px; /* Consistent height with other buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .game-actions .settings-btn:hover {
@@ -175,6 +179,12 @@
 
 .return-btn .btn-icon, .cv-btn .btn-icon {
     font-size: 16px;
+}
+
+/* SVG icon styling for buttons */
+.return-btn svg.btn-icon, .cv-btn svg.btn-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .return-btn .btn-text, .cv-btn .btn-text {
@@ -268,7 +278,9 @@
     margin-bottom: 60px;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    text-shadow: 6px 6px 0px var(--superhot-red);
+    text-shadow: 3px 3px 0px var(--superhot-red); /* Reduced shadow offset for better alignment */
+    position: relative;
+    display: inline-block;
 }
 
 .shortcut-hint {
@@ -829,7 +841,7 @@
         align-items: center;
     }
     
-    .return-btn, .cv-btn {
+    .return-btn, .cv-btn, .game-actions .settings-btn {
         padding: 8px;
         font-size: 16px;
         min-width: 40px;
@@ -849,13 +861,23 @@
         font-size: 18px;
     }
     
-    .return-btn:hover, .cv-btn:hover {
+    /* Mobile SVG icon sizing */
+    .return-btn svg.btn-icon, .cv-btn svg.btn-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .return-btn:hover, .cv-btn:hover, .game-actions .settings-btn:hover {
         transform: translate(-1px, -1px);
         box-shadow: 3px 3px 0px var(--superhot-grey);
     }
     
     .game-container {
         padding: 140px 20px 60px; /* Remove extra left padding on mobile */
+    }
+    
+    .shortcut-hint {
+        display: none; /* Hide [SPACE] indicator on mobile */
     }
     
     .game-stats {

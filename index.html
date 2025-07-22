@@ -25,13 +25,12 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <span class="brand-name">ASHAR</span>
-                <span class="brand-title">PM</span>
+                <span class="brand-title">RM</span>
             </div>
             <!-- Desktop Navigation -->
             <div class="nav-menu nav-menu-desktop">
                 <a href="#about" class="nav-link" tabindex="0">ABOUT</a>
                 <a href="#work" class="nav-link" tabindex="0">WORK</a>
-                <a href="#projects" class="nav-link" tabindex="0">PROJECTS</a>
                 <a href="#skills" class="nav-link" tabindex="0">SKILLS</a>
                 <a href="#contact" class="nav-link" tabindex="0">CONTACT</a>
                 
@@ -228,11 +227,25 @@
         <div class="hero-content">
             <h1 class="hero-title" id="hero-title">ASHAR RAI MUJEEB</h1>
             <p class="hero-subtitle">PRODUCT MANAGER</p>
+            <p class="hero-tagline">Building fintech products that drive 2x growth and 60% increase in user engagement</p>
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <span class="metric-number">2x</span>
+                    <span class="metric-label">AUM Growth</span>
+                </div>
+                <div class="hero-metric">
+                    <span class="metric-number">60%</span>
+                    <span class="metric-label">MAU Increase</span>
+                </div>
+                <div class="hero-metric">
+                    <span class="metric-number">4→7</span>
+                    <span class="metric-label">NPS Score</span>
+                </div>
+            </div>
             <div class="hero-game-section">
                 <p class="hero-hiring-text">HIRING?</p>
-                <a href="game.html" class="play-game-btn animate-btn" id="play-game-btn">PLAY GAME</a>
+                <a href="#" class="play-game-btn animate-btn" id="resume-download-btn-hero">DOWNLOAD CV</a>
             </div>
-            
         </div>
         <!-- Video controls moved outside video container -->
         <div class="video-controls">
@@ -251,7 +264,7 @@
                     <h2 id="about-heading">ABOUT</h2>
                     <p>Successfully transitioned from a legal background, now thriving as an Associate Product Manager. Proven ability to launch new features, drive user growth, and enhance user experience through data-driven decision-making and cross-functional collaboration.</p>
                     <div class="cta-buttons">
-                        <a href="#" class="resume-btn animate-btn" id="resume-download-btn">VIEW RESUME</a>
+                        <a href="#" class="resume-btn animate-btn" id="resume-download-btn">DOWNLOAD CV</a>
                         <a href="https://www.linkedin.com/in/0xtr0jan/" class="linkedin-btn animate-btn" target="_blank" onclick="if(typeof posthog !== 'undefined') { posthog.capture('linkedin_clicked', { location: 'about_section', theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">LINKEDIN</a>
                         <a href="https://wa.me/917378666101?text=Hi%2C%20came%20across%20your%20profile.%20Let%27s%20connect%21" class="whatsapp-btn animate-btn" target="_blank" onclick="if(typeof posthog !== 'undefined') { posthog.capture('whatsapp_clicked', { location: 'about_section', theme: localStorage.getItem('theme') || 'dark', colorblind_mode: localStorage.getItem('colorblindMode') === 'true' }); }">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -270,228 +283,100 @@
         <section class="bento-box large work animate-box" id="work" role="region" aria-labelledby="work-heading">
             <h2 id="work-heading">FABITS - PRODUCT MANAGER</h2>
             <p class="work-period">Nov 2023 – Present | Bengaluru</p>
-            <div class="work-grid">
-                <div class="work-item animate-item">
-                    <h3>PRODUCT LAUNCHES</h3>
-                    <p>Launched key investment instruments including Mutual Funds, Mutual Fund Baskets, IPO, SGB which improved Assets Under Management by 2x.</p>
+            <div class="work-cards-grid">
+                <div class="work-card animate-card" data-work-id="product-launches">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/mf-baskets.png" alt="MF Baskets & Admin">
+                    </div>
+                    <div class="work-content">
+                        <h3>MF BASKETS & ADMIN</h3>
+                        <p>Launched curated mutual fund baskets with admin dashboard, enabling 2x AUM growth through simplified investment flows</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
-                <div class="work-item animate-item">
-                    <h3>USER GROWTH</h3>
-                    <p>Increased Monthly Active Users by 60% through the implementation of biometric authentication, significantly reducing drop-off rates.</p>
+
+                <div class="work-card animate-card" data-work-id="user-growth">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/mf-direct.png" alt="MF Direct Search">
+                    </div>
+                    <div class="work-content">
+                        <h3>MF DIRECT SEARCH</h3>
+                        <p>Built direct mutual fund search and discovery system, improving user engagement by 60% with advanced filtering</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
-                <div class="work-item animate-item">
-                    <h3>UX ENHANCEMENT</h3>
-                    <p>Enhanced user experience and drove NPS from 4 to 7 by upgrading to a modern design language and optimizing in-app navigation.</p>
+
+                <div class="work-card animate-card" data-work-id="ux-enhancement">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/kyc-auth.png" alt="KYC & Internal Auth">
+                    </div>
+                    <div class="work-content">
+                        <h3>KYC & INTERNAL AUTH</h3>
+                        <p>Designed seamless KYC onboarding and internal authentication flows, reducing drop-off rates while ensuring compliance</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
-                <div class="work-item animate-item">
-                    <h3>UPI AUTOPAY</h3>
-                    <p>Integrated UPI Autopay for collection of subscription charges, improving collection success rate and streamlining administrative workload.</p>
+
+                <div class="work-card animate-card" data-work-id="upi-autopay">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/events-notifications.png" alt="Events & Notifications">
+                    </div>
+                    <div class="work-content">
+                        <h3>EVENTS & NOTIFICATIONS</h3>
+                        <p>Implemented real-time event-driven notification system, increasing user retention through personalized alerts</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
-                <div class="work-item animate-item">
-                    <h3>ANALYTICS</h3>
-                    <p>Integrated Mixpanel and Clevertap on the platform, improving ability to make data-driven decisions.</p>
+
+                <div class="work-card animate-card" data-work-id="analytics">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/ipo-sgb.png" alt="IPO & SGB Flows">
+                    </div>
+                    <div class="work-content">
+                        <h3>IPO & SGB FLOWS</h3>
+                        <p>Developed IPO and Sovereign Gold Bond investment workflows, streamlining complex financial processes for users</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
-                <div class="work-item animate-item">
-                    <h3>COMPLIANCE</h3>
-                    <p>Launched user complaint ticketing system and voluntary freezing system to ensure proper compliance with SEBI and NSE guidelines.</p>
+
+                <div class="work-card animate-card" data-work-id="compliance">
+                    <div class="work-thumbnail">
+                        <img src="/src/assets/work/brand-revamp.png" alt="Brand Revamp">
+                    </div>
+                    <div class="work-content">
+                        <h3>BRAND REVAMP</h3>
+                        <p>Led comprehensive brand refresh and UI redesign, improving NPS from 4 to 7 and enhancing user experience across platform</p>
+                    </div>
+                    <div class="work-card-footer">
+                        <button class="view-details-btn">VIEW DETAILS</button>
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- Projects Section -->
-        <section class="bento-box extra-large projects" id="projects" role="region" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">PROJECTS & CASE STUDIES</h2>
-            <div class="projects-grid" id="projects-grid">
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project1.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project1-thumb.jpg" alt="UPI Autopay Implementation">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>UPI AUTOPAY IMPLEMENTATION</h3>
-                            <p>Complete case study on implementing UPI Autopay for subscription collection</p>
-                            <div class="project-tags">
-                                <span class="tag">Product Strategy</span>
-                                <span class="tag">UX Design</span>
-                                <span class="tag">Implementation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project2.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project2-thumb.jpg" alt="Analytics Integration">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>ANALYTICS INTEGRATION</h3>
-                            <p>Mixpanel & Clevertap integration for data-driven decision making</p>
-                            <div class="project-tags">
-                                <span class="tag">Analytics</span>
-                                <span class="tag">Data Strategy</span>
-                                <span class="tag">Implementation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project3.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project3-thumb.jpg" alt="Biometric Authentication">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>BIOMETRIC AUTHENTICATION</h3>
-                            <p>60% MAU increase through biometric authentication implementation</p>
-                            <div class="project-tags">
-                                <span class="tag">User Experience</span>
-                                <span class="tag">Authentication</span>
-                                <span class="tag">Growth</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project4.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project4-thumb.jpg" alt="Product Launch Strategy">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>PRODUCT LAUNCH STRATEGY</h3>
-                            <p>Comprehensive strategy for launching investment instruments</p>
-                            <div class="project-tags">
-                                <span class="tag">Product Launch</span>
-                                <span class="tag">Strategy</span>
-                                <span class="tag">Go-to-Market</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project5.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project5-thumb.jpg" alt="User Experience Redesign">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>USER EXPERIENCE REDESIGN</h3>
-                            <p>Modern design language implementation driving NPS from 4 to 7</p>
-                            <div class="project-tags">
-                                <span class="tag">UX Design</span>
-                                <span class="tag">Product Strategy</span>
-                                <span class="tag">User Research</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="visible">
-                    <div class="project-card animate-card" data-pdf="project6.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project6-thumb.jpg" alt="Compliance Framework">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>COMPLIANCE FRAMEWORK</h3>
-                            <p>User complaint ticketing system for SEBI and NSE compliance</p>
-                            <div class="project-tags">
-                                <span class="tag">Compliance</span>
-                                <span class="tag">Process Design</span>
-                                <span class="tag">Regulation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Additional projects (initially hidden) -->
-                <div class="project-item" data-category="hidden">
-                    <div class="project-card animate-card" data-pdf="project7.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project7-thumb.jpg" alt="KYC Integration">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>KYC INTEGRATION</h3>
-                            <p>HyperVerge integration improving KYC onboarding metrics</p>
-                            <div class="project-tags">
-                                <span class="tag">Integration</span>
-                                <span class="tag">Onboarding</span>
-                                <span class="tag">Automation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="hidden">
-                    <div class="project-card animate-card" data-pdf="project8.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project8-thumb.jpg" alt="Investment Instruments">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>INVESTMENT INSTRUMENTS</h3>
-                            <p>Mutual Funds, IPO, and SGB implementation strategy</p>
-                            <div class="project-tags">
-                                <span class="tag">Product Development</span>
-                                <span class="tag">Financial Services</span>
-                                <span class="tag">Launch Strategy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-item" data-category="hidden">
-                    <div class="project-card animate-card" data-pdf="project9.pdf">
-                        <div class="project-thumbnail">
-                            <img src="/src/assets/pdfs/thumbnails/project9-thumb.jpg" alt="Mobile App Optimization">
-                            <div class="project-overlay">
-                                <span class="view-pdf">VIEW PDF</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>MOBILE APP OPTIMIZATION</h3>
-                            <p>Cross-functional collaboration for enhanced user experience</p>
-                            <div class="project-tags">
-                                <span class="tag">Mobile</span>
-                                <span class="tag">Optimization</span>
-                                <span class="tag">User Journey</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="projects-expand-btn" id="projects-expand-btn" aria-expanded="false" aria-controls="projects-grid" aria-label="Show more projects">
-                <span>VIEW MORE</span>
+        
+        <!-- Bored Section -->
+        <section class="bento-box small projects-cta animate-box" id="projects" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">BORED?</h2>
+            <p class="projects-description">Take a break and play a quick game</p>
+            <a href="game.html" class="projects-cta-btn animate-btn" id="play-game-btn">
+                <span>PLAY GAME</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M7 10l5 5 5-5z"/>
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                 </svg>
-            </button>
+            </a>
         </section>
         <!-- Skills Section -->
-        <section class="bento-box medium skills animate-box" id="skills" role="region" aria-labelledby="skills-heading">
+        <section class="bento-box skills animate-box" id="skills" role="region" aria-labelledby="skills-heading">
             <h2 id="skills-heading">SKILLS</h2>
             <div class="skills-grid">
                 <div class="skill-category animate-item">
@@ -640,6 +525,7 @@
             </div>
         </section>
         <!-- AI Query Section -->
+        <!--
         <section class="bento-box medium ai-query animate-box" id="ai-query" role="region" aria-labelledby="ai-query-heading">
             <h2 id="ai-query-heading">ASK AI</h2>
             <div class="ai-query-form">
@@ -665,6 +551,7 @@
             </div>
             <p id="ai-query-description" class="ai-query-description">Powered by Gemini AI</p>
         </section>
+        -->
         <!-- Personal Section (commented out) -->
         <!--
         <section class="bento-box small personal" id="personal">
@@ -729,6 +616,35 @@
         </div>
     </div>
 
+    <!-- Work Presentation Modal -->
+    <div id="work-modal" class="modal work-modal">
+        <div class="modal-content work-modal-content">
+            <div class="modal-header work-modal-header">
+                <h3 id="work-title">Work Experience</h3>
+                <button class="close-btn" id="close-work">&times;</button>
+            </div>
+            <div class="modal-body work-modal-body">
+                <div class="work-slides-container">
+                    <div class="work-slide" id="work-slide-content">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                </div>
+                <div class="work-slide-controls">
+                    <button id="work-prev-slide">← PREVIOUS</button>
+                    <div class="work-slide-indicators" id="work-slide-indicators">
+                        <!-- Dots will be dynamically added -->
+                    </div>
+                    <button id="work-next-slide">NEXT →</button>
+                </div>
+                <div class="work-nav-controls">
+                    <button id="work-prev-item">← PREV WORK</button>
+                    <span id="work-item-info">1 of 6</span>
+                    <button id="work-next-item">NEXT WORK →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer" role="contentinfo" aria-label="Site footer">
         <div class="footer-content">
@@ -741,7 +657,6 @@
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#work">Work</a></li>
-                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>

@@ -84,10 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeResumeDownload();
     initializeKeyboardShortcuts();
     initializeBentoGrid();
-    initializeProjectsExpand();
     initializeAIQuery();
     initializeHealthStatus();
     initializePortfolioSharing();
+    
+    // Initialize work modal after everything else is loaded
+    setTimeout(() => {
+        initializeWorkModal();
+    }, 100);
     initializeSkillsCollapse();
     
     // Add initial loading state
@@ -926,9 +930,9 @@ function updatePageInfo() {
 
 // Certificate Modal Functions
 const certificateImages = [
-    'assets/certificates/cert1.jpg',
-    'assets/certificates/cert2.jpg',
-    'assets/certificates/cert3.jpg'
+    '/src/assets/certificates/cert1.jpg',
+    '/src/assets/certificates/cert2.jpg',
+    '/src/assets/certificates/cert3.jpg'
 ];
 
 let currentCertIndex = 0;
@@ -976,7 +980,7 @@ function closeCertModal() {
 
 function updateCertImage() {
     const certImage = document.getElementById('cert-image');
-    certImage.src = certificateImages[currentCertIndex] || 'assets/certificates/placeholder.jpg';
+    certImage.src = certificateImages[currentCertIndex] || '/src/assets/certificates/placeholder.jpg';
     certImage.onerror = () => {
         // Fallback placeholder
         certImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjBmMGYwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiPkNlcnRpZmljYXRlIFByZXZpZXc8L3RleHQ+Cjwvc3ZnPg==';
@@ -2770,5 +2774,614 @@ function showShareNotification(message) {
     }, 3000);
 }
 
+// =====================================
+// Work Modal System
+// =====================================
+
+// Work data structure
+const workData = {
+    'product-launches': {
+        title: 'MF BASKETS & ADMIN ALLOCATION',
+        subtitle: 'Personalized Investment System with Dynamic Portfolio Management',
+        slides: [
+            {
+                title: 'PRODUCT STRATEGY & REQUIREMENTS',
+                content: {
+                    header: 'Data-Driven Personalized Investment Experience',
+                    metrics: [
+                        { value: '2x', label: 'AUM Growth' },
+                        { value: '45%', label: 'SIP Conversion' },
+                        { value: '1-6', label: 'Fund Portfolios' }
+                    ],
+                    sections: [
+                        {
+                            title: 'STRATEGIC OBJECTIVES',
+                            content: `<p>Architected a sophisticated basket-based investment platform to address user acquisition bottlenecks and portfolio management complexity. The system leverages behavioral finance principles to deliver personalized recommendations.</p>
+                            <ul>
+                                <li><strong>Risk Profiling:</strong> Psychometric assessment determining user risk tolerance</li>
+                                <li><strong>Investment Horizon:</strong> Goal-based timeline optimization for asset allocation</li>
+                                <li><strong>Financial Objectives:</strong> Life-stage aligned investment strategy mapping</li>
+                                <li><strong>Thematic Preferences:</strong> ESG, sectoral, and market-cap preference integration</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'IMPLEMENTATION & BUSINESS OUTCOMES',
+                content: {
+                    header: 'Scalable Admin Operations & User Conversion',
+                    sections: [
+                        {
+                            title: 'OPERATIONAL EXCELLENCE',
+                            content: `<p>Developed a rule-based allocation engine enabling administrators to generate optimized 1-6 fund portfolios in real-time. The system dynamically adjusts recommendations based on user input parameters, presenting personalized "Action Plans" for immediate investment execution.</p>`
+                        },
+                        {
+                            title: 'QUANTIFIABLE BUSINESS IMPACT',
+                            content: `<p>Delivered measurable outcomes across key performance indicators:</p>
+                            <ul>
+                                <li><strong>Portfolio Recommendation Accuracy:</strong> Achieved 85% user acceptance rate for generated baskets</li>
+                                <li><strong>Onboarding Efficiency:</strong> Reduced time-to-investment from 15 minutes to 3 minutes</li>
+                                <li><strong>SIP Conversion Optimization:</strong> Increased systematic investment plan adoption by 45%</li>
+                                <li><strong>AUM Acceleration:</strong> Contributed to 2x assets under management growth within 6 months</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    'user-growth': {
+        title: 'MUTUAL FUNDS & DIRECT SEARCH',
+        subtitle: 'Self-Directed Investment Discovery Platform',
+        slides: [
+            {
+                title: 'MARKET OPPORTUNITY & USER RESEARCH',
+                content: {
+                    header: 'Data-Driven Fund Discovery for Self-Directed Investors',
+                    metrics: [
+                        { value: '60%', label: 'User Engagement' },
+                        { value: '35%', label: 'SIP Conversion' },
+                        { value: '4.2/5', label: 'User Rating' }
+                    ],
+                    sections: [
+                        {
+                            title: 'STRATEGIC RATIONALE',
+                            content: `<p>Identified a critical product-market fit gap through user research: 68% of users preferred self-directed investment decisions but lacked sophisticated comparison tools. Launched comprehensive fund discovery platform to capture this underserved segment.</p>
+                            <p>Solution addressed key user pain points including information asymmetry, decision paralysis, and lack of actionable fund analytics in the direct mutual fund investment journey.</p>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'PRODUCT EXECUTION & BUSINESS IMPACT',
+                content: {
+                    header: 'Advanced Fund Discovery & Comparison Engine',
+                    sections: [
+                        {
+                            title: 'FEATURE ARCHITECTURE',
+                            content: `<p>Architected and launched a comprehensive Mutual Fund Explorer featuring advanced analytics and comparison capabilities:</p>
+                            <ul>
+                                <li><strong>Dynamic Search & Filtering:</strong> 15+ filter criteria including fund size, expense ratio, and Sharpe ratio</li>
+                                <li><strong>Advanced Performance Analytics:</strong> Multi-period returns with benchmark comparison and rolling return analysis</li>
+                                <li><strong>Portfolio Composition Analysis:</strong> Sector allocation visualization and top holdings transparency</li>
+                                <li><strong>Risk Assessment Tools:</strong> Volatility metrics, downside protection analysis, and fund manager track record</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'MEASURABLE BUSINESS OUTCOMES',
+                            content: `<p>Achieved significant improvements across key user engagement and conversion metrics:</p>
+                            <ul>
+                                <li><strong>User Engagement:</strong> Increased platform engagement by 60% with 3.5x longer session duration</li>
+                                <li><strong>Conversion Rate Optimization:</strong> Improved SIP conversion rate by 35% through enhanced decision support</li>
+                                <li><strong>User Satisfaction:</strong> Achieved 4.2/5 user rating with 89% feature adoption rate</li>
+                                <li><strong>Revenue Impact:</strong> Generated 22% increase in direct investment transaction volume</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    'ux-enhancement': {
+        title: 'KYC & INTERNAL AUTH AUTOMATION',
+        subtitle: 'Digital Onboarding & Compliance Platform',
+        slides: [
+            {
+                title: 'DIGITAL TRANSFORMATION STRATEGY',
+                content: {
+                    header: 'End-to-End KYC Automation & Compliance Framework',
+                    metrics: [
+                        { value: '80%', label: 'Process Automation' },
+                        { value: '65%', label: 'Time Reduction' },
+                        { value: '99.2%', label: 'Compliance Rate' }
+                    ],
+                    sections: [
+                        {
+                            title: 'BUSINESS CASE & TRANSFORMATION',
+                            content: `<p>Identified critical operational bottlenecks in legacy Google Forms-based KYC process causing 40% user drop-off and 3-day processing delays. Architected comprehensive digital transformation solution integrating best-in-class identity verification APIs with automated compliance workflows.</p>
+                            <p>Strategic initiative addressed regulatory requirements, operational efficiency, and user experience optimization through end-to-end process digitization.</p>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'PLATFORM ARCHITECTURE & BUSINESS IMPACT',
+                content: {
+                    header: 'Integrated Compliance & Authentication Platform',
+                    sections: [
+                        {
+                            title: 'TECHNICAL IMPLEMENTATION',
+                            content: `<p>Developed comprehensive KYC automation platform integrating multiple third-party services with custom business logic:</p>
+                            <ul>
+                                <li><strong>Identity Verification:</strong> Hyperverge integration for OCR, liveness detection, and Aadhaar validation</li>
+                                <li><strong>Data Processing:</strong> Automated transformation of unstructured inputs into BSE-compliant formats</li>
+                                <li><strong>API Integration:</strong> Real-time BSE UCC submission with automated error handling and retry logic</li>
+                                <li><strong>Authentication Layer:</strong> ELog Auth implementation with FATCA processing and state management</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'OPERATIONAL EXCELLENCE & OUTCOMES',
+                            content: `<p>Delivered scalable compliance infrastructure with measurable business impact:</p>
+                            <ul>
+                                <li><strong>Process Efficiency:</strong> Achieved 80% automation of manual KYC operations with 12-step workflow engine</li>
+                                <li><strong>User Experience:</strong> Reduced onboarding time from 3 days to 4 hours, improving conversion by 65%</li>
+                                <li><strong>Compliance & Audit:</strong> Implemented comprehensive audit trail with 99.2% regulatory compliance rate</li>
+                                <li><strong>Infrastructure Security:</strong> AWS S3-based secure document storage with encryption and access controls</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    'upi-autopay': {
+        title: 'EVENTS & NOTIFICATIONS',
+        subtitle: 'Intelligent User Engagement & Retention Platform',
+        slides: [
+            {
+                title: 'USER ENGAGEMENT STRATEGY',
+                content: {
+                    header: 'Data-Driven Engagement & Retention Architecture',
+                    metrics: [
+                        { value: '2x', label: 'Operational Efficiency' },
+                        { value: '45%', label: 'User Retention' },
+                        { value: '3.2x', label: 'Engagement Rate' }
+                    ],
+                    sections: [
+                        {
+                            title: 'BEHAVIORAL ANALYTICS FRAMEWORK',
+                            content: `<p>Architected comprehensive user engagement ecosystem leveraging behavioral analytics to optimize conversion funnels and drive sustainable user retention. Implemented predictive modeling to identify user intent and deliver personalized intervention strategies.</p>
+                            <p>Strategic initiative addressed declining user engagement post-onboarding and created systematic approach to nurture user relationships throughout the investment lifecycle.</p>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'PLATFORM IMPLEMENTATION & OUTCOMES',
+                content: {
+                    header: 'Omnichannel Engagement Platform',
+                    sections: [
+                        {
+                            title: 'TECHNICAL ARCHITECTURE',
+                            content: `<p>Integrated best-in-class analytics and engagement platforms to create unified user experience optimization system:</p>
+                            <ul>
+                                <li><strong>Behavioral Analytics:</strong> Mixpanel integration for comprehensive user journey mapping and cohort analysis</li>
+                                <li><strong>Engagement Automation:</strong> CleverTap implementation for real-time personalized messaging and campaign optimization</li>
+                                <li><strong>Content Strategy:</strong> Newsletter and blog communication pipeline with A/B testing capabilities</li>
+                                <li><strong>Predictive Triggers:</strong> Event-based automation for proactive user intervention and support</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'BUSINESS IMPACT & PERFORMANCE',
+                            content: `<p>Delivered significant improvements in user engagement and operational efficiency metrics:</p>
+                            <ul>
+                                <li><strong>Operational Efficiency:</strong> Achieved 2x improvement in KYC and investment funnel completion rates</li>
+                                <li><strong>User Retention:</strong> Increased 30-day retention by 45% through targeted re-engagement campaigns</li>
+                                <li><strong>Engagement Optimization:</strong> Delivered 3.2x increase in user engagement through personalized notifications</li>
+                                <li><strong>Conversion Rate:</strong> Improved investment completion rate by 28% via strategic nudging and follow-ups</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    'analytics': {
+        title: 'IPO & SGB FLOWS',
+        subtitle: 'Multi-Asset Investment Platform Expansion',
+        slides: [
+            {
+                title: 'PRODUCT STRATEGY & MARKET EXPANSION',
+                content: {
+                    header: 'Strategic Investment Portfolio Diversification',
+                    metrics: [
+                        { value: '150%', label: 'Platform Adoption' },
+                        { value: '92%', label: 'Application Success' },
+                        { value: '2.8x', label: 'Revenue Growth' }
+                    ],
+                    sections: [
+                        {
+                            title: 'STRATEGIC MARKET OPPORTUNITY',
+                            content: `<p>Identified significant market opportunity in primary market investments through user research indicating 78% demand for IPO and SGB access. Architected comprehensive multi-asset investment platform to capture underserved market segments and increase platform stickiness.</p>
+                            <p>Strategic expansion addressed portfolio diversification needs while leveraging existing user base and infrastructure for accelerated market penetration.</p>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'PLATFORM DEVELOPMENT & BUSINESS OUTCOMES',
+                content: {
+                    header: 'Integrated Primary Market Investment Platform',
+                    sections: [
+                        {
+                            title: 'TECHNICAL IMPLEMENTATION',
+                            content: `<p>Developed comprehensive primary market investment platform with unified user experience and backend architecture:</p>
+                            <ul>
+                                <li><strong>IPO Application Engine:</strong> End-to-end IPO investment flows with UPI mandate integration and automated allocation processing</li>
+                                <li><strong>SGB Investment Platform:</strong> Sovereign Gold Bond purchase system with lock-in period tracking and maturity optimization</li>
+                                <li><strong>Compliance Integration:</strong> Seamless KYC validation and bank verification layer integration</li>
+                                <li><strong>Portfolio Management:</strong> Unified holdings view with real-time status updates and performance tracking</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'QUANTIFIABLE BUSINESS IMPACT',
+                            content: `<p>Achieved substantial growth in user engagement and revenue metrics:</p>
+                            <ul>
+                                <li><strong>Platform Adoption:</strong> Increased user engagement by 150% with 65% of users utilizing new investment options</li>
+                                <li><strong>Application Success Rate:</strong> Achieved 92% successful application completion rate through optimized UX flows</li>
+                                <li><strong>Revenue Diversification:</strong> Generated 2.8x revenue growth through expanded product portfolio</li>
+                                <li><strong>User Retention:</strong> Improved 90-day retention by 38% through enhanced investment portfolio options</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    'compliance': {
+        title: 'BRAND REVAMP',
+        subtitle: 'Complete UI/UX Transformation & Brand Refresh',
+        slides: [
+            {
+                title: 'DESIGN RESEARCH & STRATEGY',
+                content: {
+                    header: 'User-Centered Brand Evolution',
+                    metrics: [
+                        { value: '4→7', label: 'NPS Score' },
+                        { value: '85%', label: 'User Satisfaction' },
+                        { value: '40%', label: 'Task Completion' }
+                    ],
+                    sections: [
+                        {
+                            title: 'RESEARCH FOUNDATION',
+                            content: `<p>Comprehensive analysis driving brand transformation:</p>
+                            <ul>
+                                <li><strong>User Interviews:</strong> 50+ interviews revealing pain points in current design</li>
+                                <li><strong>Competitive Analysis:</strong> Analyzed 15 fintech platforms for best practices</li>
+                                <li><strong>Usability Testing:</strong> Identified 23 critical UX issues affecting conversion</li>
+                                <li><strong>Brand Perception Study:</strong> Assessed market positioning and brand equity</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'DESIGN SYSTEM & IMPLEMENTATION',
+                content: {
+                    header: 'Cohesive Visual Language',
+                    sections: [
+                        {
+                            title: 'VISUAL IDENTITY REFRESH',
+                            content: `<p>Modern, trustworthy design language for fintech:</p>
+                            <ul>
+                                <li><strong>Typography:</strong> Implemented clean, readable font hierarchy for financial data</li>
+                                <li><strong>Color Palette:</strong> Introduced trust-building blues with accessible contrast ratios</li>
+                                <li><strong>Iconography:</strong> Custom icon set reflecting financial concepts and actions</li>
+                                <li><strong>Spacing System:</strong> Consistent 8px grid system for visual harmony</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'COMPONENT LIBRARY',
+                            content: `<p>Scalable design system implementation:</p>
+                            <ul>
+                                <li><strong>UI Components:</strong> 45+ reusable components in Figma and code</li>
+                                <li><strong>Investment Cards:</strong> Redesigned fund display with clear hierarchy</li>
+                                <li><strong>Dashboard Widgets:</strong> Intuitive portfolio overview components</li>
+                                <li><strong>Form Patterns:</strong> Simplified onboarding and transaction flows</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            },
+            {
+                title: 'IMPACT & RESULTS',
+                content: {
+                    header: 'Measurable Brand Success',
+                    sections: [
+                        {
+                            title: 'USER EXPERIENCE METRICS',
+                            content: `<p>Significant improvements across all user satisfaction metrics:</p>
+                            <ul>
+                                <li><strong>NPS Improvement:</strong> Increased from 4 to 7, representing 75% growth</li>
+                                <li><strong>User Satisfaction:</strong> 85% positive feedback on new design</li>
+                                <li><strong>Task Completion:</strong> 40% increase in successful investment flows</li>
+                                <li><strong>Support Tickets:</strong> 30% reduction in UI-related queries</li>
+                            </ul>`
+                        },
+                        {
+                            title: 'BUSINESS IMPACT',
+                            content: `<p>Brand revamp driving measurable business outcomes:</p>
+                            <ul>
+                                <li><strong>User Retention:</strong> 25% improvement in 30-day retention rates</li>
+                                <li><strong>Conversion Rate:</strong> 18% increase in onboarding completion</li>
+                                <li><strong>Brand Recognition:</strong> 60% improvement in brand recall studies</li>
+                                <li><strong>Market Position:</strong> Elevated perception as modern, trustworthy platform</li>
+                            </ul>`
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+};
+
+function initializeWorkModal() {
+    const workCards = document.querySelectorAll('.work-card');
+    const workModal = document.getElementById('work-modal');
+    const closeWorkBtn = document.getElementById('close-work');
+    
+    let currentWorkId = null;
+    let currentSlideIndex = 0;
+    let workItems = Object.keys(workData);
+    let currentWorkIndex = 0;
+
+    // Add click listeners to work cards and their buttons
+    workCards.forEach((card) => {
+        // Handle card click (but not if clicking the button)
+        card.addEventListener('click', (e) => {
+            // Don't trigger if clicking the view details button
+            if (e.target.closest('.view-details-btn')) {
+                return;
+            }
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const workId = card.getAttribute('data-work-id');
+            if (workId && workData[workId]) {
+                openWorkModal(workId);
+            }
+        });
+        
+        // Handle button click specifically
+        const detailsBtn = card.querySelector('.view-details-btn');
+        if (detailsBtn) {
+            detailsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const workId = card.getAttribute('data-work-id');
+                if (workId && workData[workId]) {
+                    openWorkModal(workId);
+                }
+            });
+        }
+        
+        // Add pointer cursor
+        card.style.cursor = 'pointer';
+    });
+    
+    // Return early if modal elements don't exist
+    if (!workModal || !closeWorkBtn) {
+        return;
+    }
+
+    // Close modal listeners
+    closeWorkBtn.addEventListener('click', closeWorkModal);
+    workModal.addEventListener('click', (e) => {
+        if (e.target === workModal) {
+            closeWorkModal();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!workModal.classList.contains('active')) return;
+        
+        switch (e.key) {
+            case 'Escape':
+                closeWorkModal();
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                previousSlide();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                nextSlide();
+                break;
+        }
+    });
+
+    // Slide navigation
+    const prevSlideBtn = document.getElementById('work-prev-slide');
+    const nextSlideBtn = document.getElementById('work-next-slide');
+    const prevItemBtn = document.getElementById('work-prev-item');
+    const nextItemBtn = document.getElementById('work-next-item');
+
+    if (prevSlideBtn) prevSlideBtn.addEventListener('click', previousSlide);
+    if (nextSlideBtn) nextSlideBtn.addEventListener('click', nextSlide);
+    if (prevItemBtn) prevItemBtn.addEventListener('click', previousWorkItem);
+    if (nextItemBtn) nextItemBtn.addEventListener('click', nextWorkItem);
+
+    function openWorkModal(workId) {
+        currentWorkId = workId;
+        currentSlideIndex = 0;
+        currentWorkIndex = workItems.indexOf(workId);
+        
+        updateModalContent();
+        workModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Analytics
+        if (typeof posthog !== 'undefined') {
+            posthog.capture('work_modal_opened', {
+                work_item: workId,
+                theme: currentTheme,
+                colorblind_mode: colorblindMode
+            });
+        }
+    }
+
+    function closeWorkModal() {
+        workModal.classList.remove('active');
+        document.body.style.overflow = '';
+        currentWorkId = null;
+    }
+
+    function updateModalContent() {
+        if (!currentWorkId || !workData[currentWorkId]) return;
+
+        const work = workData[currentWorkId];
+        const slide = work.slides[currentSlideIndex];
+        
+        // Update modal title
+        const titleElement = document.getElementById('work-title');
+        if (titleElement) {
+            titleElement.textContent = `${work.title} - ${slide.title}`;
+        }
+
+        // Update slide content
+        const slideContent = document.getElementById('work-slide-content');
+        if (slideContent && slide.content) {
+            slideContent.innerHTML = generateSlideHTML(slide.content);
+        }
+
+        // Update slide indicators
+        updateSlideIndicators();
+        
+        // Update navigation buttons
+        updateNavigationButtons();
+        
+        // Update work item info
+        const workItemInfo = document.getElementById('work-item-info');
+        if (workItemInfo) {
+            workItemInfo.textContent = `${currentWorkIndex + 1} of ${workItems.length}`;
+        }
+    }
+
+    function generateSlideHTML(content) {
+        let html = `
+            <div class="slide-header">
+                <h2 class="slide-title">${content.header || ''}</h2>
+            </div>
+        `;
+
+        if (content.metrics) {
+            html += '<div class="slide-metrics">';
+            content.metrics.forEach(metric => {
+                html += `
+                    <div class="slide-metric">
+                        <span class="metric-value">${metric.value}</span>
+                        <span class="metric-label">${metric.label}</span>
+                    </div>
+                `;
+            });
+            html += '</div>';
+        }
+
+        if (content.sections) {
+            html += '<div class="slide-content">';
+            content.sections.forEach(section => {
+                html += `
+                    <div class="slide-section">
+                        <h4>${section.title}</h4>
+                        ${section.content}
+                    </div>
+                `;
+            });
+            html += '</div>';
+        }
+
+        return html;
+    }
+
+    function updateSlideIndicators() {
+        const indicatorsContainer = document.getElementById('work-slide-indicators');
+        if (!indicatorsContainer || !currentWorkId) return;
+
+        const slides = workData[currentWorkId].slides;
+        indicatorsContainer.innerHTML = '';
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `slide-dot ${index === currentSlideIndex ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(dot);
+        });
+    }
+
+    function updateNavigationButtons() {
+        if (!currentWorkId) return;
+
+        const slides = workData[currentWorkId].slides;
+        const prevSlideBtn = document.getElementById('work-prev-slide');
+        const nextSlideBtn = document.getElementById('work-next-slide');
+        const prevItemBtn = document.getElementById('work-prev-item');
+        const nextItemBtn = document.getElementById('work-next-item');
+
+        if (prevSlideBtn) {
+            prevSlideBtn.disabled = currentSlideIndex === 0;
+        }
+        if (nextSlideBtn) {
+            nextSlideBtn.disabled = currentSlideIndex === slides.length - 1;
+        }
+        if (prevItemBtn) {
+            prevItemBtn.disabled = currentWorkIndex === 0;
+        }
+        if (nextItemBtn) {
+            nextItemBtn.disabled = currentWorkIndex === workItems.length - 1;
+        }
+    }
+
+    function previousSlide() {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            updateModalContent();
+        }
+    }
+
+    function nextSlide() {
+        if (currentWorkId && currentSlideIndex < workData[currentWorkId].slides.length - 1) {
+            currentSlideIndex++;
+            updateModalContent();
+        }
+    }
+
+    function goToSlide(index) {
+        currentSlideIndex = index;
+        updateModalContent();
+    }
+
+    function previousWorkItem() {
+        if (currentWorkIndex > 0) {
+            currentWorkIndex--;
+            currentWorkId = workItems[currentWorkIndex];
+            currentSlideIndex = 0;
+            updateModalContent();
+        }
+    }
+
+    function nextWorkItem() {
+        if (currentWorkIndex < workItems.length - 1) {
+            currentWorkIndex++;
+            currentWorkId = workItems[currentWorkIndex];
+            currentSlideIndex = 0;
+            updateModalContent();
+        }
+    }
+}
+
 console.log('Modern Neobrutal Portfolio Ready!');
-console.log('Mobile Optimized | Video Controls | PDF Viewer | Certificate Gallery | Get in Touch | AI Query | Health Monitor | Portfolio Sharing | Accessibility Enhanced');
+console.log('Mobile Optimized | Video Controls | Work Modal System | Certificate Gallery | Get in Touch | AI Query | Health Monitor | Portfolio Sharing | Accessibility Enhanced');
