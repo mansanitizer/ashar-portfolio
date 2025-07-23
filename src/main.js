@@ -60,8 +60,7 @@ let currentAccent = localStorage.getItem('accent') || '#FF6600';
 let colorblindMode = localStorage.getItem('colorblindMode') === 'true' || false;
 let trackingEnabled = localStorage.getItem('trackingEnabled') !== 'false';
 
-// Resume Download State
-let hasViewedResume = localStorage.getItem('hasViewedResume') === 'true' || false;
+// Resume download functionality (view feature removed)
 
 // Enhanced Color Palettes
 const colorPalettes = [
@@ -1765,14 +1764,14 @@ function initializeResumeDownload() {
 function updateResumeButtonText() {
     const resumeBtn = document.getElementById('resume-download-btn');
     if (resumeBtn) {
-        resumeBtn.textContent = hasViewedResume ? 'DOWNLOAD CV' : 'VIEW RESUME';
+        resumeBtn.textContent = 'DOWNLOAD CV';
     }
 }
 
 function updateHeroResumeButtonText() {
     const heroResumeBtn = document.getElementById('resume-download-btn-hero');
     if (heroResumeBtn) {
-        heroResumeBtn.textContent = hasViewedResume ? 'DOWNLOAD CV' : 'VIEW RESUME';
+        heroResumeBtn.textContent = 'DOWNLOAD CV';
     }
 }
 
@@ -1781,48 +1780,26 @@ function handleResumeDownload(e) {
     
     const resumeBtn = e.target;
     
-    if (!hasViewedResume) {
-        // First time - open PDF viewer
-        openPDFModal('resume.pdf', 'Ashar\'s Resume');
-        hasViewedResume = true;
-        localStorage.setItem('hasViewedResume', 'true');
-        
-        // PostHog Analytics
-        if (typeof posthog !== 'undefined') {
-            posthog.capture('resume_viewed', { 
-                action: 'pdf_modal_opened',
-                theme: currentTheme, 
-                colorblind_mode: colorblindMode 
-            });
-        }
-        
-        // Show thumbs up and update text
-        createThumbsUpEffect(resumeBtn, () => {
-            updateResumeButtonText();
-            updateHeroResumeButtonText();
+    // Direct download only - no viewing
+    forceDownloadResume();
+    
+    // PostHog Analytics
+    if (typeof posthog !== 'undefined') {
+        posthog.capture('resume_downloaded', { 
+            action: 'direct_download',
+            theme: currentTheme, 
+            colorblind_mode: colorblindMode 
         });
-    } else {
-        // Second time - force download
-        forceDownloadResume();
-        
-        // PostHog Analytics
-        if (typeof posthog !== 'undefined') {
-            posthog.capture('resume_downloaded', { 
-                action: 'force_download',
-                theme: currentTheme, 
-                colorblind_mode: colorblindMode 
-            });
-        }
-        
-        // Show thumbs up
-        createThumbsUpEffect(resumeBtn);
     }
+    
+    // Show thumbs up effect
+    createThumbsUpEffect(resumeBtn);
 }
 
 function forceDownloadResume() {
     const link = document.createElement('a');
     link.href = 'resume.pdf';
-    link.download = 'Ashar_Rai_Mujeeb_Resume.pdf';
+    link.download = 'Ashar_RM_PM_CV_iarm.xyz.pdf';
     link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
