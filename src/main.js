@@ -1336,30 +1336,21 @@ function initializeSkillsCollapse() {
         const isMobile = window.innerWidth <= 768;
         
         skillCategories.forEach(category => {
-            if (isMobile) {
-                // Add mobile collapsible class and functionality
-                category.classList.add('mobile-collapsible');
-                category.setAttribute('tabindex', '0');
-                category.setAttribute('role', 'button');
-                category.setAttribute('aria-expanded', 'false');
-                
-                // Add event listeners if not already added
-                if (!eventListenersAdded) {
-                    category.addEventListener('click', handleSkillClick);
-                    category.addEventListener('keydown', handleSkillKeydown);
-                }
-                
-            } else {
-                // Remove mobile functionality on desktop
-                category.classList.remove('mobile-collapsible', 'expanded');
-                category.removeAttribute('tabindex');
-                category.removeAttribute('role');
-                category.removeAttribute('aria-expanded');
+            // Always add collapsible functionality (desktop and mobile)
+            category.classList.add('mobile-collapsible');
+            category.setAttribute('tabindex', '0');
+            category.setAttribute('role', 'button');
+            category.setAttribute('aria-expanded', 'false');
+            
+            // Add event listeners if not already added
+            if (!eventListenersAdded) {
+                category.addEventListener('click', handleSkillClick);
+                category.addEventListener('keydown', handleSkillKeydown);
             }
         });
         
-        eventListenersAdded = isMobile;
-        console.log('📱 Mobile skills collapse', isMobile ? 'enabled' : 'disabled');
+        eventListenersAdded = true;
+        console.log('🖥️ Skills collapse enabled on all devices');
     }
     
     // Initialize on load
