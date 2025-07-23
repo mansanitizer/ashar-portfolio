@@ -815,7 +815,7 @@ h6 {
 
 .hero-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-size: clamp(1.8rem, 8vw, 6rem);
     font-weight: 900;
     color: #ffffff;
     text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9),
@@ -825,7 +825,8 @@ h6 {
     margin-bottom: 20px;
     letter-spacing: -0.02em;
     line-height: 1;
-    white-space: nowrap;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 @keyframes glow {
@@ -2609,9 +2610,7 @@ h6 {
         padding: 30px 20px;
     }
     
-    .hero-title {
-        font-size: 3rem;
-    }
+    /* .hero-title uses responsive clamp() - no override needed */
     
     .hero-subtitle {
         font-size: 1.5rem;
@@ -2712,9 +2711,7 @@ h6 {
         padding: 20px 15px;
     }
     
-    .hero-title {
-        font-size: 2.5rem;
-    }
+    /* .hero-title uses responsive clamp() - no override needed */
     
     .hero-subtitle {
         font-size: 1.2rem;
