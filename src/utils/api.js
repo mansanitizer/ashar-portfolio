@@ -187,16 +187,18 @@ export const api = {
 
   // Game CV bullet generation - simplified approach
   async generateCVBullets(options = {}) {
+    const requestData = {
+      real_bullets_count: options.realCount || 3,
+      fake_bullets_count: options.fakeCount || 1,
+      real_temperature: options.realTemperature || 0.0,
+      fake_temperature: options.fakeTemperature || 0.6,
+      role: options.role || 'product_manager'
+    };
+
     try {
-      const requestData = {
-        real_bullets_count: options.realCount || 3,
-        fake_bullets_count: options.fakeCount || 1,
-        real_temperature: options.realTemperature || 0.0,
-        fake_temperature: options.fakeTemperature || 0.6,
-        role: options.role || 'product_manager'
-      };
-      
+      console.log('🎮 Sending CV bullet request:', requestData);
       const response = await apiClient.post('/api/v1/game/generate-cv-bullets', requestData);
+      console.log('🎮 CV bullet response received:', response.data);
       return response.data;
     } catch (error) {
       console.error('🎮 Game CV bullet generation failed:', error);
@@ -205,7 +207,7 @@ export const api = {
         status: error.response?.status,
         statusText: error.response?.statusText,
         data: error.response?.data,
-        requestData
+        requestData: requestData
       });
       throw error;
     }
@@ -213,23 +215,32 @@ export const api = {
 
   // Prefetch bullets for better performance
   async prefetchBullets(options = {}) {
+    const requestData = {
+      session_id: options.sessionId || `game_${Date.now()}`,
+      total_questions: options.totalQuestions || 20,
+      buffer_size: options.bufferSize || 15,
+      role: options.role || 'product_manager',
+      difficulty_progression: options.difficultyProgression || 'linear',
+      rotation_count: options.rotationCount || 1,
+      exclude_ids: options.excludeIds || [],
+      request_randomization: options.requestRandomization || true,
+      session_progress: options.sessionProgress || 0.0
+    };
+
     try {
-      const requestData = {
-        session_id: options.sessionId || `game_${Date.now()}`,
-        total_questions: options.totalQuestions || 20,
-        buffer_size: options.bufferSize || 15,
-        role: options.role || 'product_manager',
-        difficulty_progression: options.difficultyProgression || 'linear',
-        rotation_count: options.rotationCount || 1,
-        exclude_ids: options.excludeIds || [],
-        request_randomization: options.requestRandomization || true,
-        session_progress: options.sessionProgress || 0.0
-      };
-      
+      console.log('🎮 Sending prefetch request:', requestData);
       const response = await apiClient.post('/api/v1/game/prefetch-bullets', requestData);
+      console.log('🎮 Prefetch response received:', response.data);
       return response.data;
     } catch (error) {
       console.error('🎮 Game bullet prefetch failed:', error);
+      console.error('🎮 Prefetch error details:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        requestData: requestData
+      });
       throw error;
     }
   }

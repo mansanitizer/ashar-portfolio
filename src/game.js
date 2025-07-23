@@ -864,29 +864,50 @@ class CVGenerator {
     }
     
     generateWithStaticBullets(temperature = 1.0) {
-        // Original static implementation as fallback
+        // Enhanced static implementation with unique ID generation
         const options = [];
+        const timestamp = Date.now();
         
         // Add 3 professional bullets (ensuring no duplicates)
         for (let i = 0; i < 3; i++) {
             const bullet = this.getUniqueRandomBullet('professional');
+            const uniqueId = `static_real_${timestamp}_${i}`;
+            
+            // Track the unique ID in session
+            this.sessionBulletIds.add(uniqueId);
+            
             options.push({
                 text: bullet,
                 isFake: false,
                 temperature: 0.0,
-                source: 'static'
+                source: 'static',
+                bulletId: `real_${i}`,
+                uniqueId: uniqueId,
+                requestTimestamp: timestamp,
+                generatedAt: new Date().toISOString()
             });
         }
         
         // Add 1 fake bullet based on current temperature (ensuring no duplicates)
         const fakeType = this.getBulletTypeByTemperature(temperature);
         const fakeBullet = this.getUniqueRandomBullet(fakeType);
+        const fakeUniqueId = `static_fake_${timestamp}_0`;
+        
+        // Track the unique ID in session
+        this.sessionBulletIds.add(fakeUniqueId);
+        
         options.push({
             text: fakeBullet,
             isFake: true,
             temperature: temperature,
-            source: 'static'
+            source: 'static',
+            bulletId: 'fake_0',
+            uniqueId: fakeUniqueId,
+            requestTimestamp: timestamp,
+            generatedAt: new Date().toISOString()
         });
+        
+        console.log('🎮 Generated static bullets with unique IDs:', options.map(opt => opt.uniqueId));
         
         // Shuffle the options so fake isn't always in same position
         return this.shuffleArray(options);
