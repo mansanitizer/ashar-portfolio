@@ -1803,6 +1803,73 @@ h6 {
     background: linear-gradient(135deg, var(--card-bg), var(--hover-bg));
 }
 
+/* Skills Marquee */
+.skills-marquee {
+    margin: 20px 0;
+    overflow: hidden;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .skills-marquee {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+}
+
+.marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.marquee-item:hover {
+    opacity: 1;
+}
+
+.marquee-item img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+[data-theme="light"] .marquee-item img {
+    opacity: 0.7;
+}
+
+.marquee-item span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(160, 160, 160, 0.9);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+[data-theme="light"] .marquee-item span {
+    color: rgba(100, 100, 100, 0.9);
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 #skills h2 {
     text-align: left !important;
     margin-bottom: 25px;
