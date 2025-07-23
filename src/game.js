@@ -2124,11 +2124,7 @@ function initializeHealthStatusForGame() {
                 heartIcon.className = 'heart-icon healthy';
                 healthTooltip.textContent = `backend is healthy @ 2bpm (${responseTime}ms)`;
                 
-                // Game-specific health tracking
-                trackEvent('health_check_success', {
-                    response_time: responseTime,
-                    game_state: gameState.isPlaying ? 'playing' : 'idle'
-                });
+                // Health check successful (no analytics tracking)
                 
             } else {
                 throw new Error('Invalid response');
@@ -2140,11 +2136,7 @@ function initializeHealthStatusForGame() {
             
             console.warn('❤️ Backend health check failed:', error.message);
             
-            // Game-specific health failure tracking
-            trackEvent('health_check_failure', {
-                error_message: error.message,
-                game_state: gameState.isPlaying ? 'playing' : 'idle'
-            });
+            // Health check failed (no analytics tracking)
         }
     }
     

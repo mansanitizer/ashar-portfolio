@@ -2498,11 +2498,7 @@ function initializeHealthStatus() {
                 heartIcon.className = 'heart-icon healthy';
                 healthTooltip.textContent = `backend is healthy @ 2bpm (${responseTime}ms)`;
                 
-                // PostHog tracking for health checks
-                captureAnalytics('health_check_success', {
-                    response_time: responseTime,
-                    theme: currentTheme
-                });
+                // Health check successful (no analytics tracking)
                 
             } else {
                 throw new Error('Invalid response');
@@ -2514,11 +2510,7 @@ function initializeHealthStatus() {
             
             console.warn('❤️ Backend health check failed:', error.message);
             
-            // PostHog tracking for health failures
-            captureAnalytics('health_check_failure', {
-                error_message: error.message,
-                theme: currentTheme
-            });
+            // Health check failed (no analytics tracking)
         }
     }
     
