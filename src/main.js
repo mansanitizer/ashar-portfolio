@@ -2755,49 +2755,49 @@ function showShareNotification(message) {
 // Work data structure
 const workData = {
     'product-launches': {
-        title: 'MF BASKETS & ADMIN ALLOCATION',
-        subtitle: 'Personalized Investment System with Dynamic Portfolio Management',
+        title: 'MUTUAL FUNDS BASKETS & ADMIN ALLOCATION',
+        subtitle: 'Goal-Based Investment Baskets for First-Time Investors',
         slides: [
             {
-                title: 'PRODUCT STRATEGY & REQUIREMENTS',
+                title: 'PRODUCT STRATEGY & USER PROBLEM',
                 content: {
-                    header: 'Data-Driven Personalized Investment Experience',
-                    metrics: [
-                        { value: '2x', label: 'AUM Growth' },
-                        { value: '45%', label: 'SIP Conversion' },
-                        { value: '1-6', label: 'Fund Portfolios' }
-                    ],
+                    header: 'Solving Investment Decision Paralysis',
                     sections: [
                         {
-                            title: 'STRATEGIC OBJECTIVES',
-                            content: `<p>Architected a sophisticated basket-based investment platform to address user acquisition bottlenecks and portfolio management complexity. The system leverages behavioral finance principles to deliver personalized recommendations.</p>
+                            title: 'COMPANY PIVOT & USER RESEARCH',
+                            content: `<p>During our strategic pivot towards mutual funds, I identified a core user problem through interviews and support tickets: users didn't know what to buy, when to sell, or which funds to pick for their goals.</p>
+                            <p>Working as the solo PM with 2 engineers and 1 designer, I chose a basket-based approach to allow users to invest in diversified portfolios that could be adjusted over time based on specific goals like retirement, house purchase, or emergency funds.</p>
                             <ul>
-                                <li><strong>Risk Profiling:</strong> Psychometric assessment determining user risk tolerance</li>
-                                <li><strong>Investment Horizon:</strong> Goal-based timeline optimization for asset allocation</li>
-                                <li><strong>Financial Objectives:</strong> Life-stage aligned investment strategy mapping</li>
-                                <li><strong>Thematic Preferences:</strong> ESG, sectoral, and market-cap preference integration</li>
+                                <li><strong>Goal-Based Design:</strong> Simple goal selection to improve user confidence in investment decisions</li>
+                                <li><strong>Diversification Made Easy:</strong> Pre-built baskets to allow users to avoid single-fund risk</li>
+                                <li><strong>Admin Flexibility:</strong> Manual basket creation to allow admins to adjust allocations based on market conditions</li>
                             </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'IMPLEMENTATION & BUSINESS OUTCOMES',
+                title: 'IMPLEMENTATION & TEAM COLLABORATION',
                 content: {
-                    header: 'Scalable Admin Operations & User Conversion',
+                    header: 'Building with Limited Resources',
                     sections: [
                         {
-                            title: 'OPERATIONAL EXCELLENCE',
-                            content: `<p>Developed a rule-based allocation engine enabling administrators to generate optimized 1-6 fund portfolios in real-time. The system dynamically adjusts recommendations based on user input parameters, presenting personalized "Action Plans" for immediate investment execution.</p>`
+                            title: 'PRODUCT EXECUTION',
+                            content: `<p>Led end-to-end product development including user research, requirement documentation, wireframing, and stakeholder coordination. Given our small team size, I had to balance feature scope with technical bandwidth.</p>
+                            <ul>
+                                <li><strong>Technical Constraints:</strong> Built simple admin interface to allow manual basket creation due to limited engineering resources</li>
+                                <li><strong>User Experience:</strong> Collaborated with our designer to create intuitive goal selection flow to improve conversion rates</li>
+                                <li><strong>Strategic Planning:</strong> Prioritized core functionality over advanced features to allow faster time-to-market during company pivot</li>
+                            </ul>`
                         },
                         {
-                            title: 'QUANTIFIABLE BUSINESS IMPACT',
-                            content: `<p>Delivered measurable outcomes across key performance indicators:</p>
+                            title: 'TEAMWORK & RESULTS',
+                            content: `<p>Coordinated closely with engineering and design teams to ensure smooth execution despite resource constraints:</p>
                             <ul>
-                                <li><strong>Portfolio Recommendation Accuracy:</strong> Achieved 85% user acceptance rate for generated baskets</li>
-                                <li><strong>Onboarding Efficiency:</strong> Reduced time-to-investment from 15 minutes to 3 minutes</li>
-                                <li><strong>SIP Conversion Optimization:</strong> Increased systematic investment plan adoption by 45%</li>
-                                <li><strong>AUM Acceleration:</strong> Contributed to 2x assets under management growth within 6 months</li>
+                                <li><strong>Engineering Collaboration:</strong> Worked with 2-person dev team to balance feature complexity with delivery timelines</li>
+                                <li><strong>Design Partnership:</strong> Collaborated on user flows and wireframes to improve user experience within design bandwidth</li>
+                                <li><strong>Stakeholder Management:</strong> Regular updates to leadership on progress and pivot strategy alignment</li>
+                                <li><strong>User Impact:</strong> Successfully launched goal-based investment solution that improved user decision-making confidence</li>
                             </ul>`
                         }
                     ]
@@ -2806,50 +2806,49 @@ const workData = {
         ]
     },
     'user-growth': {
-        title: 'MUTUAL FUNDS & DIRECT SEARCH',
-        subtitle: 'Self-Directed Investment Discovery Platform',
+        title: 'MUTUAL FUNDS DIRECT SEARCH',
+        subtitle: 'Fund Discovery Platform for Advanced Investors',
         slides: [
             {
-                title: 'MARKET OPPORTUNITY & USER RESEARCH',
+                title: 'STRATEGIC CONTEXT & USER RESEARCH',
                 content: {
-                    header: 'Data-Driven Fund Discovery for Self-Directed Investors',
-                    metrics: [
-                        { value: '60%', label: 'User Engagement' },
-                        { value: '35%', label: 'SIP Conversion' },
-                        { value: '4.2/5', label: 'User Rating' }
-                    ],
+                    header: 'Building for Advanced Self-Directed Investors',
                     sections: [
                         {
-                            title: 'STRATEGIC RATIONALE',
-                            content: `<p>Identified a critical product-market fit gap through user research: 68% of users preferred self-directed investment decisions but lacked sophisticated comparison tools. Launched comprehensive fund discovery platform to capture this underserved segment.</p>
-                            <p>Solution addressed key user pain points including information asymmetry, decision paralysis, and lack of actionable fund analytics in the direct mutual fund investment journey.</p>`
+                            title: 'PIVOT STRATEGY & USER SEGMENTATION',
+                            content: `<p>As our first major feature during the mutual funds pivot, I identified a segment of advanced users who wanted full control over fund selection rather than pre-built baskets. These users had investment experience but lacked access to comprehensive fund data and comparison tools.</p>
+                            <p>The challenge was building an entire mutual funds platform in just 2 months with our small team, while integrating with BSE StaR MF platform for real-time fund data and transactions.</p>
+                            <ul>
+                                <li><strong>User Segmentation:</strong> Focused on experienced investors to allow them to make informed independent decisions</li>
+                                <li><strong>Data Integration:</strong> BSE StaR MF API integration to allow real-time fund information and transaction processing</li>
+                                <li><strong>Search & Discovery:</strong> Comprehensive filtering system to improve decision-making for fund selection</li>
+                            </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'PRODUCT EXECUTION & BUSINESS IMPACT',
+                title: 'EXECUTION UNDER PRESSURE',
                 content: {
-                    header: 'Advanced Fund Discovery & Comparison Engine',
+                    header: 'Rapid Development with Technical Constraints',
                     sections: [
                         {
-                            title: 'FEATURE ARCHITECTURE',
-                            content: `<p>Architected and launched a comprehensive Mutual Fund Explorer featuring advanced analytics and comparison capabilities:</p>
+                            title: 'TECHNICAL CHALLENGES',
+                            content: `<p>Led product development under intense time pressure, managing data integration complexities while coordinating with our 2-engineer team to build the entire platform from scratch.</p>
                             <ul>
-                                <li><strong>Dynamic Search & Filtering:</strong> 15+ filter criteria including fund size, expense ratio, and Sharpe ratio</li>
-                                <li><strong>Advanced Performance Analytics:</strong> Multi-period returns with benchmark comparison and rolling return analysis</li>
-                                <li><strong>Portfolio Composition Analysis:</strong> Sector allocation visualization and top holdings transparency</li>
-                                <li><strong>Risk Assessment Tools:</strong> Volatility metrics, downside protection analysis, and fund manager track record</li>
+                                <li><strong>Data Integration Challenge:</strong> BSE StaR MF API had complex data structures requiring careful mapping to allow seamless user experience</li>
+                                <li><strong>Performance Optimization:</strong> Search functionality needed to handle large fund databases to improve user search experience</li>
+                                <li><strong>Technical Bandwidth:</strong> Prioritized core search and filter features over advanced analytics due to development timeline constraints</li>
                             </ul>`
                         },
                         {
-                            title: 'MEASURABLE BUSINESS OUTCOMES',
-                            content: `<p>Achieved significant improvements across key user engagement and conversion metrics:</p>
+                            title: 'TEAM COLLABORATION & DELIVERY',
+                            content: `<p>Successfully delivered the platform within the 2-month deadline through effective team coordination and strategic feature prioritization:</p>
                             <ul>
-                                <li><strong>User Engagement:</strong> Increased platform engagement by 60% with 3.5x longer session duration</li>
-                                <li><strong>Conversion Rate Optimization:</strong> Improved SIP conversion rate by 35% through enhanced decision support</li>
-                                <li><strong>User Satisfaction:</strong> Achieved 4.2/5 user rating with 89% feature adoption rate</li>
-                                <li><strong>Revenue Impact:</strong> Generated 22% increase in direct investment transaction volume</li>
+                                <li><strong>Engineering Partnership:</strong> Daily standups with dev team to balance feature complexity with delivery timelines</li>
+                                <li><strong>Strategic Vision:</strong> Focused on essential fund discovery features to allow users to research and invest independently</li>
+                                <li><strong>Design Coordination:</strong> Worked with designer to create intuitive search interface despite complex underlying data structure</li>
+                                <li><strong>Stakeholder Communication:</strong> Regular progress updates to leadership during critical pivot period to improve company strategic alignment</li>
                             </ul>`
                         }
                     ]
@@ -2859,49 +2858,48 @@ const workData = {
     },
     'ux-enhancement': {
         title: 'KYC & INTERNAL AUTH AUTOMATION',
-        subtitle: 'Digital Onboarding & Compliance Platform',
+        subtitle: 'Digital Onboarding for Mutual Funds Compliance',
         slides: [
             {
-                title: 'DIGITAL TRANSFORMATION STRATEGY',
+                title: 'COMPLIANCE & BUSINESS STRATEGY',
                 content: {
-                    header: 'End-to-End KYC Automation & Compliance Framework',
-                    metrics: [
-                        { value: '80%', label: 'Process Automation' },
-                        { value: '65%', label: 'Time Reduction' },
-                        { value: '99.2%', label: 'Compliance Rate' }
-                    ],
+                    header: 'Enabling Mutual Funds Pivot Through Digital KYC',
                     sections: [
                         {
-                            title: 'BUSINESS CASE & TRANSFORMATION',
-                            content: `<p>Identified critical operational bottlenecks in legacy Google Forms-based KYC process causing 40% user drop-off and 3-day processing delays. Architected comprehensive digital transformation solution integrating best-in-class identity verification APIs with automated compliance workflows.</p>
-                            <p>Strategic initiative addressed regulatory requirements, operational efficiency, and user experience optimization through end-to-end process digitization.</p>`
+                            title: 'REGULATORY REQUIREMENT & BUSINESS NEED',
+                            content: `<p>As part of our strategic pivot to mutual funds, KYC compliance became mandatory for user onboarding. The existing manual process was creating significant friction in user acquisition and time-to-value delivery.</p>
+                            <p>I led the design and implementation of a digital KYC system to allow users to complete onboarding in minutes rather than hours, while ensuring full regulatory compliance for mutual fund investments.</p>
+                            <ul>
+                                <li><strong>Compliance Mandate:</strong> KYC required for all mutual fund transactions to meet regulatory standards</li>
+                                <li><strong>User Acquisition:</strong> Streamlined onboarding to improve conversion and reduce drop-off rates</li>
+                                <li><strong>Time to Value:</strong> Fast user verification to allow immediate investment capability</li>
+                            </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'PLATFORM ARCHITECTURE & BUSINESS IMPACT',
+                title: 'TECHNICAL EXECUTION & INTEGRATION',
                 content: {
-                    header: 'Integrated Compliance & Authentication Platform',
+                    header: 'Building Seamless Digital Identity Verification',
                     sections: [
                         {
-                            title: 'TECHNICAL IMPLEMENTATION',
-                            content: `<p>Developed comprehensive KYC automation platform integrating multiple third-party services with custom business logic:</p>
+                            title: 'INTEGRATION CHALLENGES',
+                            content: `<p>Coordinated complex third-party integrations while managing technical constraints and ensuring smooth user experience across the verification flow.</p>
                             <ul>
-                                <li><strong>Identity Verification:</strong> Hyperverge integration for OCR, liveness detection, and Aadhaar validation</li>
-                                <li><strong>Data Processing:</strong> Automated transformation of unstructured inputs into BSE-compliant formats</li>
-                                <li><strong>API Integration:</strong> Real-time BSE UCC submission with automated error handling and retry logic</li>
-                                <li><strong>Authentication Layer:</strong> ELog Auth implementation with FATCA processing and state management</li>
+                                <li><strong>HyperVerge Integration:</strong> OCR and liveness detection to allow instant document verification</li>
+                                <li><strong>CVL KRA Integration:</strong> KYC record access and validation to improve onboarding accuracy</li>
+                                <li><strong>Technical Bandwidth:</strong> Managed integration complexity with limited engineering resources during pivot period</li>
                             </ul>`
                         },
                         {
-                            title: 'OPERATIONAL EXCELLENCE & OUTCOMES',
-                            content: `<p>Delivered scalable compliance infrastructure with measurable business impact:</p>
+                            title: 'PRODUCT DELIVERY & IMPACT',
+                            content: `<p>Successfully launched digital KYC system that transformed user onboarding experience while maintaining regulatory compliance:</p>
                             <ul>
-                                <li><strong>Process Efficiency:</strong> Achieved 80% automation of manual KYC operations with 12-step workflow engine</li>
-                                <li><strong>User Experience:</strong> Reduced onboarding time from 3 days to 4 hours, improving conversion by 65%</li>
-                                <li><strong>Compliance & Audit:</strong> Implemented comprehensive audit trail with 99.2% regulatory compliance rate</li>
-                                <li><strong>Infrastructure Security:</strong> AWS S3-based secure document storage with encryption and access controls</li>
+                                <li><strong>Engineering Collaboration:</strong> Worked closely with dev team to manage multiple API integrations and error handling</li>
+                                <li><strong>User Experience Design:</strong> Simplified multi-step verification process to improve completion rates</li>
+                                <li><strong>Strategic Planning:</strong> Prioritized core verification features to allow faster go-to-market during company pivot</li>
+                                <li><strong>Business Impact:</strong> Reduced onboarding time from hours to minutes, significantly improving user acquisition metrics</li>
                             </ul>`
                         }
                     ]
@@ -2911,49 +2909,49 @@ const workData = {
     },
     'upi-autopay': {
         title: 'EVENTS & NOTIFICATIONS',
-        subtitle: 'Intelligent User Engagement & Retention Platform',
+        subtitle: 'Core Infrastructure for Product Analytics & User Communication',
         slides: [
             {
-                title: 'USER ENGAGEMENT STRATEGY',
+                title: 'PRODUCT ANALYTICS & COMMUNICATION STRATEGY',
                 content: {
-                    header: 'Data-Driven Engagement & Retention Architecture',
-                    metrics: [
-                        { value: '2x', label: 'Operational Efficiency' },
-                        { value: '45%', label: 'User Retention' },
-                        { value: '3.2x', label: 'Engagement Rate' }
-                    ],
+                    header: 'Building Data-Driven Product Development Infrastructure',
                     sections: [
                         {
-                            title: 'BEHAVIORAL ANALYTICS FRAMEWORK',
-                            content: `<p>Architected comprehensive user engagement ecosystem leveraging behavioral analytics to optimize conversion funnels and drive sustainable user retention. Implemented predictive modeling to identify user intent and deliver personalized intervention strategies.</p>
-                            <p>Strategic initiative addressed declining user engagement post-onboarding and created systematic approach to nurture user relationships throughout the investment lifecycle.</p>`
+                            title: 'CORE INFRASTRUCTURE DEVELOPMENT',
+                            content: `<p>Built comprehensive events and notifications system as core product infrastructure to enable data-driven product development through the build-measure-learn cycle. This system became essential for product discovery, user behavior analysis, and automated user communication.</p>
+                            <p>Designed system to handle three critical areas: user engagement tracking, system monitoring for bug detection, and transaction notifications to improve user trust and transparency.</p>
+                            <ul>
+                                <li><strong>Product Analytics:</strong> Event tracking system to allow data-driven feature decisions and user behavior insights</li>
+                                <li><strong>User Communication:</strong> Multi-channel notification system to improve user engagement and transaction transparency</li>
+                                <li><strong>System Monitoring:</strong> Custom event API to allow proactive bug detection and system health monitoring</li>
+                            </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'PLATFORM IMPLEMENTATION & OUTCOMES',
+                title: 'TECHNICAL IMPLEMENTATION & INTEGRATION',
                 content: {
-                    header: 'Omnichannel Engagement Platform',
+                    header: 'Multi-Service Integration for Comprehensive Coverage',
                     sections: [
                         {
-                            title: 'TECHNICAL ARCHITECTURE',
-                            content: `<p>Integrated best-in-class analytics and engagement platforms to create unified user experience optimization system:</p>
+                            title: 'INTEGRATION CHALLENGES & SOLUTIONS',
+                            content: `<p>Coordinated multiple third-party integrations and custom development to create comprehensive events and notifications infrastructure that supported all product and business needs.</p>
                             <ul>
-                                <li><strong>Behavioral Analytics:</strong> Mixpanel integration for comprehensive user journey mapping and cohort analysis</li>
-                                <li><strong>Engagement Automation:</strong> CleverTap implementation for real-time personalized messaging and campaign optimization</li>
-                                <li><strong>Content Strategy:</strong> Newsletter and blog communication pipeline with A/B testing capabilities</li>
-                                <li><strong>Predictive Triggers:</strong> Event-based automation for proactive user intervention and support</li>
+                                <li><strong>User Engagement:</strong> CleverTap integration to allow personalized user communication and behavior-based messaging</li>
+                                <li><strong>Transaction Notifications:</strong> Multi-channel approach using 2Factor for SMS, CleverTap for push notifications, and Amazon SES for email to improve transaction transparency</li>
+                                <li><strong>System Monitoring:</strong> Custom event API development to allow real-time bug detection and system health tracking</li>
+                                <li><strong>Analytics Integration:</strong> Event tracking system to enable build-measure-learn cycles and data-driven product decisions</li>
                             </ul>`
                         },
                         {
-                            title: 'BUSINESS IMPACT & PERFORMANCE',
-                            content: `<p>Delivered significant improvements in user engagement and operational efficiency metrics:</p>
+                            title: 'PRODUCT DEVELOPMENT & TEAM IMPACT',
+                            content: `<p>Successfully implemented core infrastructure that became essential for product development, user communication, and operational efficiency across the organization.</p>
                             <ul>
-                                <li><strong>Operational Efficiency:</strong> Achieved 2x improvement in KYC and investment funnel completion rates</li>
-                                <li><strong>User Retention:</strong> Increased 30-day retention by 45% through targeted re-engagement campaigns</li>
-                                <li><strong>Engagement Optimization:</strong> Delivered 3.2x increase in user engagement through personalized notifications</li>
-                                <li><strong>Conversion Rate:</strong> Improved investment completion rate by 28% via strategic nudging and follow-ups</li>
+                                <li><strong>Product Discovery:</strong> Event tracking enabled data-driven feature prioritization and user behavior insights for better product decisions</li>
+                                <li><strong>Engineering Collaboration:</strong> Worked with dev team to balance custom development with third-party integrations given technical bandwidth constraints</li>
+                                <li><strong>User Experience:</strong> Multi-channel communication system improved user trust through timely transaction updates and engagement</li>
+                                <li><strong>Strategic Planning:</strong> Built scalable foundation that supported future product expansion and user growth initiatives</li>
                             </ul>`
                         }
                     ]
@@ -2963,49 +2961,49 @@ const workData = {
     },
     'analytics': {
         title: 'IPO & SGB FLOWS',
-        subtitle: 'Multi-Asset Investment Platform Expansion',
+        subtitle: 'Primary Market Investment Platform for Stocks & ETFs Users',
         slides: [
             {
-                title: 'PRODUCT STRATEGY & MARKET EXPANSION',
+                title: 'PRODUCT STRATEGY & MARKET OPPORTUNITY',
                 content: {
-                    header: 'Strategic Investment Portfolio Diversification',
-                    metrics: [
-                        { value: '150%', label: 'Platform Adoption' },
-                        { value: '92%', label: 'Application Success' },
-                        { value: '2.8x', label: 'Revenue Growth' }
-                    ],
+                    header: 'Expanding Beyond Secondary Market Trading',
                     sections: [
                         {
-                            title: 'STRATEGIC MARKET OPPORTUNITY',
-                            content: `<p>Identified significant market opportunity in primary market investments through user research indicating 78% demand for IPO and SGB access. Architected comprehensive multi-asset investment platform to capture underserved market segments and increase platform stickiness.</p>
-                            <p>Strategic expansion addressed portfolio diversification needs while leveraging existing user base and infrastructure for accelerated market penetration.</p>`
+                            title: 'EXPANDING INVESTMENT OPTIONS',
+                            content: `<p>During our stocks and ETFs phase, I identified an opportunity to expand into primary market investments by offering IPO and Sovereign Gold Bond (SGB) access to our existing user base who were already trading in secondary markets.</p>
+                            <p>The challenge was implementing IPO ASBA (Applications Supported by Blocked Amount), which required a completely different transaction flow compared to regular stock trading, along with NSE API integration for DEMAT form investments.</p>
+                            <ul>
+                                <li><strong>User Research:</strong> Existing users wanted access to IPOs and SGB investments to allow portfolio diversification beyond stocks and ETFs</li>
+                                <li><strong>Technical Challenge:</strong> ASBA implementation required unique transaction handling to allow fund blocking instead of immediate debit</li>
+                                <li><strong>Integration Complexity:</strong> NSE API integration for DEMAT form processing to improve investment accessibility</li>
+                            </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'PLATFORM DEVELOPMENT & BUSINESS OUTCOMES',
+                title: 'TECHNICAL IMPLEMENTATION & CHALLENGES',
                 content: {
-                    header: 'Integrated Primary Market Investment Platform',
+                    header: 'Building ASBA and NSE Integration Infrastructure',
                     sections: [
                         {
-                            title: 'TECHNICAL IMPLEMENTATION',
-                            content: `<p>Developed comprehensive primary market investment platform with unified user experience and backend architecture:</p>
+                            title: 'ASBA & API INTEGRATION CHALLENGES',
+                            content: `<p>Led the technical implementation of IPO ASBA and SGB investment flows, coordinating with engineering team to handle the unique transaction requirements and NSE API integration complexities.</p>
                             <ul>
-                                <li><strong>IPO Application Engine:</strong> End-to-end IPO investment flows with UPI mandate integration and automated allocation processing</li>
-                                <li><strong>SGB Investment Platform:</strong> Sovereign Gold Bond purchase system with lock-in period tracking and maturity optimization</li>
-                                <li><strong>Compliance Integration:</strong> Seamless KYC validation and bank verification layer integration</li>
-                                <li><strong>Portfolio Management:</strong> Unified holdings view with real-time status updates and performance tracking</li>
+                                <li><strong>ASBA Implementation:</strong> Built fund blocking mechanism for IPO applications to allow users to participate without immediate fund debit</li>
+                                <li><strong>NSE API Integration:</strong> Coordinated integration with NSE systems for DEMAT form processing to improve investment execution</li>
+                                <li><strong>User Experience Design:</strong> Simplified complex IPO application process to allow users to understand and complete applications easily</li>
+                                <li><strong>Technical Constraints:</strong> Managed API limitations and processing delays while maintaining smooth user experience</li>
                             </ul>`
                         },
                         {
-                            title: 'QUANTIFIABLE BUSINESS IMPACT',
-                            content: `<p>Achieved substantial growth in user engagement and revenue metrics:</p>
+                            title: 'PRODUCT EXECUTION & TEAM COLLABORATION',
+                            content: `<p>Successfully launched primary market investment capabilities despite complex technical requirements and integration challenges, working closely with development and design teams.</p>
                             <ul>
-                                <li><strong>Platform Adoption:</strong> Increased user engagement by 150% with 65% of users utilizing new investment options</li>
-                                <li><strong>Application Success Rate:</strong> Achieved 92% successful application completion rate through optimized UX flows</li>
-                                <li><strong>Revenue Diversification:</strong> Generated 2.8x revenue growth through expanded product portfolio</li>
-                                <li><strong>User Retention:</strong> Improved 90-day retention by 38% through enhanced investment portfolio options</li>
+                                <li><strong>Engineering Partnership:</strong> Collaborated with dev team to handle ASBA transaction complexities and NSE API integration challenges</li>
+                                <li><strong>User Education:</strong> Created intuitive flows to allow users to understand IPO application process and SGB investment benefits</li>
+                                <li><strong>Strategic Planning:</strong> Prioritized core IPO and SGB functionality to allow faster market entry for primary investments</li>
+                                <li><strong>Business Impact:</strong> Expanded investment options for existing stocks and ETFs users, improving platform value proposition</li>
                             </ul>`
                         }
                     ]
@@ -3015,82 +3013,68 @@ const workData = {
     },
     'compliance': {
         title: 'BRAND REVAMP',
-        subtitle: 'Complete UI/UX Transformation & Brand Refresh',
+        subtitle: 'Complete App Redesign from Inherited MVP',
         slides: [
             {
-                title: 'DESIGN RESEARCH & STRATEGY',
+                title: 'INHERITED MVP & STRATEGIC REDESIGN',
                 content: {
-                    header: 'User-Centered Brand Evolution',
-                    metrics: [
-                        { value: '4→7', label: 'NPS Score' },
-                        { value: '85%', label: 'User Satisfaction' },
-                        { value: '40%', label: 'Task Completion' }
-                    ],
+                    header: 'Transforming Non-User-Friendly MVP into Polished Product',
                     sections: [
                         {
-                            title: 'RESEARCH FOUNDATION',
-                            content: `<p>Comprehensive analysis driving brand transformation:</p>
+                            title: 'MVP ASSESSMENT & REDESIGN STRATEGY',
+                            content: `<p>When I joined, I inherited an MVP that was functional but not user-friendly. The app needed a complete redesign to meet modern UX standards and user expectations before we could focus on feature development.</p>
+                            <p>The challenge was massive - redesigning the entire app experience with limited design and development resources while maintaining existing functionality during the transition.</p>
                             <ul>
-                                <li><strong>User Interviews:</strong> 50+ interviews revealing pain points in current design</li>
-                                <li><strong>Competitive Analysis:</strong> Analyzed 15 fintech platforms for best practices</li>
-                                <li><strong>Usability Testing:</strong> Identified 23 critical UX issues affecting conversion</li>
-                                <li><strong>Brand Perception Study:</strong> Assessed market positioning and brand equity</li>
+                                <li><strong>MVP Analysis:</strong> Identified core usability issues preventing user adoption and engagement</li>
+                                <li><strong>User Research:</strong> Conducted interviews to understand pain points with existing interface</li>
+                                <li><strong>Resource Planning:</strong> Coordinated redesign timeline with limited team capacity to allow systematic transformation</li>
+                                <li><strong>Strategic Priority:</strong> Complete UI/UX overhaul required before pursuing growth initiatives</li>
                             </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'DESIGN SYSTEM & IMPLEMENTATION',
+                title: 'MASSIVE REDESIGN WITH LIMITED RESOURCES',
                 content: {
-                    header: 'Cohesive Visual Language',
+                    header: 'Coordinating Complete App Transformation',
                     sections: [
                         {
-                            title: 'VISUAL IDENTITY REFRESH',
-                            content: `<p>Modern, trustworthy design language for fintech:</p>
+                            title: 'DESIGN SYSTEM DEVELOPMENT',
+                            content: `<p>Led the creation of a complete design system from scratch to transform the inherited MVP into a professional, user-friendly application that could compete in the fintech market.</p>
                             <ul>
-                                <li><strong>Typography:</strong> Implemented clean, readable font hierarchy for financial data</li>
-                                <li><strong>Color Palette:</strong> Introduced trust-building blues with accessible contrast ratios</li>
-                                <li><strong>Iconography:</strong> Custom icon set reflecting financial concepts and actions</li>
-                                <li><strong>Spacing System:</strong> Consistent 8px grid system for visual harmony</li>
+                                <li><strong>Design System Creation:</strong> Built comprehensive UI components and patterns to allow consistent redesign across the entire app</li>
+                                <li><strong>Visual Identity:</strong> Developed modern, trustworthy design language to improve user confidence and engagement</li>
+                                <li><strong>Team Coordination:</strong> Worked closely with our single designer to prioritize screen redesigns and component development</li>
+                                <li><strong>Technical Constraints:</strong> Managed design implementation with limited engineering bandwidth during the transformation</li>
                             </ul>`
                         },
                         {
-                            title: 'COMPONENT LIBRARY',
-                            content: `<p>Scalable design system implementation:</p>
+                            title: 'IMPLEMENTATION & TEAM MANAGEMENT',
+                            content: `<p>Successfully executed the complete app transformation through strategic planning, team coordination, and careful resource management despite significant scope and resource constraints.</p>
                             <ul>
-                                <li><strong>UI Components:</strong> 45+ reusable components in Figma and code</li>
-                                <li><strong>Investment Cards:</strong> Redesigned fund display with clear hierarchy</li>
-                                <li><strong>Dashboard Widgets:</strong> Intuitive portfolio overview components</li>
-                                <li><strong>Form Patterns:</strong> Simplified onboarding and transaction flows</li>
+                                <li><strong>Engineering Partnership:</strong> Coordinated with dev team to implement new designs without breaking existing functionality</li>
+                                <li><strong>Design Collaboration:</strong> Worked with designer to create scalable component library for consistent user experience</li>
+                                <li><strong>Strategic Phasing:</strong> Prioritized critical user flows to allow immediate UX improvements while continuing broader redesign</li>
+                                <li><strong>Quality Management:</strong> Ensured design consistency and usability standards throughout the massive transformation</li>
                             </ul>`
                         }
                     ]
                 }
             },
             {
-                title: 'IMPACT & RESULTS',
+                title: 'TRANSFORMATION RESULTS & FOUNDATION',
                 content: {
-                    header: 'Measurable Brand Success',
+                    header: 'Building Foundation for Product Growth',
                     sections: [
                         {
-                            title: 'USER EXPERIENCE METRICS',
-                            content: `<p>Significant improvements across all user satisfaction metrics:</p>
+                            title: 'SUCCESSFUL TRANSFORMATION & TEAM IMPACT',
+                            content: `<p>Successfully transformed the inherited MVP into a professional, user-friendly application that became the foundation for all future product development and growth initiatives.</p>
                             <ul>
-                                <li><strong>NPS Improvement:</strong> Increased from 4 to 7, representing 75% growth</li>
-                                <li><strong>User Satisfaction:</strong> 85% positive feedback on new design</li>
-                                <li><strong>Task Completion:</strong> 40% increase in successful investment flows</li>
-                                <li><strong>Support Tickets:</strong> 30% reduction in UI-related queries</li>
-                            </ul>`
-                        },
-                        {
-                            title: 'BUSINESS IMPACT',
-                            content: `<p>Brand revamp driving measurable business outcomes:</p>
-                            <ul>
-                                <li><strong>User Retention:</strong> 25% improvement in 30-day retention rates</li>
-                                <li><strong>Conversion Rate:</strong> 18% increase in onboarding completion</li>
-                                <li><strong>Brand Recognition:</strong> 60% improvement in brand recall studies</li>
-                                <li><strong>Market Position:</strong> Elevated perception as modern, trustworthy platform</li>
+                                <li><strong>Foundation Building:</strong> Created design system and UI standards that enabled faster feature development and consistent user experience</li>
+                                <li><strong>Team Empowerment:</strong> Established design processes and component library to allow more efficient product development cycles</li>
+                                <li><strong>User Experience:</strong> Transformed app from basic MVP to professional fintech application to improve user trust and engagement</li>
+                                <li><strong>Strategic Vision:</strong> Redesign became the foundation that enabled all subsequent product features and business growth initiatives</li>
                             </ul>`
                         }
                     ]
