@@ -1747,19 +1747,32 @@ function showSuccessFeedback() {
 // Resume Download Functions
 function initializeResumeDownload() {
     const resumeBtn = document.getElementById('resume-download-btn');
-    if (!resumeBtn) return;
+    const heroResumeBtn = document.getElementById('resume-download-btn-hero');
     
-    // Set initial button text based on download state
-    updateResumeButtonText();
+    // Initialize main resume button
+    if (resumeBtn) {
+        updateResumeButtonText();
+        resumeBtn.addEventListener('click', handleResumeDownload);
+    }
     
-    // Add click event listener
-    resumeBtn.addEventListener('click', handleResumeDownload);
+    // Initialize hero resume button
+    if (heroResumeBtn) {
+        updateHeroResumeButtonText();
+        heroResumeBtn.addEventListener('click', handleResumeDownload);
+    }
 }
 
 function updateResumeButtonText() {
     const resumeBtn = document.getElementById('resume-download-btn');
     if (resumeBtn) {
-        resumeBtn.textContent = hasViewedResume ? 'DOWNLOAD' : 'VIEW RESUME';
+        resumeBtn.textContent = hasViewedResume ? 'DOWNLOAD CV' : 'VIEW RESUME';
+    }
+}
+
+function updateHeroResumeButtonText() {
+    const heroResumeBtn = document.getElementById('resume-download-btn-hero');
+    if (heroResumeBtn) {
+        heroResumeBtn.textContent = hasViewedResume ? 'DOWNLOAD CV' : 'VIEW RESUME';
     }
 }
 
@@ -1786,6 +1799,7 @@ function handleResumeDownload(e) {
         // Show thumbs up and update text
         createThumbsUpEffect(resumeBtn, () => {
             updateResumeButtonText();
+            updateHeroResumeButtonText();
         });
     } else {
         // Second time - force download

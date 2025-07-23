@@ -464,9 +464,14 @@ class CVGenerator {
         this.usedBufferIds = new Set(); // Track used buffer bullet IDs to prevent immediate repetition
         this.bufferRotationCount = 0; // Track buffer rotations for variety
         this.questionsAnswered = 0; // Track session progress for adaptive prefetching
+        
+        // Enhanced session-level tracking for new backend format
+        this.sessionBulletIds = new Set(); // Track all unique_ids used in this game session
+        this.sessionRequestIds = new Set(); // Track all request_ids to detect backend repetition
+        this.lastApiResponseTime = 0; // Track response times for debugging
     }
     
-    // Reset used bullets for new game
+    // Reset used bullets for new game (enhanced for unique_id tracking)
     resetUsedBullets() {
         this.usedBullets.clear();
         this.sessionId = `game_${Date.now()}`;
@@ -474,6 +479,13 @@ class CVGenerator {
         this.usedBufferIds.clear();
         this.bufferRotationCount = 0;
         this.questionsAnswered = 0;
+        
+        // Clear enhanced session tracking
+        this.sessionBulletIds.clear();
+        this.sessionRequestIds.clear();
+        this.lastApiResponseTime = 0;
+        
+        console.log('🎮 Game session reset with enhanced tracking cleared');
     }
     
     // Initialize prefetch buffer with randomization
@@ -682,28 +694,76 @@ class CVGenerator {
             throw new Error('Invalid API response format');
         }
         
+        // Check for duplicate bullets before processing (enhanced validation)
+        const allReceivedBullets = [...apiResponse.real_bullets, ...apiResponse.fake_bullets];
+        const duplicatesFound = [];
+        
+        allReceivedBullets.forEach(bullet => {
+            const uniqueId = bullet.unique_id;
+            const requestId = apiResponse.metadata?.request_id;
+            
+            if (uniqueId && this.sessionBulletIds.has(uniqueId)) {
+                duplicatesFound.push(`unique_id: ${uniqueId}`);
+            }
+            if (requestId && this.sessionRequestIds.has(requestId)) {
+                duplicatesFound.push(`request_id: ${requestId}`);
+            }
+        });
+        
+        if (duplicatesFound.length > 0) {
+            console.warn('🚨 DUPLICATE BULLETS DETECTED:', duplicatesFound);
+            console.warn('Backend may still be sending repeated content despite fixes');
+            // Continue processing but log for debugging
+        }
+        
+        // Track this response's metadata
+        if (apiResponse.metadata?.request_id) {
+            this.sessionRequestIds.add(apiResponse.metadata.request_id);
+        }
+        if (apiResponse.metadata?.timestamp) {
+            this.lastApiResponseTime = apiResponse.metadata.timestamp;
+        }
+        
         const options = [];
         
-        // Add 3 real bullets
+        // Add 3 real bullets with enhanced tracking and session deduplication
         for (let i = 0; i < 3; i++) {
             const bullet = apiResponse.real_bullets[i];
+            
+            // Track unique_id in session to prevent future duplicates
+            if (bullet.unique_id) {
+                this.sessionBulletIds.add(bullet.unique_id);
+            }
+            
             options.push({
                 text: bullet.text || bullet,
                 isFake: false,
                 temperature: 0.0,
                 source: 'api',
-                bulletId: bullet.id
+                bulletId: bullet.id,
+                uniqueId: bullet.unique_id, // New unique identifier
+                requestTimestamp: bullet.request_timestamp, // New timestamp tracking
+                generatedAt: bullet.generated_at
             });
         }
         
-        // Add 1 fake bullet
+        // Add 1 fake bullet with enhanced tracking and session deduplication
         const fakeBullet = apiResponse.fake_bullets[0];
+        
+        // Track unique_id in session to prevent future duplicates
+        if (fakeBullet.unique_id) {
+            this.sessionBulletIds.add(fakeBullet.unique_id);
+        }
+        
         options.push({
             text: fakeBullet.text || fakeBullet,
             isFake: true,
             temperature: temperature,
             source: 'api',
-            bulletId: fakeBullet.id
+            bulletId: fakeBullet.id,
+            uniqueId: fakeBullet.unique_id, // New unique identifier
+            requestTimestamp: fakeBullet.request_timestamp, // New timestamp tracking
+            generatedAt: fakeBullet.generated_at
         });
         
         // Shuffle the options so fake isn't always in same position
@@ -714,7 +774,7 @@ class CVGenerator {
     formatBulletSet(bullets, temperature) {
         const options = [];
         
-        // Add real bullets
+        // Add real bullets with enhanced tracking
         if (bullets.real_bullets) {
             bullets.real_bullets.forEach(bullet => {
                 options.push({
@@ -722,12 +782,15 @@ class CVGenerator {
                     isFake: false,
                     temperature: 0.0,
                     source: 'api',
-                    bulletId: bullet.id
+                    bulletId: bullet.id,
+                    uniqueId: bullet.unique_id, // New unique identifier
+                    requestTimestamp: bullet.request_timestamp, // New timestamp tracking
+                    generatedAt: bullet.generated_at
                 });
             });
         }
         
-        // Add fake bullets
+        // Add fake bullets with enhanced tracking
         if (bullets.fake_bullets) {
             bullets.fake_bullets.forEach(bullet => {
                 options.push({
@@ -735,7 +798,10 @@ class CVGenerator {
                     isFake: true,
                     temperature: temperature,
                     source: 'api',
-                    bulletId: bullet.id
+                    bulletId: bullet.id,
+                    uniqueId: bullet.unique_id, // New unique identifier
+                    requestTimestamp: bullet.request_timestamp, // New timestamp tracking
+                    generatedAt: bullet.generated_at
                 });
             });
         }
@@ -743,7 +809,7 @@ class CVGenerator {
         return this.shuffleArray(options);
     }
     
-    // Check if a bullet set was recently used
+    // Check if a bullet set was recently used (updated for unique_id)
     isRecentlyUsed(bulletSet) {
         if (!bulletSet.bullets || (!bulletSet.bullets.real_bullets && !bulletSet.bullets.fake_bullets)) {
             return false;
@@ -756,12 +822,18 @@ class CVGenerator {
         ];
         
         return allBullets.some(bullet => {
+            // Check unique_id first (most reliable), then fallback to other IDs
+            const uniqueId = bullet.unique_id;
             const bulletId = bullet.id || bullet.bulletId || bullet.text;
-            return this.usedBufferIds.has(bulletId);
+            const timestampId = bullet.request_timestamp ? `timestamp_${bullet.request_timestamp}` : null;
+            
+            return this.usedBufferIds.has(uniqueId) || 
+                   this.usedBufferIds.has(bulletId) ||
+                   (timestampId && this.usedBufferIds.has(timestampId));
         });
     }
     
-    // Track bullet usage to prevent immediate repetition
+    // Track bullet usage to prevent immediate repetition (updated for unique_id)
     trackBulletUsage(bulletSet) {
         if (!bulletSet.bullets) return;
         
@@ -771,18 +843,23 @@ class CVGenerator {
         ];
         
         allBullets.forEach(bullet => {
-            const bulletId = bullet.id || bullet.bulletId || bullet.text;
+            // Prioritize unique_id from new backend format
+            const bulletId = bullet.unique_id || bullet.id || bullet.bulletId || bullet.text;
             if (bulletId) {
                 this.usedBufferIds.add(bulletId);
+                // Also track request timestamps for additional deduplication
+                if (bullet.request_timestamp) {
+                    this.usedBufferIds.add(`timestamp_${bullet.request_timestamp}`);
+                }
             }
         });
         
         // Limit the size of used IDs to prevent memory bloat
-        if (this.usedBufferIds.size > 100) {
+        if (this.usedBufferIds.size > 150) {
             const idsArray = Array.from(this.usedBufferIds);
             this.usedBufferIds.clear();
-            // Keep only the most recent 50 IDs
-            idsArray.slice(-50).forEach(id => this.usedBufferIds.add(id));
+            // Keep only the most recent 75 IDs (increased for unique_id tracking)
+            idsArray.slice(-75).forEach(id => this.usedBufferIds.add(id));
         }
     }
     
@@ -860,7 +937,7 @@ class CVGenerator {
         return shuffled;
     }
     
-    // Get statistics about bullet usage
+    // Get statistics about bullet usage (enhanced with session tracking)
     getUsageStats() {
         const totalUsed = this.usedBullets.size;
         const professionalUsed = cvBullets.professional.filter(bullet => this.usedBullets.has(bullet)).length;
@@ -874,7 +951,27 @@ class CVGenerator {
             absurdUsed,
             professionalRemaining: cvBullets.professional.length - professionalUsed,
             inflatedRemaining: cvBullets.inflated.length - inflatedUsed,
-            absurdRemaining: cvBullets.absurd.length - absurdUsed
+            absurdRemaining: cvBullets.absurd.length - absurdUsed,
+            // Enhanced session statistics
+            sessionUniqueIds: this.sessionBulletIds.size,
+            sessionRequestIds: this.sessionRequestIds.size,
+            bufferSize: this.prefetchBuffer.length,
+            questionsAnswered: this.questionsAnswered
+        };
+    }
+    
+    // Get detailed session information for debugging
+    getSessionDebugInfo() {
+        return {
+            sessionId: this.sessionId,
+            totalQuestionsAnswered: this.questionsAnswered,
+            uniqueBulletsUsed: this.sessionBulletIds.size,
+            requestIdsTracked: this.sessionRequestIds.size,
+            bufferRotations: this.bufferRotationCount,
+            currentBufferSize: this.prefetchBuffer.length,
+            lastApiResponseTime: this.lastApiResponseTime,
+            recentUniqueIds: Array.from(this.sessionBulletIds).slice(-10), // Last 10 for debugging
+            recentRequestIds: Array.from(this.sessionRequestIds).slice(-5) // Last 5 for debugging
         };
     }
     
@@ -1145,11 +1242,16 @@ async function nextQuestion() {
         // Enable options
         enableCVOptions();
         
-        // Log usage stats for debugging (reduced frequency)
+        // Enhanced logging for debugging repetition issues (reduced frequency)
         if (gameState.currentQuestion <= 3 || gameState.currentQuestion % 5 === 0) {
             const stats = cvGenerator.getUsageStats();
-            console.log(`Question ${gameState.currentQuestion}: Temperature ${gameState.temperature.toFixed(2)}, Fake option: ${gameState.correctOption}`);
-            console.log(`Bullets used: ${stats.totalUsed} total (${stats.professionalUsed} professional, ${stats.inflatedUsed} inflated, ${stats.absurdUsed} absurd)`);
+            console.log(`🎮 Question ${gameState.currentQuestion}: Temperature ${gameState.temperature.toFixed(2)}, Fake option: ${gameState.correctOption}`);
+            console.log(`🎮 Bullets used: ${stats.totalUsed} total (${stats.professionalUsed} professional, ${stats.inflatedUsed} inflated, ${stats.absurdUsed} absurd)`);
+            
+            // Log unique IDs for repetition tracking
+            const currentBulletIds = options.map(opt => opt.uniqueId || opt.bulletId || 'no-id').join(', ');
+            console.log(`🎮 Current bullet IDs: [${currentBulletIds}]`);
+            console.log(`🎮 Session has used ${cvGenerator.sessionBulletIds.size} unique bullets so far`);
         }
         
     } catch (error) {
@@ -1191,7 +1293,8 @@ function handleCVSelection(selectedOption) {
     // Disable options during feedback
     disableCVOptions();
     
-    // Track answer
+    // Track answer with enhanced bullet tracking
+    const selectedBullet = gameState.currentOptions[selectedOption - 1];
     trackEvent('cv_selection_made', {
         question_number: gameState.currentQuestion,
         selected_option: selectedOption,
@@ -1201,7 +1304,11 @@ function handleCVSelection(selectedOption) {
         points_earned: points,
         current_score: gameState.score,
         current_streak: gameState.streak,
-        temperature: gameState.temperature
+        temperature: gameState.temperature,
+        // Enhanced tracking for repetition debugging
+        selected_bullet_unique_id: selectedBullet?.uniqueId,
+        selected_bullet_source: selectedBullet?.source,
+        all_bullet_unique_ids: gameState.currentOptions.map(opt => opt.uniqueId || opt.bulletId)
     });
     
     // Auto-advance with different timing based on correctness
@@ -2050,13 +2157,19 @@ function initializeHealthStatusForGame() {
     console.log('❤️ Game health status monitor initialized - checking every 30 seconds');
 }
 
-// Export for debugging
+// Export for debugging (enhanced with session tracking)
 window.gameState = gameState;
 window.gameUtils = {
     trackEvent,
     showNotification,
     restartGame,
-    nextQuestion
+    nextQuestion,
+    // Enhanced debugging methods
+    getSessionDebugInfo: () => cvGenerator.getSessionDebugInfo(),
+    checkForDuplicates: () => {
+        console.log('🔍 Session Debug Info:', cvGenerator.getSessionDebugInfo());
+        console.log('📊 Usage Stats:', cvGenerator.getUsageStats());
+    }
 };
 
 console.log('✅ Spot the Fake CV game script loaded successfully');
