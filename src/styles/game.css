@@ -181,10 +181,10 @@
     font-size: 16px;
 }
 
-/* SVG icon styling for buttons */
-.return-btn svg.btn-icon, .cv-btn svg.btn-icon {
-    width: 16px;
-    height: 16px;
+/* SVG icon styling for buttons - uniform 20px size */
+.return-btn svg.btn-icon, .cv-btn svg.btn-icon, .game-actions .settings-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 .return-btn .btn-text, .cv-btn .btn-text {
@@ -861,10 +861,10 @@
         font-size: 18px;
     }
     
-    /* Mobile SVG icon sizing */
-    .return-btn svg.btn-icon, .cv-btn svg.btn-icon {
-        width: 18px;
-        height: 18px;
+    /* Mobile SVG icon sizing - uniform 20px */
+    .return-btn svg.btn-icon, .cv-btn svg.btn-icon, .game-actions .settings-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
     .return-btn:hover, .cv-btn:hover, .game-actions .settings-btn:hover {
