@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emoji Favicon Generator</title>
+    <style>
+        canvas { border: 1px solid #ccc; margin: 10px; }
+        .container { text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💪 Emoji Favicon Generator</h1>
+        <p>Right-click on each canvas and "Save image as..." to download the favicon files:</p>
+        
+        <div>
+            <h3>favicon.ico (32x32)</h3>
+            <canvas id="favicon32" width="32" height="32"></canvas>
+        </div>
+        
+        <div>
+            <h3>Apple Touch Icon (180x180)</h3>
+            <canvas id="apple180" width="180" height="180"></canvas>
+        </div>
+        
+        <div>
+            <h3>Android Chrome 192x192</h3>
+            <canvas id="android192" width="192" height="192"></canvas>
+        </div>
+        
+        <div>
+            <h3>Android Chrome 512x512</h3>
+            <canvas id="android512" width="512" height="512"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function drawEmojiOnCanvas(canvasId, size, backgroundColor = '#0a0a0a') {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Set background
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw emoji
+            ctx.font = `${size * 0.6}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('💪', size / 2, size / 2);
+        }
+        
+        // Generate all favicon sizes
+        drawEmojiOnCanvas('favicon32', 32);
+        drawEmojiOnCanvas('apple180', 180);
+        drawEmojiOnCanvas('android192', 192);
+        drawEmojiOnCanvas('android512', 512);
+    </script>
+</body>
+</html>
