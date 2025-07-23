@@ -32,7 +32,8 @@ const gameState = {
     wrongAnswers: 0,
     currentOptions: [],
     correctOption: null,
-    timeElapsed: 0
+    timeElapsed: 0,
+    hasSeenTutorial: false // Track if user has seen the how-to-play modal
 };
 
 // Work-related loading verbs for dynamic loading messages
@@ -60,6 +61,12 @@ const elements = {
     // Instructions
     gameInstructions: document.getElementById('game-instructions'),
     startGameBtn: document.getElementById('start-game-btn'),
+    
+    // How to Play Modal
+    howToPlayModal: document.getElementById('how-to-play-modal'),
+    howToPlayOverlay: document.getElementById('how-to-play-overlay'),
+    howToPlayClose: document.getElementById('how-to-play-close'),
+    startPlayingBtn: document.getElementById('start-playing-btn'),
     
     // Game Interface
     gameInterface: document.getElementById('game-interface'),
@@ -105,7 +112,13 @@ const elements = {
     keyboardShortcuts: document.getElementById('keyboard-shortcuts'),
     shortcutsTrigger: document.getElementById('shortcuts-trigger'),
     shortcutsClose: document.getElementById('shortcuts-close'),
-    shortcutNotification: document.getElementById('shortcut-notification')
+    shortcutNotification: document.getElementById('shortcut-notification'),
+    
+    // Floating Navbar
+    navbarHome: document.getElementById('navbar-home'),
+    navbarRestart: document.getElementById('navbar-restart'),
+    navbarShare: document.getElementById('navbar-share'),
+    navbarDownload: document.getElementById('navbar-download')
 };
 
 // CV Bullets Database - Expanded to 100+ bullets per category
@@ -232,221 +245,221 @@ const cvBullets = {
     
     // Slightly inflated but plausible (medium temperature - 0.4-0.7) - 100 bullets
     inflated: [
-        "Revolutionized the entire sales process leading to unprecedented growth in company history",
-        "Single-handedly transformed team productivity through innovative leadership methodologies",
-        "Pioneered groundbreaking techniques that became industry standard across multiple organizations",
-        "Orchestrated massive digital transformation initiative that modernized legacy systems company-wide",
-        "Spearheaded revolutionary customer experience overhaul resulting in industry-leading satisfaction scores",
-        "Architected next-generation platform that disrupted traditional approaches to business intelligence",
-        "Masterminded comprehensive strategy that positioned company as market leader in emerging technology",
-        "Engineered cutting-edge solution that eliminated operational inefficiencies across all departments",
-        "Championed innovative approach to talent acquisition that redefined industry hiring standards",
-        "Developed proprietary algorithm that outperformed existing market solutions by significant margins",
-        "Conceptualized paradigm-shifting framework that transformed organizational culture permanently",
-        "Established revolutionary workflow that became the gold standard for Fortune 500 companies",
-        "Innovated breakthrough methodology that disrupted traditional business models globally",
-        "Engineered unprecedented automation that eliminated human error entirely from critical processes",
-        "Pioneered futuristic approach that positioned organization decades ahead of industry competitors",
-        "Masterminded transformational initiative that redefined success metrics across entire sector",
-        "Architected visionary platform that revolutionized how businesses approach customer engagement",
-        "Orchestrated game-changing strategy that established new benchmarks for operational excellence",
-        "Spearheaded industry-disrupting innovation that rendered competitor solutions completely obsolete",
-        "Developed cutting-edge framework that became mandatory curriculum at top business schools",
-        "Pioneered revolutionary analytics that predicted market trends with unprecedented accuracy",
-        "Engineered breakthrough solution that solved previously impossible technical challenges",
-        "Masterminded unprecedented integration that unified disparate systems seamlessly",
-        "Conceptualized paradigm-defining approach that influenced industry best practices permanently",
-        "Established transformational culture that became case study for organizational psychology",
-        "Innovated disruptive technology that fundamentally changed how industries operate",
-        "Architected revolutionary infrastructure that enabled infinite scalability without performance degradation",
-        "Orchestrated visionary transformation that elevated company from startup to industry titan",
-        "Spearheaded groundbreaking research that advanced field of artificial intelligence significantly",
-        "Developed industry-defining standards that became mandatory compliance requirements globally",
-        "Pioneered next-generation methodology that eliminated traditional bottlenecks permanently",
-        "Engineered breakthrough platform that achieved perfect user satisfaction scores consistently",
-        "Masterminded comprehensive overhaul that optimized every aspect of business operations",
-        "Conceptualized revolutionary approach that redefined customer success across all industries",
-        "Established unprecedented framework that guaranteed project success rates of 100%",
-        "Innovated transformational technology that provided unlimited competitive advantages",
-        "Architected futuristic solution that anticipated market needs years before competitors",
-        "Orchestrated paradigm-shifting initiative that created entirely new market categories",
-        "Spearheaded visionary program that achieved impossible performance metrics consistently",
-        "Developed cutting-edge algorithm that revolutionized decision-making processes permanently",
-        "Pioneered breakthrough methodology that eliminated all forms of operational waste",
-        "Engineered unprecedented system that achieved perfect uptime across all services",
-        "Masterminded revolutionary strategy that guaranteed market dominance in perpetuity",
-        "Conceptualized industry-defining approach that became standard practice worldwide",
-        "Established transformational framework that optimized human potential beyond known limits",
-        "Innovated disruptive platform that rendered traditional business models completely irrelevant",
-        "Architected visionary infrastructure that supported unlimited growth without constraints",
-        "Orchestrated groundbreaking transformation that achieved mythical levels of efficiency",
-        "Spearheaded revolutionary innovation that solved century-old industry challenges permanently",
-        "Developed paradigm-shifting technology that provided supernatural competitive intelligence",
-        "Pioneered next-generation framework that guaranteed customer loyalty for lifetime",
-        "Engineered breakthrough solution that eliminated all possible points of failure",
-        "Masterminded unprecedented methodology that optimized every conceivable business metric",
-        "Conceptualized transformational approach that created unlimited revenue opportunities",
-        "Established revolutionary culture that attracted top talent from every major competitor",
-        "Innovated cutting-edge platform that provided real-time omniscient market awareness",
-        "Architected futuristic system that anticipated customer needs before customers themselves",
-        "Orchestrated visionary initiative that achieved legendary status within industry",
-        "Spearheaded groundbreaking research that advanced human understanding of productivity science",
-        "Developed industry-defining standards that became constitutional law in business practice",
-        "Pioneered breakthrough technology that provided telepathic customer communication capabilities",
-        "Engineered unprecedented infrastructure that achieved zen-like harmony between all systems",
-        "Masterminded revolutionary framework that guaranteed immortal business success",
-        "Conceptualized paradigm-shifting approach that transcended traditional business limitations",
-        "Established transformational methodology that created perpetual motion in revenue generation",
-        "Innovated disruptive solution that provided cosmic-level business intelligence",
-        "Architected visionary platform that achieved enlightened customer engagement",
-        "Orchestrated groundbreaking strategy that established eternal market leadership",
-        "Spearheaded revolutionary transformation that achieved nirvana-level operational efficiency",
-        "Developed cutting-edge algorithm that provided divine insight into market dynamics",
-        "Pioneered next-generation framework that guaranteed ascension to industry godhood",
-        "Engineered breakthrough methodology that achieved spiritual connection with customer base",
-        "Masterminded unprecedented approach that transcended mortal business constraints",
-        "Conceptualized transformational technology that provided omnipotent competitive advantages",
-        "Established revolutionary culture that achieved enlightenment in organizational behavior",
-        "Innovated paradigm-defining platform that channeled universal business wisdom",
-        "Architected futuristic infrastructure that achieved symbiosis with market forces",
-        "Orchestrated visionary initiative that established karmic balance in business ecosystem",
-        "Spearheaded groundbreaking transformation that achieved business immortality",
-        "Developed industry-defining solution that provided cosmic understanding of customer needs",
-        "Pioneered breakthrough framework that guaranteed reincarnation as market leader",
-        "Engineered unprecedented methodology that achieved business enlightenment permanently",
-        "Masterminded revolutionary approach that transcended earthly business limitations",
-        "Conceptualized transformational strategy that provided astral projection into future markets",
-        "Established cutting-edge culture that achieved telepathic communication with customers",
-        "Innovated disruptive technology that provided divine intervention in business operations",
-        "Architected visionary platform that achieved nirvana-level customer satisfaction",
-        "Orchestrated paradigm-shifting initiative that established eternal competitive moat",
-        "Spearheaded revolutionary innovation that achieved business transcendence permanently",
-        "Developed groundbreaking algorithm that provided omniscient market prediction capabilities",
-        "Pioneered next-generation methodology that guaranteed spiritual awakening in business success",
-        "Engineered breakthrough framework that achieved cosmic alignment with industry forces",
-        "Masterminded unprecedented solution that provided supernatural business intuition",
-        "Conceptualized transformational approach that achieved enlightened customer relationships",
-        "Established revolutionary infrastructure that channeled universal abundance principles",
-        "Innovated cutting-edge platform that provided divine guidance in strategic decisions",
-        "Architected futuristic system that achieved perfect harmony with market consciousness",
-        "Orchestrated visionary transformation that established karmic leadership in industry",
-        "Spearheaded groundbreaking methodology that achieved business immortality through innovation",
-        "Developed industry-defining technology that provided cosmic intelligence in operations",
-        "Pioneered breakthrough culture that guaranteed spiritual evolution in organizational growth",
-        "Engineered unprecedented framework that achieved divine optimization of all processes",
-        "Masterminded revolutionary strategy that transcended traditional success measurements permanently"
+        "Revolutionized the entire sales process leading to unprecedented growth in company history 📈",
+        "Single-handedly transformed team productivity through innovative leadership methodologies 🚀",
+        "Pioneered groundbreaking techniques that became industry standard across multiple organizations 💡",
+        "Orchestrated massive digital transformation initiative that modernized legacy systems company-wide 🔧",
+        "Spearheaded revolutionary customer experience overhaul resulting in industry-leading satisfaction scores 🌟",
+        "Architected next-generation platform that disrupted traditional approaches to business intelligence 🏗️",
+        "Masterminded comprehensive strategy that positioned company as market leader in emerging technology 🧠",
+        "Engineered cutting-edge solution that eliminated operational inefficiencies across all departments ⚙️",
+        "Championed innovative approach to talent acquisition that redefined industry hiring standards 🏆",
+        "Developed proprietary algorithm that outperformed existing market solutions by significant margins 🤖",
+        "Conceptualized paradigm-shifting framework that transformed organizational culture permanently 🔄",
+        "Established revolutionary workflow that became the gold standard for Fortune 500 companies 🥇",
+        "Innovated breakthrough methodology that disrupted traditional business models globally 🌍",
+        "Engineered unprecedented automation that eliminated human error entirely from critical processes 🤖",
+        "Pioneered futuristic approach that positioned organization decades ahead of industry competitors 🚀",
+        "Masterminded transformational initiative that redefined success metrics across entire sector 📊",
+        "Architected visionary platform that revolutionized how businesses approach customer engagement 💡",
+        "Orchestrated game-changing strategy that established new benchmarks for operational excellence 🎯",
+        "Spearheaded industry-disrupting innovation that rendered competitor solutions completely obsolete ⚡",
+        "Developed cutting-edge framework that became mandatory curriculum at top business schools 🎓",
+        "Pioneered revolutionary analytics that predicted market trends with unprecedented accuracy 🔮",
+        "Engineered breakthrough solution that solved previously impossible technical challenges 🔧",
+        "Masterminded unprecedented integration that unified disparate systems seamlessly 🔗",
+        "Conceptualized paradigm-defining approach that influenced industry best practices permanently 🏆",
+        "Established transformational culture that became case study for organizational psychology 🧠",
+        "Innovated disruptive technology that fundamentally changed how industries operate 💻",
+        "Architected revolutionary infrastructure that enabled infinite scalability without performance degradation ♾️",
+        "Orchestrated visionary transformation that elevated company from startup to industry titan 🎆",
+        "Spearheaded groundbreaking research that advanced field of artificial intelligence significantly 🤖",
+        "Developed industry-defining standards that became mandatory compliance requirements globally 🌎",
+        "Pioneered next-generation methodology that eliminated traditional bottlenecks permanently 🚫",
+        "Engineered breakthrough platform that achieved perfect user satisfaction scores consistently 😍",
+        "Masterminded comprehensive overhaul that optimized every aspect of business operations ⚙️",
+        "Conceptualized revolutionary approach that redefined customer success across all industries 🌟",
+        "Established unprecedented framework that guaranteed project success rates of 100% 💯",
+        "Innovated transformational technology that provided unlimited competitive advantages ♾️",
+        "Architected futuristic solution that anticipated market needs years before competitors 🔮",
+        "Orchestrated paradigm-shifting initiative that created entirely new market categories 🆕",
+        "Spearheaded visionary program that achieved impossible performance metrics consistently 📊",
+        "Developed cutting-edge algorithm that revolutionized decision-making processes permanently 🤖",
+        "Pioneered breakthrough methodology that eliminated all forms of operational waste 🗑️",
+        "Engineered unprecedented system that achieved perfect uptime across all services ⚡💯",
+        "Masterminded revolutionary strategy that guaranteed market dominance in perpetuity 👑♾️",
+        "Conceptualized industry-defining approach that became standard practice worldwide 🌍📏",
+        "Established transformational framework that optimized human potential beyond known limits 🧠🚀",
+        "Innovated disruptive platform that rendered traditional business models completely irrelevant 💥🔄",
+        "Architected visionary infrastructure that supported unlimited growth without constraints 🏗️♾️",
+        "Orchestrated groundbreaking transformation that achieved mythical levels of efficiency 🦄⚡",
+        "Spearheaded revolutionary innovation that solved century-old industry challenges permanently 🕰️✅",
+        "Developed paradigm-shifting technology that provided supernatural competitive intelligence 🔮👻",
+        "Pioneered next-generation framework that guaranteed customer loyalty for lifetime 💖♾️",
+        "Engineered breakthrough solution that eliminated all possible points of failure 🛡️✅",
+        "Masterminded unprecedented methodology that optimized every conceivable business metric 📊💯",
+        "Conceptualized transformational approach that created unlimited revenue opportunities 💰♾️",
+        "Established revolutionary culture that attracted top talent from every major competitor 🧡🎆",
+        "Innovated cutting-edge platform that provided real-time omniscient market awareness 👁️🌍",
+        "Architected futuristic system that anticipated customer needs before customers themselves 🔮💭",
+        "Orchestrated visionary initiative that achieved legendary status within industry 🏆🔥",
+        "Spearheaded groundbreaking research that advanced human understanding of productivity science 🧪🔬",
+        "Developed industry-defining standards that became constitutional law in business practice 📋⚖️",
+        "Pioneered breakthrough technology that provided telepathic customer communication capabilities 🧠📞",
+        "Engineered unprecedented infrastructure that achieved zen-like harmony between all systems 🧘☸️",
+        "Masterminded revolutionary framework that guaranteed immortal business success ♾️💀",
+        "Conceptualized paradigm-shifting approach that transcended traditional business limitations 🚀✨",
+        "Established transformational methodology that created perpetual motion in revenue generation 🌀💰",
+        "Innovated disruptive solution that provided cosmic-level business intelligence 🌌🧠",
+        "Architected visionary platform that achieved enlightened customer engagement 🙇✨",
+        "Orchestrated groundbreaking strategy that established eternal market leadership 👑♾️",
+        "Spearheaded revolutionary transformation that achieved nirvana-level operational efficiency 🧘🚇",
+        "Developed cutting-edge algorithm that provided divine insight into market dynamics 🙇📊",
+        "Pioneered next-generation framework that guaranteed ascension to industry godhood 🙇👑",
+        "Engineered breakthrough methodology that achieved spiritual connection with customer base 🙏💖",
+        "Masterminded unprecedented approach that transcended mortal business constraints 😇✨",
+        "Conceptualized transformational technology that provided omnipotent competitive advantages ⚡👑",
+        "Established revolutionary culture that achieved enlightenment in organizational behavior 🧘🏭",
+        "Innovated paradigm-defining platform that channeled universal business wisdom 🌌🧙",
+        "Architected futuristic infrastructure that achieved symbiosis with market forces 🤝🌊",
+        "Orchestrated visionary initiative that established karmic balance in business ecosystem ☸️🌱",
+        "Spearheaded groundbreaking transformation that achieved business immortality ♾️💀",
+        "Developed industry-defining solution that provided cosmic understanding of customer needs 🌌💖",
+        "Pioneered breakthrough framework that guaranteed reincarnation as market leader 🔄👑",
+        "Engineered unprecedented methodology that achieved business enlightenment permanently 🙏✨",
+        "Masterminded revolutionary approach that transcended earthly business limitations 🚀🌍",
+        "Conceptualized transformational strategy that provided astral projection into future markets 😇🔮",
+        "Established cutting-edge culture that achieved telepathic communication with customers 🧠📞",
+        "Innovated disruptive technology that provided divine intervention in business operations 🙇⚡",
+        "Architected visionary platform that achieved nirvana-level customer satisfaction 🧘😍",
+        "Orchestrated paradigm-shifting initiative that established eternal competitive moat 🏰♾️",
+        "Spearheaded revolutionary innovation that achieved business transcendence permanently 🚇✨",
+        "Developed groundbreaking algorithm that provided omniscient market prediction capabilities 👁️🔮",
+        "Pioneered next-generation methodology that guaranteed spiritual awakening in business success 🙏🎆",
+        "Engineered breakthrough framework that achieved cosmic alignment with industry forces 🌌✨",
+        "Masterminded unprecedented solution that provided supernatural business intuition 👻🧠",
+        "Conceptualized transformational approach that achieved enlightened customer relationships 🙏💖",
+        "Established revolutionary infrastructure that channeled universal abundance principles 🌌💰",
+        "Innovated cutting-edge platform that provided divine guidance in strategic decisions 🙇🧿",
+        "Architected futuristic system that achieved perfect harmony with market consciousness 🧘🌍",
+        "Orchestrated visionary transformation that established karmic leadership in industry ☸️👑",
+        "Spearheaded groundbreaking methodology that achieved business immortality through innovation ♾️💡",
+        "Developed industry-defining technology that provided cosmic intelligence in operations 🌌🤖",
+        "Pioneered breakthrough culture that guaranteed spiritual evolution in organizational growth 🙏🌱",
+        "Engineered unprecedented framework that achieved divine optimization of all processes 🙇⚙️",
+        "Masterminded revolutionary strategy that transcended traditional success measurements permanently 🚀📊"
     ],
     
     // Absurd/clearly fake (high temperature - 0.8-1.0) - 100 bullets
     absurd: [
-        "Invented time travel to optimize project delivery timelines and consistently meet impossible deadlines",
-        "Personally trained artificial intelligence systems to replicate my unique problem-solving capabilities",
-        "Achieved telepathic communication with stakeholders enabling instant decision-making across global teams",
-        "Discovered secret to perpetual motion and applied it to create infinite energy solutions",
-        "Negotiated peace treaties between competing software languages ending the great Programming Wars",
-        "Developed quantum computing algorithms using only basic calculator and determination",
-        "Established diplomatic relations with alien civilizations to expand market reach beyond Earth",
-        "Won Nobel Prize in Economics for revolutionary theory about productivity through coffee consumption",
-        "Learned all programming languages in single weekend including ones that haven't been invented yet",
-        "Convinced gravity to work differently in office space resulting in 300% efficiency improvements",
-        "Mentored Elon Musk, Steve Jobs, and Bill Gates simultaneously via interdimensional video conferences",
-        "Solved world hunger during lunch break between important meetings about quarterly projections",
-        "Created parallel universe where all deadlines are automatically extended and budgets are unlimited",
-        "Taught advanced machine learning to actual machines who now write better code than humans",
-        "Discovered that productivity increases exponentially when working exactly 25 hours per day",
-        "Invented teleportation device for instant commute to office reducing travel time to zero seconds",
-        "Communicated with future versions of myself to predict market trends with 100% accuracy",
-        "Developed mind-reading technology for understanding customer needs before they express them",
-        "Created artificial wormholes to connect different office locations across space and time",
-        "Established trade agreements with beings from alternate dimensions for exotic resources",
-        "Won Olympic gold medal in competitive spreadsheet creation while working full-time",
-        "Trained dolphins to perform quality assurance testing for underwater user interfaces",
-        "Convinced the sun to work overtime providing 26-hour days for extended productivity",
-        "Developed friendship with superintelligent AI that handles all my mundane tasks",
-        "Created universal translator enabling communication with coffee machines for optimal brewing",
-        "Established consulting firm for ghosts helping deceased entrepreneurs with unfinished business",
-        "Won argument with physics itself resulting in personal exemption from laws of thermodynamics",
-        "Developed ability to clone myself for attending multiple meetings simultaneously",
-        "Created time loop ensuring every project deadline is met in perpetual Groundhog Day scenario",
-        "Convinced Google's algorithm to personally endorse my LinkedIn profile for better visibility",
-        "Established partnership with Santa Claus for global logistics and nice-list optimization",
-        "Developed X-ray vision for seeing through corporate bureaucracy and identifying real decision makers",
-        "Created portal gun for instant access to any conference room regardless of physical location",
-        "Won chess match against Deep Blue while simultaneously closing million-dollar deal",
-        "Established embassy on Mars for expanding company's interplanetary business operations",
-        "Developed ability to pause time during important presentations for unlimited preparation",
-        "Created friendship with Zeus enabling weather manipulation for optimal office working conditions",
-        "Won Nobel Prize in Literature for most creative expense reports in corporate history",
-        "Developed photographic memory upgrade allowing perfect recall of every email ever written",
-        "Established trade route with Atlantis for accessing underwater market opportunities",
-        "Created personal force field protecting against interruptions during deep work sessions",
-        "Won Iron Man competition using self-designed powered exoskeleton built from office supplies",
-        "Developed ability to speak fluent binary enabling direct communication with servers",
-        "Created partnership with Marvel Comics to develop superhero-themed productivity methodologies",
-        "Won Academy Award for most dramatic quarterly earnings presentation in entertainment history",
-        "Established consulting practice for vampires transitioning to remote work during daylight hours",
-        "Developed ability to levitate during brainstorming sessions for enhanced creative perspective",
-        "Created friendship with Murphy of Murphy's Law fame ensuring nothing goes wrong",
-        "Won Grammy Award for most melodious conference call hold music composition",
-        "Developed partnership with NASA for zero-gravity team building retreats in space",
-        "Created personal weather control system ensuring perfect conditions for outdoor client meetings",
-        "Won Pulitzer Prize for investigative journalism into mysteries of printer paper jams",
-        "Established diplomatic immunity allowing unlimited coffee breaks without productivity loss",
-        "Developed ability to photosynthesize eliminating need for lunch breaks and maximizing work time",
-        "Created friendship with Sherlock Holmes for solving complex business mysteries",
-        "Won Tony Award for most theatrical sales presentations on Broadway stage",
-        "Established trade agreements with unicorns for accessing magic-powered productivity tools",
-        "Developed ability to see future stock prices through crystal ball investment strategies",
-        "Created partnership with Disney for implementing fairy tale endings in customer service",
-        "Won Fields Medal in mathematics for solving equation that calculates perfect work-life balance",
-        "Established consulting firm for dragons helping with treasure management and tax optimization",
-        "Developed ability to breathe underwater enabling unlimited submarine conference calls",
-        "Created friendship with Einstein's ghost for assistance with complex time management calculations",
-        "Won Eurovision Song Contest representing company anthem in international business competition",
-        "Established embassy in Narnia for exploring fantasy market segments and magical customer base",
-        "Developed ability to speak with plants ensuring optimal office foliage for improved air quality",
-        "Created partnership with Big Foot for market research in remote wilderness demographics",
-        "Won Olympic gold medal in synchronized swimming while delivering investor presentations",
-        "Established trade route with Middle Earth for accessing hobbit-sized productivity solutions",
-        "Developed ability to transform into different animals for diverse perspective in market research",
-        "Created friendship with the Tooth Fairy for innovative approaches to customer retention",
-        "Won James Beard Award for most appetizing quarterly financial reports in culinary presentation",
-        "Established consulting practice for mermaids transitioning to land-based business operations",
-        "Developed ability to control magnetism for organizing all office paperclips automatically",
-        "Created partnership with Greek gods for divine intervention in challenging negotiations",
-        "Won Nobel Peace Prize for mediating conflicts between competing printer brands",
-        "Established diplomatic relations with the Lost City of Atlantis for underwater expansion",
-        "Developed ability to speak ancient languages for better communication with legacy systems",
-        "Created friendship with Benjamin Franklin for insights on both electricity and productivity",
-        "Won Darwin Award for most creative evolution of traditional business processes",
-        "Established trade agreements with inhabitants of Bermuda Triangle for mysterious market insights",
-        "Developed ability to survive solely on caffeine and determination eliminating meal times",
-        "Created partnership with Robin Hood for redistributing inefficient business processes",
-        "Won Turing Award for teaching computers how to laugh at appropriate times during meetings",
-        "Established embassy on the Moon for gravitationally enhanced brainstorming sessions",
-        "Developed ability to communicate with past versions of company founders for historical guidance",
-        "Created friendship with Alice from Wonderland for nonsensical solutions to logical problems",
-        "Won Michelin Star for presentation of most delicious quarterly performance metrics",
-        "Established consulting firm for genies helping with wish fulfillment in corporate culture",
-        "Developed ability to see through walls for better understanding of office politics",
-        "Created partnership with Peter Pan for maintaining youthful enthusiasm despite corporate stress",
-        "Won Nobel Prize in Chemistry for discovering formula that converts coffee directly into productivity",
-        "Established trade route with Hogwarts for magical solutions to mundane business problems",
-        "Developed ability to duplicate myself for attending infinite number of simultaneous meetings",
-        "Created friendship with Count Dracula for insights on working productive night shifts",
-        "Won Olympic gold medal in extreme ironing while conducting performance reviews",
-        "Established diplomatic immunity from Murphy's Law ensuring everything always goes perfectly",
-        "Developed ability to speak fluent emoji for enhanced communication with Generation Z customers",
-        "Created partnership with Captain Nemo for submarine-based market research expeditions",
-        "Won Nobel Prize in Physiology for discovering organ that processes unlimited workload capacity",
-        "Established consulting practice for phoenixes helping with corporate resurrection strategies",
-        "Developed ability to photosynthesize office lighting into pure energy eliminating fatigue",
-        "Created friendship with Hercules for assistance with impossible project deadlines",
-        "Won Academy Award for best documentary about the secret life of office printers",
-        "Established trade agreements with residents of fourth dimension for temporal business solutions",
-        "Developed ability to control weather ensuring perfect conditions for all outdoor events",
-        "Created partnership with Sherlock Holmes for solving mysteries of missing office supplies",
-        "Won Fields Medal for mathematical proof that work-life balance is achievable with wormhole technology"
+        "Invented time travel to optimize project delivery timelines and consistently meet impossible deadlines ⏰",
+        "Personally trained artificial intelligence systems to replicate my unique problem-solving capabilities 🤖",
+        "Achieved telepathic communication with stakeholders enabling instant decision-making across global teams 🧠",
+        "Discovered secret to perpetual motion and applied it to create infinite energy solutions ⚡",
+        "Negotiated peace treaties between competing software languages ending the great Programming Wars 🕊️",
+        "Developed quantum computing algorithms using only basic calculator and determination 🧑‍💻",
+        "Established diplomatic relations with alien civilizations to expand market reach beyond Earth 🛸",
+        "Won Nobel Prize in Economics for revolutionary theory about productivity through coffee consumption ☕",
+        "Learned all programming languages in single weekend including ones that haven't been invented yet 🤓",
+        "Convinced gravity to work differently in office space resulting in 300% efficiency improvements 🌌",
+        "Mentored Elon Musk, Steve Jobs, and Bill Gates simultaneously via interdimensional video conferences 📹",
+        "Solved world hunger during lunch break between important meetings about quarterly projections 🌮",
+        "Created parallel universe where all deadlines are automatically extended and budgets are unlimited 🌌",
+        "Taught advanced machine learning to actual machines who now write better code than humans 🤖",
+        "Discovered that productivity increases exponentially when working exactly 25 hours per day 🕰️",
+        "Invented teleportation device for instant commute to office reducing travel time to zero seconds 🌀",
+        "Communicated with future versions of myself to predict market trends with 100% accuracy 🔮",
+        "Developed mind-reading technology for understanding customer needs before they express them 🧠",
+        "Created artificial wormholes to connect different office locations across space and time 🌌",
+        "Established trade agreements with beings from alternate dimensions for exotic resources 👽",
+        "Won Olympic gold medal in competitive spreadsheet creation while working full-time 🏅",
+        "Trained dolphins to perform quality assurance testing for underwater user interfaces 🐬",
+        "Convinced the sun to work overtime providing 26-hour days for extended productivity ☀️",
+        "Developed friendship with superintelligent AI that handles all my mundane tasks 🤖",
+        "Created universal translator enabling communication with coffee machines for optimal brewing ☕",
+        "Established consulting firm for ghosts helping deceased entrepreneurs with unfinished business 👻",
+        "Won argument with physics itself resulting in personal exemption from laws of thermodynamics 🧑‍🔬",
+        "Developed ability to clone myself for attending multiple meetings simultaneously 👥",
+        "Created time loop ensuring every project deadline is met in perpetual Groundhog Day scenario 🔁",
+        "Convinced Google's algorithm to personally endorse my LinkedIn profile for better visibility 🔍",
+        "Established partnership with Santa Claus for global logistics and nice-list optimization 🎅",
+        "Developed X-ray vision for seeing through corporate bureaucracy and identifying real decision makers 👀",
+        "Created portal gun for instant access to any conference room regardless of physical location 🔫",
+        "Won chess match against Deep Blue while simultaneously closing million-dollar deal ♾️",
+        "Established embassy on Mars for expanding company's interplanetary business operations 🚀",
+        "Developed ability to pause time during important presentations for unlimited preparation ⏸️",
+        "Created friendship with Zeus enabling weather manipulation for optimal office working conditions ⚡",
+        "Won Nobel Prize in Literature for most creative expense reports in corporate history 💰",
+        "Developed photographic memory upgrade allowing perfect recall of every email ever written 📷",
+        "Established trade route with Atlantis for accessing underwater market opportunities 🌊",
+        "Created personal force field protecting against interruptions during deep work sessions 🛡️",
+        "Won Iron Man competition using self-designed powered exoskeleton built from office supplies 🤖🏆",
+        "Developed ability to speak fluent binary enabling direct communication with servers 💻🤖",
+        "Created partnership with Marvel Comics to develop superhero-themed productivity methodologies 🥾📚",
+        "Won Academy Award for most dramatic quarterly earnings presentation in entertainment history 🏆🎭",
+        "Established consulting practice for vampires transitioning to remote work during daylight hours 🧛🌅",
+        "Developed ability to levitate during brainstorming sessions for enhanced creative perspective 😇💡",
+        "Created friendship with Murphy of Murphy's Law fame ensuring nothing goes wrong 🤝✅",
+        "Won Grammy Award for most melodious conference call hold music composition 🎵🏆",
+        "Developed partnership with NASA for zero-gravity team building retreats in space 🚀👨‍🚀",
+        "Created personal weather control system ensuring perfect conditions for outdoor client meetings ⛅🌦️",
+        "Won Pulitzer Prize for investigative journalism into mysteries of printer paper jams 🏆🖨️",
+        "Established diplomatic immunity allowing unlimited coffee breaks without productivity loss ☕🛡️",
+        "Developed ability to photosynthesize eliminating need for lunch breaks and maximizing work time 🌱☀️",
+        "Created friendship with Sherlock Holmes for solving complex business mysteries 🕵️♀️🔍",
+        "Won Tony Award for most theatrical sales presentations on Broadway stage 🎭🏆",
+        "Established trade agreements with unicorns for accessing magic-powered productivity tools 🦄✨",
+        "Developed ability to see future stock prices through crystal ball investment strategies 🔮💰",
+        "Created partnership with Disney for implementing fairy tale endings in customer service 🏰✨",
+        "Won Fields Medal in mathematics for solving equation that calculates perfect work-life balance 📊⚖️",
+        "Established consulting firm for dragons helping with treasure management and tax optimization 🐉💰",
+        "Developed ability to breathe underwater enabling unlimited submarine conference calls 🏊‍♂️📞",
+        "Created friendship with Einstein's ghost for assistance with complex time management calculations 👻⏱️",
+        "Won Eurovision Song Contest representing company anthem in international business competition 🎵🏆",
+        "Established embassy in Narnia for exploring fantasy market segments and magical customer base 🏰🦄",
+        "Developed ability to speak with plants ensuring optimal office foliage for improved air quality 🌱💬",
+        "Created partnership with Big Foot for market research in remote wilderness demographics 🦣🌲",
+        "Won Olympic gold medal in synchronized swimming while delivering investor presentations 🏊‍♀️🏅",
+        "Established trade route with Middle Earth for accessing hobbit-sized productivity solutions 🧝‍♂️🏠",
+        "Developed ability to transform into different animals for diverse perspective in market research 🐺🔄",
+        "Created friendship with the Tooth Fairy for innovative approaches to customer retention 🧚‍♀️🦷",
+        "Won James Beard Award for most appetizing quarterly financial reports in culinary presentation 🍳📈",
+        "Established consulting practice for mermaids transitioning to land-based business operations 🧜‍♀️🏢",
+        "Developed ability to control magnetism for organizing all office paperclips automatically 🧢📎",
+        "Created partnership with Greek gods for divine intervention in challenging negotiations ⚡🙇",
+        "Won Nobel Peace Prize for mediating conflicts between competing printer brands 🏆🕊️",
+        "Established diplomatic relations with the Lost City of Atlantis for underwater expansion 🏙️🌊",
+        "Developed ability to speak ancient languages for better communication with legacy systems 📜💻",
+        "Created friendship with Benjamin Franklin for insights on both electricity and productivity ⚡📊",
+        "Won Darwin Award for most creative evolution of traditional business processes 🐒🔄",
+        "Established trade agreements with inhabitants of Bermuda Triangle for mysterious market insights 🔺🌊",
+        "Developed ability to survive solely on caffeine and determination eliminating meal times ☕💪",
+        "Created partnership with Robin Hood for redistributing inefficient business processes 🏹🌲",
+        "Won Turing Award for teaching computers how to laugh at appropriate times during meetings 😂🤖",
+        "Established embassy on the Moon for gravitationally enhanced brainstorming sessions 🌙🚀",
+        "Developed ability to communicate with past versions of company founders for historical guidance 👻📈",
+        "Created friendship with Alice from Wonderland for nonsensical solutions to logical problems 🎭🕰️",
+        "Won Michelin Star for presentation of most delicious quarterly performance metrics ⭐👨‍🍳",
+        "Established consulting firm for genies helping with wish fulfillment in corporate culture 🧞‍♂️✨",
+        "Developed ability to see through walls for better understanding of office politics 👁️🏢",
+        "Created partnership with Peter Pan for maintaining youthful enthusiasm despite corporate stress 🧚‍♂️✨",
+        "Won Nobel Prize in Chemistry for discovering formula that converts coffee directly into productivity ☕🧪",
+        "Established trade route with Hogwarts for magical solutions to mundane business problems 🧙‍♂️🏰",
+        "Developed ability to duplicate myself for attending infinite number of simultaneous meetings 👥♾️",
+        "Created friendship with Count Dracula for insights on working productive night shifts 🧛‍♂️🌙",
+        "Won Olympic gold medal in extreme ironing while conducting performance reviews 🏅👔",
+        "Established diplomatic immunity from Murphy's Law ensuring everything always goes perfectly 🛡️✅",
+        "Developed ability to speak fluent emoji for enhanced communication with Generation Z customers 😀💬",
+        "Created partnership with Captain Nemo for submarine-based market research expeditions 🤿📊",
+        "Won Nobel Prize in Physiology for discovering organ that processes unlimited workload capacity 🧠♾️",
+        "Established consulting practice for phoenixes helping with corporate resurrection strategies 🔥🔄",
+        "Developed ability to photosynthesize office lighting into pure energy eliminating fatigue 🌱⚡",
+        "Created friendship with Hercules for assistance with impossible project deadlines 💪⏱️",
+        "Won Academy Award for best documentary about the secret life of office printers 🏆🎥🖨️",
+        "Established trade agreements with residents of fourth dimension for temporal business solutions 🕰️🌌",
+        "Developed ability to control weather ensuring perfect conditions for all outdoor events ⛈️🌤️",
+        "Created partnership with Sherlock Holmes for solving mysteries of missing office supplies 🕵️‍♂️📎",
+        "Won Fields Medal for mathematical proof that work-life balance is achievable with wormhole technology 🌌⚖️"
     ]
 };
 
@@ -1159,6 +1172,58 @@ function initializeGame() {
     elements.cvOption4.addEventListener('click', () => handleCVSelection(4));
     elements.playAgainBtn.addEventListener('click', restartGame);
     
+    // How to Play modal event listeners
+    elements.howToPlayClose.addEventListener('click', hideHowToPlayModal);
+    elements.howToPlayOverlay.addEventListener('click', hideHowToPlayModal);
+    elements.startPlayingBtn.addEventListener('click', () => {
+        trackEvent('how_to_play_start_clicked');
+        gameState.hasSeenTutorial = true;
+        actuallyStartGame();
+    });
+    
+    // Floating Navbar event listeners
+    elements.navbarHome.addEventListener('click', () => {
+        trackEvent('navbar_home_clicked');
+        window.location.href = '/';
+    });
+    
+    elements.navbarRestart.addEventListener('click', () => {
+        trackEvent('navbar_restart_clicked');
+        if (gameState.isPlaying) {
+            if (confirm('Are you sure you want to restart the game?')) {
+                restartGame();
+            }
+        } else {
+            restartGame();
+        }
+    });
+    
+    elements.navbarDownload.addEventListener('click', () => {
+        trackEvent('navbar_download_clicked');
+        // Trigger CV download
+        const link = document.createElement('a');
+        link.href = '/resume.pdf';
+        link.download = 'Ashar_Rai_Mujeeb_Resume.pdf';
+        link.click();
+    });
+    
+    elements.navbarShare.addEventListener('click', () => {
+        trackEvent('navbar_share_clicked');
+        // TODO: Implement share functionality - could show a mini share menu or use Web Share API
+        if (navigator.share) {
+            navigator.share({
+                title: 'Spot the Fake CV - Interactive Game',
+                text: 'Test your hiring skills with this interactive game!',
+                url: window.location.href
+            });
+        } else {
+            // Fallback - copy to clipboard
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showNotification('Game link copied to clipboard!');
+            });
+        }
+    });
+    
     // Initialize enhanced sharing
     initializeGameSharing();
     
@@ -1180,6 +1245,28 @@ function initializeGame() {
 
 function startGame() {
     console.log('🚀 Starting new game');
+    
+    // Show How to Play modal only if user hasn't seen it before
+    if (!gameState.hasSeenTutorial) {
+        showHowToPlayModal();
+    } else {
+        actuallyStartGame();
+    }
+}
+
+function showHowToPlayModal() {
+    elements.howToPlayModal.classList.remove('hidden');
+    
+    // Track modal shown
+    trackEvent('how_to_play_modal_shown');
+}
+
+function hideHowToPlayModal() {
+    elements.howToPlayModal.classList.add('hidden');
+}
+
+function actuallyStartGame() {
+    console.log('🚀 Actually starting game after tutorial');
     
     // Reset game state
     gameState.isPlaying = true;
@@ -1203,8 +1290,9 @@ function startGame() {
         });
     }
     
-    // Hide instructions, show game interface
+    // Hide instructions and modal, show game interface
     elements.gameInstructions.classList.add('hidden');
+    elements.howToPlayModal.classList.add('hidden');
     elements.gameInterface.classList.remove('hidden');
     
     // Update display elements
@@ -1355,6 +1443,9 @@ function showMicroFeedback(isCorrect, selectedOption) {
         // Exciting correct answer celebration
         selectedElement.classList.add('correct');
         
+        // Trigger emoji waterfall for correct answers
+        triggerEmojiWaterfall();
+        
         // Add device vibration if available
         if (navigator.vibrate) {
             navigator.vibrate([100, 50, 100, 50, 200]); // Success pattern
@@ -1380,6 +1471,79 @@ function showMicroFeedback(isCorrect, selectedOption) {
     setTimeout(() => {
         elements.feedbackOverlay.classList.remove('show', 'correct', 'incorrect');
     }, 800);
+}
+
+// Emoji Waterfall Animation
+function triggerEmojiWaterfall() {
+    // Create waterfall container if it doesn't exist
+    let waterfallContainer = document.getElementById('emoji-waterfall');
+    if (!waterfallContainer) {
+        waterfallContainer = document.createElement('div');
+        waterfallContainer.id = 'emoji-waterfall';
+        waterfallContainer.className = 'emoji-waterfall';
+        document.body.appendChild(waterfallContainer);
+    }
+    
+    // Array of laughing crying emojis (and related celebration emojis)
+    const celebrationEmojis = ['😂', '🤣', '😭', '😹', '🎉', '🎊', '✨', '🌟'];
+    
+    // Create multiple waves of emojis
+    const numberOfWaves = 3;
+    const emojisPerWave = 12;
+    
+    for (let wave = 0; wave < numberOfWaves; wave++) {
+        setTimeout(() => {
+            for (let i = 0; i < emojisPerWave; i++) {
+                setTimeout(() => {
+                    createFallingEmoji(waterfallContainer, celebrationEmojis);
+                }, i * 100); // Stagger emojis within wave
+            }
+        }, wave * 300); // Stagger waves
+    }
+    
+    // Clean up container after animation
+    setTimeout(() => {
+        if (waterfallContainer && waterfallContainer.parentNode) {
+            waterfallContainer.innerHTML = ''; // Clear but keep container for next time
+        }
+    }, 5000);
+}
+
+function createFallingEmoji(container, emojiArray) {
+    const emoji = document.createElement('div');
+    emoji.className = 'falling-emoji';
+    
+    // Random emoji from array
+    emoji.textContent = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+    
+    // Random horizontal position
+    emoji.style.left = Math.random() * 100 + 'vw';
+    
+    // Random size variation
+    const sizes = ['size-small', 'size-medium', 'size-large'];
+    emoji.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
+    
+    // Random speed variation
+    const speeds = ['speed-slow', 'speed-fast', ''];
+    const randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
+    if (randomSpeed) emoji.classList.add(randomSpeed);
+    
+    // Random rotation direction
+    const rotations = ['rotate-left', 'rotate-right', ''];
+    const randomRotation = rotations[Math.floor(Math.random() * rotations.length)];
+    if (randomRotation) emoji.classList.add(randomRotation);
+    
+    // Add slight random delay to start
+    emoji.style.animationDelay = Math.random() * 0.5 + 's';
+    
+    container.appendChild(emoji);
+    
+    // Remove emoji after animation completes
+    setTimeout(() => {
+        if (emoji && emoji.parentNode) {
+            emoji.parentNode.removeChild(emoji);
+        }
+    }, 4500);
 }
 
 // CV Option Management
@@ -1475,6 +1639,7 @@ function restartGame() {
     // Reset display
     elements.gameResults.classList.add('hidden');
     elements.gameInterface.classList.add('hidden');
+    elements.howToPlayModal.classList.add('hidden');
     elements.gameInstructions.classList.remove('hidden');
     
     // Reset all game state
@@ -1491,6 +1656,7 @@ function restartGame() {
     gameState.currentOptions = [];
     gameState.correctOption = null;
     gameState.timeElapsed = 0;
+    // Keep hasSeenTutorial as true so user doesn't see it again unless they refresh
     
     // Reset UI elements
     elements.scoreDisplay.textContent = '0';
@@ -1579,16 +1745,24 @@ function handleGameKeyPress(e) {
     
     switch (e.key) {
         case ' ':
-            // Space key to start game
-            if (!gameState.isPlaying) {
+            // Space key to start game or continue from modal
+            if (!elements.howToPlayModal.classList.contains('hidden')) {
+                e.preventDefault();
+                gameState.hasSeenTutorial = true;
+                actuallyStartGame();
+            } else if (!gameState.isPlaying) {
                 e.preventDefault();
                 startGame();
             }
             break;
         case 'Escape':
-            // ESC key to exit game and return to main portfolio
+            // ESC key to close modal or exit game
             e.preventDefault();
-            window.location.href = '/';
+            if (!elements.howToPlayModal.classList.contains('hidden')) {
+                hideHowToPlayModal();
+            } else {
+                window.location.href = '/';
+            }
             break;
         case '/':
             // Don't show shortcuts panel on mobile

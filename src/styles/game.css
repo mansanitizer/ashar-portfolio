@@ -5,6 +5,7 @@
     --superhot-white: #FFFFFF;
     --superhot-black: #000000;
     --superhot-red: #FF0000;
+    --superhot-green: #00FF00;
     --superhot-grey: #808080;
     --superhot-dark-grey: #333333;
     --superhot-light-grey: #F5F5F5;
@@ -211,7 +212,7 @@
 /* Game Container */
 .game-container {
     min-height: 100vh;
-    padding: 120px 30px 60px 150px; /* Extra left padding for sidebar */
+    padding: 120px 30px 80px; /* Removed sidebar padding, added bottom padding for navbar */
     background: var(--superhot-white);
     margin: 0 auto;
     max-width: 1400px;
@@ -385,9 +386,9 @@
 }
 
 .cv-option.correct {
-    background: var(--superhot-red);
+    background: var(--superhot-green);
     color: var(--superhot-white);
-    border-color: var(--superhot-red);
+    border-color: var(--superhot-green);
     box-shadow: 8px 8px 0px var(--superhot-black);
     animation: correctCelebration 2s ease-out;
     transform: scale(1.05);
@@ -426,17 +427,17 @@
 }
 
 .cv-option.wrong-choice {
-    background: var(--superhot-black);
+    background: var(--superhot-red);
     color: var(--superhot-white);
-    border-color: var(--superhot-black);
-    box-shadow: 8px 8px 0px var(--superhot-grey);
+    border-color: var(--superhot-red);
+    box-shadow: 8px 8px 0px var(--superhot-black);
     animation: wrongShake 0.5s ease-in-out;
 }
 
 .cv-option.correct-highlight {
-    background: var(--superhot-red);
+    background: var(--superhot-green);
     color: var(--superhot-white);
-    border-color: var(--superhot-red);
+    border-color: var(--superhot-green);
     box-shadow: 8px 8px 0px var(--superhot-black);
     animation: correctVibrate 5s ease-in-out;
     transform: scale(1.02);
@@ -467,7 +468,7 @@
 
 .cv-option.correct .option-number {
     background: var(--superhot-white);
-    color: var(--superhot-red);
+    color: var(--superhot-green);
     border-color: var(--superhot-white);
     box-shadow: 3px 3px 0px var(--superhot-black);
 }
@@ -480,7 +481,7 @@
 }
 
 .cv-bullet {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
     font-size: 16px;
     line-height: 1.4;
     color: var(--superhot-black);
@@ -491,7 +492,10 @@
     padding-right: 70px; /* Space for option number */
 }
 
-.cv-option.correct .cv-bullet,
+.cv-option.correct .cv-bullet {
+    color: var(--superhot-black);
+}
+
 .cv-option.incorrect .cv-bullet {
     color: inherit;
 }
@@ -830,50 +834,19 @@
         align-items: center;
     }
     
+    .game-brand {
+        margin-right: 10px;
+    }
+    
     .game-brand .brand-name,
     .game-brand .brand-title {
         font-size: 18px;
     }
     
-    .game-actions {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    
-    .return-btn, .cv-btn, .game-actions .settings-btn {
-        padding: 8px;
-        font-size: 16px;
-        min-width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 2px 2px 0px var(--superhot-black);
-    }
-    
-    .return-btn .btn-text, .cv-btn .btn-text {
-        display: none; /* Hide text on mobile */
-    }
-    
-    .return-btn .btn-icon, .cv-btn .btn-icon {
-        display: block; /* Show only icons on mobile */
-        font-size: 18px;
-    }
-    
-    /* Mobile SVG icon sizing - uniform 20px */
-    .return-btn svg.btn-icon, .cv-btn svg.btn-icon, .game-actions .settings-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .return-btn:hover, .cv-btn:hover, .game-actions .settings-btn:hover {
-        transform: translate(-1px, -1px);
-        box-shadow: 3px 3px 0px var(--superhot-grey);
-    }
+    /* Header is now simplified with just the logo */
     
     .game-container {
-        padding: 140px 20px 60px; /* Remove extra left padding on mobile */
+        padding: 120px 20px 80px; /* Added bottom padding for floating navbar */
     }
     
     .shortcut-hint {
@@ -1217,68 +1190,575 @@
     }
 }
 
-/* Game Footer */
-.game-footer {
+/* ===================================
+   FLOATING BOTTOM NAVBAR
+   =================================== */
+
+.floating-navbar {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-}
-
-.game-footer .health-status {
-    position: static;
-    transform: none;
     background: var(--superhot-white);
-    border: 3px solid var(--superhot-black);
-    padding: 8px 12px;
-    border-radius: 0;
-    box-shadow: 4px 4px 0 var(--superhot-black);
-    transition: all 0.3s ease;
-}
-
-.game-footer .health-status:hover {
-    transform: translate(-2px, -2px);
+    border: 4px solid var(--superhot-black);
     box-shadow: 6px 6px 0 var(--superhot-black);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
 }
 
-.game-footer .health-tooltip {
+
+.health-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
     background: var(--superhot-white);
     color: var(--superhot-black);
     border: 3px solid var(--superhot-black);
     box-shadow: 4px 4px 0 var(--superhot-black);
-    border-radius: 0;
-    top: -50px;
-    left: 0;
-    transform: translateY(10px);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    pointer-events: none;
 }
 
-.game-footer .health-status:hover .health-tooltip,
-.game-footer .health-status.show-tooltip .health-tooltip {
-    transform: translateY(0);
+.health-status:hover .health-tooltip,
+.health-status.show-tooltip .health-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-16px);
 }
 
-/* Mobile styles for game footer */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-btn {
+    background: var(--superhot-white);
+    border: 3px solid var(--superhot-black);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: none;
+    box-shadow: 3px 3px 0 var(--superhot-black);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.navbar-btn:hover {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--superhot-grey);
+}
+
+.navbar-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+
+/* Mobile styles for floating navbar */
 @media (max-width: 768px) {
-    .game-footer {
-        bottom: 10px;
-        left: 10px;
+    .floating-navbar {
+        bottom: 15px;
+        padding: 10px 15px;
+        gap: 12px;
+        border: 3px solid var(--superhot-black);
+        box-shadow: 4px 4px 0 var(--superhot-black);
     }
     
-    .game-footer .health-status {
+    .navbar-btn {
+        width: 44px;
+        height: 44px;
+        border: 2px solid var(--superhot-black);
+        box-shadow: 2px 2px 0 var(--superhot-black);
+    }
+    
+    .navbar-btn:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 var(--superhot-grey);
+    }
+    
+    .navbar-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    
+    .health-tooltip {
+        font-size: 11px;
         padding: 6px 8px;
         border: 2px solid var(--superhot-black);
         box-shadow: 2px 2px 0 var(--superhot-black);
+        bottom: 35px;
+    }
+}
+
+/* ===================================
+   EMOJI WATERFALL ANIMATION
+   =================================== */
+
+.emoji-waterfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+.falling-emoji {
+    position: absolute;
+    font-size: 40px;
+    animation: fallDown 3s linear forwards;
+    opacity: 0.9;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.falling-emoji.size-small {
+    font-size: 30px;
+    animation-duration: 3.5s;
+}
+
+.falling-emoji.size-medium {
+    font-size: 40px;
+    animation-duration: 3s;
+}
+
+.falling-emoji.size-large {
+    font-size: 50px;
+    animation-duration: 2.5s;
+}
+
+/* Different fall speeds for variety */
+.falling-emoji.speed-slow {
+    animation-duration: 4s;
+}
+
+.falling-emoji.speed-fast {
+    animation-duration: 2s;
+}
+
+/* Slight rotation variation */
+.falling-emoji.rotate-left {
+    animation-name: fallDownRotateLeft;
+}
+
+.falling-emoji.rotate-right {
+    animation-name: fallDownRotateRight;
+}
+
+@keyframes fallDownRotateLeft {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fallDownRotateRight {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ===================================
+   HOW TO PLAY MODAL
+   =================================== */
+
+.how-to-play-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.how-to-play-modal.hidden {
+    display: none;
+}
+
+.how-to-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+.how-to-play-content {
+    position: relative;
+    z-index: 2;
+    background: var(--superhot-white);
+    border: 6px solid var(--superhot-black);
+    box-shadow: 12px 12px 0px var(--superhot-red);
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.how-to-play-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 20px;
+    border-bottom: 4px solid var(--superhot-black);
+    background: var(--superhot-white);
+}
+
+.how-to-play-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--superhot-black);
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 0px var(--superhot-red);
+}
+
+.how-to-play-close {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    border: 3px solid var(--superhot-black);
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0px var(--superhot-grey);
+}
+
+.how-to-play-close:hover {
+    background: var(--superhot-white);
+    color: var(--superhot-black);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--superhot-grey);
+}
+
+.how-to-play-body {
+    padding: 30px;
+    background: var(--superhot-white);
+}
+
+.how-to-play-text {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.how-to-play-main {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--superhot-black);
+    margin: 0 0 15px 0;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.how-to-play-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--superhot-red);
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.how-to-play-illustration {
+    margin-bottom: 30px;
+}
+
+.illustration-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--superhot-black);
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.mock-cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.mock-cv-option {
+    background: var(--superhot-white);
+    border: 4px solid var(--superhot-black);
+    padding: 15px;
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 4px 4px 0px var(--superhot-black);
+}
+
+.mock-cv-option.fake {
+    background: var(--superhot-red);
+    color: var(--superhot-white);
+    border-color: var(--superhot-red);
+    position: relative;
+}
+
+.mock-option-number {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    border: 2px solid var(--superhot-black);
+}
+
+.mock-cv-option.fake .mock-option-number {
+    background: var(--superhot-white);
+    color: var(--superhot-red);
+    border-color: var(--superhot-white);
+}
+
+.mock-cv-bullet {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--superhot-black);
+    font-weight: 600;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.mock-cv-option.fake .mock-cv-bullet {
+    color: var(--superhot-white);
+}
+
+.fake-indicator {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--superhot-white);
+    text-align: center;
+    background: var(--superhot-black);
+    padding: 5px 10px;
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+    animation: indicatorPulse 2s ease-in-out infinite;
+}
+
+@keyframes indicatorPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+.how-to-play-instructions {
+    display: grid;
+    gap: 15px;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: var(--superhot-light-grey);
+    border: 3px solid var(--superhot-black);
+    box-shadow: 3px 3px 0px var(--superhot-black);
+}
+
+.step-number {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    border: 3px solid var(--superhot-black);
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--superhot-black);
+    line-height: 1.3;
+}
+
+.how-to-play-footer {
+    padding: 20px 30px 30px;
+    background: var(--superhot-white);
+    border-top: 4px solid var(--superhot-black);
+    text-align: center;
+}
+
+
+.start-playing-btn {
+    background: var(--superhot-black);
+    color: var(--superhot-white);
+    border: 6px solid var(--superhot-black);
+    padding: 20px 40px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: none;
+    letter-spacing: 0.05em;
+    box-shadow: 8px 8px 0px var(--superhot-red);
+}
+
+.start-playing-btn:hover {
+    background: var(--superhot-white);
+    color: var(--superhot-black);
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0px var(--superhot-red);
+}
+
+/* Mobile responsiveness for How to Play modal */
+@media (max-width: 768px) {
+    .how-to-play-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        border: 4px solid var(--superhot-black);
+        box-shadow: 6px 6px 0px var(--superhot-red);
     }
     
-    .game-footer .health-status:hover {
-        transform: translate(-1px, -1px);
-        box-shadow: 3px 3px 0 var(--superhot-black);
+    .how-to-play-header {
+        padding: 20px 20px 15px;
     }
     
-    .game-footer .health-tooltip {
-        border: 2px solid var(--superhot-black);
-        box-shadow: 2px 2px 0 var(--superhot-black);
-        font-size: 0.7rem;
-        top: -40px;
+    .how-to-play-title {
+        font-size: 24px;
+    }
+    
+    .how-to-play-close {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .how-to-play-body {
+        padding: 20px;
+    }
+    
+    .how-to-play-main {
+        font-size: 20px;
+    }
+    
+    .how-to-play-sub {
+        font-size: 16px;
+    }
+    
+    .mock-cv-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .mock-cv-option {
+        padding: 12px;
+        min-height: 80px;
+    }
+    
+    .mock-cv-bullet {
+        font-size: 13px;
+        padding-right: 35px;
+    }
+    
+    .instruction-step {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .step-text {
+        font-size: 14px;
+    }
+    
+    .how-to-play-footer {
+        padding: 15px 20px 20px;
+    }
+    
+    .start-playing-btn {
+        padding: 15px 30px;
+        font-size: 16px;
+        box-shadow: 4px 4px 0px var(--superhot-red);
+    }
+    
+    .start-playing-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px var(--superhot-red);
     }
 }
