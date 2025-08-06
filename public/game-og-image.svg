@@ -1,34 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="background: #f5f5f5;">
   <!-- Background -->
-  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect width="1200" height="630" fill="#f5f5f5"/>
   
-  <!-- Brand Logo Circle -->
-  <circle cx="300" cy="315" r="100" fill="#FF6600" stroke="#ffffff" stroke-width="4"/>
-  <text x="300" y="315" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif" font-size="80" text-anchor="middle" dominant-baseline="central">💪</text>
+  <!-- Main Title -->
+  <text x="600" y="150" font-family="Space Grotesk, Arial Black, sans-serif" font-size="90" font-weight="900" fill="#000000" text-anchor="middle" stroke="#FF6600" stroke-width="3">SPOT THE FAKE</text>
+  <text x="600" y="280" font-family="Space Grotesk, Arial Black, sans-serif" font-size="120" font-weight="900" fill="#000000" text-anchor="middle" stroke="#FF6600" stroke-width="3">CV</text>
   
-  <!-- Game Title -->
-  <text x="550" y="250" font-family="Space Grotesk, Arial Black, sans-serif" font-size="72" font-weight="700" fill="#ffffff" text-anchor="start">SPOT THE</text>
-  <text x="550" y="330" font-family="Space Grotesk, Arial Black, sans-serif" font-size="72" font-weight="700" fill="#FF6600" text-anchor="start">FAKE CV</text>
+  <!-- Start Game Button -->
+  <rect x="450" y="380" width="300" height="80" fill="#000000" stroke="#FF6600" stroke-width="4"/>
+  <rect x="454" y="384" width="292" height="72" fill="#FF6600"/>
+  <text x="600" y="435" font-family="Space Grotesk, Arial Black, sans-serif" font-size="28" font-weight="700" fill="#000000" text-anchor="middle">START GAME</text>
   
-  <!-- Subtitle -->
-  <text x="550" y="380" font-family="DM Sans, Arial, sans-serif" font-size="24" fill="#cccccc" text-anchor="start">Test your hiring skills with this interactive game</text>
+  <!-- Keyboard Hint -->
+  <text x="600" y="500" font-family="DM Sans, Arial, sans-serif" font-size="18" fill="#666666" text-anchor="middle">[SPACE]</text>
   
-  <!-- Brand Name -->
-  <text x="550" y="450" font-family="DM Sans, Arial, sans-serif" font-size="20" fill="#888888" text-anchor="start">Created by Ashar Rai Mujeeb</text>
+  <!-- Brand Mark - Small logo in corner -->
+  <circle cx="100" cy="100" r="40" fill="#FF6600"/>
+  <text x="100" y="100" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif" font-size="32" text-anchor="middle" dominant-baseline="central">💪</text>
   
-  <!-- Game Icon Elements -->
-  <rect x="950" y="200" width="60" height="40" fill="#1a1a1a" stroke="#FF6600" stroke-width="2" rx="4"/>
-  <text x="980" y="225" font-family="DM Sans, Arial, sans-serif" font-size="16" fill="#FF6600" text-anchor="middle">CV</text>
-  
-  <rect x="950" y="260" width="60" height="40" fill="#1a1a1a" stroke="#FF6600" stroke-width="2" rx="4"/>
-  <text x="980" y="285" font-family="DM Sans, Arial, sans-serif" font-size="16" fill="#FF6600" text-anchor="middle">CV</text>
-  
-  <rect x="950" y="320" width="60" height="40" fill="#1a1a1a" stroke="#FF6600" stroke-width="2" rx="4"/>
-  <text x="980" y="345" font-family="DM Sans, Arial, sans-serif" font-size="16" fill="#FF6600" text-anchor="middle">CV</text>
-  
-  <rect x="950" y="380" width="60" height="40" fill="#FF6600" stroke="#FF6600" stroke-width="2" rx="4"/>
-  <text x="980" y="405" font-family="DM Sans, Arial, sans-serif" font-size="14" fill="#0a0a0a" text-anchor="middle">FAKE</text>
-  
-  <!-- URL -->
-  <text x="1200" y="610" font-family="JetBrains Mono, Courier, monospace" font-size="18" fill="#666666" text-anchor="end">iarm.xyz/game</text>
+  <!-- Attribution -->
+  <text x="100" y="580" font-family="DM Sans, Arial, sans-serif" font-size="16" fill="#888888">Created by Ashar Rai Mujeeb</text>
+  <text x="1100" y="580" font-family="JetBrains Mono, Courier, monospace" font-size="16" fill="#888888" text-anchor="end">iarm.xyz/game</text>
 </svg>
