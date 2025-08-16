@@ -7,7 +7,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        game: resolve(__dirname, 'game.html')
+        game: resolve(__dirname, 'game.html'),
+        prep: resolve(__dirname, 'prep.html')
       }
     },
     // Copy static assets to dist
