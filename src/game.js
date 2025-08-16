@@ -1203,7 +1203,7 @@ function initializeGame() {
         // Trigger CV download
         const link = document.createElement('a');
         link.href = '/resume.pdf';
-        link.download = 'Ashar_Rai_Mujeeb_Resume.pdf';
+        link.download = 'Ashar_Rai_Mujeeb_CV_2025.pdf';
         link.click();
     });
     

@@ -1799,7 +1799,7 @@ function handleResumeDownload(e) {
 function forceDownloadResume() {
     const link = document.createElement('a');
     link.href = 'resume.pdf';
-    link.download = 'Ashar_RM_PM_CV_iarm.xyz.pdf';
+    link.download = 'Ashar_Rai_Mujeeb_CV_2025.pdf';
     link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
