@@ -1876,45 +1876,37 @@ const keyboardShortcuts = {
         // Keyboard events
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
-        
+
         // Panel toggle events
-        this.trigger.addEventListener('mousedown', function(e) {
-            e.preventDefault(); // Prevent focus on click
-            e.stopPropagation(); // Stop event bubbling
-            e.stopImmediatePropagation(); // Stop all propagation
-            
-            // Temporarily disable pointer events to prevent any browser focus behavior
-            keyboardShortcuts.trigger.style.pointerEvents = 'none';
-            setTimeout(() => {
-                keyboardShortcuts.trigger.style.pointerEvents = 'auto';
-            }, 100);
-        });
-        
         this.trigger.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent default behavior
             e.stopPropagation(); // Stop event bubbling
-            e.stopImmediatePropagation(); // Stop all event propagation
-            
+
             // Preserve scroll position and viewport state
             const scrollPosition = window.pageYOffset;
             const scrollLeft = window.pageXOffset;
-            
+
             // Enforce button position before any potential browser interference
             keyboardShortcuts.enforceButtonPosition();
-            
+
             // Toggle panel
             keyboardShortcuts.togglePanel();
-            
+
             // Restore scroll position and enforce button position again
             setTimeout(() => {
                 window.scrollTo(scrollLeft, scrollPosition);
                 keyboardShortcuts.enforceButtonPosition();
             }, 0);
-            
+
             // Additional enforcement after a short delay
             setTimeout(() => {
                 keyboardShortcuts.enforceButtonPosition();
             }, 10);
+
+            // Remove focus from button to prevent scroll issues
+            if (document.activeElement === keyboardShortcuts.trigger) {
+                keyboardShortcuts.trigger.blur();
+            }
         });
         document.getElementById('shortcuts-close').addEventListener('click', () => this.hidePanel());
         
