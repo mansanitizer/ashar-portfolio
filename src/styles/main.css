@@ -989,6 +989,51 @@ h6 {
     left: 8px;
 }
 
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shuffle-color-btn {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border: 3px solid var(--border-color);
+    padding: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 4px 0px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.shuffle-color-btn:hover {
+    transform: translate(-2px, -2px) rotate(180deg);
+    box-shadow: 6px 6px 0px var(--shadow-color);
+}
+
+.shuffle-color-btn:active {
+    transform: translate(0, 0) rotate(0deg);
+    box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.shuffle-color-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.shuffle-color-btn:hover svg {
+    transform: rotate(180deg);
+}
+
 /* Header Share Dropdown Styles */
 .share-dropdown {
     position: relative;
@@ -1158,9 +1203,22 @@ h6 {
         gap: 15px;
     }
     
+    .hero-buttons {
+        gap: 10px;
+    }
+    
     .play-game-btn {
         padding: 14px 28px;
         font-size: 16px;
+    }
+    
+    .shuffle-color-btn {
+        padding: 14px;
+    }
+    
+    .shuffle-color-btn svg {
+        width: 16px;
+        height: 16px;
     }
     
     .share-dropdown {

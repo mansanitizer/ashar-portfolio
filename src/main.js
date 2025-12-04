@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePostHog();
     initializeGetInTouch();
     initializeResumeDownload();
+    initializeColorShuffle();
     initializeKeyboardShortcuts();
     initializeBentoGrid();
     initializeAIQuery();
@@ -1823,6 +1824,61 @@ function updateHeroResumeButtonText() {
     if (heroResumeBtn) {
         heroResumeBtn.textContent = 'DOWNLOAD CV';
     }
+}
+
+// Color Shuffle Functionality
+function initializeColorShuffle() {
+    const shuffleBtn = document.getElementById('shuffle-color-btn-hero');
+    
+    if (!shuffleBtn) return;
+    
+    shuffleBtn.addEventListener('click', () => {
+        // Get current accent color
+        const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+        
+        // Get a random color from palette that's different from current
+        let newColor;
+        do {
+            newColor = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+        } while (newColor === currentAccent && colorPalettes.length > 1);
+        
+        // Update accent color
+        document.documentElement.style.setProperty('--accent-color', newColor);
+        
+        // Save to localStorage if available
+        if (typeof Storage !== 'undefined') {
+            localStorage.setItem('accent', newColor);
+        }
+        
+        // Update accent color picker active state if elements exist
+        const accentColorElements = document.querySelectorAll('.accent-color');
+        accentColorElements.forEach(color => {
+            color.classList.remove('active');
+            if (color.dataset.color === newColor) {
+                color.classList.add('active');
+            }
+        });
+        
+        // Trigger confetti effect (same as z+x shortcut)
+        createConfettiEffect();
+        
+        // Analytics tracking
+        if (typeof posthog !== 'undefined') {
+            posthog.capture('color_shuffled', {
+                location: 'hero_section',
+                from_color: currentAccent,
+                to_color: newColor,
+                theme: currentTheme || 'dark',
+                colorblind_mode: colorblindMode || false
+            });
+        }
+        
+        // Add rotation animation
+        shuffleBtn.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            shuffleBtn.style.transform = '';
+        }, 300);
+    });
 }
 
 function handleResumeDownload(e) {
