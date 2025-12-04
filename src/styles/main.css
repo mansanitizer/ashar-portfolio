@@ -1391,6 +1391,7 @@ h6 {
 .about-image {
     flex-shrink: 0;
     order: -1;
+    width: 100%;
 }
 
 .profile-image {
@@ -1405,6 +1406,21 @@ h6 {
 }
 
 .profile-image:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0px var(--shadow-color);
+}
+
+.profile-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 24px;
+    border: 5px solid var(--accent-color);
+    box-shadow: 8px 8px 0px var(--shadow-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--card-bg);
+}
+
+.profile-video:hover {
     transform: translate(-2px, -2px);
     box-shadow: 10px 10px 0px var(--shadow-color);
 }
