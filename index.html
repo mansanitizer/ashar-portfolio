@@ -360,13 +360,30 @@
                     </div>
                 </div>
                 <div class="about-image">
+                    <div class="video-thumbnail-wrapper" id="video-thumbnail-wrapper">
+                        <img 
+                            src="/Ashar_Photo.jpg?v=20250817" 
+                            alt="Ashar Rai Mujeeb - Product Manager" 
+                            class="video-thumbnail"
+                            id="video-thumbnail"
+                        >
+                        <button class="play-button" id="play-video-btn" aria-label="Play video">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="40" fill="var(--accent-color)"/>
+                                <path d="M32 26L56 40L32 54V26Z" fill="var(--bg-color)"/>
+                            </svg>
+                        </button>
+                    </div>
                     <iframe 
-                        src="https://www.youtube.com/embed/IlZNzD0GKhw?start=207" 
+                        src="" 
+                        data-src="https://www.youtube.com/embed/IlZNzD0GKhw?start=207&autoplay=1"
                         title="Ashar Rai Mujeeb - Product Manager Video"
                         class="profile-video"
+                        id="youtube-video-iframe"
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
+                        allowfullscreen
+                        style="display: none;">
                     </iframe>
                 </div>
             </div>

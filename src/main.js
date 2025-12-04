@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeWorkModal();
     }, 100);
     initializeSkillsCollapse();
+    initializeVideoThumbnail();
     
     // Add initial loading state
     document.body.style.opacity = '0';
@@ -1360,6 +1361,55 @@ function initializeSkillsCollapse() {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(updateMobileState, 100);
+    });
+}
+
+function initializeVideoThumbnail() {
+    const thumbnailWrapper = document.getElementById('video-thumbnail-wrapper');
+    const playButton = document.getElementById('play-video-btn');
+    const videoIframe = document.getElementById('youtube-video-iframe');
+    
+    if (!thumbnailWrapper || !playButton || !videoIframe) {
+        return; // Elements not found, exit early
+    }
+    
+    function loadAndPlayVideo() {
+        // Get the video source from data-src
+        const videoSrc = videoIframe.getAttribute('data-src');
+        if (videoSrc) {
+            // Set the src to load the video
+            videoIframe.src = videoSrc;
+            // Hide thumbnail wrapper
+            thumbnailWrapper.style.display = 'none';
+            // Show video iframe
+            videoIframe.style.display = 'block';
+            
+            // Track analytics
+            if (typeof posthog !== 'undefined') {
+                posthog.capture('about_video_played', {
+                    location: 'about_section',
+                    theme: currentTheme,
+                    colorblind_mode: colorblindMode
+                });
+            }
+        }
+    }
+    
+    // Add click handlers
+    playButton.addEventListener('click', loadAndPlayVideo);
+    thumbnailWrapper.addEventListener('click', (e) => {
+        // Only trigger if clicking on the wrapper, not the button (to avoid double trigger)
+        if (e.target === thumbnailWrapper || e.target.classList.contains('video-thumbnail')) {
+            loadAndPlayVideo();
+        }
+    });
+    
+    // Keyboard accessibility
+    playButton.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            loadAndPlayVideo();
+        }
     });
 }
 

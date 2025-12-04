@@ -1410,6 +1410,55 @@ h6 {
     box-shadow: 10px 10px 0px var(--shadow-color);
 }
 
+.video-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 24px;
+    border: 5px solid var(--accent-color);
+    box-shadow: 8px 8px 0px var(--shadow-color);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-thumbnail-wrapper:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0px var(--shadow-color);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-button svg circle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.play-button:hover svg circle {
+    fill: var(--hover-accent, var(--accent-color));
+}
+
 .profile-video {
     width: 100%;
     aspect-ratio: 16 / 9;
