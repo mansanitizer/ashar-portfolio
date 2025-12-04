@@ -72,7 +72,7 @@ const PLATFORM_URLS = {
  */
 export function generateShareUrl(platform, context, data = {}) {
     // Use production domain instead of window.location.origin
-    const baseUrl = 'https://iarm.xyz';
+    const baseUrl = 'https://iarm.me';
     let shareUrl = baseUrl;
     let shareText = '';
     
@@ -157,7 +157,7 @@ export function openPlatformShare(platform, context, data = {}) {
  * @returns {Promise} Promise that resolves with copied text
  */
 export async function copyToClipboard(context, platform, data = {}) {
-    const baseUrl = 'https://iarm.xyz';
+    const baseUrl = 'https://iarm.me';
     const shareUrl = context === SHARE_CONTEXTS.GAME ? `${baseUrl}/game.html` : baseUrl;
     
     let shareText = '';
