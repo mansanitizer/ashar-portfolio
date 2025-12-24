@@ -9,7 +9,16 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         game: resolve(__dirname, 'game.html'),
         prep: resolve(__dirname, 'prep.html'),
-        playground: resolve(__dirname, 'playground.html')
+        playground: resolve(__dirname, 'playground.html'),
+        // Project Presentation Pages
+        rabbithole: resolve(__dirname, 'projects/rabbithole.html'),
+        foodbuddy: resolve(__dirname, 'projects/foodbuddy.html'),
+        pdf_proofreader: resolve(__dirname, 'projects/pdf-proofreader.html'),
+        fileops: resolve(__dirname, 'projects/fileops.html'),
+        gg_eink: resolve(__dirname, 'projects/gg-eink.html'),
+        pirate_dj: resolve(__dirname, 'projects/pirate-dj.html'),
+        n8n_automations: resolve(__dirname, 'projects/n8n-automations.html'),
+        bored: resolve(__dirname, 'projects/bored.html')
       }
     },
     // Copy static assets to dist
