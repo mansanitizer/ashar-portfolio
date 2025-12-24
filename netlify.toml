@@ -50,6 +50,18 @@
   to = "/src/assets/:splat"
   status = 301
 
+# Redirect rules for resume download
+[[redirects]]
+  from = "/cv"
+  to = "/resume.pdf"
+  status = 301
+
+# Headers for resume download to force attachment
+[[headers]]
+  for = "/resume.pdf"
+  [headers.values]
+    Content-Disposition = "attachment; filename=Ashar_CV.pdf"
+
 # Handle 404s for missing pages
 [[redirects]]
   from = "/*"
