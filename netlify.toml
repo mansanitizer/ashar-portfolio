@@ -50,6 +50,12 @@
   to = "/src/assets/:splat"
   status = 301
 
+# Redirect rules for playground
+[[redirects]]
+  from = "/playground"
+  to = "/playground.html"
+  status = 200
+
 # Redirect rules for resume download
 [[redirects]]
   from = "/cv"
