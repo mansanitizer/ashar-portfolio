@@ -698,7 +698,7 @@ function initializeAnimations() {
 
 function addMicroInteractions() {
     // Add ripple effect to clickable elements
-    document.querySelectorAll('button, .project-card, .cert-card, .work-item, .accent-color').forEach(element => {
+    document.querySelectorAll('button, .cert-card, .work-item, .accent-color').forEach(element => {
         element.addEventListener('click', createRippleEffect);
     });
 
@@ -752,6 +752,9 @@ function initializeModals() {
     if (projectCards.length > 0) {
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
+                // If it's an anchor tag with an href, never prevent default here
+                if (card.tagName === 'A' && card.getAttribute('href')) return;
+
                 const pdfPath = card.dataset.pdf;
                 if (!pdfPath) return; // Allow default action if not a PDF card
 
