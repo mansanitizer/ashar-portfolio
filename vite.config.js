@@ -8,7 +8,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         game: resolve(__dirname, 'game.html'),
-        prep: resolve(__dirname, 'prep.html')
+        prep: resolve(__dirname, 'prep.html'),
+        playground: resolve(__dirname, 'playground.html')
       }
     },
     // Copy static assets to dist
@@ -16,34 +17,34 @@ export default defineConfig({
     // Generate clean filenames for production
     cssCodeSplit: false
   },
-  
+
   // Development server configuration
   server: {
     port: 3000,
     open: true
   },
-  
+
   // Asset handling
   assetsInclude: ['**/*.pdf', '**/*.mp4', '**/*.vtt'],
-  
+
   // Public directory for static files
   publicDir: 'public',
-  
+
   // Environment variables prefix
   envPrefix: 'VITE_',
-  
+
   // CSS configuration
   css: {
     // Enable CSS modules if needed in future
     modules: false,
     devSourcemap: true
   },
-  
+
   // Define global constants
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.0.0')
   },
-  
+
   // Optimize dependencies
   optimizeDeps: {
     include: ['axios']
