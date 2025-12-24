@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashar Rai Mujeeb - Playground</title>
+    <meta name="description"
+        content="Playground of Ashar Rai Mujeeb - A collection of AI, fintech, and hardware projects.">
+    <meta name="theme-color" content="#FF6600">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Styles -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Vite will inject CSS here in dev, but for now we link mostly for consistency if manually managed -->
+    <!-- Assuming styles are handled via vite or linked. In index.html it said "Vite will inject CSS". 
+         But I see src/styles/main.css. I will link it relative for safety if this is a static file -->
+    <script type="module" src="/src/main.js"></script>
+    <!-- Note: main.js imports css in Vite usually. -->
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-name">ASHAR</span>
+                <span class="brand-title">RM</span>
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="nav-menu nav-menu-desktop">
+                <a href="index.html#about" class="nav-link" tabindex="0">ABOUT</a>
+                <a href="index.html#work" class="nav-link" tabindex="0">WORK</a>
+                <a href="index.html#contact" class="nav-link" tabindex="0">CONTACT</a>
+                <a href="index.html#skills" class="nav-link" tabindex="0">SKILLS</a>
+
+                <!-- Theme Toggle (Simplified from index.html for brevity, assuming main.js handles logic) -->
+                <div class="settings-dropdown">
+                    <button class="settings-btn" id="settings-toggle" aria-expanded="false" aria-haspopup="true"
+                        aria-label="Settings menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z" />
+                        </svg>
+                    </button>
+                    <div class="settings-menu" id="settings-menu">
+                        <div class="settings-section">
+                            <h4>THEME</h4>
+                            <button id="theme-toggle" class="settings-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="settings-section">
+                            <h4>ACCENT COLOR</h4>
+                            <!-- Copied from index.html -->
+                            <div class="accent-picker">
+                                <div class="accent-color" data-color="#FF6600" style="background: #FF6600;"></div>
+                                <div class="accent-color" data-color="#0066FF" style="background: #0066FF;"></div>
+                                <div class="accent-color" data-color="#FF1493" style="background: #FF1493;"></div>
+                                <div class="accent-color" data-color="#32CD32" style="background: #32CD32;"></div>
+                                <div class="accent-color" data-color="#8A2BE2" style="background: #8A2BE2;"></div>
+                                <div class="accent-color" data-color="#20B2AA" style="background: #20B2AA;"></div>
+                                <div class="accent-color" data-color="#FFD700" style="background: #FFD700;"></div>
+                                <div class="accent-color" data-color="#FF69B4" style="background: #FF69B4;"></div>
+                            </div>
+                            <button id="randomizer" class="settings-item randomizer-btn">
+                                <span>Random Color</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Action Buttons -->
+            <div class="mobile-header-actions">
+                <div class="settings-dropdown">
+                    <button class="settings-btn" id="settings-toggle-mobile" aria-expanded="false" aria-haspopup="true"
+                        aria-label="Settings menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z" />
+                        </svg>
+                    </button>
+                    <div class="settings-menu" id="settings-menu-mobile">
+                        <div class="settings-section">
+                            <h4>THEME</h4>
+                            <button id="theme-toggle-mobile" class="settings-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="settings-section">
+                            <h4>ACCENT COLOR</h4>
+                            <!-- Copied from index.html -->
+                            <div class="accent-picker">
+                                <div class="accent-color" data-color="#FF6600" style="background: #FF6600;"></div>
+                                <div class="accent-color" data-color="#0066FF" style="background: #0066FF;"></div>
+                                <div class="accent-color" data-color="#FF1493" style="background: #FF1493;"></div>
+                                <div class="accent-color" data-color="#32CD32" style="background: #32CD32;"></div>
+                                <div class="accent-color" data-color="#8A2BE2" style="background: #8A2BE2;"></div>
+                                <div class="accent-color" data-color="#20B2AA" style="background: #20B2AA;"></div>
+                                <div class="accent-color" data-color="#FFD700" style="background: #FFD700;"></div>
+                                <div class="accent-color" data-color="#FF69B4" style="background: #FF69B4;"></div>
+                            </div>
+                            <button id="randomizer-mobile" class="settings-item randomizer-btn">
+                                <span>Random Color</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+        style="padding-top: 100px; padding-bottom: 60px; max-width: 1400px; margin: 0 auto; padding-left: 30px; padding-right: 30px;">
+        <h1 style="margin-bottom: 40px; text-align: center; font-size: clamp(3rem, 6vw, 5rem);">PLAYGROUND</h1>
+
+        <div class="projects-grid">
+            <!-- Rabbithole -->
+            <a href="https://rabbithole.iarm.me" target="_blank" class="project-item project-card"
+                style="text-decoration: none; color: inherit; display: block;">
+                <!-- Using a placeholder pattern or emoji since no image provided for most -->
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    🐰
+                    <div class="project-overlay">
+                        <span class="view-pdf">VISIT SITE</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Rabbithole</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; color: #00cc66;">
+                        ● Live</div>
+                    <p>Infinite personalized AI Wikipedia with search and discovery.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Agents</span>
+                        <span class="tag">Vector Embeddings</span>
+                        <span class="tag">Capacitor</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">Prompt Optimization</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Foodbuddy -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    🥑
+                    <div class="project-overlay">
+                        <span class="view-pdf">PRIVATE</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Foodbuddy</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained (Private)</div>
+                    <p>Personalized AI nutrition with accountability partner and social features.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Multimodal</span>
+                        <span class="tag">GCP e2 Micro</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CrewAI PDF Proofreader -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    📄
+                    <div class="project-overlay">
+                        <span class="view-pdf">PUBLIC</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>CrewAI PDF Proofreader</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained (Public)</div>
+                    <p>Proofread and style large documents quickly and agentically.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Agentic Frameworks</span>
+                        <span class="tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FileOps -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    📂
+                    <div class="project-overlay">
+                        <span class="view-pdf">REPO ON REQUEST</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>FileOps</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained</div>
+                    <p>File operations (r/w) and context orchestration tool for working across AI agents locally.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">MCP</span>
+                        <span class="tag">Node JS</span>
+                        <span class="tag">Context Engineering</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GG -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    📟
+                    <div class="project-overlay">
+                        <span class="view-pdf">REPO ON REQUEST</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>GG (E-ink Learner)</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained</div>
+                    <p>E-ink learning device for children to enjoy, learn and interact with the world in a healthy and
+                        positive manner.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Multimodal</span>
+                        <span class="tag">Physical Devices</span>
+                        <span class="tag">Cloud Run</span>
+                        <span class="tag">Serverless</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pirate DJ -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    🎧
+                    <div class="project-overlay">
+                        <span class="view-pdf">REPO ON REQUEST</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Pirate DJ</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained</div>
+                    <p>Curate and listen to new playlists with a DJ companion.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Multimodal</span>
+                        <span class="tag">TTS</span>
+                        <span class="tag">11labs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- n8n Automations -->
+            <div class="project-item project-card">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    🔄
+                    <div class="project-overlay">
+                        <span class="view-pdf">UNMAINTAINED</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>n8n Automations</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">●
+                        Unmaintained</div>
+                    <p>Backbone for custom triggers, actions, outputs.</p>
+                    <div class="project-tags">
+                        <span class="tag">Automation</span>
+                        <span class="tag">Workflows</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bored? Play Game -->
+            <a href="game.html" class="project-item project-card"
+                style="text-decoration: none; color: inherit; display: block;">
+                <div class="project-thumbnail"
+                    style="display: flex; align-items: center; justify-content: center; background: var(--hover-bg); font-size: 5rem;">
+                    🎮
+                    <div class="project-overlay">
+                        <span class="view-pdf">PLAY GAME</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Bored?</h3>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 10px; color: var(--accent-color);">
+                        ● Play Game</div>
+                    <p>Take a break and play a quick game.</p>
+                    <div class="project-tags">
+                        <span class="tag">Proxmox</span>
+                        <span class="tag">Virtualization</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ASHAR RAI MUJEEB</h4>
+                <p>Product Manager passionate about launching innovative products and driving user growth.</p>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#work">Work</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONNECT</h4>
+                <div class="social-links">
+                    <!-- Simplified links, actual links in index.html -->
+                    <a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank">LinkedIn</a>
+                    <a href="mailto:asharrm18@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ashar Rai Mujeeb. Built with <span class="accent-text">Claude Code</span>.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
