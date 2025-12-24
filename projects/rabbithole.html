@@ -51,46 +51,342 @@
         </div>
 
         <article class="blog-content">
-            <h2>The Infinite Wikipedia</h2>
-            <p>Rabbithole is more than just a search engine; it's a personalized knowledge discovery engine designed to
-                cure curiosity. In an era where information is abundant but scattered, Rabbithole aims to synthesize
-                complex topics into digestible, infinitely explorable learning paths.</p>
 
-            <p>The core concept was simple: What if Wikipedia was written specifically for you, right now, responding to
-                exactly what you're curious about?</p>
+            <!-- ============================================ -->
+            <!-- PART I: THE MARKET NARRATIVE                 -->
+            <!-- ============================================ -->
+            <span class="section-label">PART I: THE MARKET NARRATIVE</span>
 
-            <blockquote>
-                "Discovery is not about finding what you know you're looking for, but stumbling upon what you didn't
-                know you needed."
-            </blockquote>
+            <h2>Market Intelligence: User Frustrations with Short-Form Video</h2>
+            <p>The following analysis synthesizes data from 2024–2025 scientific reports and user surveys regarding the
+                conflict between short-form video consumption (TikTok/Reels) and deep reading habits.</p>
 
-            <h2>How It Works</h2>
-            <p>Under the hood, Rabbithole orchestrates a complex dance of AI agents. When a user enters a topic, the
-                system doesn't just "search" for it. Instead:</p>
-
+            <h3>1. The "TikTok Brain" Phenomenon</h3>
+            <p>Recent meta-analyses (late 2024/early 2025) have validated user complaints with clinical data:</p>
             <ul>
-                <li><strong>Intent Analysis:</strong> An agent analyzes the user's query to understand the depth and
-                    context desired.</li>
-                <li><strong>Content Synthesis:</strong> Multiple LLMs work in parallel to draft a comprehensive
-                    overview.</li>
-                <li><strong>Dynamic Linking:</strong> The most interesting part—keywords in the generated text become
-                    "portals" or "rabbit holes" to deeper content. Clicking one spawns a new generation task instantly.
+                <li>
+                    <strong>"Popcorn Brain" / Attentional Residue:</strong><br>
+                    A 2025 review in Psychological Bulletin linked heavy SFV engagement to deficits in inhibitory
+                    control. Users physically struggle to "inhibit" the impulse to switch tasks.
+                </li>
+                <li>
+                    <strong>The 47-Second Threshold:</strong><br>
+                    Attention span studies indicate focus on a screen has dropped to ~47 seconds before the urge to
+                    switch windows kicks in. This makes the 15-20 minute immersion required for a book neurologically
+                    painful.
+                </li>
+                <li>
+                    <strong>Dopamine Desensitization:</strong><br>
+                    The "variable reward schedule" of feeds desensitizes the brain's reward system, making text appear
+                    "insufferably boring" by comparison.
                 </li>
             </ul>
 
-            <h2>Technical Challenges</h2>
-            <h3>State Management & Context</h3>
-            <p>Keeping track of a user's journey through multiple levels of "rabbit holes" required a robust state
-                management system. We utilized a graph-based data structure to track the relationship between topics.
+            <h3>2. User Frustrations: "I Can't Read Anymore"</h3>
+            <p>Users are not just bored; they are experiencing a loss of identity as readers.</p>
+            <ul>
+                <li>
+                    <strong>The "Clunky" Text Effect:</strong><br>
+                    Users report text feels "impenetrable."
+                    <blockquote>"I used to lose time in books; now it takes real effort... my brain has to work harder."
+                    </blockquote>
+                </li>
+                <li>
+                    <strong>The "Tsundoku" of Guilt:</strong><br>
+                    Buying books for the aesthetic but failing to read them creates anxiety.
+                    <blockquote>"My TBR pile isn't a library anymore; it's just evidence of my broken attention span."
+                    </blockquote>
+                </li>
+            </ul>
+
+            <h3>3. The Migration to Passive Learning</h3>
+            <p>Curiosity hasn't died; it just migrated to lower-friction formats.</p>
+            <ul>
+                <li>
+                    <strong>The Podcast Boom:</strong><br>
+                    While non-fiction print sales fell <strong>3.1%</strong> in early 2025, business/education podcast
+                    streams surged <strong>34%</strong>.
+                </li>
+                <li>
+                    <strong>The Audio Compromise:</strong><br>
+                    Users are flocking to audiobooks and podcasts because they <em>want</em> to learn but can't stomach
+                    the friction of text.
+                </li>
+            </ul>
+
+            <h3>The Business Case: A Billion-Dollar Void</h3>
+            <p>Short-form learning platforms represent a massive, validated market.</p>
+
+            <div class="market-grid">
+                <div class="market-card">
+                    <span class="label">TAM</span>
+                    <h4>600M+</h4>
+                    <p>Global podcast listeners + active users of micro-learning apps (e.g., Duolingo, Blinkist).</p>
+                </div>
+                <div class="market-card">
+                    <span class="label">TOM</span>
+                    <h4>~50M</h4>
+                    <p>English-speaking smartphone users (18-45) actively seeking self-improvement content.</p>
+                </div>
+                <div class="market-card">
+                    <span class="label">SOM</span>
+                    <h4>500k</h4>
+                    <p>Conservative capture of ~1% of TOM within 3-5 years ($30M-$50M ARR opportunity).</p>
+                </div>
+            </div>
+
+
+            <!-- ============================================ -->
+            <!-- PART II: THE PRODUCT DEFINITION              -->
+            <!-- ============================================ -->
+            <span class="section-label">PART II: THE PRODUCT DEFINITION (PROBLEM SPACE)</span>
+
+            <div class="pm-box">
+                <span class="pm-header">Formal Problem Statement</span>
+                <div class="pm-statement">
+                    <p style="margin-top: 0; margin-bottom: 15px;">
+                        "For <strong>knowledge-seeking smartphone users</strong> who habitually doomscroll, the current
+                        experience of <strong>SFV consumption</strong> leads to 'brain rot' because the <strong>dopamine
+                            feedback loop creates a 'scan-and-shift' state</strong> that makes deep reading physically
+                        difficult."
+                    </p>
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px; padding-left: 15px; border-left: 3px solid var(--accent-color);">
+                    <div>
+                        <strong style="color: var(--accent-color);">Functional Job:</strong><br>
+                        Utilize 5-15 minute gaps for high-signal discovery without friction.
+                    </div>
+                    <div>
+                        <strong style="color: var(--accent-color);">Emotional Job:</strong><br>
+                        Convert "wasted time" guilt into a feeling of productive intellectual curiosity.
+                    </div>
+                </div>
+
+                <div class="pm-grid" style="margin-top: 30px;">
+                    <div class="pm-item">
+                        <strong>Constraints & Non-Goals</strong>
+                        <ul>
+                            <li><strong>NO</strong> curing addiction/replacing TikTok.</li>
+                            <li><strong>NO</strong> training users back to long-form.</li>
+                            <li><strong>MUST</strong> work within 47-second spans.</li>
+                        </ul>
+                    </div>
+                    <div class="pm-item">
+                        <strong>Validation Hypotheses</strong>
+                        <ul>
+                            <li><strong>H1:</strong> Recall ≥1 fact after 10 mins.</li>
+                            <li><strong>H2:</strong> Session feels "productive."</li>
+                            <li><strong>H3:</strong> Engagement >5 cards/session.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ============================================ -->
+            <!-- PART III: THE SOLUTION SPACE                 -->
+            <!-- ============================================ -->
+            <span class="section-label">PART III: THE SOLUTION SPACE</span>
+
+            <h2>V1 Solution Summary</h2>
+            <p>
+                <strong>The Elevator Pitch:</strong><br>
+                Rabbithole is a swipeable, card-based feed of bite-sized, AI-generated facts around a chosen topic that
+                can be explored via tap-to-deepen "holes" within a 5–15 minute session.
             </p>
 
-            <h3>Latency Optimization</h3>
-            <p>Generating high-quality content takes time. To keep the experience fluid, we implemented aggressive
-                streaming and optimistic UI updates. We use <code>Vercel AI SDK</code> for streaming responses to ensure
-                the user feels immediate feedback.</p>
+            <div class="pm-grid">
+                <div class="pm-item">
+                    <strong>Core Mechanics (V1)</strong>
+                    <ul>
+                        <li><strong>Infinite Topic Feed:</strong>&nbsp; Never-ending stream of fact cards.</li>
+                        <li><strong>Micro-Holes:</strong>&nbsp; Tap keywords to spawn a sub-feed (1-2 layers deep).</li>
+                        <li><strong>Productivity Signal:</strong>&nbsp; Visual "facts collected" counter.</li>
+                        <li><strong>Save for Later:</strong>&nbsp; One-tap bookmarking for deep reading later.</li>
+                    </ul>
+                </div>
+                <div class="pm-item">
+                    <strong>Success Metrics (KPIs)</strong>
+                    <ul>
+                        <li><strong>Activation:</strong>&nbsp; First session with ≥5 cards viewed + "productive" rating.
+                        </li>
+                        <li><strong>Engagement:</strong>&nbsp; Median cards viewed per session > 10.</li>
+                        <li><strong>Learning Proxy:</strong>&nbsp; % of users passing a 1-question recall check
+                            (optional).</li>
+                    </ul>
+                </div>
+            </div>
 
-            <pre><code class="language-typescript">// Simplified example of the streaming architecture
-export async function POST(req: Request) {
+            <h3>Solution Options Considered</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Approach</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Micro-Chapters</strong></td>
+                            <td>High depth/integrity.</td>
+                            <td>Too much text friction (high cognitive load).</td>
+                            <td>Discarded</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Audio-First Feed</strong></td>
+                            <td>Lowest friction.</td>
+                            <td>Hard to skim/scan; passive retention is lower.</td>
+                            <td>Postponed (V2)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Smart Card Feed</strong></td>
+                            <td>Matches swipe habit; granular; skimmable.</td>
+                            <td>Risk of disjointed context.</td>
+                            <td><strong>Selected (V1)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>V1 Jobs-to-be-Done (Detail)</h3>
+            <div class="v1-section">
+                <div class="v1-item">
+                    <h3>1. Who is it for?</h3>
+                    <p>The <em>intellectually aspiring doomscroller</em> who loves feeds but hates the post-binge
+                        regret.</p>
+                </div>
+                <div class="v1-item">
+                    <h3>2. What is the core job?</h3>
+                    <p><em>"Turn passive downtime into guilt-free discovery"</em> using existing swipe habits.</p>
+                </div>
+                <div class="v1-item">
+                    <h3>3. Success Signal (2 Weeks)</h3>
+                    <p>The "Cocktail Party Effect": spontaneously citing a fact learned in the app during conversation.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ============================================ -->
+            <!-- PART IV: UX ARTIFACTS                        -->
+            <!-- ============================================ -->
+            <span class="section-label">PART IV: UX ARTIFACTS</span>
+
+            <h2>V1 Core Flows</h2>
+            <p>Visualizing the primary user journey: Entry → Swipe → Deep Dive → Exit.</p>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="#" class="cta-button" style="margin-top: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                        style="vertical-align: middle; margin-right: 8px;">
+                        <polygon points="5,3 19,12 5,21"></polygon>
+                    </svg>
+                    Watch Video
+                </a>
+            </div>
+
+
+            <!-- ============================================ -->
+            <!-- PART V: RESEARCH APPENDIX                    -->
+            <!-- ============================================ -->
+            <span class="section-label">PART V: RESEARCH APPENDIX</span>
+
+            <h3>Summary Table: The Friction Points</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Frustration</th>
+                            <th>User Description</th>
+                            <th>Underlying Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>"The Glaze Over"</strong></td>
+                            <td>Eyes moving without comprehension.</td>
+                            <td>Cognitive Load: Brain conditioned for visual stimuli.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"The Itch"</strong></td>
+                            <td>Physical discomfort when not checking phone.</td>
+                            <td>Dopamine Withdrawal: Craving the fast reward loop.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"The Pile"</strong></td>
+                            <td>Anxiety looking at unread books.</td>
+                            <td>Aspiration/Reality Gap.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"The Audit"</strong></td>
+                            <td>Listening but retaining little.</td>
+                            <td>Passive Consumption: Illusion of learning.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Primary Sources & Validation</h3>
+            <ul class="sources-list">
+                <li>
+                    <strong>Systematic Review on Short-Form Video (2025):</strong>
+                    <a href="https://www.psypost.org/large-meta-analysis-links-tiktok-and-instagram-reels-to-poorer-cognitive-and-mental-health/"
+                        target="_blank">Psychological Bulletin</a> — linkage to inhibitory control deficits.
+                </li>
+                <li>
+                    <strong>Scan-and-Shift Hypothesis (2025):</strong>
+                    <a href="https://www.sdsu.edu/news/2025/08/sdsu-study-links-tiktok-scrolling-to-poor-study-focus"
+                        target="_blank">SDSU Eye-tracking study</a> — reading patterns.
+                </li>
+                <li>
+                    <strong>Reading Decline (2025):</strong>
+                    <a href="https://news.ufl.edu/2025/08/reading-for-pleasure-study/" target="_blank">University of
+                        Florida/iScience</a> — 40% drop in pleasure reading.
+                </li>
+                <li>
+                    <strong>Attention Spans:</strong>
+                    <a href="https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans"
+                        target="_blank">Gloria Mark/UC Irvine</a> — drop to 47 seconds.
+                </li>
+                <li>
+                    <strong>Market Stats:</strong>
+                    <a href="https://omr.com/en/reviews/contenthub/tools-blinkist-app-user-happy"
+                        target="_blank">Blinkist</a> (19M users) •
+                    <a href="https://riverside.com/blog/podcast-statistics" target="_blank">Podcasts</a> (580M
+                    listeners).
+                </li>
+            </ul>
+
+
+            <!-- ============================================ -->
+            <!-- PART VI: TECHNICAL SOLUTION                  -->
+            <!-- ============================================ -->
+            <span class="section-label">PART VI: TECHNICAL SOLUTION</span>
+
+            <h2>How It Works: The "Infinite Wikipedia"</h2>
+            <p>Rabbithole orchestrates a complex dance of AI agents to create a personalized knowledge feed.</p>
+            <ul>
+                <li><strong>Intent Analysis:</strong>&nbsp; Agents analyze query depth/context.</li>
+                <li><strong>Content Synthesis:</strong>&nbsp; Parallel LLMs draft comprehensive overviews.</li>
+                <li><strong>Dynamic Linking:</strong>&nbsp; Keywords become "portals" to deeper content.</li>
+            </ul>
+
+            <h3>Technical Challenges</h3>
+            <p>
+                <strong>Latency:</strong><br>
+                Utilizing <code>Vercel AI SDK</code> for aggressive streaming to match "feed speed."
+            </p>
+            <p>
+                <strong>State:</strong><br>
+                Graph-based structures to track the user's journey through topic nodes.
+            </p>
+
+            <pre><code class="language-typescript">export async function POST(req: Request) {
   const { messages } = await req.json();
   const response = await openai.createChatCompletion({
     model: 'gpt-4',
@@ -100,11 +396,9 @@ export async function POST(req: Request) {
   return OpenAIStream(response);
 }</code></pre>
 
-            <h2>Mobile Adaptation</h2>
-            <p>Bringing this experience to mobile was crucial for "on-the-go" learning. We used
-                <strong>Capacitor</strong> to wrap our Next.js web application into a native Android app.</p>
-
-            <p>Key adaptations included:</p>
+            <h3>Mobile Adaptation</h3>
+            <p>Built with <strong>Capacitor</strong> to bring the Next.js web app to Android with native interactions:
+            </p>
             <ul>
                 <li>Touch-optimized interactions (swipe to save, tap to explore).</li>
                 <li>Native sharing capabilities.</li>
@@ -116,6 +410,7 @@ export async function POST(req: Request) {
                 relevant images (using Flux or Midjourney APIs) and even short audio summaries.</p>
 
             <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button">Enter the Rabbithole</a>
+
         </article>
 
         <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
