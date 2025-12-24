@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirate DJ - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">Pirate DJ</h1>
+            <div class="blog-meta">
+                <span>STATUS: ARCHIVED</span>
+                <span>•</span>
+                <span>PLATFORM: WEB APP</span>
+                <span>•</span>
+                <span>YEAR: 2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">ElevenLabs</span>
+                <span class="blog-tag">Spotify API</span>
+                <span class="blog-tag">Generative Audio</span>
+                <span class="blog-tag">Design</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            🎧
+        </div>
+
+        <article class="blog-content">
+            <h2>Bringing the Radio Back</h2>
+            <p>Spotify killed the radio star—or at least, the radio DJ. While algorithmic playlists are convenient, they
+                lack soul. They lack the context, the trivia, and the human connection that a great radio host provides.
+            </p>
+
+            <p><strong>Pirate DJ</strong> was an experiment to bring that back using AI.</p>
+
+            <h2>The Experience</h2>
+            <p>You connect your Spotify account. The system analyzes your "On Repeat" or "Discover Weekly" playlist.
+                Then, between every 3-4 songs, it injects a short audio segment. </p>
+
+            <p>But it's not a generic "Up next is..." voice. The AI DJ:</p>
+            <ul>
+                <li><strong>Reads the Vibe:</strong> Analyzes the tempo and energy of the upcoming tracks.</li>
+                <li><strong>Drops Knowledge:</strong> Pulls trivia about the artist or the album from the web.</li>
+                <li><strong>Has Personality:</strong> You can choose your host. Want a smooth jazz voice or a
+                    high-energy pop host?</li>
+            </ul>
+
+            <h2>Under the Hood</h2>
+            <p>This project was a mashup of the <strong>Spotify Web Playback SDK</strong> and <strong>ElevenLabs
+                    API</strong>.</p>
+
+            <ol>
+                <li><strong>Analysis:</strong> We fetch the playlist metadata.</li>
+                <li><strong>Scripting:</strong> GPT-4 writes a short script connecting the previous song to the next one
+                    (e.g., "That was 'Dreams' by Fleetwood Mac. Speaking of dreams, this next track...").</li>
+                <li><strong>Synthesis:</strong> The script is sent to ElevenLabs for ultra-low latency TTS generation.
+                </li>
+                <li><strong>Playback:</strong> The audio buffer is injected into the audio stream via the Web Audio API.
+                </li>
+            </ol>
+
+            <h2>Lessons</h2>
+            <p>The main challenge was timing. Radio is seamless. An AI pausing for 5 seconds to "think" ruins the flow.
+                We solved this by pre-generating the "links" (the DJ talk) while the previous song was playing.</p>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>

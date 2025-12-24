@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bored? Play Game - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">Bored? (Spot the Fake CV)</h1>
+            <div class="blog-meta">
+                <span>STATUS: LIVE</span>
+                <span>•</span>
+                <span>PLATFORM: WEB GAME</span>
+                <span>•</span>
+                <span>YEAR: 2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">Gamification</span>
+                <span class="blog-tag">Recruitment</span>
+                <span class="blog-tag">Interactive</span>
+                <span class="blog-tag">Viral Marketing</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            🎮
+        </div>
+
+        <article class="blog-content">
+            <h2>Making Recruitment Fun?</h2>
+            <p>Let's be honest: reviewing CVs is boring. "Spot the Fake CV" is a gamified take on the hiring process. It
+                challenges HR professionals and hiring managers to identify AI-generated or obviously fake bullet points
+                hidden among real, high-quality achievements.</p>
+
+            <p>It turns the mundane task of screening into a competitive sport.</p>
+
+            <h2>The Game Loop</h2>
+            <p>The rules are simple: You are presented with 4 bullet points. 3 are real, high-impact achievements (e.g.,
+                "Increased revenue by 20%..."). 1 is a plausible but fake hallucination. You have 10 seconds to spot the
+                fake.</p>
+
+            <h2>Technical Implementation</h2>
+            <p>The game is built with vanilla JavaScript for maximum performance and zero dependencies. However, the
+                content is dynamic.</p>
+
+            <ul>
+                <li><strong>Content Generation:</strong> We used a fine-tuned GPT-3.5 model to generate thousands of
+                    "fake" CV bullets that sound <em>almost</em> real but have subtle flaws (e.g., impossible metrics,
+                    vague buzzwords).</li>
+                <li><strong>Scoring Algorithm:</strong> The score isn't just +1 for a correct answer. It factors in
+                    speed and streaks, rewarding "flow state".</li>
+                <li><strong>Analytics:</strong> We track which "fakes" trick people the most, effectively building a
+                    dataset of "what a believable lie looks like" vs "what a good resume looks like".</li>
+            </ul>
+
+            <blockquote>
+                "Gamification is the most effective way to test domain expertise. If you can't spot the lie, do you know
+                the job?"
+            </blockquote>
+
+            <a href="../game.html" class="cta-button">PLAY THE GAME</a>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>

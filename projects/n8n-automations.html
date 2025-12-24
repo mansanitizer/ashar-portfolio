@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Automations - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">n8n Automations</h1>
+            <div class="blog-meta">
+                <span>STATUS: ARCHIVED</span>
+                <span>•</span>
+                <span>PLATFORM: SELF-HOSTED</span>
+                <span>•</span>
+                <span>YEAR: 2023-2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">Workflow Automation</span>
+                <span class="blog-tag">Webhooks</span>
+                <span class="blog-tag">API Integration</span>
+                <span class="blog-tag">Self-Hosting</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            🔄
+        </div>
+
+        <article class="blog-content">
+            <h2>The Glue of the Internet</h2>
+            <p>Every developer eventually builds a messy collection of scripts to automate their life. I decided to
+                professionalize mine using <strong>n8n</strong>, a fair-code workflow automation tool.</p>
+
+            <p>This "project" represents a collection of complex, self-healing workflows that acted as the backend for
+                my personal life and other prototypes.</p>
+
+            <h2>Notable Flows</h2>
+
+            <h3>1. The "Morning Brief"</h3>
+            <p>A workflow that triggered at 6:00 AM daily:</p>
+            <ul>
+                <li>Fetched weather data for my location.</li>
+                <li>Scraped the top headlines from tailored RSS feeds (TechCrunch, Hacker News).</li>
+                <li>Summarized them using OpenAI API.</li>
+                <li>Sent a formatted digest to my Telegram.</li>
+            </ul>
+
+            <h3>2. Social Media Monitor</h3>
+            <p>A webhook-based listener that watched for brand mentions (or mentions of specific keywords like "AI
+                Agents") on Twitter/X and filtered out noise using sentiment analysis before flagging them in a Notion
+                database for review.</p>
+
+            <h3>3. Prototype Backend</h3>
+            <p>Before spinning up a dedicated backend for a new idea, I often used n8n as a rapid prototype API. I could
+                expose a webhook, process the JSON payload, call 3rd party APIs, and return a response, effectively
+                creating a serverless backend visually.</p>
+
+            <h2>Why n8n?</h2>
+            <p>Unlike Zapier or Make, n8n is self-hostable. This meant no data privacy concerns and no per-execution
+                costs for my high-volume polling workflows. Running it on a simple VPS gave me total control.</p>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>

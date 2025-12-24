@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrewAI PDF Proofreader - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">CrewAI PDF Proofreader</h1>
+            <div class="blog-meta">
+                <span>STATUS: PUBLIC (ARCHIVED)</span>
+                <span>•</span>
+                <span>PLATFORM: PYTHON / CLI</span>
+                <span>•</span>
+                <span>YEAR: 2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">CrewAI</span>
+                <span class="blog-tag">Agentic Workflows</span>
+                <span class="blog-tag">Python</span>
+                <span class="blog-tag">PDF Processing</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            📄
+        </div>
+
+        <article class="blog-content">
+            <h2>Agents as Editors</h2>
+            <p>Editing large technical documents is tedious. You need to check for grammar, consistency in tone,
+                formatting standards, and technical accuracy. Doing this sequentially takes hours. I wanted to see if I
+                could spin up a "team" of AI agents to do it in parallel.</p>
+
+            <p>Using the <strong>CrewAI</strong> framework, I built a system where different agents took on different
+                personas:</p>
+            <ul>
+                <li><strong>The Grammarian:</strong> Focused solely on syntax and grammar.</li>
+                <li><strong>The Stylist:</strong> Ensured the tone matched the target audience (e.g., "professional" vs
+                    "casual").</li>
+                <li><strong>The Fact-Checker:</strong> Cross-referenced claims (limited to internal consistency).</li>
+            </ul>
+
+            <h2>The Workflow</h2>
+            <p>The system digests a PDF, splits it into chunks, and assigns these chunks to the agent crew. The agents
+                critique the text and propose changes. A final "Manager Agent" reviews these proposals and compiles the
+                final output.</p>
+
+            <pre><code class="language-python"># Defining the agents
+editor = Agent(
+  role='Senior Editor',
+  goal='Ensure the document flows logically and is free of errors',
+  backstory="""You are a veteran editor at a top tech publisher. 
+  You hate passive voice and love clarity.""",
+  verbose=True,
+  allow_delegation=True
+)
+
+# Defining the task
+proofread_task = Task(
+  description=f"""Analyze the following text section: {text_chunk}""",
+  agent=editor
+)</code></pre>
+
+            <h2>Challenges & Learnings</h2>
+            <p>Building this taught me a lot about <strong>Agent orchestration</strong>. The biggest challenge was
+                "hallucination loops," where one agent would correct something, and another would correct it back.
+                Strict prompt engineering and clear hierarchy (using the Manager agent) were essential to break these
+                loops.</p>
+
+            <p>While effective for rough drafts, I found that for final polish, a human in the loop is still
+                indispensable. However, this tool cut down the "first pass" editing time by about 80%.</p>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>

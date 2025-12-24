@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodbuddy - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">Foodbuddy</h1>
+            <div class="blog-meta">
+                <span>STATUS: PRIVATE (UNMAINTAINED)</span>
+                <span>•</span>
+                <span>PLATFORM: WEB APP</span>
+                <span>•</span>
+                <span>YEAR: 2023</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">AI Vision</span>
+                <span class="blog-tag">Health Tech</span>
+                <span class="blog-tag">GCP</span>
+                <span class="blog-tag">Social</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            🥑
+        </div>
+
+        <article class="blog-content">
+            <h2>The Accountability Partner You Can Eat With</h2>
+            <p>Foodbuddy aimed to solve the hardest part of dieting: consistency. Most trackers require tedious manual
+                entry. Foodbuddy used early multimodal AI models to simply allow users to "snap and track". But beyond
+                tracking, it was about <em>accountability</em>.</p>
+
+            <blockquote>
+                "People don't need another calculator. They need a friend who gently judges their late-night pizza."
+            </blockquote>
+
+            <h2>Core Features</h2>
+            <ul>
+                <li><strong>Snap-to-Track:</strong> Leveraging GPT-4 Vision (and later Gemini Pro Vision), users could
+                    upload a photo of their meal. The AI estimated calories, macros, and ingredients with surprising
+                    accuracy.</li>
+                <li><strong>The AI Coach:</strong> A personality-driven AI chatbot that would comment on your meals. It
+                    could be supportive ("Great salad!") or sassy ("Is that your third cookie?").</li>
+                <li><strong>Social Circles:</strong> Small, private groups where friends could see each other's logs—not
+                    the specific calories, but a "Health Score" for the day, fostering positive peer pressure.</li>
+            </ul>
+
+            <h2>Backend Architecture</h2>
+            <p>We hosted the core services on a <strong>GCP e2-micro</strong> instance to keep costs near zero. The
+                challenge was managing the heavy lifting of image processing.</p>
+
+            <pre><code class="language-javascript">// Handling the image upload and analysis queue
+const processImageQueue = async (imageUrl, userId) => {
+    // Determine complexity
+    const analysis = await aiService.analyzeFood(imageUrl);
+    
+    // Store nutritional data
+    await db.saveLog({
+        userId,
+        calories: analysis.calories,
+        macros: analysis.macros,
+        image: imageUrl
+    });
+    
+    // Trigger the accountability agent
+    await coachAgent.reactToMeal(userId, analysis);
+}</code></pre>
+
+            <h2>Why It's Unmaintained</h2>
+            <p>While the prototype was functional and the "snap-to-track" feature was magical, the unit economics of
+                processing every meal image with high-end LLMs were difficult for a free side project. Additionally, the
+                latency in 2023 for vision models was a friction point.</p>
+
+            <p>However, the lessons learned here directly influenced the "Context Engineering" work in later projects
+                like FileOps.</p>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>

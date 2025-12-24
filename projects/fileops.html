@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileOps - Project Deep Dive</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS for Theme functionality -->
+    <script type="module" src="../src/main.js"></script>
+</head>
+
+<body>
+
+    <div class="blog-container">
+        <a href="../playground.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO PLAYGROUND
+        </a>
+
+        <header class="blog-header">
+            <h1 class="blog-title">FileOps</h1>
+            <div class="blog-meta">
+                <span>STATUS: ARCHIVED</span>
+                <span>•</span>
+                <span>PLATFORM: NODE.JS / CLI</span>
+                <span>•</span>
+                <span>YEAR: 2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="blog-tag">Context Engineering</span>
+                <span class="blog-tag">Tool Use</span>
+                <span class="blog-tag">Local LLMs</span>
+                <span class="blog-tag">Automation</span>
+            </div>
+        </header>
+
+        <div class="blog-hero">
+            📂
+        </div>
+
+        <article class="blog-content">
+            <h2>Bridging LLMs and the Filesystem</h2>
+            <p>Before standard protocols like the <strong>Model Context Protocol (MCP)</strong> became mainstream,
+                giving LLMs safe, structured access to a local filesystem was the Wild West. FileOps was my solution to
+                this problem.</p>
+
+            <p>It was designed as a "context orchestration" layer. It didn't just let an LLM write a file; it managed
+                <em>what</em> the LLM knew about the workspace. It prevented context window overflow by intelligently
+                summarizing files that weren't immediately relevant but part of the project structure.</p>
+
+            <h2>Key features</h2>
+            <ul>
+                <li><strong>Safe R/W Sandbox:</strong> Agents could only operate within a defined root directory.</li>
+                <li><strong>Context Optimization:</strong> FileOps automatically generated "skeleton" representations of
+                    codebases (showing only class names and method signatures) to feed into the context window, saving
+                    90% of tokens while maintaining structural awareness.</li>
+                <li><strong>Multi-Agent Handoff:</strong> One agent could write a spec file, and FileOps would trigger a
+                    second agent to implement the code based on that file change.</li>
+            </ul>
+
+            <h2>The Code</h2>
+            <p>Written in Node.js, it acted as a middleware between the OpenAI API and the OS.</p>
+
+            <pre><code class="language-javascript">// Intelligent context pruning
+function generateSkeleton(code) {
+    // Uses AST parsing to strip function bodies
+    // keeping only the "shape" of the code
+    const ast = parser.parse(code);
+    return traverseAndPrune(ast);
+}</code></pre>
+
+            <h2>Evolution</h2>
+            <p>FileOps was a crucial experiment in "Context Engineering." It highlighted that for complex coding tasks,
+                the bottleneck isn't model intelligence—it's relevant information retrieval. While I now use standard
+                MCP servers for similar tasks, the logic for context pruning I developed here remains relevant.</p>
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>
