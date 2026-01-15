@@ -4,91 +4,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FileOps - Project Deep Dive</title>
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
+    <title>FileOps | Project Walkthrough</title>
     <link rel="stylesheet" href="../src/styles/main.css">
     <link rel="stylesheet" href="style.css">
-
-    <!-- JS for Theme functionality -->
-    <script type="module" src="../src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="../src/main.js" type="module"></script>
+    <style>
+        /* Local override to hide scrollbars during presentation */
+    </style>
 </head>
 
 <body>
 
-    <div class="blog-container">
-        <a href="../playground.html" class="back-link">
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>2024</span>
+                        <span>•</span>
+                        <span>DEV TOOLS</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">FILEOPS
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        Orchestrating agentic context by giving LLMs safe, structured access to the filesystem.
+                    </p>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">Context Engineering</span>
+                        <span class="blog-tag">Node.js</span>
+                        <span class="blog-tag">AST Parsing</span>
+                        <span class="blog-tag">Local LLMs</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: THE PROBLEM</span>
+                        <span class="slide-counter">02 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Context Silo
+                    </h2>
+                    <div class="slide-body">
+                        <p><strong>Agents are smart but forgetful.</strong>
+                            Working across multiple projects (Context A -> Context B) meant manually copying context.
+                            There was no "Clipboard Manager" for AI memory.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>The "Daisy Chain" Problem</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">You find an insight in a PDF report
+                                    (Agent A) but want to apply it to your code (Agent B). Moving this insight is manual
+                                    friction.</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Ephemeral Memory</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Agents have no persistence. Once you
+                                    close the session, the knowledge is gone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">MCP for Power Users
+                    </h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> A Model Context Protocol (MCP) tool allowing agents to
+                            Read/Write/Zip/Search and "Teleport" context between sessions via a persistent SQLite
+                            memory.
+                        </p>
+
+                        <div class="table-container" style="font-size: 0.85rem; margin-bottom: 20px;">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Capability</th>
+                                        <th>Traditional Context</th>
+                                        <th>FileOps (MCP)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Persistence</strong></td>
+                                        <td>Session only.</td>
+                                        <td><strong>SQLite Backed Meta-Memory</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cross-Project</strong></td>
+                                        <td>Impossible.</td>
+                                        <td><strong>"Quick Save" / "Quick Load"</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Core Verbs</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>`learn(meta)`: Save insight to DB.</li>
+                                    <li>`remember(query)`: Vector search DB.</li>
+                                    <li>`teleport(ctx)`: Move context between agents.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">04 / 09</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">
+                                    Architecture</h2>
+                                <p>A Node.js server exposing JSON-RPC endpoints to the Agent.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Interface:</strong> MCP (Model Context
+                                        Protocol).</li>
+                                    <li style="margin-bottom: 10px;"><strong>Storage:</strong> Local SQLite for file
+                                        metadata & memory.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Action:</strong> NodeJS `fs` module for
+                                        actual file ops.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-javascript" style="font-size: 0.8rem;">// The "Teleport" Logic
+/* 
+User: "FileOps, save this TSLA report comparison."
+Agent -> FileOps.save("tsla_report_q3", content);
+
+... switch to Cursor IDE ...
+
+User: "FileOps, load the TSLA report."
+Agent -> FileOps.load("tsla_report_q3");
+> Returns structured summary from SQLite
+*/</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: EVOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART IV: EVOLUTION</span>
+                        <span class="slide-counter">05 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The MCP Era</h2>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">Standardization</span>
+                            <div class="pm-statement" style="font-size: 1.1rem;">
+                                "FileOps was a precursor to the Model Context Protocol (MCP). What I hackily built in
+                                Node.js is now a standardized JSON-RPC spec supported by Anthropic and others,
+                                validating the need for 'Tool Use' as a first-class citizen."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: RESULTS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART V: RESULTS</span>
+                        <span class="slide-counter">06 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Power User Impact
+                    </h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Efficiency</span>
+                                <h4>10x</h4>
+                                <p>Faster context switching.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Control</span>
+                                <h4>Full</h4>
+                                <p>Granular file access.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Status</span>
+                                <h4>Tech Demo</h4>
+                                <p>Proving ground for MCPs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
+            <div class="slide">
+                <div class="slide-content" style="align-items: center; justify-content: center;">
+                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART VI:
+                        VISUALS</span>
+                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+
+                    <h2 class="slide-title" style="margin-bottom: 50px;">Architecture Diagram</h2>
+                    <div style="font-size: 5rem; margin-bottom: 20px;">🕸️</div>
+                    <p style="opacity: 0.6;">(Diagram archived)</p>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 8: TECH SPECS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">APPENDIX</span>
+                        <span class="slide-counter">08 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Technical Stack
+                    </h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Runtime</span>
+                                <h4>Node.js</h4>
+                                <p>Async I/O for filesystem ops.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Parsing</span>
+                                <h4>Babel</h4>
+                                <p>AST manipulation.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Integrations</span>
+                                <h4>OpenAI SDK</h4>
+                                <p>Tool calling interface.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: ARCHIVED</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        Superseded by MCP servers, but foundational for my understanding of agent inputs.
+                    </p>
+
+                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2024 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div style="max-width: 1000px; margin: 80px auto 40px; height: 60vh; width: 90%;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/HUdNHCtUTnU" title="FileOps Demo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen style="border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);"></iframe>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 80px;">
+        <a href="../playground.html" class="back-link" style="display: inline-flex; align-items: center; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
             BACK TO PLAYGROUND
         </a>
-
-        <header class="blog-header">
-            <h1 class="blog-title">FileOps</h1>
-            <div class="blog-meta">
-                <span>STATUS: ARCHIVED</span>
-                <span>•</span>
-                <span>PLATFORM: NODE.JS / CLI</span>
-                <span>•</span>
-                <span>YEAR: 2024</span>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">Context Engineering</span>
-                <span class="blog-tag">Tool Use</span>
-                <span class="blog-tag">Local LLMs</span>
-                <span class="blog-tag">Automation</span>
-            </div>
-        </header>
-
-        <div class="blog-hero">
-            📂
-        </div>
-
-        <article class="blog-content">
-            <h2>Bridging LLMs and the Filesystem</h2>
-            <p>Before standard protocols like the <strong>Model Context Protocol (MCP)</strong> became mainstream,
-                giving LLMs safe, structured access to a local filesystem was the Wild West. FileOps was my solution to
-                this problem.</p>
-
-            <p>It was designed as a "context orchestration" layer. It didn't just let an LLM write a file; it managed
-                <em>what</em> the LLM knew about the workspace. It prevented context window overflow by intelligently
-                summarizing files that weren't immediately relevant but part of the project structure.</p>
-
-            <h2>Key features</h2>
-            <ul>
-                <li><strong>Safe R/W Sandbox:</strong> Agents could only operate within a defined root directory.</li>
-                <li><strong>Context Optimization:</strong> FileOps automatically generated "skeleton" representations of
-                    codebases (showing only class names and method signatures) to feed into the context window, saving
-                    90% of tokens while maintaining structural awareness.</li>
-                <li><strong>Multi-Agent Handoff:</strong> One agent could write a spec file, and FileOps would trigger a
-                    second agent to implement the code based on that file change.</li>
-            </ul>
-
-            <h2>The Code</h2>
-            <p>Written in Node.js, it acted as a middleware between the OpenAI API and the OS.</p>
-
-            <pre><code class="language-javascript">// Intelligent context pruning
-function generateSkeleton(code) {
-    // Uses AST parsing to strip function bodies
-    // keeping only the "shape" of the code
-    const ast = parser.parse(code);
-    return traverseAndPrune(ast);
-}</code></pre>
-
-            <h2>Evolution</h2>
-            <p>FileOps was a crucial experiment in "Context Engineering." It highlighted that for complex coding tasks,
-                the bottleneck isn't model intelligence—it's relevant information retrieval. While I now use standard
-                MCP servers for similar tasks, the logic for context pruning I developed here remains relevant.</p>
-        </article>
-
-        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
-        </footer>
     </div>
 </body>
 

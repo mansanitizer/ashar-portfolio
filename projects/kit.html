@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit | The Micro-App OS</title>
+    <!-- Adjusted paths for root directory -->
+    <link rel="stylesheet" href="components/win98-simulation/styles/animations.css">
+    <link rel="stylesheet" href="youtube-proxy/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #ff0055;
+            /* Cyberpunk Pink */
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            /* Only hide horizontal */
+        }
+
+        .slide-title {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+        }
+
+        .blog-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Ensure presentation mode takes full height but doesn't trap scroll if we want to go past */
+        .presentation-mode {
+            min-height: 100vh;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-mode">
+        <a href="/" class="back-link"
+            style="position: absolute; top: 40px; left: 20px; z-index: 10; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Exit to OS
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta"
+                        style="justify-content: center; display: flex; gap: 10px; opacity: 0.7; font-family: 'JetBrains Mono', monospace;">
+                        <span>2026</span>
+                        <span>•</span>
+                        <span>MANIFESTO</span>
+                    </div>
+
+                    <h1 class="slide-title"
+                        style="font-size: 5rem; margin-bottom: 30px; max-width: 100%; color: white;">KIT OS
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 700px; margin: 0 auto;">
+                        Beyond the Chatbox: The Era of Encapsulated Micro-LLM Apps.
+                    </p>
+
+                    <a href="https://kit.iarm.me" target="_blank" class="cta-button"
+                        style="margin-top: 30px; display: inline-block; padding: 12px 24px; background: white; color: black; text-decoration: none; border-radius: 4px; font-weight: bold; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease;">
+                        Launch App
+                    </a>
+
+                    <div class="blog-tags" style="margin-top: 40px; display: flex; gap: 10px; justify-content: center;">
+                        <span class="blog-tag">Gemini 2.0</span>
+                        <span class="blog-tag">Generative UI</span>
+                        <span class="blog-tag">Agentic Core</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: THE PROBLEM -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header"
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 30px;">
+                        <span class="slide-part-label">PART I: THE TRAP</span>
+                        <span class="slide-counter">02 / 06</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The "Chat"
+                        Interface Trap</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.2rem;">Modern chat interfaces are ephemeral buckets of lost potential.
+                        </p>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px;">
+                                <h3 style="margin-top: 0; color: #ff8888;">Prompt Drift</h3>
+                                <p>You get a great result once, but can't repeat it exactly 3 days later because you
+                                    forgot the nuance.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px;">
+                                <h3 style="margin-top: 0; color: #ff8888;">The Search Problem</h3>
+                                <p>Searching for <em>"that one prompt"</em>, <em>"that one output"</em>, or <em>"that
+                                        one AI file"</em> in a linear chat history is impossible.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px;">
+                                <h3 style="margin-top: 0; color: #ff8888;">No Persistence</h3>
+                                <p>Chat implies transience. Real work requires state, history, and versioning.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: THE SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header"
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 30px;">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 06</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Encapsulated
+                        Micro-Apps</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem;">Don't "chat" with AI. <strong>Use tools powered by AI.</strong>
+                        </p>
+
+                        <div class="pm-grid" style="margin-top: 30px;">
+                            <div class="pm-item" style="border-left: 3px solid #00d2ff; padding-left: 20px;">
+                                <strong>The Capsule Config</strong>
+                                <p style="font-family: 'JetBrains Mono'; font-size: 0.9rem; margin-top: 10px;">
+                                    {<br>
+                                    &nbsp;&nbsp;"input_schema": { ... },<br>
+                                    &nbsp;&nbsp;"system_prompt": "...",<br>
+                                    &nbsp;&nbsp;"output_renderer": "..."<br>
+                                    }
+                                </p>
+                                <p>Every app is just a database entry defining this triad.</p>
+                            </div>
+                            <div class="pm-item" style="border-left: 3px solid #00d2ff; padding-left: 20px;">
+                                <strong>The Toolmaker</strong>
+                                <p>A meta-agent that writes these configs. You describe the workflow, it builds the
+                                    persistent tool.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: MULTIMODAL -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header"
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 30px;">
+                        <span class="slide-part-label">PART III: ENGINE</span>
+                        <span class="slide-counter">04 / 06</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Multimodal Native
+                    </h2>
+                    <div class="slide-body">
+                        <p>We leverage the latest model breakthroughs to power these capsules.</p>
+
+                        <div style="margin-top: 40px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <span style="font-size: 2rem; margin-right: 20px;">⚡️</span>
+                                <div>
+                                    <h3 style="margin: 0;">Gemini 2.0 Flash Lite</h3>
+                                    <p style="margin: 5px 0 0; opacity: 0.7;">Low latency, high vision capabilities. The
+                                        "Eyes" of the system.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <span style="font-size: 2rem; margin-right: 20px;">🧠</span>
+                                <div>
+                                    <h3 style="margin: 0;">Mistral / Devstral</h3>
+                                    <p style="margin: 5px 0 0; opacity: 0.7;">Strict logic and code generation. The
+                                        "Cortex" of the system.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: GEN UI -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header"
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 30px;">
+                        <span class="slide-part-label">PART IV: INTERFACE</span>
+                        <span class="slide-counter">05 / 06</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Generative UI</h2>
+                    <div class="slide-body">
+                        <p>The interface should adapt to the data, not the other way around.</p>
+
+                        <div class="table-container"
+                            style="margin-top: 30px; border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                            <table style="width: 100%; text-align: left;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding-bottom: 15px;">Challenge</th>
+                                        <th style="padding-bottom: 15px;">Solution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 10px 0;"><strong>Ambiguity</strong></td>
+                                        <td style="color: #00d2ff;">Strict Schemas (Zod)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 0;"><strong>"Hallucinated" Widgets</strong></td>
+                                        <td style="color: #00d2ff;">Component Fallbacks</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 0;"><strong>Unpredictability</strong></td>
+                                        <td style="color: #00d2ff;">Validation Layers & Dynamic Rendering</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: VISION -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">THE VISION</h2>
+                    <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto 60px;">
+                        A living OS where you build your own tools in seconds, and they persist forever.
+                    </p>
+
+                    <a href="/" class="cta-button"
+                        style="padding: 15px 30px; background: white; color: black; text-decoration: none; font-weight: bold; border-radius: 30px; text-transform: uppercase; letter-spacing: 1px;">Start
+                        Building</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2026 Kit OS
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls"
+            style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; align-items: center; z-index: 100;">
+            <button id="prevBtn" class="nav-btn"
+                style="background: none; border: 1px solid white; color: white; padding: 10px 20px; cursor: pointer;">PREV</button>
+
+            <div class="progress-bar" style="width: 200px; height: 4px; background: rgba(255,255,255,0.2);">
+                <div id="progressFill" class="progress-fill" style="width: 0%; height: 100%; background: white;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn"
+                style="background: none; border: 1px solid white; color: white; padding: 10px 20px; cursor: pointer;">NEXT</button>
+        </div>
+    </div>
+
+    <!-- DETAILED BLOG SECTION -->
+    <div
+        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid #333; padding-top: 40px;">
+        <h3
+            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
+            Detailed Product Specification</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
+    </div>
+
+    <div class="blog-container" style="max-width: 800px; margin: 0 auto 100px; padding: 0 20px;">
+        <a href="/" class="back-link"
+            style="display: inline-flex; align-items: center; gap: 8px; color: white; text-decoration: none; margin-bottom: 40px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            BACK TO OS
+        </a>
+
+        <header class="blog-header" style="margin-bottom: 60px;">
+            <h1 class="blog-title"
+                style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; margin-bottom: 20px;">Kit OS Manifesto
+            </h1>
+            <div class="blog-meta" style="font-family: 'JetBrains Mono', monospace; opacity: 0.6; font-size: 0.9rem;">
+                <span>STATUS: ALPHA</span>
+                <span>•</span>
+                <span>PLATFORM: WEB</span>
+                <span>•</span>
+                <span>YEAR: 2026</span>
+            </div>
+            <div class="blog-tags" style="margin-top: 20px; display: flex; gap: 10px;">
+                <span class="blog-tag">Micro-Apps</span>
+                <span class="blog-tag">Toolmaker</span>
+                <span class="blog-tag">GenUI</span>
+            </div>
+        </header>
+
+        <article class="blog-content" style="line-height: 1.6; font-size: 1.1rem;">
+
+            <!-- ============================================ -->
+            <!-- PART I: THE PROBLEM                          -->
+            <!-- ============================================ -->
+            <span class="section-label"
+                style="display: block; font-family: 'Space Grotesk'; color: var(--accent-color); margin-bottom: 20px; font-weight: bold;">PART
+                I: THE PROBLEM</span>
+
+            <h2 style="font-family: 'Space Grotesk'; font-size: 2rem; margin-bottom: 20px;">The "Chat" Trap</h2>
+            <p>We are currently stuck in the "CMD.EXE" era of AI. The chatbox is a command line interface that pretends
+                to be a conversation, and it fails at repeatability.</p>
+
+            <h3 style="color: white; margin-top: 30px;">1. Prompt Drift</h3>
+            <p>You craft the perfect prompt on Tuesday. On Friday, you try to recreate it, but you forget one specific
+                instruction. The output changes. Reliability collapses.</p>
+
+            <h3 style="color: white; margin-top: 30px;">2. The Search Black Hole</h3>
+            <p>Trying to find "that one CodePen I generated three weeks ago" in a linear chat history is a nightmare.
+                Chat logs are not a file system.</p>
+
+            <h3 style="color: white; margin-top: 30px;">3. No State</h3>
+            <p>Chat is ephemeral. Real software needs state. It needs to know "this is the current draft," not "here is
+                a wall of text from 5 minutes ago."</p>
+
+            <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+
+            <!-- ============================================ -->
+            <!-- PART II: THE SOLUTION                        -->
+            <!-- ============================================ -->
+            <span class="section-label"
+                style="display: block; font-family: 'Space Grotesk'; color: var(--accent-color); margin-bottom: 20px; font-weight: bold;">PART
+                II: THE SOLUTION</span>
+
+            <h2 style="font-family: 'Space Grotesk'; font-size: 2rem; margin-bottom: 20px;">Encapsulated Micro-LLM Apps
+            </h2>
+            <p>The solution is to stop treating AI as a conversational partner and start treating it as a **component
+                engine**. We build "Capsules."</p>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #00d2ff;">
+                <h4 style="margin-top: 0; font-family: 'JetBrains Mono';">The Capsule Triad</h4>
+                <ul style="padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>Input Schema:</strong> Strictly typed arguments (e.g., "Code snippet", "Target
+                        Language").</li>
+                    <li><strong>System Prompt:</strong> The frozen, perfected instructions that never drift.</li>
+                    <li><strong>Output Renderer:</strong> A UI component specifically designed to view the result (e.g.,
+                        a Syntax Highlighter, a Chart, a Table).</li>
+                </ul>
+            </div>
+
+            <p>By saving this triad to a database, we create a <strong>Tool</strong>. This tool is repeatable,
+                searchable, and shareable.</p>
+
+            <h3 style="color: white; margin-top: 30px;">The Toolmaker</h3>
+            <p>You don't need to code these tools manually. The **Toolmaker** agent accepts a natural language
+                description ("Make a tool that converts Python to Rust and explains the memory safety differences") and
+                generates the configuration instantly.</p>
+
+            <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+
+            <!-- ============================================ -->
+            <!-- PART III: ENGINE & UI                        -->
+            <!-- ============================================ -->
+            <span class="section-label"
+                style="display: block; font-family: 'Space Grotesk'; color: var(--accent-color); margin-bottom: 20px; font-weight: bold;">PART
+                III: TECHNICAL STACK</span>
+
+            <h2 style="font-family: 'Space Grotesk'; font-size: 2rem; margin-bottom: 20px;">Multimodal & Generative UI
+            </h2>
+
+            <p>To make this work, we need speed and strictness.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;">
+                <div>
+                    <h3 style="margin-top: 0;">Gemini 2.0 Flash Lite</h3>
+                    <p style="opacity: 0.7;">We use this for the "Eyes." Its multimodal native capabilities allow us to
+                        drop screenshots or mockups into a tool content.</p>
+                </div>
+                <div>
+                    <h3 style="margin-top: 0;">Mistral / Devstral</h3>
+                    <p style="opacity: 0.7;">We use this for the "Hands." Its superior code generation logic ensures the
+                        tools work as expected.</p>
+                </div>
+            </div>
+
+            <h3 style="color: white; margin-top: 30px;">Generative UI (GenUI)</h3>
+            <p>Standard UI is static. Chat UI is text. GenUI is the middle ground: UI that spawns based on the data.</p>
+
+            <p><strong>The Risk:</strong> Hallucinated interfaces (AI trying to render a component that doesn't exist).
+            </p>
+            <p><strong>The Fix:</strong> We implementation strict Zod schemas that force the AI to choose from a
+                <em>registry</em> of valid components (Charts, Tables, Markdown, CodeBlocks). If it tries to invent a
+                widget, the validation layer catches it and falls back to raw text.
+            </p>
+
+        </article>
+
+        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+            &copy; 2026 Kit OS. Built for the Agentic Future.
+        </footer>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressFill = document.getElementById('progressFill');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                .slide { 
+                    position: absolute; 
+                    top: 0; left: 0; 
+                    width: 100%; height: 100vh; 
+                    opacity: 0; 
+                    pointer-events: none; 
+                    transition: opacity 0.5s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 40px;
+                    box-sizing: border-box;
+                }
+                .slide.active { 
+                    opacity: 1; 
+                    pointer-events: all;
+                    z-index: 1;
+                }
+                .slide-content {
+                    max-width: 1000px;
+                    width: 100%;
+                }
+            `;
+            document.head.appendChild(style);
+
+            function updateDeck() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                prevBtn.disabled = currentSlide === 0;
+                if (currentSlide === 0) prevBtn.style.opacity = 0.3; else prevBtn.style.opacity = 1;
+
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+                if (currentSlide === totalSlides - 1) nextBtn.style.opacity = 0.3; else nextBtn.style.opacity = 1;
+
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateDeck();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateDeck();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'Space') {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateDeck();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateDeck();
+                    }
+                }
+            });
+
+            updateDeck();
+        });
+    </script>
+</body>
+
+</html>

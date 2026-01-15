@@ -4,23 +4,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rabbithole - Project Deep Dive</title>
-    <!-- Fonts -->
+    <title>Rabbithole | Project Walkthrough</title>
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="../src/styles/main.css"> <!-- Import main variables -->
-    <link rel="stylesheet" href="style.css"> <!-- Blog specific styles -->
-
-    <!-- JS for Theme functionality -->
-    <script type="module" src="../src/main.js"></script>
+    <script src="../src/main.js" type="module"></script>
+    <style>
+        /* Local override to hide scrollbars during presentation */
+    </style>
 </head>
 
 <body>
 
-    <!-- Navigation Overlay (Simplified for back button context) -->
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>DECEMBER 2025</span>
+                        <span>•</span>
+                        <span>PRODUCT DEEP DIVE</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">RABBITHOLE
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        Curing "TikTok Brain" with AI-generated, swipeable knowledge paths.
+                    </p>
+
+                    <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button"
+                        style="margin-top: 30px;">Launch App</a>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">Next.js</span>
+                        <span class="blog-tag">OpenAI</span>
+                        <span class="blog-tag">Vercel AI SDK</span>
+                        <span class="blog-tag">Capacitor</span>
+                        <span class="blog-tag">Supabase</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: MARKET NARRATIVE</span>
+                        <span class="slide-counter">02 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The "TikTok Brain"
+                        Problem</h2>
+                    <div class="slide-body">
+                        <p>User attention spans have dropped to <strong><a
+                                    href="https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans"
+                                    target="_blank" class="source-tooltip"
+                                    data-tooltip="Research by Dr. Gloria Mark (UC Irvine) shows average screen focus dropped from 2.5 mins (2004) to ~47 seconds (2023).">~47
+                                    seconds</a></strong>.
+                            The "variable reward schedule" of feeds makes traditional reading feel "insufferably
+                            boring."</p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong><a href="https://www.psypost.org/" target="_blank" class="source-tooltip"
+                                        data-tooltip="2025 Psychological Bulletin review linking rapid task switching to deficits in inhibitory control.">"Popcorn
+                                        Brain"</a></strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Deficits in inhibitory control; users
+                                    physically struggle to stop switching tasks.</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>The "Tsundoku" Guilt</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Buying books for the aesthetic but
+                                    failing to read them creates anxiety and loss of identity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: MARKET 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: MARKET NARRATIVE</span>
+                        <span class="slide-counter">03 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Billion-Dollar
+                        Gap</h2>
+                    <div class="slide-body">
+                        <p>While print sales fall, <strong>active learning</strong> is migrating to audio and
+                            micro-formats. Users want to learn but need lower friction.</p>
+
+                        <div class="market-grid" style="margin-top: 40px;">
+                            <div class="market-card">
+                                <span class="label">TAM</span>
+                                <h4>
+                                    <a href="#" class="source-tooltip"
+                                        data-tooltip="Combined global audience of Podcast listeners (460M+) and active users of apps like Duolingo/Blinkist (150M+).">600M+</a>
+                                </h4>
+                                <p>Podcast listeners + micro-learning apps.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">TOM</span>
+                                <h4>~50M</h4>
+                                <p>Smartphone users seeking self-improvement.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">SOM</span>
+                                <h4>500k</h4>
+                                <p>$30M-$50M ARR opportunity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: PROBLEM SPACE -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: PRODUCT DEFINITION</span>
+                        <span class="slide-counter">04 / 11</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">Formal Problem Statement</span>
+                            <div class="pm-statement" style="font-size: 1.2rem;">
+                                "For <strong>knowledge-seeking users</strong>, current SFV consumption leads to 'brain
+                                rot' because the <strong>dopamine loop creates a 'scan-and-shift' state</strong> that
+                                makes deep reading physically difficult."
+                            </div>
+
+                            <div
+                                style="display: flex; gap: 30px; margin-top: 30px; padding-left: 15px; border-left: 3px solid var(--accent-color);">
+                                <div>
+                                    <strong style="color: var(--accent-color);">Functional Job:</strong><br>
+                                    Utilize 5-15 min gaps for discovery.
+                                </div>
+                                <div>
+                                    <strong style="color: var(--accent-color);">Emotional Job:</strong><br>
+                                    Convert "wasted time" guilt into curiosity.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 5: OPTIONS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: SOLUTION SPACE</span>
+                        <span class="slide-counter">05 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Solution Options
+                    </h2>
+                    <div class="slide-body">
+                        <div class="table-container" style="margin-top: 30px; font-size: 0.85rem;">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Option</th>
+                                        <th>Pros / Cons</th>
+                                        <th>Verdict</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Micro-Chapters</strong></td>
+                                        <td>High depth but high friction (cognitive load).</td>
+                                        <td style="opacity: 0.6;">Discarded</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Audio-First</strong></td>
+                                        <td>Lowest friction but passive retention.</td>
+                                        <td style="opacity: 0.6;">Postponed (V2)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Smart Card Feed</strong></td>
+                                        <td>Matches swipe habit; granular; skimmable.</td>
+                                        <td style="color: var(--accent-color); font-weight: bold;">Selected (V1)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SLIDE 6: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: SOLUTION SPACE</span>
+                        <span class="slide-counter">06 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The V1 Solution
+                    </h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> A swipeable, card-based feed of AI-generated facts that
+                            can be explored via tap-to-deepen "holes" within a 5–15 minute session.
+                        </p>
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Core Mechanics</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Infinite Topic Feed</li>
+                                    <li>Micro-Holes (Tap to spawn sub-feed)</li>
+                                    <li>"Facts Collected" Counter</li>
+                                </ul>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Success KPIs</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Median cards/session > 10</li>
+                                    <li>Session felt "productive"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: UX / VIDEO -->
+            <div class="slide">
+                <div class="slide-content" style="align-items: center; justify-content: center;">
+                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART IV: UX
+                        ARTIFACTS</span>
+                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 11</span>
+
+                    <h2 class="slide-title" style="margin-bottom: 50px;">V1 Core Flows Demo</h2>
+
+                    <a href="#" class="cta-button" style="transform: scale(1.5);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                            style="vertical-align: middle; margin-right: 8px;">
+                            <polygon points="5,3 19,12 5,21"></polygon>
+                        </svg>
+                        Watch Video
+                    </a>
+
+                    <p style="margin-top: 40px; opacity: 0.6;">Topic Selection → Infinite Feed → Rabbit Hole Drill Down
+                        → Session Summary</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: RESEARCH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART V: RESEARCH APPENDIX</span>
+                        <span class="slide-counter">08 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Friction Analysis
+                    </h2>
+                    <div class="slide-body">
+                        <div class="table-container" style="margin-top: 0;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Frustration</th>
+                                        <th>User Description</th>
+                                        <th>Validating Source</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>"The Glaze Over"</strong></td>
+                                        <td>Eyes moving without comprehension.</td>
+                                        <td>SDSU Eye-tracking Study</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>"The Itch"</strong></td>
+                                        <td>Discomfort when not checking phone.</td>
+                                        <td>Psychological Bulletin 2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>"The Audit"</strong></td>
+                                        <td>Listening but retaining little.</td>
+                                        <td>Active vs Passive Learning</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+                            <strong>Primary Sources:</strong>
+                            <ul style="margin-top: 10px; line-height: 1.8;">
+                                <li>
+                                    <a href="https://news.ufl.edu/" target="_blank" class="source-tooltip"
+                                        data-tooltip="University of Florida study finding a 40% decline in reading for pleasure among undergraduates.">UF
+                                        Reading Decline Study (2025)</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.sdsu.edu/" target="_blank" class="source-tooltip"
+                                        data-tooltip="San Diego State University eye-tracking research linking scroll speed to reduced comprehension retention.">SDSU
+                                        'Scan-and-Shift' Hypothesis</a>
+                                </li>
+                                <li>
+                                    <a href="https://omr.com/en/reviews/contenthub/tools-blinkist-app-user-happy"
+                                        target="_blank" class="source-tooltip"
+                                        data-tooltip="Blinkist reports 26M users, validating the market demand for compressed non-fiction content.">Blinkist
+                                        Market Validation</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART VI: TECHNICAL SOLUTION</span>
+                        <span class="slide-counter">09 / 11</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">The
+                                    "Infinite Wikipedia"</h2>
+                                <p>Orchestrating AI agents to synthesize knowledge feeds in real-time.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Intent Analysis:</strong> Agents analyze
+                                        query depth.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Content Synthesis:</strong> Parallel LLMs
+                                        draft content.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Aggressive Streaming:</strong> Vercel AI
+                                        SDK for low latency.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-typescript" style="font-size: 0.8rem;">export async function POST(req) {
+  const { messages } = await req.json();
+  
+  // Parallel agent execution
+  const response = await openai.createChatCompletion({
+    model: 'gpt-4',
+    stream: true,
+    messages
+  });
+  
+  return OpenAIStream(response);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: MOBILE -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART VI: TECHNICAL SOLUTION</span>
+                        <span class="slide-counter">10 / 11</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Mobile Adaptation
+                    </h2>
+                    <div class="slide-body">
+                        <p>Built with <strong>Capacitor</strong> to bring the Next.js web app to Android with native
+                            interactions.</p>
+
+                        <div class="pm-grid" style="margin-top: 40px;">
+                            <div class="pm-item">
+                                <strong>Native Gestures</strong>
+                                <p>Swipe-to-save, tap-to-drill-down optimized for thumbs.</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Offline Caching</strong>
+                                <p>Local storage for previously visited "holes".</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Share Intent</strong>
+                                <p>Deep linking into specific knowledge stacks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">FUTURE ROADMAP</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        Exploring multi-modal learning paths with Flux for images and audio summaries.
+                    </p>
+
+                    <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button">Launch Live Demo</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2025 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
+        <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button" 
+           style="display: inline-block; padding: 16px 32px; background: white; color: black; text-decoration: none; border-radius: 4px; font-weight: bold; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; font-size: 1.2rem;">
+            Launch App
+        </a>
+    </div>
+
     <div class="blog-container">
         <a href="../playground.html" class="back-link">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -417,6 +851,80 @@
             &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
         </footer>
     </div>
+
+    <button id="nextBtn" class="nav-btn">
+        NEXT
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6" />
+        </svg>
+    </button>
+    </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressFill = document.getElementById('progressFill');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function updateDeck() {
+                // Update visibility
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update buttons
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+
+                // Update progress
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+
+            // Button listeners
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateDeck();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateDeck();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'Space') {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateDeck();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateDeck();
+                    }
+                }
+            });
+
+            // Init
+            updateDeck();
+        });
+    </script>
 </body>
 
 </html>
