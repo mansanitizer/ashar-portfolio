@@ -153,7 +153,7 @@
 const items = $input.all();
 const sentiment = items[0].json.body.sentiment;
 
-if (sentiment.score < -0.5) {
+if (sentiment.score &lt; -0.5) {
   return {
     json: {
       alert: true,
