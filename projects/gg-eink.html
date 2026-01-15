@@ -4,21 +4,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GG (E-ink Learner) - Project Deep Dive</title>
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
+    <title>GG (E-ink Learner) | Project Walkthrough</title>
     <link rel="stylesheet" href="../src/styles/main.css">
     <link rel="stylesheet" href="style.css">
-
-    <!-- JS for Theme functionality -->
-    <script type="module" src="../src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="../src/main.js" type="module"></script>
+    <style>
+        /* Local override to hide scrollbars during presentation */
+    </style>
 </head>
 
 <body>
+
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>2024</span>
+                        <span>•</span>
+                        <span>HARDWARE AI</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">GG E-INK
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        Screen time redefined. A calm, multimodal AI companion for active childish curiosity.
+                    </p>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">IoT</span>
+                        <span class="blog-tag">E-Ink</span>
+                        <span class="blog-tag">Cloud Run</span>
+                        <span class="blog-tag">Multimodal AI</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: THE PROBLEM</span>
+                        <span class="slide-counter">02 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Dopamine
+                        Pathway
+                    </h2>
+                    <div class="slide-body">
+                        <p><strong>Short-form video is rewiring children's brains.</strong>
+                            Research correlates high-frequency screen refreshing with damaged dopaminergic pathways,
+                            leading to reading disabilities and attention deficits.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>The 35yo Parent's Dilemma</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">"I need 30 minutes of professional time,
+                                    but I don't want to hand my child an 'iPad Lobotomy'."</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Safety Rails</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">The open internet is dangerous. Parents
+                                    will pay premium for a "Walled Garden" of healthy content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">"Grandpa Guru"</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> A Kindle Webapp that uses picto-interactive fiction to
+                            build vocabulary. A "Soft Screen" alternative to flashy tablets.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Pedagogical AI</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li><strong>Adaptive Vocab:</strong> Senses child's level.</li>
+                                    <li><strong>Grandpa Persona:</strong> Wise, patient teacher.</li>
+                                    <li><strong>Encyclopedia:</strong> "Why is the sky blue?" answered safely.</li>
+                                </ul>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Why Kindle?</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Low Refresh Rate = Low Dopamine Spike.</li>
+                                    <li>Focused Environment (No notifications).</li>
+                                    <li>Healthy Development.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">04 / 09</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">
+                                    Serverless Brain</h2>
+                                <p>Keeping the hardware "dumb" allows for robust safety guardrails in the cloud.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Client:</strong> Lightweight WebApp
+                                        optimized for E-ink refresh rates.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Cloud:</strong> Cloud Run processes logic +
+                                        Vision.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Safety:</strong> Strong LLM system prompts
+                                        prevent inappropriate content.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-typescript" style="font-size: 0.8rem;">// Cloud Run Handler
+export async function analyze(req) {
+  const { image, audio } = req.body;
+  
+  // 1. Transcribe Audio (Whisper)
+  const question = await stt(audio);
+  
+  // 2. Vision/Logic Analysis (GPT-4o)
+  const answer = await vision.generate({
+    image,
+    prompt: `Persona: Grandpa Guru. Explain to a 5yo: ${question}`
+  });
+  
+  return { text: answer };
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: HARDWARE -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART IV: HARDWARE</span>
+                        <span class="slide-counter">05 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Why E-Ink?</h2>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">Feature, Not Bug</span>
+                            <div class="pm-statement" style="font-size: 1.1rem;">
+                                "E-ink is slow. It forces a pause. It feels like paper. This physical delay reduces the
+                                dopamine spike found in high-refresh LCD screens, fostering patience."
+                            </div>
+                        </div>
+                        <p style="margin-top: 30px;"><strong>Battery Life:</strong> Because the screen consumes zero
+                            power when static, and the compute is offloaded to the cloud, the device can run for weeks
+                            on a single charge.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: RESULTS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART V: RESULTS</span>
+                        <span class="slide-counter">06 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Engagement</h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Battery</span>
+                                <h4>3 Weeks</h4>
+                                <p>Standby time on 1500mAh.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Latency</span>
+                                <h4>~4s</h4>
+                                <p>End-to-End response time.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Cost</span>
+                                <h4>
+                                    <$50< /h4>
+                                        <p>BOM (Bill of Materials).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
+            <div class="slide">
+                <div class="slide-content" style="align-items: center; justify-content: center;">
+                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART VI:
+                        VISUALS</span>
+                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+
+                    <h2 class="slide-title" style="margin-bottom: 50px;">Prototype Vision</h2>
+
+                    <div
+                        style="margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-radius: 12px; overflow: hidden; max-width: 500px;">
+                        <img src="gg-kindle.jpg" alt="Kindle Prototype running Grandpa Guru"
+                            style="width: 100%; display: block;">
+                    </div>
+
+                    <p style="opacity: 0.6;">Grandpa Guru Concept running on Kindle</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: TECH SPECS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">APPENDIX</span>
+                        <span class="slide-counter">08 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Technical Stack
+                    </h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Display</span>
+                                <h4>Waveshare</h4>
+                                <p>2.13inch E-Ink HAT.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Controller</span>
+                                <h4>ESP32 / Pi Zero</h4>
+                                <p>WiFi & Camera handling.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Backend</span>
+                                <h4>GCP Cloud Run</h4>
+                                <p>Stateless container for AI logic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: PROTOTYPE</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        "Technology should amplify our connection to the physical world, not replace it."
+                    </p>
+
+                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2024 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div
+        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
+        <h3
+            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
+            Detailed Project Archive</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
+    </div>
 
     <div class="blog-container">
         <a href="../playground.html" class="back-link">
@@ -50,6 +356,7 @@
         </div>
 
         <article class="blog-content">
+            <span class="section-label">PART I: THE IDEA</span>
             <h2>Screen Time, Redefined</h2>
             <p>We face a crisis of attention. Children are glued to dopamine-loop screens that overstimulate. "GG"
                 (named after the gaming term "Good Game", but also hinting at "Good Gadget") was my attempt to build a
@@ -58,7 +365,8 @@
             <p>The device is a simple, rugged E-ink tablet with a camera and a microphone. No browser. No social media.
                 Just a window to curiosity.</p>
 
-            <h2>Multimodal Interaction</h2>
+            <span class="section-label">PART II: USER EXPERIENCE</span>
+            <h3>Multimodal Interaction</h3>
             <p>The core interaction loop is physical:</p>
             <ol>
                 <li><strong>See:</strong> The child points the camera at a leaf.</li>
@@ -69,7 +377,8 @@
                     anthocyanins (simplified for a child), and displays the answer on the paper-like screen.</li>
             </ol>
 
-            <h2>Architecture</h2>
+            <span class="section-label">PART III: ARCHITECTURE</span>
+            <h3>Cloud-Native Hardware</h3>
             <p>The hardware is "thin." It barely does any processing. It captures media and wakes up the radio.</p>
 
             <p>The "brain" lives in <strong>Google Cloud Run</strong>. This serverless approach allowed the device to
@@ -81,13 +390,13 @@
                 "Technology should amplify our connection to the physical world, not replace it."
             </blockquote>
 
-            <h2>Why E-Ink?</h2>
+            <h3>Why E-Ink?</h3>
             <p>E-ink is slow. That's a feature, not a bug. It forces a slower pace of interaction. It reduces eye
                 strain. And crucially, it doesn't emit the blue light that disrupts circadian rhythms.</p>
         </article>
 
         <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+            &copy; 2024 Ashar Rai Mujeeb. All rights reserved.
         </footer>
     </div>
 </body>

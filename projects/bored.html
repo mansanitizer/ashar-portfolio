@@ -20,73 +20,312 @@
 
 <body>
 
-    <div class="blog-container">
-        <a href="../playground.html" class="back-link">
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            BACK TO PLAYGROUND
+            Back to Playground
         </a>
 
-        <header class="blog-header">
-            <h1 class="blog-title">Bored? (Spot the Fake CV)</h1>
-            <div class="blog-meta">
-                <span>STATUS: LIVE</span>
-                <span>•</span>
-                <span>PLATFORM: WEB GAME</span>
-                <span>•</span>
-                <span>YEAR: 2024</span>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">Gamification</span>
-                <span class="blog-tag">Recruitment</span>
-                <span class="blog-tag">Interactive</span>
-                <span class="blog-tag">Viral Marketing</span>
-            </div>
-        </header>
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
 
-        <div class="blog-hero">
-            🎮
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>2024</span>
+                        <span>•</span>
+                        <span>GAMIFICATION</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">BORED GAME
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        Spot the fake CV. A viral experiment in recruitment mechanics and AI hallucination detection.
+                    </p>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">Web Game</span>
+                        <span class="blog-tag">Recruitment</span>
+                        <span class="blog-tag">Generative AI</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: THE PROBLEM</span>
+                        <span class="slide-counter">02 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Recruiter Fatigue
+                    </h2>
+                    <div class="slide-body">
+                        <p><strong>Reviewing resumes is soul-crushing work.</strong>
+                            Hiring managers scan thousands of bullet points, looking for signals of competence. But in
+                            the age of ChatGPT, "fake competence" is easy to generate.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>The "Wall of Text"</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">After the 50th resume, eyes glaze over.
+                                    Critical details are missed.</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>The Hallucination Trap</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Candidates are using AI to fluff their
+                                    CVs. Can you spot the difference between a real achievement and a hallucination?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Gamified Due
+                        Diligence</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> "Spot the Fake CV" - A fast-paced web game where you
+                            have 10 seconds to identify the AI-generated lie hidden among 3 real achievements.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>The Game Loop</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li><strong>Present:</strong> 4 Plausible Bullet Points.</li>
+                                    <li><strong>Action:</strong> Click the "Fake" one.</li>
+                                    <li><strong>Feedback:</strong> Immediate reveal + Explanation.</li>
+                                </ul>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Why it Works</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li><strong>Competitiveness:</strong> HR pros want to prove they can't be tricked.
+                                    </li>
+                                    <li><strong>Data Collection:</strong> We learn what "believable lies" look like.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">04 / 09</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">
+                                    Adversarial Generation</h2>
+                                <p>Using fine-tuned models to generate specific types of resume lies.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Real Data:</strong> Dataset of 10k
+                                        high-quality CV bullets.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Fake Generator:</strong> Prompted to create
+                                        "plausible but vague" metrics.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Engine:</strong> Vanilla JS for instant
+                                        load times.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-javascript" style="font-size: 0.8rem;">const generateFake = async (role) => {
+  // We want subtle lies, not obvious ones
+  return llm.create({
+    role: role,
+    instruction: "Generate a bullet point that sounds impressive but uses impossible metrics or vague buzzwords.",
+    example: "Optimized serverless latency by 500% using quantum flux capacitors."
+  });
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: LEARNINGS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART IV: LEARNINGS</span>
+                        <span class="slide-counter">05 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Uncanny Valley
+                    </h2>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">Human Instinct</span>
+                            <div class="pm-statement" style="font-size: 1.1rem;">
+                                "Experienced recruiters could spot the AI fakes with 90% accuracy, not because of the
+                                content, but because of the 'perfectly average' sentence structure. AI lacks the
+                                idiosyncratic messiness of human writing."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: RESULTS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART V: RESULTS</span>
+                        <span class="slide-counter">06 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Engagement</h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Plays</span>
+                                <h4>15k+</h4>
+                                <p>In first week of launch.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Dwell Time</span>
+                                <h4>4m</h4>
+                                <p>Average session length.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Viral</span>
+                                <h4>LinkedIn</h4>
+                                <p>Shared by top HR influencers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: LIVE</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        "Gamification is the most effective way to test domain expertise."
+                    </p>
+
+                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2025 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
         </div>
 
-        <article class="blog-content">
-            <h2>Making Recruitment Fun?</h2>
-            <p>Let's be honest: reviewing CVs is boring. "Spot the Fake CV" is a gamified take on the hiring process. It
-                challenges HR professionals and hiring managers to identify AI-generated or obviously fake bullet points
-                hidden among real, high-quality achievements.</p>
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
 
-            <p>It turns the mundane task of screening into a competitive sport.</p>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
 
-            <h2>The Game Loop</h2>
-            <p>The rules are simple: You are presented with 4 bullet points. 3 are real, high-impact achievements (e.g.,
-                "Increased revenue by 20%..."). 1 is a plausible but fake hallucination. You have 10 seconds to spot the
-                fake.</p>
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
 
-            <h2>Technical Implementation</h2>
-            <p>The game is built with vanilla JavaScript for maximum performance and zero dependencies. However, the
-                content is dynamic.</p>
+    <div
+        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
+        <h3
+            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
+            Detailed Project Archive</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
+    </div>
 
-            <ul>
-                <li><strong>Content Generation:</strong> We used a fine-tuned GPT-3.5 model to generate thousands of
-                    "fake" CV bullets that sound <em>almost</em> real but have subtle flaws (e.g., impossible metrics,
-                    vague buzzwords).</li>
-                <li><strong>Scoring Algorithm:</strong> The score isn't just +1 for a correct answer. It factors in
-                    speed and streaks, rewarding "flow state".</li>
-                <li><strong>Analytics:</strong> We track which "fakes" trick people the most, effectively building a
-                    dataset of "what a believable lie looks like" vs "what a good resume looks like".</li>
-            </ul>
+    <header class="blog-header">
+        <h1 class="blog-title">Bored? (Spot the Fake CV)</h1>
+        <div class="blog-meta">
+            <span>STATUS: LIVE</span>
+            <span>•</span>
+            <span>PLATFORM: WEB GAME</span>
+            <span>•</span>
+            <span>YEAR: 2024</span>
+        </div>
+        <div class="blog-tags">
+            <span class="blog-tag">Gamification</span>
+            <span class="blog-tag">Recruitment</span>
+            <span class="blog-tag">Interactive</span>
+            <span class="blog-tag">Viral Marketing</span>
+        </div>
+    </header>
 
-            <blockquote>
-                "Gamification is the most effective way to test domain expertise. If you can't spot the lie, do you know
-                the job?"
-            </blockquote>
+    <div class="blog-hero">
+        🎮
+    </div>
 
-            <a href="../game.html" class="cta-button">PLAY THE GAME</a>
-        </article>
+    <article class="blog-content">
+        <h2>Making Recruitment Fun?</h2>
+        <p>Let's be honest: reviewing CVs is boring. "Spot the Fake CV" is a gamified take on the hiring process. It
+            challenges HR professionals and hiring managers to identify AI-generated or obviously fake bullet points
+            hidden among real, high-quality achievements.</p>
 
-        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
-        </footer>
+        <p>It turns the mundane task of screening into a competitive sport.</p>
+
+        <h2>The Game Loop</h2>
+        <p>The rules are simple: You are presented with 4 bullet points. 3 are real, high-impact achievements (e.g.,
+            "Increased revenue by 20%..."). 1 is a plausible but fake hallucination. You have 10 seconds to spot the
+            fake.</p>
+
+        <h2>Technical Implementation</h2>
+        <p>The game is built with vanilla JavaScript for maximum performance and zero dependencies. However, the
+            content is dynamic.</p>
+
+        <ul>
+            <li><strong>Content Generation:</strong> We used a fine-tuned GPT-3.5 model to generate thousands of
+                "fake" CV bullets that sound <em>almost</em> real but have subtle flaws (e.g., impossible metrics,
+                vague buzzwords).</li>
+            <li><strong>Scoring Algorithm:</strong> The score isn't just +1 for a correct answer. It factors in
+                speed and streaks, rewarding "flow state".</li>
+            <li><strong>Analytics:</strong> We track which "fakes" trick people the most, effectively building a
+                dataset of "what a believable lie looks like" vs "what a good resume looks like".</li>
+        </ul>
+
+        <blockquote>
+            "Gamification is the most effective way to test domain expertise. If you can't spot the lie, do you know
+            the job?"
+        </blockquote>
+
+        <a href="../game.html" class="cta-button">PLAY THE GAME</a>
+    </article>
+
+    <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
+        &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+    </footer>
     </div>
 </body>
 

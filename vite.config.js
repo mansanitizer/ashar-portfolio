@@ -11,6 +11,7 @@ export default defineConfig({
         prep: resolve(__dirname, 'prep.html'),
         playground: resolve(__dirname, 'playground.html'),
         // Project Presentation Pages
+        kit: resolve(__dirname, 'projects/kit.html'),
         rabbithole: resolve(__dirname, 'projects/rabbithole.html'),
         foodbuddy: resolve(__dirname, 'projects/foodbuddy.html'),
         pdf_proofreader: resolve(__dirname, 'projects/pdf-proofreader.html'),

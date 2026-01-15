@@ -4,21 +4,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foodbuddy - Project Deep Dive</title>
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
+    <title>Foodbuddy | Project Walkthrough</title>
     <link rel="stylesheet" href="../src/styles/main.css">
     <link rel="stylesheet" href="style.css">
-
-    <!-- JS for Theme functionality -->
-    <script type="module" src="../src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="../src/main.js" type="module"></script>
+    <style>
+        /* Local override to hide scrollbars during presentation */
+    </style>
 </head>
 
 <body>
+
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>2023</span>
+                        <span>•</span>
+                        <span>AI HEALTH TECH</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">FOODBUDDY
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        The AI accountability partner you can eat with. Snap-to-track with zero friction.
+                    </p>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">AI Vision</span>
+                        <span class="blog-tag">Health Tech</span>
+                        <span class="blog-tag">GCP</span>
+                        <span class="blog-tag">Social</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: THE PROBLEM</span>
+                        <span class="slide-counter">02 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Accountability
+                        Gap
+                    </h2>
+                    <div class="slide-body">
+                        <p><strong>Tracking calories is boring; failing your diet is lonely.</strong>
+                            For calorie and macronutrient conscious mobile-first users, classical apps are mundane and
+                            unrewarding.
+                        </p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>The "Data Entry" Churn</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Classical apps treat food as spreadsheet
+                                    data. This boring, mundane task causes users to stop recording meals within 2 weeks.
+                                </p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>No Social Cost</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Eating a donut in secret feels free.
+                                    Eating it when you have to notify a buddy creates positive friction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Accountability as a
+                        Service</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> A social-first food tracker that uses AI Vision to
+                            lower friction and "Peer Pressure" to increase adherence.
+                        </p>
+
+                        <div class="table-container" style="font-size: 0.85rem; margin-bottom: 20px;">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Approach</th>
+                                        <th>Pros</th>
+                                        <th>Cons</th>
+                                        <th>Verdict</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Voice Logging</strong></td>
+                                        <td>Fastest input.</td>
+                                        <td>Volume/Portion estimation is wildly inaccurate.</td>
+                                        <td style="opacity: 0.6;">Rejected</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Barcode Scan</strong></td>
+                                        <td>Perfect accuracy.</td>
+                                        <td>Useless for home-cooked meals.</td>
+                                        <td style="opacity: 0.6;">Backup feature</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AI Vision + Social</strong></td>
+                                        <td>Zero friction + Social Motivation.</td>
+                                        <td>Latency constraints.</td>
+                                        <td style="color: var(--accent-color); font-weight: bold;">Selected</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Social "Push"</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>One-to-many sharing.</li>
+                                    <li>Real-time notifications only on "Bad" choices.</li>
+                                    <li>"Better Judgement" recommendations.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">04 / 09</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">Vision
+                                    Pipeline</h2>
+                                <p>Leveraging early access to GPT-4 Vision and Gemini Pro Vision.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Input:</strong> Raw image buffer from
+                                        camera.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Processing:</strong> Cloud Function spins
+                                        up on valid upload.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Output:</strong> Structured JSON with
+                                        macros and confidence score.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-javascript" style="font-size: 0.8rem;">const analyzeFood = async (imageBuffer) => {
+  const prompt = "Identify food items, estimate mass, and calculate macros.";
+  
+  const result = await model.generateContent([
+    prompt, 
+    { inlineData: { data: imageBuffer, mimeType: 'image/jpeg' } }
+  ]);
+  
+  return parseJSON(result.response.text());
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: INFRASTRUCTURE -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">05 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Frugal
+                        Architecture</h2>
+                    <div class="slide-body">
+                        <p>Hosted on a <strong>GCP e2-micro</strong> instance to keep costs near zero while maintaining
+                            scalability.</p>
+
+                        <div class="table-container" style="margin-top: 30px;">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Technology</th>
+                                        <th>Why?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Backend</strong></td>
+                                        <td>Node.js / Express</td>
+                                        <td>Lightweight, huge ecosystem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Database</strong></td>
+                                        <td>Firestore</td>
+                                        <td>Flexible schema for varying food data structures.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AI Model</strong></td>
+                                        <td>Gemini Pro Vision</td>
+                                        <td>Lower latency & cost tailored for multimodal.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: LEARNINGS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART IV: RETROSPECTIVE</span>
+                        <span class="slide-counter">06 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Why It Was Archived
+                    </h2>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">The Unit Economics Problem</span>
+                            <div class="pm-statement" style="font-size: 1.1rem;">
+                                "While the 'snap-to-track' feature was magical, the cost of processing 3-5 high-res
+                                images per daily active user (DAU) made the specific free-tier model unsustainable in
+                                2023."
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 30px;">However, the lessons learned in <strong>Context
+                                Engineering</strong>
+                            directly influenced later projects like FileOps.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
+            <div class="slide">
+                <div class="slide-content" style="align-items: center; justify-content: center;">
+                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART V:
+                        VISUALS</span>
+                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+
+                    <h2 class="slide-title" style="margin-bottom: 50px;">Interface Preview</h2>
+                    <div style="font-size: 5rem; margin-bottom: 20px;">🥑</div>
+                    <p style="opacity: 0.6;">(Demo video archived)</p>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 8: TECH SPECS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">APPENDIX</span>
+                        <span class="slide-counter">08 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Technical Stack
+                    </h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Frontend</span>
+                                <h4>React Native</h4>
+                                <p>For cross-platform mobile reach.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Backend</span>
+                                <h4>GCP</h4>
+                                <p>Cloud Run & Cloud Functions.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">AI</span>
+                                <h4>LangChain</h4>
+                                <p>Orchestration of vision & chat agents.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: UNMAINTAINED</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        The code lives on in private repos, but the spirit of AI-assisted accountability continues.
+                    </p>
+
+                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2023-2025 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div
+        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
+        <h3
+            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
+            Detailed Project Archive</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
+    </div>
 
     <div class="blog-container">
         <a href="../playground.html" class="back-link">
@@ -31,9 +371,9 @@
         <header class="blog-header">
             <h1 class="blog-title">Foodbuddy</h1>
             <div class="blog-meta">
-                <span>STATUS: PRIVATE (UNMAINTAINED)</span>
+                <span>STATUS: ARCHIVED</span>
                 <span>•</span>
-                <span>PLATFORM: WEB APP</span>
+                <span>PLATFORM: MOBILE APP</span>
                 <span>•</span>
                 <span>YEAR: 2023</span>
             </div>
@@ -50,6 +390,7 @@
         </div>
 
         <article class="blog-content">
+            <span class="section-label">PART I: THE VISION</span>
             <h2>The Accountability Partner You Can Eat With</h2>
             <p>Foodbuddy aimed to solve the hardest part of dieting: consistency. Most trackers require tedious manual
                 entry. Foodbuddy used early multimodal AI models to simply allow users to "snap and track". But beyond
@@ -59,7 +400,7 @@
                 "People don't need another calculator. They need a friend who gently judges their late-night pizza."
             </blockquote>
 
-            <h2>Core Features</h2>
+            <h3>Core Features</h3>
             <ul>
                 <li><strong>Snap-to-Track:</strong> Leveraging GPT-4 Vision (and later Gemini Pro Vision), users could
                     upload a photo of their meal. The AI estimated calories, macros, and ingredients with surprising
@@ -70,7 +411,8 @@
                     the specific calories, but a "Health Score" for the day, fostering positive peer pressure.</li>
             </ul>
 
-            <h2>Backend Architecture</h2>
+            <span class="section-label">PART II: UNDER THE HOOD</span>
+            <h3>Backend Architecture</h3>
             <p>We hosted the core services on a <strong>GCP e2-micro</strong> instance to keep costs near zero. The
                 challenge was managing the heavy lifting of image processing.</p>
 
@@ -91,7 +433,8 @@ const processImageQueue = async (imageUrl, userId) => {
     await coachAgent.reactToMeal(userId, analysis);
 }</code></pre>
 
-            <h2>Why It's Unmaintained</h2>
+            <span class="section-label">PART III: POST-MORTEM</span>
+            <h3>Why It's Unmaintained</h3>
             <p>While the prototype was functional and the "snap-to-track" feature was magical, the unit economics of
                 processing every meal image with high-end LLMs were difficult for a free side project. Additionally, the
                 latency in 2023 for vision models was a friction point.</p>
@@ -101,7 +444,7 @@ const processImageQueue = async (imageUrl, userId) => {
         </article>
 
         <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+            &copy; 2023-2025 Ashar Rai Mujeeb. All rights reserved.
         </footer>
     </div>
 </body>

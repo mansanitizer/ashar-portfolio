@@ -4,21 +4,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>n8n Automations - Project Deep Dive</title>
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
+    <title>n8n Automations | Project Walkthrough</title>
     <link rel="stylesheet" href="../src/styles/main.css">
     <link rel="stylesheet" href="style.css">
-
-    <!-- JS for Theme functionality -->
-    <script type="module" src="../src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="../src/main.js" type="module"></script>
+    <style>
+        /* Local override to hide scrollbars during presentation */
+    </style>
 </head>
 
 <body>
+
+    <div class="presentation-mode">
+        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <!-- SLIDE DECK CONTAINER -->
+        <div id="deck">
+
+            <!-- SLIDE 1: INTRO -->
+            <div class="slide active">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <div class="blog-meta" style="justify-content: center;">
+                        <span>2024</span>
+                        <span>•</span>
+                        <span>AUTOMATION</span>
+                    </div>
+
+                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">N8N BACKBONE
+                    </h1>
+                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                        The invisible glue connecting my digital life. Self-hosted workflows for rapid prototyping.
+                    </p>
+
+                    <div class="blog-tags" style="margin-top: 40px;">
+                        <span class="blog-tag">Workflows</span>
+                        <span class="blog-tag">Webhooks</span>
+                        <span class="blog-tag">Integrations</span>
+                        <span class="blog-tag">Self-Hosted</span>
+                    </div>
+
+                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                        Use arrow keys or buttons below to navigate
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MARKET 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART I: THE PROBLEM</span>
+                        <span class="slide-counter">02 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">SaaS Fragmentation
+                    </h2>
+                    <div class="slide-body">
+                        <p><strong>My data was everywhere, but my attention was limited.</strong> I found myself
+                            manually checking 10+ apps (RSS, Notion, Gmail, Telegram) just to start my day. Building
+                            custom backends for every small idea was overkill.</p>
+
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Manual Glue</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Copy-pasting data between apps is a
+                                    waste of human potential.</p>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Prototype Friction</strong>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">Spinning up an Express server just to
+                                    test an API webhook adds unnecessary overhead.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: SOLUTION -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART II: THE SOLUTION</span>
+                        <span class="slide-counter">03 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Visual Backend</h2>
+                    <div class="slide-body">
+                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                            <strong>Elevator Pitch:</strong><br> A self-hosted orchestration layer that automates
+                            recurring tasks and acts as a "low-code backend" for MVP apps.
+                        </p>
+                        <div class="pm-grid">
+                            <div class="pm-item">
+                                <strong>Morning Brief</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Fetch Weather + RSS.</li>
+                                    <li>Summarize via OpenAI.</li>
+                                    <li>Send Telegram digest at 6AM.</li>
+                                </ul>
+                            </div>
+                            <div class="pm-item">
+                                <strong>Social Monitor</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Watch Twitter keywords.</li>
+                                    <li>Filter Sentiment.</li>
+                                    <li>Log to Notion Database.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TECH -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
+                        <span class="slide-counter">04 / 09</span>
+                    </div>
+                    <div class="slide-body">
+                        <div style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h2 class="slide-title"
+                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">Why n8n?
+                                </h2>
+                                <p>Fair-code, node-based automation.</p>
+                                <ul style="margin-top: 20px;">
+                                    <li style="margin-bottom: 10px;"><strong>Self-Hosted:</strong> No per-execution
+                                        costs (unlike Zapier).</li>
+                                    <li style="margin-bottom: 10px;"><strong>Privacy:</strong> No sensitive data leaves
+                                        my VPS.</li>
+                                    <li style="margin-bottom: 10px;"><strong>Code Nodes:</strong> Drop into JavaScript
+                                        whenever the visual builder isn't enough.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <pre><code class="language-javascript" style="font-size: 0.8rem;">// Custom Function Node in n8n
+const items = $input.all();
+const sentiment = items[0].json.body.sentiment;
+
+if (sentiment.score < -0.5) {
+  return {
+    json: {
+      alert: true,
+      message: "Negative sentiment detected!"
+    }
+  }
+}
+return { json: { alert: false } };</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: USE CASE -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART IV: USE CASE</span>
+                        <span class="slide-counter">05 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Rapid Prototyping
+                    </h2>
+                    <div class="slide-body">
+                        <div class="pm-box">
+                            <span class="pm-header">Backend-as-a-Service</span>
+                            <div class="pm-statement" style="font-size: 1.1rem;">
+                                "Before writing a line of backend code for a new app idea, I build the logic in n8n. I
+                                expose a Webhook node, process the logic visually, and return JSON. This cuts MVP time
+                                by 50%."
+                            </div>
+                        </div>
+                        <p style="margin-top: 30px;">This "Disposable Backend" strategy allows me to validate frontend
+                            concepts without committing to a database schema or API architecture.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: RESULTS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">PART V: RESULTS</span>
+                        <span class="slide-counter">06 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Impact</h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Volume</span>
+                                <h4>~5k</h4>
+                                <p>Executions per day.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Reliability</span>
+                                <h4>99.9%</h4>
+                                <p>Self-healing retry logic.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Cost</span>
+                                <h4>$5/mo</h4>
+                                <p>Flat VPS cost (vs $500+ Zapier bill).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
+            <div class="slide">
+                <div class="slide-content" style="align-items: center; justify-content: center;">
+                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART VI:
+                        VISUALS</span>
+                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+
+                    <h2 class="slide-title" style="margin-bottom: 50px;">Workflow Map</h2>
+                    <div style="font-size: 5rem; margin-bottom: 20px;">🕸️</div>
+                    <p style="opacity: 0.6;">(Workflow Screenshot archived)</p>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 8: TECH SPECS -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-part-label">APPENDIX</span>
+                        <span class="slide-counter">08 / 09</span>
+                    </div>
+                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Technical Stack
+                    </h2>
+                    <div class="slide-body">
+                        <div class="market-grid">
+                            <div class="market-card">
+                                <span class="label">Engine</span>
+                                <h4>n8n</h4>
+                                <p>Dockerized deployment.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Host</span>
+                                <h4>DigitalOcean</h4>
+                                <p>Ubuntu Droplet.</p>
+                            </div>
+                            <div class="market-card">
+                                <span class="label">Database</span>
+                                <h4>Postgres</h4>
+                                <p>For persistent execution logs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: OUTRO -->
+            <div class="slide">
+                <div class="slide-content"
+                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
+                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: ACTIVE</h2>
+                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+                        The quiet engine room of my digital life.
+                    </p>
+
+                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+
+                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
+                        &copy; 2024 Ashar Rai Mujeeb
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="deck-controls">
+            <button id="prevBtn" class="nav-btn" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                PREV
+            </button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <button id="nextBtn" class="nav-btn">
+                NEXT
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div
+        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
+        <h3
+            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
+            Detailed Project Archive</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
+    </div>
 
     <div class="blog-container">
         <a href="../playground.html" class="back-link">
@@ -50,6 +346,7 @@
         </div>
 
         <article class="blog-content">
+            <span class="section-label">PART I: THE IDEA</span>
             <h2>The Glue of the Internet</h2>
             <p>Every developer eventually builds a messy collection of scripts to automate their life. I decided to
                 professionalize mine using <strong>n8n</strong>, a fair-code workflow automation tool.</p>
@@ -57,9 +354,10 @@
             <p>This "project" represents a collection of complex, self-healing workflows that acted as the backend for
                 my personal life and other prototypes.</p>
 
-            <h2>Notable Flows</h2>
+            <span class="section-label">PART II: WORKFLOWS</span>
+            <h3>Notable Flows</h3>
 
-            <h3>1. The "Morning Brief"</h3>
+            <h4>1. The "Morning Brief"</h4>
             <p>A workflow that triggered at 6:00 AM daily:</p>
             <ul>
                 <li>Fetched weather data for my location.</li>
@@ -68,23 +366,24 @@
                 <li>Sent a formatted digest to my Telegram.</li>
             </ul>
 
-            <h3>2. Social Media Monitor</h3>
+            <h4>2. Social Media Monitor</h4>
             <p>A webhook-based listener that watched for brand mentions (or mentions of specific keywords like "AI
                 Agents") on Twitter/X and filtered out noise using sentiment analysis before flagging them in a Notion
                 database for review.</p>
 
-            <h3>3. Prototype Backend</h3>
+            <h4>3. Prototype Backend</h4>
             <p>Before spinning up a dedicated backend for a new idea, I often used n8n as a rapid prototype API. I could
                 expose a webhook, process the JSON payload, call 3rd party APIs, and return a response, effectively
                 creating a serverless backend visually.</p>
 
-            <h2>Why n8n?</h2>
+            <span class="section-label">PART III: INFRASTRUCTURE</span>
+            <h3>Why n8n?</h3>
             <p>Unlike Zapier or Make, n8n is self-hostable. This meant no data privacy concerns and no per-execution
                 costs for my high-volume polling workflows. Running it on a simple VPS gave me total control.</p>
         </article>
 
         <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
+            &copy; 2024 Ashar Rai Mujeeb. All rights reserved.
         </footer>
     </div>
 </body>
