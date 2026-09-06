@@ -1,6 +1,10 @@
 // Enhanced Portfolio JavaScript with Modern Features
 // Import CSS styles
 import './styles/main.css';
+import './styles/editorial.css';
+import { initializeEditorialInteractions } from './editorial-interactions.js';
+import { initializeSeedDesign } from './design-seed.js';
+initializeSeedDesign();
 
 // Import API client for future backend integration
 import { api, apiUtils } from './utils/api.js';
@@ -55,8 +59,8 @@ const projectCards = document.querySelectorAll('.project-card');
 const certCards = document.querySelectorAll('.cert-card');
 
 // Theme Management
-let currentTheme = localStorage.getItem('theme') || 'dark';
-let currentAccent = localStorage.getItem('accent') || '#FF6600';
+let currentTheme = localStorage.getItem('theme') || 'light';
+let currentAccent = localStorage.getItem('accent') || '#28594b';
 let colorblindMode = localStorage.getItem('colorblindMode') === 'true' || false;
 let trackingEnabled = localStorage.getItem('trackingEnabled') !== 'false';
 
@@ -72,6 +76,7 @@ const colorPalettes = [
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    initializeEditorialInteractions();
     initializeTheme();
     initializeSettings();
     initializeNavigation();
@@ -95,7 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSkillsCollapse();
     initializeVideoThumbnail();
 
-    // Add initial loading state
+    // The editorial page is immediately readable, without an entrance delay.
+    if (document.body.classList.contains('editorial')) return;
     document.body.style.opacity = '0';
 
     // Smooth fade in
@@ -557,6 +563,7 @@ randomizer.addEventListener('click', () => {
 
 // Color Change Animation
 function triggerColorChangeAnimation() {
+    if (document.body.classList.contains('editorial')) return;
     const elements = document.querySelectorAll('.bento-box, .work-item, .project-card, .cert-card');
     elements.forEach((element, index) => {
         setTimeout(() => {
@@ -570,6 +577,7 @@ function triggerColorChangeAnimation() {
 
 // Confetti Effect for Randomizer
 function createConfettiEffect() {
+    if (document.body.classList.contains('editorial')) return;
     for (let i = 0; i < 20; i++) {
         const confetti = document.createElement('div');
         confetti.style.position = 'fixed';
@@ -645,6 +653,7 @@ function updateActiveNavLink() {
 
 // Animation Functions
 function initializeAnimations() {
+    if (document.body.classList.contains('editorial')) return;
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -1506,7 +1515,7 @@ window.addEventListener('scroll', throttle(() => {
     const hero = document.querySelector('.hero');
     const heroContent = document.querySelector('.hero-content');
 
-    if (hero && heroContent && scrolled < window.innerHeight) {
+    if (hero && heroContent && !document.body.classList.contains('editorial') && scrolled < window.innerHeight) {
         heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
     }
 }, 16));
@@ -1527,6 +1536,7 @@ function throttle(func, limit) {
 
 // Loading Animation
 window.addEventListener('load', () => {
+    if (document.body.classList.contains('editorial')) return;
     // Add staggered loading animation
     const elements = document.querySelectorAll('.bento-box');
     elements.forEach((element, index) => {

@@ -1,116 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrewAI Proofreader | Project Walkthrough</title>
-    <link rel="stylesheet" href="../src/styles/main.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-    <script src="../src/main.js" type="module"></script>
-    <style>
-        /* Local override to hide scrollbars during presentation */
-    </style>
-</head>
-
-<body>
-
-    <div class="presentation-mode">
-        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to Playground
-        </a>
-
-        <!-- SLIDE DECK CONTAINER -->
-        <div id="deck">
-
-            <!-- SLIDE 1: INTRO -->
-            <div class="slide active">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <div class="blog-meta" style="justify-content: center;">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PDF Proofreader — Ashar Rai Mujeeb</title><meta name="description" content="A CrewAI workflow for proofreading and styling long documents."><meta name="theme-color" content="#f8f9fb"><link rel="canonical" href="https://ashar.site/projects/pdf-proofreader.html"><meta property="og:title" content="PDF Proofreader — Ashar Rai Mujeeb"><meta property="og:description" content="A CrewAI workflow for proofreading and styling long documents."><meta property="og:image" content="https://ashar.site/og-image.jpg"><meta property="og:url" content="https://ashar.site/projects/pdf-proofreader.html"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><script type="module" src="/src/site.js"></script></head><body data-page="pdf-proofreader"><a class="skip" href="#main">Skip to content</a>
+ <aside class="rail"><a class="monogram" href="/" aria-label="Ashar Rai Mujeeb home">ar<span>m.</span></a><span class="rail-caption">PRODUCT MANAGER & BUILDER</span><a class="rail-bottom" href="mailto:asharrm18@gmail.com" aria-label="Email Ashar"><span aria-hidden="true">↗</span></a></aside>
+ <div class="site"><header class="topbar"><a class="small identity" href="/">ASHAR RAI MUJEEB</a><nav aria-label="Main navigation"><a href="/#work">Work <sup>06</sup></a><a href="/playground.html" >Projects <sup>11</sup></a><a href="/#about">About</a><a href="/#contact">Contact <span aria-hidden="true">↗</span></a></nav><button class="icon-button" id="settings-open" aria-label="Appearance and sharing settings" aria-haspopup="dialog">◐</button></header>
+ <main id="main"><section class="article-page"><div class="section-label small"><a href="/playground.html">← ALL PROJECTS</a><span>TOOLS</span></div><header class="article-header"><h1>PDF Proofreader</h1><p>A CrewAI workflow for proofreading and styling long documents.</p></header><div class="article-layout"><aside class="article-sidebar"><span class="small">PROJECT STATUS</span><p>Unmaintained · public</p><span class="small">BUILT WITH</span><div class="tags"><span>CrewAI</span><span>Prompt engineering</span></div><a class="inline-link" href="/#contact">Discuss this project ↗</a></aside><article class="prose"><img class="article-cover" src="/projects/pdf-proofreader-thumbnail.png" alt="PDF Proofreader preview"><section class="original-slides"><h2>Project presentation</h2><p>Notes from the original project deck, kept with the decisions and trade-offs.</p><details class="presentation-slide" ><summary><span><b>01</b> CREWAI EDITOR</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
                         <span>2024</span>
                         <span>•</span>
                         <span>AI AGENTS</span>
                     </div>
 
-                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">CREWAI
+                    <h1>CREWAI
                         EDITOR
                     </h1>
-                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    <p>
                         Orchestrating a digital newsroom of expert agents to proofread at scale.
                     </p>
 
-                    <div class="blog-tags" style="margin-top: 40px;">
-                        <span class="blog-tag">CrewAI</span>
-                        <span class="blog-tag">Python</span>
-                        <span class="blog-tag">Multi-Agent Systems</span>
-                        <span class="blog-tag">Automation</span>
+                    <div>
+                        <span>CrewAI</span>
+                        <span>Python</span>
+                        <span>Multi-Agent Systems</span>
+                        <span>Automation</span>
                     </div>
 
-                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                    <div>
                         Use arrow keys or buttons below to navigate
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 2: MARKET 1 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART I: THE PROBLEM</span>
-                        <span class="slide-counter">02 / 09</span>
+            </div></details><details class="presentation-slide" open><summary><span><b>02</b> The Cost of Complexity</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART I: THE PROBLEM</span>
+                        <span>02 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Cost of
+                    <h2>The Cost of
                         Complexity
                     </h2>
-                    <div class="slide-body">
+                    <div>
                         <p><strong>This wasn't a startup idea; it was a tuition fee.</strong>
                             I built this to understand the "Hidden Taxes" of agentic workflows: latency, token costs,
                             and orchestration fragility.
                         </p>
 
-                        <div class="pm-grid">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>Orchestration Hell</strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Getting three LLMs to agree on a diff is
+                                <p>Getting three LLMs to agree on a diff is
                                     harder than managing three human interns.</p>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>Token Burn</strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Learning CrewAI revealed how quickly
+                                <p>Learning CrewAI revealed how quickly
                                     context windows fill up when agents "talk" to each other.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 3: SOLUTION -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART II: THE SOLUTION</span>
-                        <span class="slide-counter">03 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>03</b> Digital Newsroom</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART II: THE SOLUTION</span>
+                        <span>03 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Digital Newsroom
+                    <h2>Digital Newsroom
                     </h2>
-                    <div class="slide-body">
-                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                    <div>
+                        <p>
                             <strong>Elevator Pitch:</strong><br> A CLI-based multi-agent system where specialized AI
                             personas
                             (Grammarian, Stylist, Fact-Checker) critique documents in parallel.
                         </p>
 
-                        <div class="table-container" style="font-size: 0.85rem; margin-bottom: 20px;">
-                            <table style="width: 100%;">
+                        <div>
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Approach</th>
@@ -122,30 +84,30 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Single LLM (ChatGPT)</strong></td>
-                                        <td>Cheap & Fast.</td>
+                                        <td>Cheap &amp; Fast.</td>
                                         <td>Lacks nuance; prioritizes speed over rigor.</td>
-                                        <td style="opacity: 0.6;">Baseline</td>
+                                        <td>Baseline</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Human Editor</strong></td>
                                         <td>High Agency.</td>
                                         <td>Expensive ($50/hr); Slow turnover.</td>
-                                        <td style="opacity: 0.6;">Too Slow</td>
+                                        <td>Too Slow</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Agent Crew</strong></td>
                                         <td>Multi-perspective critique.</td>
                                         <td>High Token Cost.</td>
-                                        <td style="color: var(--accent-color); font-weight: bold;">Selected</td>
+                                        <td>Selected</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="pm-grid">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>Specialized Agents</strong>
-                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                <ul>
                                     <li><strong>The Grammarian:</strong> Validates syntax.</li>
                                     <li><strong>The Stylist:</strong> Enforces brand voice.</li>
                                     <li><strong>The Manager:</strong> Compiles final diffs.</li>
@@ -154,36 +116,32 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 4: TECH -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
-                        <span class="slide-counter">04 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>04</b> CrewAI Framework</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART III: TECHNOLOGY</span>
+                        <span>04 / 09</span>
                     </div>
-                    <div class="slide-body">
-                        <div style="display: flex; gap: 40px;">
-                            <div style="flex: 1;">
-                                <h2 class="slide-title"
-                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">CrewAI
+                    <div>
+                        <div>
+                            <div>
+                                <h2>CrewAI
                                     Framework</h2>
                                 <p>Defining "Personas" to constrain LLM behavior.</p>
-                                <ul style="margin-top: 20px;">
-                                    <li style="margin-bottom: 10px;"><strong>Role:</strong> Defines the agent's
+                                <ul>
+                                    <li><strong>Role:</strong> Defines the agent's
                                         expertise.</li>
-                                    <li style="margin-bottom: 10px;"><strong>Goal:</strong> The specific outcome (e.g.,
+                                    <li><strong>Goal:</strong> The specific outcome (e.g.,
                                         "Find 5 errors").</li>
-                                    <li style="margin-bottom: 10px;"><strong>Backstory:</strong> Prompt context to
+                                    <li><strong>Backstory:</strong> Prompt context to
                                         enforce persona (e.g., "You hate passive voice").</li>
                                 </ul>
                             </div>
-                            <div style="flex: 1;">
-                                <pre><code class="language-python" style="font-size: 0.8rem;">editor = Agent(
+                            <div>
+                                <pre><code>editor = Agent(
   role='Senior Editor',
   goal='Fix tone inconsistencies',
-  backstory="""You are a veteran editor at wired.com. 
+  backstory="""You are a veteran editor at wired.com.
   You prefer punchy, active sentences.""",
   verbose=True,
   allow_delegation=True
@@ -197,237 +155,105 @@ task = Task(
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 5: CHALLENGES -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART IV: LEARNINGS</span>
-                        <span class="slide-counter">05 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>05</b> The Hallucination Loop</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART IV: LEARNINGS</span>
+                        <span>05 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Hallucination
+                    <h2>The Hallucination
                         Loop</h2>
-                    <div class="slide-body">
-                        <div class="pm-box">
-                            <span class="pm-header">Agent Conflict</span>
-                            <div class="pm-statement" style="font-size: 1.1rem;">
+                    <div>
+                        <div>
+                            <span>Agent Conflict</span>
+                            <div>
                                 "Without a strict Manager agent, the 'Stylist' would rewrite a sentence to be punchy,
                                 and the 'Grammarian' would rewrite it back to be formal, creating an infinite loop."
                             </div>
                         </div>
-                        <p style="margin-top: 30px;"><strong>Solution:</strong> Implementing a hierarchical process
+                        <p><strong>Solution:</strong> Implementing a hierarchical process
                             where agents submit proposals, but only the Manager agent has write access to the final
                             document.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 6: RESULTS -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART V: RESULTS</span>
-                        <span class="slide-counter">06 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>06</b> The "Lesson"</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART V: RESULTS</span>
+                        <span>06 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The "Lesson"</h2>
-                    <div class="slide-body">
-                        <div class="market-grid">
-                            <div class="market-card">
-                                <span class="label">Time Saved</span>
+                    <h2>The "Lesson"</h2>
+                    <div>
+                        <div>
+                            <div>
+                                <span>Time Saved</span>
                                 <h4>~80%</h4>
                                 <p>Reduction in "first pass" editing time.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">Token Cost</span>
+                            <div>
+                                <span>Token Cost</span>
                                 <h4>HIGH</h4>
                                 <p>Taught me the value of frugal prompting.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">Outcome</span>
+                            <div>
+                                <span>Outcome</span>
                                 <h4>Learned</h4>
                                 <p>Deep dive into CrewAI architecture.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
-            <div class="slide">
-                <div class="slide-content" style="align-items: center; justify-content: center;">
-                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART VI:
+            </div></details><details class="presentation-slide" ><summary><span><b>07</b> Terminal Demo</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <span>PART VI:
                         VISUALS</span>
-                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+                    <span>07 / 09</span>
 
-                    <h2 class="slide-title" style="margin-bottom: 50px;">Terminal Demo</h2>
-                    <div style="font-size: 5rem; margin-bottom: 20px;">📟</div>
-                    <p style="opacity: 0.6;">(CLI Output Visualization)</p>
+                    <h2>Terminal Demo</h2>
+                    <div>📟</div>
+                    <p>(CLI Output Visualization)</p>
                 </div>
-            </div>
-
-            <!-- SLIDE 8: TECH SPECS -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">APPENDIX</span>
-                        <span class="slide-counter">08 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>08</b> Stack Details</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>APPENDIX</span>
+                        <span>08 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Stack Details</h2>
-                    <div class="slide-body">
-                        <div class="market-grid">
-                            <div class="market-card">
-                                <span class="label">Framework</span>
+                    <h2>Stack Details</h2>
+                    <div>
+                        <div>
+                            <div>
+                                <span>Framework</span>
                                 <h4>CrewAI</h4>
-                                <p>Agent orchestration & task delegation.</p>
+                                <p>Agent orchestration &amp; task delegation.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">LLM</span>
+                            <div>
+                                <span>LLM</span>
                                 <h4>GPT-4o</h4>
                                 <p>High reasoning capability for nuance.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">Input</span>
+                            <div>
+                                <span>Input</span>
                                 <h4>PyPDF2</h4>
                                 <p>Text extraction and chunking.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <!-- SLIDE 9: OUTRO -->
-            <div class="slide">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: ARCHIVED</h2>
-                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+            </div></details><details class="presentation-slide" ><summary><span><b>09</b> STATUS: ARCHIVED</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <h2>STATUS: ARCHIVED</h2>
+                    <p>
                         A successful experiment in multi-agent workflows.
                     </p>
 
-                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+                    <a href="../playground.html">Back to Playground</a>
 
-                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
-                        &copy; 2024 Ashar Rai Mujeeb
+                    <footer>
+                        © 2024 Ashar Rai Mujeeb
                     </footer>
                 </div>
-            </div>
-
-        </div>
-
-        <!-- CONTROLS -->
-        <div class="deck-controls">
-            <button id="prevBtn" class="nav-btn" disabled>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-                PREV
-            </button>
-
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
-            </div>
-
-            <button id="nextBtn" class="nav-btn">
-                NEXT
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <div
-        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
-        <h3
-            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
-            Detailed Project Archive</h3>
-        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
-    </div>
-
-    <div class="blog-container">
-        <a href="../playground.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            BACK TO PLAYGROUND
-        </a>
-
-        <header class="blog-header">
-            <h1 class="blog-title">CrewAI Proofreader</h1>
-            <div class="blog-meta">
-                <span>STATUS: ARCHIVED</span>
-                <span>•</span>
-                <span>PLATFORM: PYTHON / CLI</span>
-                <span>•</span>
-                <span>YEAR: 2024</span>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">CrewAI</span>
-                <span class="blog-tag">Agentic Workflows</span>
-                <span class="blog-tag">Python</span>
-                <span class="blog-tag">PDF Processing</span>
-            </div>
-        </header>
-
-        <div class="blog-hero">
-            📄
-        </div>
-
-        <article class="blog-content">
-            <span class="section-label">PART I: THE CONCEPT</span>
-            <h2>Agents as Editors</h2>
-            <p>Editing large technical documents is tedious. You need to check for grammar, consistency in tone,
-                formatting standards, and technical accuracy. Doing this sequentially takes hours. I wanted to see if I
-                could spin up a "team" of AI agents to do it in parallel.</p>
-
-            <p>Using the <strong>CrewAI</strong> framework, I built a system where different agents took on different
-                personas:</p>
-            <ul>
-                <li><strong>The Grammarian:</strong> Focused solely on syntax and grammar.</li>
-                <li><strong>The Stylist:</strong> Ensured the tone matched the target audience (e.g., "professional" vs
-                    "casual").</li>
-                <li><strong>The Fact-Checker:</strong> Cross-referenced claims (limited to internal consistency).</li>
-            </ul>
-
-            <span class="section-label">PART II: IMPLEMENTATION</span>
-            <h3>The Workflow</h3>
-            <p>The system digests a PDF, splits it into chunks, and assigns these chunks to the agent crew. The agents
-                critique the text and propose changes. A final "Manager Agent" reviews these proposals and compiles the
-                final output.</p>
-
-            <pre><code class="language-python"># Defining the agents
-editor = Agent(
-  role='Senior Editor',
-  goal='Ensure the document flows logically and is free of errors',
-  backstory="""You are a veteran editor at a top tech publisher. 
-  You hate passive voice and love clarity.""",
-  verbose=True,
-  allow_delegation=True
-)
-
-# Defining the task
-proofread_task = Task(
-  description=f"""Analyze the following text section: {text_chunk}""",
-  agent=editor
-)</code></pre>
-
-            <span class="section-label">PART III: LEARNINGS</span>
-            <h3>Challenges & Learnings</h3>
-            <p>Building this taught me a lot about <strong>Agent orchestration</strong>. The biggest challenge was
-                "hallucination loops," where one agent would correct something, and another would correct it back.
-                Strict prompt engineering and clear hierarchy (using the Manager agent) were essential to break these
-                loops.</p>
-
-            <p>While effective for rough drafts, I found that for final polish, a human in the loop is still
-                indispensable. However, this tool cut down the "first pass" editing time by about 80%.</p>
-        </article>
-
-        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2024 Ashar Rai Mujeeb. All rights reserved.
-        </footer>
-    </div>
-</body>
-
-</html>
+            </div></details></section></article></div></section></main>
+ <footer><a href="/" class="footer-name">Ashar Rai Mujeeb<span>Product Manager · Bengaluru, India</span></a><div><a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="mailto:asharrm18@gmail.com">Email <span aria-hidden="true">↗</span></a><button class="text-button" id="share-copy">Copy site link <span aria-hidden="true">↗</span></button></div><p class="small">© 2026 · <button class="text-button" id="shortcuts-open">Keyboard shortcuts</button></p></footer></div>
+ <dialog id="settings-dialog" class="small-dialog" aria-label="Appearance and sharing"><div class="dialog-top"><span class="small">PREFERENCES</span><button class="icon-button" data-close aria-label="Close settings">×</button></div><h2>Appearance & sharing</h2><div class="setting-row"><label for="theme-setting">Dark appearance</label><input id="theme-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="contrast-setting">High contrast</label><input id="contrast-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="tracking-setting">Allow analytics</label><input id="tracking-setting" type="checkbox" role="switch"></div><div class="setting-row"><span>Accent</span><div class="swatches"><button data-accent="#3155e7" style="--swatch:#3155e7" aria-label="Blue accent"></button><button data-accent="#8b4bce" style="--swatch:#8b4bce" aria-label="Violet accent"></button><button data-accent="#17755d" style="--swatch:#17755d" aria-label="Green accent"></button><button id="random-accent" aria-label="Random accent">↻</button></div></div><p class="small">SHARE THIS PORTFOLIO</p><div class="share-links"><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">Twitter ↗</a><a href="https://wa.me/?text=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div></dialog>
+ <dialog id="shortcuts-dialog" class="small-dialog" aria-label="Keyboard shortcuts"><div class="dialog-top"><span class="small">KEYBOARD</span><button class="icon-button" data-close aria-label="Close shortcuts">×</button></div><h2>Get around quickly.</h2><dl class="shortcut-list"><div><dt>Contact</dt><dd><kbd>Z</kbd> <kbd>C</kbd></dd></div><div><dt>Change theme</dt><dd><kbd>Z</kbd> <kbd>N</kbd></dd></div><div><dt>Random accent</dt><dd><kbd>Z</kbd> <kbd>X</kbd></dd></div><div><dt>Download CV</dt><dd><kbd>C</kbd> <kbd>V</kbd></dd></div><div><dt>Report a problem</dt><dd><kbd>Z</kbd> <kbd>R</kbd></dd></div><div><dt>This menu</dt><dd><kbd>/</kbd></dd></div><div><dt>Close dialog</dt><dd><kbd>Esc</kbd></dd></div></dl></dialog><div class="toast" id="toast" role="status"></div></body></html>

@@ -1,115 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foodbuddy | Project Walkthrough</title>
-    <link rel="stylesheet" href="../src/styles/main.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-    <script src="../src/main.js" type="module"></script>
-    <style>
-        /* Local override to hide scrollbars during presentation */
-    </style>
-</head>
-
-<body>
-
-    <div class="presentation-mode">
-        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to Playground
-        </a>
-
-        <!-- SLIDE DECK CONTAINER -->
-        <div id="deck">
-
-            <!-- SLIDE 1: INTRO -->
-            <div class="slide active">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <div class="blog-meta" style="justify-content: center;">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Foodbuddy — Ashar Rai Mujeeb</title><meta name="description" content="AI nutrition tracking with an accountability partner and social features."><meta name="theme-color" content="#f8f9fb"><link rel="canonical" href="https://ashar.site/projects/foodbuddy.html"><meta property="og:title" content="Foodbuddy — Ashar Rai Mujeeb"><meta property="og:description" content="AI nutrition tracking with an accountability partner and social features."><meta property="og:image" content="https://ashar.site/og-image.jpg"><meta property="og:url" content="https://ashar.site/projects/foodbuddy.html"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><script type="module" src="/src/site.js"></script></head><body data-page="foodbuddy"><a class="skip" href="#main">Skip to content</a>
+ <aside class="rail"><a class="monogram" href="/" aria-label="Ashar Rai Mujeeb home">ar<span>m.</span></a><span class="rail-caption">PRODUCT MANAGER & BUILDER</span><a class="rail-bottom" href="mailto:asharrm18@gmail.com" aria-label="Email Ashar"><span aria-hidden="true">↗</span></a></aside>
+ <div class="site"><header class="topbar"><a class="small identity" href="/">ASHAR RAI MUJEEB</a><nav aria-label="Main navigation"><a href="/#work">Work <sup>06</sup></a><a href="/playground.html" >Projects <sup>11</sup></a><a href="/#about">About</a><a href="/#contact">Contact <span aria-hidden="true">↗</span></a></nav><button class="icon-button" id="settings-open" aria-label="Appearance and sharing settings" aria-haspopup="dialog">◐</button></header>
+ <main id="main"><section class="article-page"><div class="section-label small"><a href="/playground.html">← ALL PROJECTS</a><span>AI</span></div><header class="article-header"><h1>Foodbuddy</h1><p>AI nutrition tracking with an accountability partner and social features.</p></header><div class="article-layout"><aside class="article-sidebar"><span class="small">PROJECT STATUS</span><p>Unmaintained · private</p><span class="small">BUILT WITH</span><div class="tags"><span>Multimodal AI</span><span>Google Cloud</span></div><a class="inline-link" href="/#contact">Discuss this project ↗</a></aside><article class="prose"><img class="article-cover" src="/projects/foodbuddy-thumbnail.PNG" alt="Foodbuddy preview"><section class="original-slides"><h2>Project presentation</h2><p>Notes from the original project deck, kept with the decisions and trade-offs.</p><details class="presentation-slide" ><summary><span><b>01</b> FOODBUDDY</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
                         <span>2023</span>
                         <span>•</span>
                         <span>AI HEALTH TECH</span>
                     </div>
 
-                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">FOODBUDDY
+                    <h1>FOODBUDDY
                     </h1>
-                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    <p>
                         The AI accountability partner you can eat with. Snap-to-track with zero friction.
                     </p>
 
-                    <div class="blog-tags" style="margin-top: 40px;">
-                        <span class="blog-tag">AI Vision</span>
-                        <span class="blog-tag">Health Tech</span>
-                        <span class="blog-tag">GCP</span>
-                        <span class="blog-tag">Social</span>
+                    <div>
+                        <span>AI Vision</span>
+                        <span>Health Tech</span>
+                        <span>GCP</span>
+                        <span>Social</span>
                     </div>
 
-                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                    <div>
                         Use arrow keys or buttons below to navigate
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 2: MARKET 1 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART I: THE PROBLEM</span>
-                        <span class="slide-counter">02 / 09</span>
+            </div></details><details class="presentation-slide" open><summary><span><b>02</b> The Accountability Gap</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART I: THE PROBLEM</span>
+                        <span>02 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Accountability
+                    <h2>The Accountability
                         Gap
                     </h2>
-                    <div class="slide-body">
+                    <div>
                         <p><strong>Tracking calories is boring; failing your diet is lonely.</strong>
                             For calorie and macronutrient conscious mobile-first users, classical apps are mundane and
                             unrewarding.
                         </p>
 
-                        <div class="pm-grid">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>The "Data Entry" Churn</strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Classical apps treat food as spreadsheet
+                                <p>Classical apps treat food as spreadsheet
                                     data. This boring, mundane task causes users to stop recording meals within 2 weeks.
                                 </p>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>No Social Cost</strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Eating a donut in secret feels free.
+                                <p>Eating a donut in secret feels free.
                                     Eating it when you have to notify a buddy creates positive friction.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 3: SOLUTION -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART II: THE SOLUTION</span>
-                        <span class="slide-counter">03 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>03</b> Accountability as a Service</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART II: THE SOLUTION</span>
+                        <span>03 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Accountability as a
+                    <h2>Accountability as a
                         Service</h2>
-                    <div class="slide-body">
-                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                    <div>
+                        <p>
                             <strong>Elevator Pitch:</strong><br> A social-first food tracker that uses AI Vision to
                             lower friction and "Peer Pressure" to increase adherence.
                         </p>
 
-                        <div class="table-container" style="font-size: 0.85rem; margin-bottom: 20px;">
-                            <table style="width: 100%;">
+                        <div>
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Approach</th>
@@ -123,28 +85,28 @@
                                         <td><strong>Voice Logging</strong></td>
                                         <td>Fastest input.</td>
                                         <td>Volume/Portion estimation is wildly inaccurate.</td>
-                                        <td style="opacity: 0.6;">Rejected</td>
+                                        <td>Rejected</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Barcode Scan</strong></td>
                                         <td>Perfect accuracy.</td>
                                         <td>Useless for home-cooked meals.</td>
-                                        <td style="opacity: 0.6;">Backup feature</td>
+                                        <td>Backup feature</td>
                                     </tr>
                                     <tr>
                                         <td><strong>AI Vision + Social</strong></td>
                                         <td>Zero friction + Social Motivation.</td>
                                         <td>Latency constraints.</td>
-                                        <td style="color: var(--accent-color); font-weight: bold;">Selected</td>
+                                        <td>Selected</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="pm-grid">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>Social "Push"</strong>
-                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                <ul>
                                     <li>One-to-many sharing.</li>
                                     <li>Real-time notifications only on "Bad" choices.</li>
                                     <li>"Better Judgement" recommendations.</li>
@@ -153,63 +115,56 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 4: TECH -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
-                        <span class="slide-counter">04 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>04</b> Vision Pipeline</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART III: TECHNOLOGY</span>
+                        <span>04 / 09</span>
                     </div>
-                    <div class="slide-body">
-                        <div style="display: flex; gap: 40px;">
-                            <div style="flex: 1;">
-                                <h2 class="slide-title"
-                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">Vision
+                    <div>
+                        <div>
+                            <div>
+                                <h2>Vision
                                     Pipeline</h2>
                                 <p>Leveraging early access to GPT-4 Vision and Gemini Pro Vision.</p>
-                                <ul style="margin-top: 20px;">
-                                    <li style="margin-bottom: 10px;"><strong>Input:</strong> Raw image buffer from
+                                <ul>
+                                    <li><strong>Input:</strong> Raw image buffer from
                                         camera.</li>
-                                    <li style="margin-bottom: 10px;"><strong>Processing:</strong> Cloud Function spins
+                                    <li><strong>Processing:</strong> Cloud Function spins
                                         up on valid upload.</li>
-                                    <li style="margin-bottom: 10px;"><strong>Output:</strong> Structured JSON with
+                                    <li><strong>Output:</strong> Structured JSON with
                                         macros and confidence score.</li>
                                 </ul>
                             </div>
-                            <div style="flex: 1;">
-                                <pre><code class="language-javascript" style="font-size: 0.8rem;">const analyzeFood = async (imageBuffer) => {
+                            <div>
+                                <pre><code>const analyzeFood = async (imageBuffer) =&gt; {
   const prompt = "Identify food items, estimate mass, and calculate macros.";
-  
+
   const result = await model.generateContent([
-    prompt, 
+    prompt,
     { inlineData: { data: imageBuffer, mimeType: 'image/jpeg' } }
   ]);
-  
+
   return parseJSON(result.response.text());
 }</code></pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 5: INFRASTRUCTURE -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART III: TECHNOLOGY</span>
-                        <span class="slide-counter">05 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>05</b> Frugal Architecture</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART III: TECHNOLOGY</span>
+                        <span>05 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Frugal
+                    <h2>Frugal
                         Architecture</h2>
-                    <div class="slide-body">
+                    <div>
                         <p>Hosted on a <strong>GCP e2-micro</strong> instance to keep costs near zero while maintaining
                             scalability.</p>
 
-                        <div class="table-container" style="margin-top: 30px;">
-                            <table style="width: 100%;">
+                        <div>
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Component</th>
@@ -231,222 +186,88 @@
                                     <tr>
                                         <td><strong>AI Model</strong></td>
                                         <td>Gemini Pro Vision</td>
-                                        <td>Lower latency & cost tailored for multimodal.</td>
+                                        <td>Lower latency &amp; cost tailored for multimodal.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 6: LEARNINGS -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART IV: RETROSPECTIVE</span>
-                        <span class="slide-counter">06 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>06</b> Why It Was Archived</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART IV: RETROSPECTIVE</span>
+                        <span>06 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Why It Was Archived
+                    <h2>Why It Was Archived
                     </h2>
-                    <div class="slide-body">
-                        <div class="pm-box">
-                            <span class="pm-header">The Unit Economics Problem</span>
-                            <div class="pm-statement" style="font-size: 1.1rem;">
+                    <div>
+                        <div>
+                            <span>The Unit Economics Problem</span>
+                            <div>
                                 "While the 'snap-to-track' feature was magical, the cost of processing 3-5 high-res
                                 images per daily active user (DAU) made the specific free-tier model unsustainable in
                                 2023."
                             </div>
                         </div>
 
-                        <p style="margin-top: 30px;">However, the lessons learned in <strong>Context
+                        <p>However, the lessons learned in <strong>Context
                                 Engineering</strong>
                             directly influenced later projects like FileOps.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 7: UX DEMO PLACEHOLDER -->
-            <div class="slide">
-                <div class="slide-content" style="align-items: center; justify-content: center;">
-                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART V:
+            </div></details><details class="presentation-slide" ><summary><span><b>07</b> Interface Preview</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <span>PART V:
                         VISUALS</span>
-                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 09</span>
+                    <span>07 / 09</span>
 
-                    <h2 class="slide-title" style="margin-bottom: 50px;">Interface Preview</h2>
-                    <div style="font-size: 5rem; margin-bottom: 20px;">🥑</div>
-                    <p style="opacity: 0.6;">(Demo video archived)</p>
+                    <h2>Interface Preview</h2>
+                    <div>🥑</div>
+                    <p>(Demo video archived)</p>
                 </div>
-            </div>
-
-
-            <!-- SLIDE 8: TECH SPECS -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">APPENDIX</span>
-                        <span class="slide-counter">08 / 09</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>08</b> Technical Stack</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>APPENDIX</span>
+                        <span>08 / 09</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Technical Stack
+                    <h2>Technical Stack
                     </h2>
-                    <div class="slide-body">
-                        <div class="market-grid">
-                            <div class="market-card">
-                                <span class="label">Frontend</span>
+                    <div>
+                        <div>
+                            <div>
+                                <span>Frontend</span>
                                 <h4>React Native</h4>
                                 <p>For cross-platform mobile reach.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">Backend</span>
+                            <div>
+                                <span>Backend</span>
                                 <h4>GCP</h4>
-                                <p>Cloud Run & Cloud Functions.</p>
+                                <p>Cloud Run &amp; Cloud Functions.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">AI</span>
+                            <div>
+                                <span>AI</span>
                                 <h4>LangChain</h4>
-                                <p>Orchestration of vision & chat agents.</p>
+                                <p>Orchestration of vision &amp; chat agents.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 9: OUTRO -->
-            <div class="slide">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">STATUS: UNMAINTAINED</h2>
-                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+            </div></details><details class="presentation-slide" ><summary><span><b>09</b> STATUS: UNMAINTAINED</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <h2>STATUS: UNMAINTAINED</h2>
+                    <p>
                         The code lives on in private repos, but the spirit of AI-assisted accountability continues.
                     </p>
 
-                    <a href="../playground.html" class="cta-button">Back to Playground</a>
+                    <a href="../playground.html">Back to Playground</a>
 
-                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
-                        &copy; 2023-2025 Ashar Rai Mujeeb
+                    <footer>
+                        © 2023-2025 Ashar Rai Mujeeb
                     </footer>
                 </div>
-            </div>
-
-        </div>
-
-        <!-- CONTROLS -->
-        <div class="deck-controls">
-            <button id="prevBtn" class="nav-btn" disabled>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-                PREV
-            </button>
-
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
-            </div>
-
-            <button id="nextBtn" class="nav-btn">
-                NEXT
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <div
-        style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
-        <h3
-            style="font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase;">
-            Detailed Project Archive</h3>
-        <p style="opacity: 0.6; font-size: 0.9rem;">Full writeup below</p>
-    </div>
-
-    <div class="blog-container">
-        <a href="../playground.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            BACK TO PLAYGROUND
-        </a>
-
-        <header class="blog-header">
-            <h1 class="blog-title">Foodbuddy</h1>
-            <div class="blog-meta">
-                <span>STATUS: ARCHIVED</span>
-                <span>•</span>
-                <span>PLATFORM: MOBILE APP</span>
-                <span>•</span>
-                <span>YEAR: 2023</span>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">AI Vision</span>
-                <span class="blog-tag">Health Tech</span>
-                <span class="blog-tag">GCP</span>
-                <span class="blog-tag">Social</span>
-            </div>
-        </header>
-
-        <div class="blog-hero">
-            🥑
-        </div>
-
-        <article class="blog-content">
-            <span class="section-label">PART I: THE VISION</span>
-            <h2>The Accountability Partner You Can Eat With</h2>
-            <p>Foodbuddy aimed to solve the hardest part of dieting: consistency. Most trackers require tedious manual
-                entry. Foodbuddy used early multimodal AI models to simply allow users to "snap and track". But beyond
-                tracking, it was about <em>accountability</em>.</p>
-
-            <blockquote>
-                "People don't need another calculator. They need a friend who gently judges their late-night pizza."
-            </blockquote>
-
-            <h3>Core Features</h3>
-            <ul>
-                <li><strong>Snap-to-Track:</strong> Leveraging GPT-4 Vision (and later Gemini Pro Vision), users could
-                    upload a photo of their meal. The AI estimated calories, macros, and ingredients with surprising
-                    accuracy.</li>
-                <li><strong>The AI Coach:</strong> A personality-driven AI chatbot that would comment on your meals. It
-                    could be supportive ("Great salad!") or sassy ("Is that your third cookie?").</li>
-                <li><strong>Social Circles:</strong> Small, private groups where friends could see each other's logs—not
-                    the specific calories, but a "Health Score" for the day, fostering positive peer pressure.</li>
-            </ul>
-
-            <span class="section-label">PART II: UNDER THE HOOD</span>
-            <h3>Backend Architecture</h3>
-            <p>We hosted the core services on a <strong>GCP e2-micro</strong> instance to keep costs near zero. The
-                challenge was managing the heavy lifting of image processing.</p>
-
-            <pre><code class="language-javascript">// Handling the image upload and analysis queue
-const processImageQueue = async (imageUrl, userId) => {
-    // Determine complexity
-    const analysis = await aiService.analyzeFood(imageUrl);
-    
-    // Store nutritional data
-    await db.saveLog({
-        userId,
-        calories: analysis.calories,
-        macros: analysis.macros,
-        image: imageUrl
-    });
-    
-    // Trigger the accountability agent
-    await coachAgent.reactToMeal(userId, analysis);
-}</code></pre>
-
-            <span class="section-label">PART III: POST-MORTEM</span>
-            <h3>Why It's Unmaintained</h3>
-            <p>While the prototype was functional and the "snap-to-track" feature was magical, the unit economics of
-                processing every meal image with high-end LLMs were difficult for a free side project. Additionally, the
-                latency in 2023 for vision models was a friction point.</p>
-
-            <p>However, the lessons learned here directly influenced the "Context Engineering" work in later projects
-                like FileOps.</p>
-        </article>
-
-        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2023-2025 Ashar Rai Mujeeb. All rights reserved.
-        </footer>
-    </div>
-</body>
-
-</html>
+            </div></details></section></article></div></section></main>
+ <footer><a href="/" class="footer-name">Ashar Rai Mujeeb<span>Product Manager · Bengaluru, India</span></a><div><a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="mailto:asharrm18@gmail.com">Email <span aria-hidden="true">↗</span></a><button class="text-button" id="share-copy">Copy site link <span aria-hidden="true">↗</span></button></div><p class="small">© 2026 · <button class="text-button" id="shortcuts-open">Keyboard shortcuts</button></p></footer></div>
+ <dialog id="settings-dialog" class="small-dialog" aria-label="Appearance and sharing"><div class="dialog-top"><span class="small">PREFERENCES</span><button class="icon-button" data-close aria-label="Close settings">×</button></div><h2>Appearance & sharing</h2><div class="setting-row"><label for="theme-setting">Dark appearance</label><input id="theme-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="contrast-setting">High contrast</label><input id="contrast-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="tracking-setting">Allow analytics</label><input id="tracking-setting" type="checkbox" role="switch"></div><div class="setting-row"><span>Accent</span><div class="swatches"><button data-accent="#3155e7" style="--swatch:#3155e7" aria-label="Blue accent"></button><button data-accent="#8b4bce" style="--swatch:#8b4bce" aria-label="Violet accent"></button><button data-accent="#17755d" style="--swatch:#17755d" aria-label="Green accent"></button><button id="random-accent" aria-label="Random accent">↻</button></div></div><p class="small">SHARE THIS PORTFOLIO</p><div class="share-links"><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">Twitter ↗</a><a href="https://wa.me/?text=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div></dialog>
+ <dialog id="shortcuts-dialog" class="small-dialog" aria-label="Keyboard shortcuts"><div class="dialog-top"><span class="small">KEYBOARD</span><button class="icon-button" data-close aria-label="Close shortcuts">×</button></div><h2>Get around quickly.</h2><dl class="shortcut-list"><div><dt>Contact</dt><dd><kbd>Z</kbd> <kbd>C</kbd></dd></div><div><dt>Change theme</dt><dd><kbd>Z</kbd> <kbd>N</kbd></dd></div><div><dt>Random accent</dt><dd><kbd>Z</kbd> <kbd>X</kbd></dd></div><div><dt>Download CV</dt><dd><kbd>C</kbd> <kbd>V</kbd></dd></div><div><dt>Report a problem</dt><dd><kbd>Z</kbd> <kbd>R</kbd></dd></div><div><dt>This menu</dt><dd><kbd>/</kbd></dd></div><div><dt>Close dialog</dt><dd><kbd>Esc</kbd></dd></div></dl></dialog><div class="toast" id="toast" role="status"></div></body></html>

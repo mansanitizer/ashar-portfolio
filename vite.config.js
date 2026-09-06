@@ -7,6 +7,13 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        'work-product-launches': resolve(__dirname, 'projects/work-product-launches.html'),
+        'work-user-growth': resolve(__dirname, 'projects/work-user-growth.html'),
+        'work-compliance': resolve(__dirname, 'projects/work-compliance.html'),
+        'work-ux-enhancement': resolve(__dirname, 'projects/work-ux-enhancement.html'),
+        'work-upi-autopay': resolve(__dirname, 'projects/work-upi-autopay.html'),
+        'work-analytics': resolve(__dirname, 'projects/work-analytics.html'),
+
         game: resolve(__dirname, 'game.html'),
         prep: resolve(__dirname, 'prep.html'),
         playground: resolve(__dirname, 'playground.html'),
@@ -16,6 +23,11 @@ export default defineConfig({
         foodbuddy: resolve(__dirname, 'projects/foodbuddy.html'),
         pdf_proofreader: resolve(__dirname, 'projects/pdf-proofreader.html'),
         fileops: resolve(__dirname, 'projects/fileops.html'),
+        blinkit_tools: resolve(__dirname, 'projects/blinkit-tools.html'),
+        openupi: resolve(__dirname, 'projects/openupi.html'),
+        duomaxxing: resolve(__dirname, 'projects/duomaxxing.html'),
+        dwaar: resolve(__dirname, 'projects/dwaar.html'),
+        blindpay_esp32: resolve(__dirname, 'projects/blindpay-esp32.html'),
         gg_eink: resolve(__dirname, 'projects/gg-eink.html'),
         n8n_automations: resolve(__dirname, 'projects/n8n-automations.html'),
         bored: resolve(__dirname, 'projects/bored.html')
@@ -24,7 +36,7 @@ export default defineConfig({
     // Copy static assets to dist
     assetsDir: 'assets',
     // Generate clean filenames for production
-    cssCodeSplit: false
+    cssCodeSplit: true
   },
 
   // Development server configuration

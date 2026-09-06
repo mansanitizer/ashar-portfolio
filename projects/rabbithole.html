@@ -1,187 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rabbithole | Project Walkthrough</title>
-    <link rel="stylesheet" href="../src/styles/main.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-    <script src="../src/main.js" type="module"></script>
-    <style>
-        /* Local override to hide scrollbars during presentation */
-    </style>
-</head>
-
-<body>
-
-    <div class="presentation-mode">
-        <a href="../playground.html" class="back-link" style="position: absolute; top: 40px; left: 20px; z-index: 10;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to Playground
-        </a>
-
-        <!-- SLIDE DECK CONTAINER -->
-        <div id="deck">
-
-            <!-- SLIDE 1: INTRO -->
-            <div class="slide active">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <div class="blog-meta" style="justify-content: center;">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rabbithole — Ashar Rai Mujeeb</title><meta name="description" content="An AI encyclopedia with personalized search and discovery."><meta name="theme-color" content="#f8f9fb"><link rel="canonical" href="https://ashar.site/projects/rabbithole.html"><meta property="og:title" content="Rabbithole — Ashar Rai Mujeeb"><meta property="og:description" content="An AI encyclopedia with personalized search and discovery."><meta property="og:image" content="https://ashar.site/og-image.jpg"><meta property="og:url" content="https://ashar.site/projects/rabbithole.html"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><script type="module" src="/src/site.js"></script></head><body data-page="rabbithole"><a class="skip" href="#main">Skip to content</a>
+ <aside class="rail"><a class="monogram" href="/" aria-label="Ashar Rai Mujeeb home">ar<span>m.</span></a><span class="rail-caption">PRODUCT MANAGER & BUILDER</span><a class="rail-bottom" href="mailto:asharrm18@gmail.com" aria-label="Email Ashar"><span aria-hidden="true">↗</span></a></aside>
+ <div class="site"><header class="topbar"><a class="small identity" href="/">ASHAR RAI MUJEEB</a><nav aria-label="Main navigation"><a href="/#work">Work <sup>06</sup></a><a href="/playground.html" >Projects <sup>11</sup></a><a href="/#about">About</a><a href="/#contact">Contact <span aria-hidden="true">↗</span></a></nav><button class="icon-button" id="settings-open" aria-label="Appearance and sharing settings" aria-haspopup="dialog">◐</button></header>
+ <main id="main"><section class="article-page"><div class="section-label small"><a href="/playground.html">← ALL PROJECTS</a><span>AI</span></div><header class="article-header"><h1>Rabbithole</h1><p>An AI encyclopedia with personalized search and discovery.</p></header><div class="article-layout"><aside class="article-sidebar"><span class="small">PROJECT STATUS</span><p>Live</p><span class="small">BUILT WITH</span><div class="tags"><span>AI agents</span><span>Vector embeddings</span><span>Android</span><span>Capacitor</span></div><a class="inline-link" href="/#contact">Discuss this project ↗</a></aside><article class="prose"><img class="article-cover" src="/projects/rabbithole.gif" alt="Rabbithole preview"><section class="original-slides"><h2>Project presentation</h2><p>Notes from the original project deck, kept with the decisions and trade-offs.</p><details class="presentation-slide" ><summary><span><b>01</b> RABBITHOLE</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
                         <span>DECEMBER 2025</span>
                         <span>•</span>
                         <span>PRODUCT DEEP DIVE</span>
                     </div>
 
-                    <h1 class="slide-title" style="font-size: 5rem; margin-bottom: 30px; max-width: 100%;">RABBITHOLE
+                    <h1>RABBITHOLE
                     </h1>
-                    <p style="font-size: 1.5rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    <p>
                         Curing "TikTok Brain" with AI-generated, swipeable knowledge paths.
                     </p>
 
-                    <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button"
-                        style="margin-top: 30px;">Launch App</a>
+                    <a href="https://rabbithole.iarm.me" target="_blank">Launch App</a>
 
-                    <div class="blog-tags" style="margin-top: 40px;">
-                        <span class="blog-tag">Next.js</span>
-                        <span class="blog-tag">OpenAI</span>
-                        <span class="blog-tag">Vercel AI SDK</span>
-                        <span class="blog-tag">Capacitor</span>
-                        <span class="blog-tag">Supabase</span>
+                    <div>
+                        <span>Next.js</span>
+                        <span>OpenAI</span>
+                        <span>Vercel AI SDK</span>
+                        <span>Capacitor</span>
+                        <span>Supabase</span>
                     </div>
 
-                    <div style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5;">
+                    <div>
                         Use arrow keys or buttons below to navigate
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 2: MARKET 1 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART I: MARKET NARRATIVE</span>
-                        <span class="slide-counter">02 / 11</span>
+            </div></details><details class="presentation-slide" open><summary><span><b>02</b> The "TikTok Brain" Problem</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART I: MARKET NARRATIVE</span>
+                        <span>02 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The "TikTok Brain"
+                    <h2>The "TikTok Brain"
                         Problem</h2>
-                    <div class="slide-body">
-                        <p>User attention spans have dropped to <strong><a
-                                    href="https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans"
-                                    target="_blank" class="source-tooltip"
-                                    data-tooltip="Research by Dr. Gloria Mark (UC Irvine) shows average screen focus dropped from 2.5 mins (2004) to ~47 seconds (2023).">~47
+                    <div>
+                        <p>User attention spans have dropped to <strong><a href="https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans" target="_blank" data-tooltip="Research by Dr. Gloria Mark (UC Irvine) shows average screen focus dropped from 2.5 mins (2004) to ~47 seconds (2023).">~47
                                     seconds</a></strong>.
                             The "variable reward schedule" of feeds makes traditional reading feel "insufferably
                             boring."</p>
 
-                        <div class="pm-grid">
-                            <div class="pm-item">
-                                <strong><a href="https://www.psypost.org/" target="_blank" class="source-tooltip"
-                                        data-tooltip="2025 Psychological Bulletin review linking rapid task switching to deficits in inhibitory control.">"Popcorn
+                        <div>
+                            <div>
+                                <strong><a href="https://www.psypost.org/" target="_blank" data-tooltip="2025 Psychological Bulletin review linking rapid task switching to deficits in inhibitory control.">"Popcorn
                                         Brain"</a></strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Deficits in inhibitory control; users
+                                <p>Deficits in inhibitory control; users
                                     physically struggle to stop switching tasks.</p>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>The "Tsundoku" Guilt</strong>
-                                <p style="font-size: 0.95rem; margin-top: 8px;">Buying books for the aesthetic but
+                                <p>Buying books for the aesthetic but
                                     failing to read them creates anxiety and loss of identity.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 3: MARKET 2 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART I: MARKET NARRATIVE</span>
-                        <span class="slide-counter">03 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>03</b> The Billion-Dollar Gap</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART I: MARKET NARRATIVE</span>
+                        <span>03 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The Billion-Dollar
+                    <h2>The Billion-Dollar
                         Gap</h2>
-                    <div class="slide-body">
+                    <div>
                         <p>While print sales fall, <strong>active learning</strong> is migrating to audio and
                             micro-formats. Users want to learn but need lower friction.</p>
 
-                        <div class="market-grid" style="margin-top: 40px;">
-                            <div class="market-card">
-                                <span class="label">TAM</span>
+                        <div>
+                            <div>
+                                <span>TAM</span>
                                 <h4>
-                                    <a href="#" class="source-tooltip"
-                                        data-tooltip="Combined global audience of Podcast listeners (460M+) and active users of apps like Duolingo/Blinkist (150M+).">600M+</a>
+                                    <a href="#" data-tooltip="Combined global audience of Podcast listeners (460M+) and active users of apps like Duolingo/Blinkist (150M+).">600M+</a>
                                 </h4>
                                 <p>Podcast listeners + micro-learning apps.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">TOM</span>
+                            <div>
+                                <span>TOM</span>
                                 <h4>~50M</h4>
                                 <p>Smartphone users seeking self-improvement.</p>
                             </div>
-                            <div class="market-card">
-                                <span class="label">SOM</span>
+                            <div>
+                                <span>SOM</span>
                                 <h4>500k</h4>
                                 <p>$30M-$50M ARR opportunity.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 4: PROBLEM SPACE -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART II: PRODUCT DEFINITION</span>
-                        <span class="slide-counter">04 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>04</b> Project note 4</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART II: PRODUCT DEFINITION</span>
+                        <span>04 / 11</span>
                     </div>
-                    <div class="slide-body">
-                        <div class="pm-box">
-                            <span class="pm-header">Formal Problem Statement</span>
-                            <div class="pm-statement" style="font-size: 1.2rem;">
+                    <div>
+                        <div>
+                            <span>Formal Problem Statement</span>
+                            <div>
                                 "For <strong>knowledge-seeking users</strong>, current SFV consumption leads to 'brain
                                 rot' because the <strong>dopamine loop creates a 'scan-and-shift' state</strong> that
                                 makes deep reading physically difficult."
                             </div>
 
-                            <div
-                                style="display: flex; gap: 30px; margin-top: 30px; padding-left: 15px; border-left: 3px solid var(--accent-color);">
+                            <div>
                                 <div>
-                                    <strong style="color: var(--accent-color);">Functional Job:</strong><br>
+                                    <strong>Functional Job:</strong><br>
                                     Utilize 5-15 min gaps for discovery.
                                 </div>
                                 <div>
-                                    <strong style="color: var(--accent-color);">Emotional Job:</strong><br>
+                                    <strong>Emotional Job:</strong><br>
                                     Convert "wasted time" guilt into curiosity.
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <!-- SLIDE 5: OPTIONS -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART III: SOLUTION SPACE</span>
-                        <span class="slide-counter">05 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>05</b> Solution Options</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART III: SOLUTION SPACE</span>
+                        <span>05 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Solution Options
+                    <h2>Solution Options
                     </h2>
-                    <div class="slide-body">
-                        <div class="table-container" style="margin-top: 30px; font-size: 0.85rem;">
-                            <table style="width: 100%;">
+                    <div>
+                        <div>
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Option</th>
@@ -193,51 +141,49 @@
                                     <tr>
                                         <td><strong>Micro-Chapters</strong></td>
                                         <td>High depth but high friction (cognitive load).</td>
-                                        <td style="opacity: 0.6;">Discarded</td>
+                                        <td>Discarded</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Audio-First</strong></td>
                                         <td>Lowest friction but passive retention.</td>
-                                        <td style="opacity: 0.6;">Postponed (V2)</td>
+                                        <td>Postponed (V2)</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Smart Card Feed</strong></td>
                                         <td>Matches swipe habit; granular; skimmable.</td>
-                                        <td style="color: var(--accent-color); font-weight: bold;">Selected (V1)</td>
+                                        <td>Selected (V1)</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- SLIDE 6: SOLUTION -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART III: SOLUTION SPACE</span>
-                        <span class="slide-counter">06 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>06</b> The V1 Solution</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART III: SOLUTION SPACE</span>
+                        <span>06 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">The V1 Solution
+                    <h2>The V1 Solution
                     </h2>
-                    <div class="slide-body">
-                        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                    <div>
+                        <p>
                             <strong>Elevator Pitch:</strong><br> A swipeable, card-based feed of AI-generated facts that
                             can be explored via tap-to-deepen "holes" within a 5–15 minute session.
                         </p>
-                        <div class="pm-grid">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>Core Mechanics</strong>
-                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                <ul>
                                     <li>Infinite Topic Feed</li>
                                     <li>Micro-Holes (Tap to spawn sub-feed)</li>
                                     <li>"Facts Collected" Counter</li>
                                 </ul>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>Success KPIs</strong>
-                                <ul style="margin-top: 10px; padding-left: 20px;">
-                                    <li>Median cards/session > 10</li>
+                                <ul>
+                                    <li>Median cards/session &gt; 10</li>
                                     <li>Session felt "productive"</li>
                                 </ul>
                             </div>
@@ -246,41 +192,34 @@
 
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 7: UX / VIDEO -->
-            <div class="slide">
-                <div class="slide-content" style="align-items: center; justify-content: center;">
-                    <span class="slide-part-label" style="position: absolute; top: 60px; left: 60px;">PART IV: UX
+            </div></details><details class="presentation-slide" ><summary><span><b>07</b> V1 Core Flows Demo</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <span>PART IV: UX
                         ARTIFACTS</span>
-                    <span class="slide-counter" style="position: absolute; top: 60px; right: 60px;">07 / 11</span>
+                    <span>07 / 11</span>
 
-                    <h2 class="slide-title" style="margin-bottom: 50px;">V1 Core Flows Demo</h2>
+                    <h2>V1 Core Flows Demo</h2>
 
-                    <a href="#" class="cta-button" style="transform: scale(1.5);">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
-                            style="vertical-align: middle; margin-right: 8px;">
+                    <a href="#">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <polygon points="5,3 19,12 5,21"></polygon>
                         </svg>
                         Watch Video
                     </a>
 
-                    <p style="margin-top: 40px; opacity: 0.6;">Topic Selection → Infinite Feed → Rabbit Hole Drill Down
+                    <p>Topic Selection → Infinite Feed → Rabbit Hole Drill Down
                         → Session Summary</p>
                 </div>
-            </div>
-
-            <!-- SLIDE 8: RESEARCH -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART V: RESEARCH APPENDIX</span>
-                        <span class="slide-counter">08 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>08</b> Friction Analysis</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART V: RESEARCH APPENDIX</span>
+                        <span>08 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 20px;">Friction Analysis
+                    <h2>Friction Analysis
                     </h2>
-                    <div class="slide-body">
-                        <div class="table-container" style="margin-top: 0;">
+                    <div>
+                        <div>
                             <table>
                                 <thead>
                                     <tr>
@@ -309,622 +248,105 @@
                             </table>
                         </div>
 
-                        <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+                        <div>
                             <strong>Primary Sources:</strong>
-                            <ul style="margin-top: 10px; line-height: 1.8;">
+                            <ul>
                                 <li>
-                                    <a href="https://news.ufl.edu/" target="_blank" class="source-tooltip"
-                                        data-tooltip="University of Florida study finding a 40% decline in reading for pleasure among undergraduates.">UF
+                                    <a href="https://news.ufl.edu/" target="_blank" data-tooltip="University of Florida study finding a 40% decline in reading for pleasure among undergraduates.">UF
                                         Reading Decline Study (2025)</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.sdsu.edu/" target="_blank" class="source-tooltip"
-                                        data-tooltip="San Diego State University eye-tracking research linking scroll speed to reduced comprehension retention.">SDSU
+                                    <a href="https://www.sdsu.edu/" target="_blank" data-tooltip="San Diego State University eye-tracking research linking scroll speed to reduced comprehension retention.">SDSU
                                         'Scan-and-Shift' Hypothesis</a>
                                 </li>
                                 <li>
-                                    <a href="https://omr.com/en/reviews/contenthub/tools-blinkist-app-user-happy"
-                                        target="_blank" class="source-tooltip"
-                                        data-tooltip="Blinkist reports 26M users, validating the market demand for compressed non-fiction content.">Blinkist
+                                    <a href="https://omr.com/en/reviews/contenthub/tools-blinkist-app-user-happy" target="_blank" data-tooltip="Blinkist reports 26M users, validating the market demand for compressed non-fiction content.">Blinkist
                                         Market Validation</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 9: TECH -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART VI: TECHNICAL SOLUTION</span>
-                        <span class="slide-counter">09 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>09</b> The "Infinite Wikipedia"</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART VI: TECHNICAL SOLUTION</span>
+                        <span>09 / 11</span>
                     </div>
-                    <div class="slide-body">
-                        <div style="display: flex; gap: 40px;">
-                            <div style="flex: 1;">
-                                <h2 class="slide-title"
-                                    style="color: var(--accent-color); font-size: 1.8rem; margin-bottom: 20px;">The
+                    <div>
+                        <div>
+                            <div>
+                                <h2>The
                                     "Infinite Wikipedia"</h2>
                                 <p>Orchestrating AI agents to synthesize knowledge feeds in real-time.</p>
-                                <ul style="margin-top: 20px;">
-                                    <li style="margin-bottom: 10px;"><strong>Intent Analysis:</strong> Agents analyze
+                                <ul>
+                                    <li><strong>Intent Analysis:</strong> Agents analyze
                                         query depth.</li>
-                                    <li style="margin-bottom: 10px;"><strong>Content Synthesis:</strong> Parallel LLMs
+                                    <li><strong>Content Synthesis:</strong> Parallel LLMs
                                         draft content.</li>
-                                    <li style="margin-bottom: 10px;"><strong>Aggressive Streaming:</strong> Vercel AI
+                                    <li><strong>Aggressive Streaming:</strong> Vercel AI
                                         SDK for low latency.</li>
                                 </ul>
                             </div>
-                            <div style="flex: 1;">
-                                <pre><code class="language-typescript" style="font-size: 0.8rem;">export async function POST(req) {
+                            <div>
+                                <pre><code>export async function POST(req) {
   const { messages } = await req.json();
-  
+
   // Parallel agent execution
   const response = await openai.createChatCompletion({
     model: 'gpt-4',
     stream: true,
     messages
   });
-  
+
   return OpenAIStream(response);
 }</code></pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 10: MOBILE -->
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-part-label">PART VI: TECHNICAL SOLUTION</span>
-                        <span class="slide-counter">10 / 11</span>
+            </div></details><details class="presentation-slide" ><summary><span><b>10</b> Mobile Adaptation</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <div>
+                        <span>PART VI: TECHNICAL SOLUTION</span>
+                        <span>10 / 11</span>
                     </div>
-                    <h2 class="slide-title" style="color: var(--accent-color); margin-bottom: 30px;">Mobile Adaptation
+                    <h2>Mobile Adaptation
                     </h2>
-                    <div class="slide-body">
+                    <div>
                         <p>Built with <strong>Capacitor</strong> to bring the Next.js web app to Android with native
                             interactions.</p>
 
-                        <div class="pm-grid" style="margin-top: 40px;">
-                            <div class="pm-item">
+                        <div>
+                            <div>
                                 <strong>Native Gestures</strong>
                                 <p>Swipe-to-save, tap-to-drill-down optimized for thumbs.</p>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>Offline Caching</strong>
                                 <p>Local storage for previously visited "holes".</p>
                             </div>
-                            <div class="pm-item">
+                            <div>
                                 <strong>Share Intent</strong>
                                 <p>Deep linking into specific knowledge stacks.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SLIDE 11: OUTRO -->
-            <div class="slide">
-                <div class="slide-content"
-                    style="justify-content: center; text-align: center; border-color: var(--accent-color);">
-                    <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 40px;">FUTURE ROADMAP</h2>
-                    <p style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 60px;">
+            </div></details><details class="presentation-slide" ><summary><span><b>11</b> FUTURE ROADMAP</span><span aria-hidden="true">+</span></summary><div class="slide-render">
+                <div>
+                    <h2>FUTURE ROADMAP</h2>
+                    <p>
                         Exploring multi-modal learning paths with Flux for images and audio summaries.
                     </p>
 
-                    <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button">Launch Live Demo</a>
+                    <a href="https://rabbithole.iarm.me" target="_blank">Launch Live Demo</a>
 
-                    <footer style="margin-top: 80px; font-size: 0.9rem; opacity: 0.6;">
-                        &copy; 2025 Ashar Rai Mujeeb
+                    <footer>
+                        © 2025 Ashar Rai Mujeeb
                     </footer>
                 </div>
-            </div>
-
-        </div>
-
-        <!-- CONTROLS -->
-        <div class="deck-controls">
-            <button id="prevBtn" class="nav-btn" disabled>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-                PREV
-            </button>
-
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
-            </div>
-
-            <button id="nextBtn" class="nav-btn">
-                NEXT
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <div style="max-width: 800px; margin: 80px auto 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px;">
-        <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button" 
-           style="display: inline-block; padding: 16px 32px; background: white; color: black; text-decoration: none; border-radius: 4px; font-weight: bold; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; font-size: 1.2rem;">
-            Launch App
-        </a>
-    </div>
-
-    <div class="blog-container">
-        <a href="../playground.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            BACK TO PLAYGROUND
-        </a>
-
-        <header class="blog-header">
-            <h1 class="blog-title">Rabbithole</h1>
-            <div class="blog-meta">
-                <span>STATUS: LIVE</span>
-                <span>•</span>
-                <span>PLATFORM: WEB & ANDROID</span>
-                <span>•</span>
-                <span>YEAR: 2024</span>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">AI Agents</span>
-                <span class="blog-tag">Vector Embeddings</span>
-                <span class="blog-tag">Capacitor</span>
-                <span class="blog-tag">Prompt Engineering</span>
-            </div>
-        </header>
-
-        <div class="blog-hero">
-            🐰
-        </div>
-
-        <article class="blog-content">
-
-            <!-- ============================================ -->
-            <!-- PART I: THE MARKET NARRATIVE                 -->
-            <!-- ============================================ -->
-            <span class="section-label">PART I: THE MARKET NARRATIVE</span>
-
-            <h2>Market Intelligence: User Frustrations with Short-Form Video</h2>
-            <p>The following analysis synthesizes data from 2024–2025 scientific reports and user surveys regarding the
-                conflict between short-form video consumption (TikTok/Reels) and deep reading habits.</p>
-
-            <h3>1. The "TikTok Brain" Phenomenon</h3>
-            <p>Recent meta-analyses (late 2024/early 2025) have validated user complaints with clinical data:</p>
-            <ul>
-                <li>
-                    <strong>"Popcorn Brain" / Attentional Residue:</strong><br>
-                    A 2025 review in Psychological Bulletin linked heavy SFV engagement to deficits in inhibitory
-                    control. Users physically struggle to "inhibit" the impulse to switch tasks.
-                </li>
-                <li>
-                    <strong>The 47-Second Threshold:</strong><br>
-                    Attention span studies indicate focus on a screen has dropped to ~47 seconds before the urge to
-                    switch windows kicks in. This makes the 15-20 minute immersion required for a book neurologically
-                    painful.
-                </li>
-                <li>
-                    <strong>Dopamine Desensitization:</strong><br>
-                    The "variable reward schedule" of feeds desensitizes the brain's reward system, making text appear
-                    "insufferably boring" by comparison.
-                </li>
-            </ul>
-
-            <h3>2. User Frustrations: "I Can't Read Anymore"</h3>
-            <p>Users are not just bored; they are experiencing a loss of identity as readers.</p>
-            <ul>
-                <li>
-                    <strong>The "Clunky" Text Effect:</strong><br>
-                    Users report text feels "impenetrable."
-                    <blockquote>"I used to lose time in books; now it takes real effort... my brain has to work harder."
-                    </blockquote>
-                </li>
-                <li>
-                    <strong>The "Tsundoku" of Guilt:</strong><br>
-                    Buying books for the aesthetic but failing to read them creates anxiety.
-                    <blockquote>"My TBR pile isn't a library anymore; it's just evidence of my broken attention span."
-                    </blockquote>
-                </li>
-            </ul>
-
-            <h3>3. The Migration to Passive Learning</h3>
-            <p>Curiosity hasn't died; it just migrated to lower-friction formats.</p>
-            <ul>
-                <li>
-                    <strong>The Podcast Boom:</strong><br>
-                    While non-fiction print sales fell <strong>3.1%</strong> in early 2025, business/education podcast
-                    streams surged <strong>34%</strong>.
-                </li>
-                <li>
-                    <strong>The Audio Compromise:</strong><br>
-                    Users are flocking to audiobooks and podcasts because they <em>want</em> to learn but can't stomach
-                    the friction of text.
-                </li>
-            </ul>
-
-            <h3>The Business Case: A Billion-Dollar Void</h3>
-            <p>Short-form learning platforms represent a massive, validated market.</p>
-
-            <div class="market-grid">
-                <div class="market-card">
-                    <span class="label">TAM</span>
-                    <h4>600M+</h4>
-                    <p>Global podcast listeners + active users of micro-learning apps (e.g., Duolingo, Blinkist).</p>
-                </div>
-                <div class="market-card">
-                    <span class="label">TOM</span>
-                    <h4>~50M</h4>
-                    <p>English-speaking smartphone users (18-45) actively seeking self-improvement content.</p>
-                </div>
-                <div class="market-card">
-                    <span class="label">SOM</span>
-                    <h4>500k</h4>
-                    <p>Conservative capture of ~1% of TOM within 3-5 years ($30M-$50M ARR opportunity).</p>
-                </div>
-            </div>
-
-
-            <!-- ============================================ -->
-            <!-- PART II: THE PRODUCT DEFINITION              -->
-            <!-- ============================================ -->
-            <span class="section-label">PART II: THE PRODUCT DEFINITION (PROBLEM SPACE)</span>
-
-            <div class="pm-box">
-                <span class="pm-header">Formal Problem Statement</span>
-                <div class="pm-statement">
-                    <p style="margin-top: 0; margin-bottom: 15px;">
-                        "For <strong>knowledge-seeking smartphone users</strong> who habitually doomscroll, the current
-                        experience of <strong>SFV consumption</strong> leads to 'brain rot' because the <strong>dopamine
-                            feedback loop creates a 'scan-and-shift' state</strong> that makes deep reading physically
-                        difficult."
-                    </p>
-                </div>
-
-                <div
-                    style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px; padding-left: 15px; border-left: 3px solid var(--accent-color);">
-                    <div>
-                        <strong style="color: var(--accent-color);">Functional Job:</strong><br>
-                        Utilize 5-15 minute gaps for high-signal discovery without friction.
-                    </div>
-                    <div>
-                        <strong style="color: var(--accent-color);">Emotional Job:</strong><br>
-                        Convert "wasted time" guilt into a feeling of productive intellectual curiosity.
-                    </div>
-                </div>
-
-                <div class="pm-grid" style="margin-top: 30px;">
-                    <div class="pm-item">
-                        <strong>Constraints & Non-Goals</strong>
-                        <ul>
-                            <li><strong>NO</strong> curing addiction/replacing TikTok.</li>
-                            <li><strong>NO</strong> training users back to long-form.</li>
-                            <li><strong>MUST</strong> work within 47-second spans.</li>
-                        </ul>
-                    </div>
-                    <div class="pm-item">
-                        <strong>Validation Hypotheses</strong>
-                        <ul>
-                            <li><strong>H1:</strong> Recall ≥1 fact after 10 mins.</li>
-                            <li><strong>H2:</strong> Session feels "productive."</li>
-                            <li><strong>H3:</strong> Engagement >5 cards/session.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- ============================================ -->
-            <!-- PART III: THE SOLUTION SPACE                 -->
-            <!-- ============================================ -->
-            <span class="section-label">PART III: THE SOLUTION SPACE</span>
-
-            <h2>V1 Solution Summary</h2>
-            <p>
-                <strong>The Elevator Pitch:</strong><br>
-                Rabbithole is a swipeable, card-based feed of bite-sized, AI-generated facts around a chosen topic that
-                can be explored via tap-to-deepen "holes" within a 5–15 minute session.
-            </p>
-
-            <div class="pm-grid">
-                <div class="pm-item">
-                    <strong>Core Mechanics (V1)</strong>
-                    <ul>
-                        <li><strong>Infinite Topic Feed:</strong>&nbsp; Never-ending stream of fact cards.</li>
-                        <li><strong>Micro-Holes:</strong>&nbsp; Tap keywords to spawn a sub-feed (1-2 layers deep).</li>
-                        <li><strong>Productivity Signal:</strong>&nbsp; Visual "facts collected" counter.</li>
-                        <li><strong>Save for Later:</strong>&nbsp; One-tap bookmarking for deep reading later.</li>
-                    </ul>
-                </div>
-                <div class="pm-item">
-                    <strong>Success Metrics (KPIs)</strong>
-                    <ul>
-                        <li><strong>Activation:</strong>&nbsp; First session with ≥5 cards viewed + "productive" rating.
-                        </li>
-                        <li><strong>Engagement:</strong>&nbsp; Median cards viewed per session > 10.</li>
-                        <li><strong>Learning Proxy:</strong>&nbsp; % of users passing a 1-question recall check
-                            (optional).</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Solution Options Considered</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Approach</th>
-                            <th>Pros</th>
-                            <th>Cons</th>
-                            <th>Verdict</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Micro-Chapters</strong></td>
-                            <td>High depth/integrity.</td>
-                            <td>Too much text friction (high cognitive load).</td>
-                            <td>Discarded</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Audio-First Feed</strong></td>
-                            <td>Lowest friction.</td>
-                            <td>Hard to skim/scan; passive retention is lower.</td>
-                            <td>Postponed (V2)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Smart Card Feed</strong></td>
-                            <td>Matches swipe habit; granular; skimmable.</td>
-                            <td>Risk of disjointed context.</td>
-                            <td><strong>Selected (V1)</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>V1 Jobs-to-be-Done (Detail)</h3>
-            <div class="v1-section">
-                <div class="v1-item">
-                    <h3>1. Who is it for?</h3>
-                    <p>The <em>intellectually aspiring doomscroller</em> who loves feeds but hates the post-binge
-                        regret.</p>
-                </div>
-                <div class="v1-item">
-                    <h3>2. What is the core job?</h3>
-                    <p><em>"Turn passive downtime into guilt-free discovery"</em> using existing swipe habits.</p>
-                </div>
-                <div class="v1-item">
-                    <h3>3. Success Signal (2 Weeks)</h3>
-                    <p>The "Cocktail Party Effect": spontaneously citing a fact learned in the app during conversation.
-                    </p>
-                </div>
-            </div>
-
-
-            <!-- ============================================ -->
-            <!-- PART IV: UX ARTIFACTS                        -->
-            <!-- ============================================ -->
-            <span class="section-label">PART IV: UX ARTIFACTS</span>
-
-            <h2>V1 Core Flows</h2>
-            <p>Visualizing the primary user journey: Entry → Swipe → Deep Dive → Exit.</p>
-
-            <div style="text-align: center; margin: 40px 0;">
-                <a href="#" class="cta-button" style="margin-top: 0;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
-                        style="vertical-align: middle; margin-right: 8px;">
-                        <polygon points="5,3 19,12 5,21"></polygon>
-                    </svg>
-                    Watch Video
-                </a>
-            </div>
-
-
-            <!-- ============================================ -->
-            <!-- PART V: RESEARCH APPENDIX                    -->
-            <!-- ============================================ -->
-            <span class="section-label">PART V: RESEARCH APPENDIX</span>
-
-            <h3>Summary Table: The Friction Points</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Frustration</th>
-                            <th>User Description</th>
-                            <th>Underlying Mechanism</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>"The Glaze Over"</strong></td>
-                            <td>Eyes moving without comprehension.</td>
-                            <td>Cognitive Load: Brain conditioned for visual stimuli.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>"The Itch"</strong></td>
-                            <td>Physical discomfort when not checking phone.</td>
-                            <td>Dopamine Withdrawal: Craving the fast reward loop.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>"The Pile"</strong></td>
-                            <td>Anxiety looking at unread books.</td>
-                            <td>Aspiration/Reality Gap.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>"The Audit"</strong></td>
-                            <td>Listening but retaining little.</td>
-                            <td>Passive Consumption: Illusion of learning.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>Primary Sources & Validation</h3>
-            <ul class="sources-list">
-                <li>
-                    <strong>Systematic Review on Short-Form Video (2025):</strong>
-                    <a href="https://www.psypost.org/large-meta-analysis-links-tiktok-and-instagram-reels-to-poorer-cognitive-and-mental-health/"
-                        target="_blank">Psychological Bulletin</a> — linkage to inhibitory control deficits.
-                </li>
-                <li>
-                    <strong>Scan-and-Shift Hypothesis (2025):</strong>
-                    <a href="https://www.sdsu.edu/news/2025/08/sdsu-study-links-tiktok-scrolling-to-poor-study-focus"
-                        target="_blank">SDSU Eye-tracking study</a> — reading patterns.
-                </li>
-                <li>
-                    <strong>Reading Decline (2025):</strong>
-                    <a href="https://news.ufl.edu/2025/08/reading-for-pleasure-study/" target="_blank">University of
-                        Florida/iScience</a> — 40% drop in pleasure reading.
-                </li>
-                <li>
-                    <strong>Attention Spans:</strong>
-                    <a href="https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans"
-                        target="_blank">Gloria Mark/UC Irvine</a> — drop to 47 seconds.
-                </li>
-                <li>
-                    <strong>Market Stats:</strong>
-                    <a href="https://omr.com/en/reviews/contenthub/tools-blinkist-app-user-happy"
-                        target="_blank">Blinkist</a> (19M users) •
-                    <a href="https://riverside.com/blog/podcast-statistics" target="_blank">Podcasts</a> (580M
-                    listeners).
-                </li>
-            </ul>
-
-
-            <!-- ============================================ -->
-            <!-- PART VI: TECHNICAL SOLUTION                  -->
-            <!-- ============================================ -->
-            <span class="section-label">PART VI: TECHNICAL SOLUTION</span>
-
-            <h2>How It Works: The "Infinite Wikipedia"</h2>
-            <p>Rabbithole orchestrates a complex dance of AI agents to create a personalized knowledge feed.</p>
-            <ul>
-                <li><strong>Intent Analysis:</strong>&nbsp; Agents analyze query depth/context.</li>
-                <li><strong>Content Synthesis:</strong>&nbsp; Parallel LLMs draft comprehensive overviews.</li>
-                <li><strong>Dynamic Linking:</strong>&nbsp; Keywords become "portals" to deeper content.</li>
-            </ul>
-
-            <h3>Technical Challenges</h3>
-            <p>
-                <strong>Latency:</strong><br>
-                Utilizing <code>Vercel AI SDK</code> for aggressive streaming to match "feed speed."
-            </p>
-            <p>
-                <strong>State:</strong><br>
-                Graph-based structures to track the user's journey through topic nodes.
-            </p>
-
-            <pre><code class="language-typescript">export async function POST(req: Request) {
-  const { messages } = await req.json();
-  const response = await openai.createChatCompletion({
-    model: 'gpt-4',
-    stream: true,
-    messages
-  });
-  return OpenAIStream(response);
-}</code></pre>
-
-            <h3>Mobile Adaptation</h3>
-            <p>Built with <strong>Capacitor</strong> to bring the Next.js web app to Android with native interactions:
-            </p>
-            <ul>
-                <li>Touch-optimized interactions (swipe to save, tap to explore).</li>
-                <li>Native sharing capabilities.</li>
-                <li>Offline caching for previously visited "holes".</li>
-            </ul>
-
-            <h2>Future Roadmap</h2>
-            <p>We are currently exploring multi-modal learning paths, where the AI can generate not just text, but
-                relevant images (using Flux or Midjourney APIs) and even short audio summaries.</p>
-
-            <a href="https://rabbithole.iarm.me" target="_blank" class="cta-button">Enter the Rabbithole</a>
-
-        </article>
-
-        <footer style="margin-top: 80px; text-align: center; font-size: 0.9rem; opacity: 0.6;">
-            &copy; 2025 Ashar Rai Mujeeb. All rights reserved.
-        </footer>
-    </div>
-
-    <button id="nextBtn" class="nav-btn">
-        NEXT
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6" />
-        </svg>
-    </button>
-    </div>
-
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const progressFill = document.getElementById('progressFill');
-
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
-            function updateDeck() {
-                // Update visibility
-                slides.forEach((slide, index) => {
-                    if (index === currentSlide) {
-                        slide.classList.add('active');
-                    } else {
-                        slide.classList.remove('active');
-                    }
-                });
-
-                // Update buttons
-                prevBtn.disabled = currentSlide === 0;
-                nextBtn.disabled = currentSlide === totalSlides - 1;
-
-                // Update progress
-                const progress = ((currentSlide + 1) / totalSlides) * 100;
-                progressFill.style.width = `${progress}%`;
-            }
-
-            // Button listeners
-            prevBtn.addEventListener('click', () => {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateDeck();
-                }
-            });
-
-            nextBtn.addEventListener('click', () => {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                    updateDeck();
-                }
-            });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === 'Space') {
-                    if (currentSlide < totalSlides - 1) {
-                        currentSlide++;
-                        updateDeck();
-                    }
-                } else if (e.key === 'ArrowLeft') {
-                    if (currentSlide > 0) {
-                        currentSlide--;
-                        updateDeck();
-                    }
-                }
-            });
-
-            // Init
-            updateDeck();
-        });
-    </script>
-</body>
-
-</html>
+            </div></details></section></article></div></section></main>
+ <footer><a href="/" class="footer-name">Ashar Rai Mujeeb<span>Product Manager · Bengaluru, India</span></a><div><a href="https://www.linkedin.com/in/0xtr0jan/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="mailto:asharrm18@gmail.com">Email <span aria-hidden="true">↗</span></a><button class="text-button" id="share-copy">Copy site link <span aria-hidden="true">↗</span></button></div><p class="small">© 2026 · <button class="text-button" id="shortcuts-open">Keyboard shortcuts</button></p></footer></div>
+ <dialog id="settings-dialog" class="small-dialog" aria-label="Appearance and sharing"><div class="dialog-top"><span class="small">PREFERENCES</span><button class="icon-button" data-close aria-label="Close settings">×</button></div><h2>Appearance & sharing</h2><div class="setting-row"><label for="theme-setting">Dark appearance</label><input id="theme-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="contrast-setting">High contrast</label><input id="contrast-setting" type="checkbox" role="switch"></div><div class="setting-row"><label for="tracking-setting">Allow analytics</label><input id="tracking-setting" type="checkbox" role="switch"></div><div class="setting-row"><span>Accent</span><div class="swatches"><button data-accent="#3155e7" style="--swatch:#3155e7" aria-label="Blue accent"></button><button data-accent="#8b4bce" style="--swatch:#8b4bce" aria-label="Violet accent"></button><button data-accent="#17755d" style="--swatch:#17755d" aria-label="Green accent"></button><button id="random-accent" aria-label="Random accent">↻</button></div></div><p class="small">SHARE THIS PORTFOLIO</p><div class="share-links"><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">Twitter ↗</a><a href="https://wa.me/?text=https%3A%2F%2Fashar.site" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div></dialog>
+ <dialog id="shortcuts-dialog" class="small-dialog" aria-label="Keyboard shortcuts"><div class="dialog-top"><span class="small">KEYBOARD</span><button class="icon-button" data-close aria-label="Close shortcuts">×</button></div><h2>Get around quickly.</h2><dl class="shortcut-list"><div><dt>Contact</dt><dd><kbd>Z</kbd> <kbd>C</kbd></dd></div><div><dt>Change theme</dt><dd><kbd>Z</kbd> <kbd>N</kbd></dd></div><div><dt>Random accent</dt><dd><kbd>Z</kbd> <kbd>X</kbd></dd></div><div><dt>Download CV</dt><dd><kbd>C</kbd> <kbd>V</kbd></dd></div><div><dt>Report a problem</dt><dd><kbd>Z</kbd> <kbd>R</kbd></dd></div><div><dt>This menu</dt><dd><kbd>/</kbd></dd></div><div><dt>Close dialog</dt><dd><kbd>Esc</kbd></dd></div></dl></dialog><div class="toast" id="toast" role="status"></div></body></html>
